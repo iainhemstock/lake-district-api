@@ -1,0 +1,132 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"id": "http://192.168.0.16:8080/schemas",
+	"type": "object",
+	"properties": {
+		"classifications": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"height": {
+			"type": "object",
+			"properties": {
+				"feet": {
+					"type": "number"
+				},
+				"meters": {
+					"type": "number"
+				}
+			},
+			"required": ["feet", "meters"]
+		},
+		"location": {
+			"type": "object",
+			"properties": {
+				"coords": {
+					"type": "object",
+					"properties": {
+						"decimal": {
+							"type": "object",
+							"properties": {
+								"latitude": {
+									"type": "string"
+								},
+								"longitude": {
+									"type": "string"
+								}
+							},
+							"required": ["latitude", "longitude"]
+						},
+						"dms": {
+							"type": "object",
+							"properties": {
+								"y": {
+									"type": "object",
+									"properties": {
+										"degrees": {
+											"type": "number"
+										},
+										"minutes": {
+											"type": "number"
+										},
+										"seconds": {
+											"type": "number"
+										},
+										"hemisphere": {
+											"type": "string"
+										},
+										"formatted": {
+											"type": "string"
+										}
+									},
+									"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"]
+								},
+								"x": {
+									"type": "object",
+									"properties": {
+										"degrees": {
+											"type": "number"
+										},
+										"minutes": {
+											"type": "number"
+										},
+										"seconds": {
+											"type": "number"
+										},
+										"hemisphere": {
+											"type": "string"
+										},
+										"formatted": {
+											"type": "string"
+										}
+									},
+									"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"]
+								}
+							},
+							"required": ["y", "x"]
+						}
+					},
+					"required": ["decimal", "dms"]
+				},
+				"region": {
+					"type": "string"
+				},
+				"os_map_ref": {
+					"type": "string"
+				},
+				"os_maps": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"required": ["coords", "region", "os_map_ref", "os_maps"]
+		},
+		"name": {
+			"type": "string"
+		},
+		"parent_peak": {
+			"type": "string"
+		},
+		"prominence": {
+			"type": "object",
+			"properties": {
+				"feet": {
+					"type": "number"
+				},
+				"meters": {
+					"type": "number"
+				}
+			},
+			"required": ["feet", "meters"]
+		},
+		"url": {
+			"type": "string"
+		}
+	},
+	"required": ["classifications", "height", "location", "name", "parent_peak", "prominence", "url"],
+	"additionalProperties": false
+}

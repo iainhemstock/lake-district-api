@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"id": "http://192.168.0.16:8080/schemas",
+	"type": "object",
+	"properties": {
+		"count": {
+			"type": "number"
+		},
+		"previous": {
+			"type": [ "string", "null" ]
+		},
+		"next": {
+			"type": [ "string", "null" ]
+		},
+		"results": {
+			"type": "array",
+			"items": {
+				"type": "object"
+			}
+		}
+	},
+	"required": [ "count", "previous", "next", "results" ],
+	"additionalProperties": false
+}
