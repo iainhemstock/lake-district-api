@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FellController.class)
-public class FellControllerTest {
+public class FellControllerApiTest {
 
     @Autowired private MockMvc mockMvc;
 
@@ -484,11 +484,5 @@ public class FellControllerTest {
         mockMvc.perform(delete("/fells/3"))
             .andExpect(jsonPath("$.timestamp", is(equalTo(NOW))))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
-
-    @Test
-    public void given_id_of_wrong_type_when_sending_get_request_for_fell_by_id_then_400_status_is_returned() throws Exception {
-        mockMvc.perform(get("/fells/three"))
-            .andExpect(status().isBadRequest());
     }
 }

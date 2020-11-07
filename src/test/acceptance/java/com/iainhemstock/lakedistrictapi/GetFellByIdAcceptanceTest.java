@@ -213,18 +213,6 @@ public class GetFellByIdAcceptanceTest {
         verify(clock, times(1)).timestamp();
     }
 
-    @Test
-    @Parameters({ "one" })
-    public void given_id_of_wrong_type_when_sending_request_for_fell_by_id_then_response_body_will_contain_error_info(Object wrongTypeId) {
-        when().get("/fells/{id}", wrongTypeId)
-            .then().assertThat()
-            .statusCode(400) // BAD REQUEST
-            .contentType(ContentType.JSON)
-            .body("status", equalTo("BAD_REQUEST"))
-            .body("message", equalTo("Id must be a number"))
-            .body("path", equalTo("/fells/{?}"))
-            .body("timestamp", equalTo(NOW));
-    }
     /*******************************************************************************************************************
      * DESTRUCTIVE TESTS
      ******************************************************************************************************************/

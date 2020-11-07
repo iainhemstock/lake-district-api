@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(FellSearchController.class)
 @TestPropertySource("/test.properties")
-public class FellSearchControllerTest {
+public class FellSearchControllerApiTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;

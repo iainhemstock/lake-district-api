@@ -18,21 +18,16 @@ public class FellController {
 
     public static final double METERS_TO_FEET_CONVERSION = 3.2808;
 
-    @Autowired private FellRepository fellRepository;
     @Autowired private Clock clock;
+    @Autowired private FellRepository fellRepository;
     @Autowired private FellDTOMapper fellDTOMapper;
 
     @GetMapping("/fells/{id}")
     public FellDTO getFell(@PathVariable int id) {
-
         FellEntity fellEntity = fellRepository.findById(id)
             .orElseThrow(() -> new FellNotFoundException(id, clock.timestamp()));
 
         return fellDTOMapper.createDTO(fellEntity);
-    }
-
-    private boolean fellNotFound(Optional<FellEntity> optionalFellEntity) {
-        return !optionalFellEntity.isPresent();
     }
 
     @RequestMapping(
