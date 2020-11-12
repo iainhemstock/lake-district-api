@@ -17,7 +17,7 @@ public final class PikeOfStickleFellEntity extends FellEntity {
 
     public PikeOfStickleFellEntity() {
         super(
-            12,
+            10,
             "Pike Of Stickle",
             709,
             54,

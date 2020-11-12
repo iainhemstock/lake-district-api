@@ -16,7 +16,7 @@ import java.util.Set;
 public final class ScafellFellEntity extends FellEntity {
     public ScafellFellEntity() {
         super(
-            4,
+            2,
             "Scafell",
             964,
             133,

@@ -1,5 +1,7 @@
-package com.iainhemstock.lakedistrictapi.controllers;
+package com.iainhemstock.lakedistrictapi;
 
+import com.iainhemstock.lakedistrictapi.controllers.FellController;
+import com.iainhemstock.lakedistrictapi.controllers.FellSearchController;
 import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -29,7 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FellController.class)
-public class FellControllerApiTest {
+@TestPropertySource("/test.properties")
+public class GetFellByIdTest {
 
     @Autowired private MockMvc mockMvc;
 
@@ -58,8 +62,14 @@ public class FellControllerApiTest {
             .thenReturn(scafellPikeFellDTO);
     }
 
+
+    /*******************************************************************************************************************
+     *
+     * Positive tests
+     *
+     ******************************************************************************************************************/
     @Test
-    public void given_fell_exists_when_sending_get_request_for_fell_by_id_then_response_will_contain_its_name() throws Exception {
+    public void given_fellExists_when_sendingGetRequestForFellById_then_responseWillContainItsName() throws Exception {
         mockMvc.perform(
             get("/fells/{id}", scafellPikeFellEntity.getId()))
             .andExpect(status().isOk())
@@ -262,6 +272,11 @@ public class FellControllerApiTest {
                 "http://localhost/api/maps/7")));
     }
 
+    /*******************************************************************************************************************
+     *
+     * Negative tests with valid input
+     *
+     ******************************************************************************************************************/
     @Test
     public void given_fell_does_not_exist_when_sending_get_request_for_fell_by_id_then_404_status_will_be_returned() throws Exception {
         int invalidFellId = -1;
@@ -330,6 +345,11 @@ public class FellControllerApiTest {
                 content().contentType(MediaType.APPLICATION_JSON));
     }
 
+    /*******************************************************************************************************************
+     *
+     * Security, authorization and permission tests
+     *
+     ******************************************************************************************************************/
     @Test
     public void given_endpoint_does_not_support_post_method_when_sending_post_request_to_url_then_405_status_will_be_returned() throws Exception {
         mockMvc.perform(post("/fells/3"))

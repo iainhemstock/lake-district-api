@@ -40,55 +40,55 @@ public class ApiExceptionHandlerTest {
     }
 
     @Test
-    public void given_fell_not_found_exception_has_been_thrown_when_handled_then_error_response_will_contain_status() {
+    public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatus() {
         assertThat(fellNotFoundErrorDTO.getStatus(),
             is(equalTo(HttpStatus.NOT_FOUND)));
     }
 
     @Test
-    public void given_fell_not_found_exception_has_been_thrown_when_handled_then_error_response_will_contain_message() {
+    public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
         assertThat(fellNotFoundErrorDTO.getMessage(),
             is(equalTo("Fell was not found for {id=" + FELL_ID + "}")));
     }
 
     @Test
-    public void given_fell_not_found_exception_has_been_thrown_when_handled_then_error_response_will_contain_path() {
+    public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
         assertThat(fellNotFoundErrorDTO.getPath(),
             is(equalTo("/fells/" + FELL_ID)));
     }
 
     @Test
-    public void given_fell_not_found_exception_has_been_thrown_when_handled_then_error_response_will_contain_timestamp() {
+    public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
         assertThat(fellNotFoundErrorDTO.getTimestamp(),
             is(equalTo(NOW)));
     }
 
     @Test
-    public void given_http_method_not_allowed_exception_has_been_thrown_when_handled_then_error_response_will_contain_status() {
+    public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatus() {
         assertThat(httpMethodNotAllowedErrorDTO.getStatus(),
             is(equalTo(HttpStatus.METHOD_NOT_ALLOWED)));
     }
 
     @Test
-    public void given_http_method_not_allowed_exception_has_been_thrown_when_handled_then_error_response_will_contain_message() {
+    public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
         assertThat(httpMethodNotAllowedErrorDTO.getMessage(),
             is(equalTo("Method 'POST' is not allowed")));
     }
 
     @Test
-    public void given_http_method_not_allowed_exception_has_been_thrown_when_handled_then_error_response_will_contain_path() {
+    public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
         assertThat(httpMethodNotAllowedErrorDTO.getPath(),
             is(equalTo("/fells/" + FELL_ID)));
     }
 
     @Test
-    public void given_http_method_not_allowed_exception_has_been_thrown_when_handled_then_error_response_will_contain_timestamp() {
+    public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
         assertThat(httpMethodNotAllowedErrorDTO.getTimestamp(),
             is(equalTo(NOW)));
     }
 
     @Test
-    public void given_method_argument_type_mismatch_exception_has_been_thrown_when_handled_then_error_response_will_contain_status() throws NoSuchMethodException {
+    public void given_methodArgumentTypeMismatchExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatus() throws NoSuchMethodException {
         String getFell = exceptionHandler.handleMethodArgumentTypeMismatchException(
             new MethodArgumentTypeMismatchException(
                 null, null, "",

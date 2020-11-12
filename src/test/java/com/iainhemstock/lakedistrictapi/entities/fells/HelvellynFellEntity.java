@@ -16,7 +16,7 @@ public final class HelvellynFellEntity extends FellEntity {
 
     public HelvellynFellEntity() {
         super(
-            5,
+            3,
             "Helvellyn",
             950,
             712,

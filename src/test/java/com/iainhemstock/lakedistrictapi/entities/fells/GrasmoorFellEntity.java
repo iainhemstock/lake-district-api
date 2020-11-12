@@ -17,7 +17,7 @@ public final class GrasmoorFellEntity extends FellEntity {
 
     public GrasmoorFellEntity () {
         super(
-            8,
+            6,
             "Grasmoor",
             852,
             519,

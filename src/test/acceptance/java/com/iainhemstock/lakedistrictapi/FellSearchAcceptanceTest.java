@@ -45,7 +45,7 @@ public final class FellSearchAcceptanceTest {
     public void when_searching_for_fell_then_response_will_conform_to_json_schema() {
         when().get("/fells?search=abc")
             .then().assertThat()
-            .body(matchesJsonSchemaInClasspath("fell_search_response_schema.json"));
+            .body(matchesJsonSchemaInClasspath("schemas/fell_search_response_schema.json"));
     }
 
     @Test

@@ -1,5 +1,5 @@
 {
-	"$schema": "http://json-schema.org/schema#",
+	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "http://192.168.0.16:8080/schemas",
 	"type": "object",
 	"properties": {
@@ -13,10 +13,12 @@
 			"type": "object",
 			"properties": {
 				"feet": {
-					"type": "number"
+					"type": "integer",
+					"minimum": 0
 				},
 				"meters": {
-					"type": "number"
+					"type": "integer",
+					"minimum": 0
 				}
 			},
 			"required": ["feet", "meters"]
@@ -46,13 +48,13 @@
 									"type": "object",
 									"properties": {
 										"degrees": {
-											"type": "number"
+											"type": "integer"
 										},
 										"minutes": {
-											"type": "number"
+											"type": "integer"
 										},
 										"seconds": {
-											"type": "number"
+											"type": "integer"
 										},
 										"hemisphere": {
 											"type": "string"
@@ -67,13 +69,13 @@
 									"type": "object",
 									"properties": {
 										"degrees": {
-											"type": "number"
+											"type": "integer"
 										},
 										"minutes": {
-											"type": "number"
+											"type": "integer"
 										},
 										"seconds": {
-											"type": "number"
+											"type": "integer"
 										},
 										"hemisphere": {
 											"type": "string"
@@ -115,10 +117,12 @@
 			"type": "object",
 			"properties": {
 				"feet": {
-					"type": "number"
+					"type": "integer",
+					"minimum": 0
 				},
 				"meters": {
-					"type": "number"
+					"type": "integer",
+					"minimum": 0
 				}
 			},
 			"required": ["feet", "meters"]

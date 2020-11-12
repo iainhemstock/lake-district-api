@@ -17,7 +17,7 @@ public final class SkiddawFellEntity extends FellEntity {
 
     public SkiddawFellEntity() {
         super(
-            6,
+            4,
             "Skiddaw",
             931,
             709,

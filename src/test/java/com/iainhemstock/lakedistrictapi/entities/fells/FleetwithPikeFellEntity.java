@@ -17,7 +17,7 @@ public class FleetwithPikeFellEntity extends FellEntity {
 
     public FleetwithPikeFellEntity() {
         super(
-            13,
+            11,
             "Fleetwith Pike",
             648,
             117,

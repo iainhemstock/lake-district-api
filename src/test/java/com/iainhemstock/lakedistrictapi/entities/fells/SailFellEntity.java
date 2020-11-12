@@ -17,7 +17,7 @@ public final class SailFellEntity extends FellEntity {
 
     public SailFellEntity() {
         super(
-            10,
+            8,
             "Sail",
             773,
             32,

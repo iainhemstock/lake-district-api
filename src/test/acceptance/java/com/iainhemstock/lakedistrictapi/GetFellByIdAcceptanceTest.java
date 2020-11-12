@@ -1,6 +1,5 @@
 package com.iainhemstock.lakedistrictapi;
 
-import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SailFellDTO;
@@ -9,9 +8,7 @@ import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.SailFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.services.Clock;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -23,9 +20,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 import org.springframework.web.context.WebApplicationContext;
@@ -71,7 +66,7 @@ public class GetFellByIdAcceptanceTest {
             .get("/fells/{id}", validId)
         .then()
         .assertThat()
-            .body(matchesJsonSchemaInClasspath("fell_schema.json"));
+            .body(matchesJsonSchemaInClasspath("schemas/fell_schema.json"));
     }
 
     @Test

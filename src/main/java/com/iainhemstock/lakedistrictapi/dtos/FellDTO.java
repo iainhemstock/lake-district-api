@@ -1,7 +1,10 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Embedded;
 import java.util.Set;
@@ -30,5 +33,4 @@ public class FellDTO {
     public String getParentPeakUrl() {
         return parentPeakUrl;
     }
-
 }

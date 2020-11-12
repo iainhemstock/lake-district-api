@@ -16,7 +16,7 @@ import java.util.Set;
 public final class GreatGableFellEntity extends FellEntity {
     public GreatGableFellEntity() {
         super(
-            7,
+            5,
             "Great Gable",
             899,
             425,

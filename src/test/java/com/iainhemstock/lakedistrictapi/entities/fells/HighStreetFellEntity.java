@@ -16,7 +16,7 @@ public final class HighStreetFellEntity extends FellEntity {
 
     public HighStreetFellEntity() {
         super(
-            9,
+            7,
             "High Street",
             828,
             373,

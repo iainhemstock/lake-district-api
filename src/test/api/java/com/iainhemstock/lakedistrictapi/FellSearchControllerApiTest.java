@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.controllers;
+package com.iainhemstock.lakedistrictapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.controllers.FellSearchController;

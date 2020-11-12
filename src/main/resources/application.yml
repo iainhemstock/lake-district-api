@@ -1,5 +1,5 @@
 api:
-    host: http://www.lake-district.com
+    host: http://localhost:8080
     baseUrl: ${api.host}/api
     search-results:
         page-size: 10

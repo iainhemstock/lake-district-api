@@ -17,7 +17,7 @@ public final class HighRaiseLangdaleFellEntity extends FellEntity {
 
     public HighRaiseLangdaleFellEntity() {
         super(
-            11,
+            9,
             "High Raise (Langdale)",
             762,
             283,
