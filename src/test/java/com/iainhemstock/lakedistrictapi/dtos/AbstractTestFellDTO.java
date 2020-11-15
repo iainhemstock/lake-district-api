@@ -24,12 +24,12 @@ public abstract class AbstractTestFellDTO extends FellDTO {
         setUrl(API_BASE_URL + "/fells/" + entity.getId());
 
         setHeight(new HeightDTO(
-            entity.getHeightMeters(),
-            (int) Math.round(entity.getHeightMeters() * METERS_TO_FEET_CONVERSION)));
+            String.valueOf(entity.getHeightMeters()),
+            String.valueOf((int) Math.round(entity.getHeightMeters() * METERS_TO_FEET_CONVERSION))));
 
         setProminence(new ProminenceDTO(
-            entity.getProminenceMeters(),
-            (int) Math.round(entity.getProminenceMeters() * METERS_TO_FEET_CONVERSION)));
+            String.valueOf(entity.getProminenceMeters()),
+            String.valueOf((int) Math.round(entity.getProminenceMeters() * METERS_TO_FEET_CONVERSION))));
 
         setLocation(new LocationDTO(
             new CoordsDTO(

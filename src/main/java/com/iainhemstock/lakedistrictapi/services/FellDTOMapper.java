@@ -1,7 +1,9 @@
 package com.iainhemstock.lakedistrictapi.services;
 
+import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
@@ -13,7 +15,12 @@ public class FellDTOMapper {
 
     private static final double METERS_TO_FEET_CONVERSION = 3.2808;
 
-    private static String API_BASE_URL = "http://localhost:8080/api";
+    private final ApiProperties apiProperties;
+
+    @Autowired
+    public FellDTOMapper(final ApiProperties apiProperties) {
+        this.apiProperties = apiProperties;
+    }
 
     public FellDTO createDTO(FellEntity fellEntity) {
         DmsService dmsService = new DmsService(
@@ -32,10 +39,10 @@ public class FellDTOMapper {
         FellDTO fellDTO = new FellDTO();
 
         if (fellEntity.getParentPeak().isNull()) fellDTO.setParentPeakUrl("");
-        else fellDTO.setParentPeakUrl(String.format("%s/fells/%s", API_BASE_URL, fellEntity.getParentPeak().getFellId()));
+        else fellDTO.setParentPeakUrl(String.format("%s/fells/%s", apiProperties.getBaseUrl(), fellEntity.getParentPeak().getFellId()));
 
         fellDTO.setName(fellEntity.getName());
-        fellDTO.setUrl(String.format("%s/fells/%s", API_BASE_URL, fellEntity.getId()));
+        fellDTO.setUrl(String.format("%s/fells/%s", apiProperties.getBaseUrl(), fellEntity.getId()));
         fellDTO.setClassifications(getClassificationUris(fellEntity));
         fellDTO.setHeight(heightDTO);
         fellDTO.setProminence(prominenceDTO);
@@ -61,36 +68,30 @@ public class FellDTOMapper {
     }
 
     private String makeRegionUrlString(final FellEntity fellEntity) {
-        String regionUrl = null;
-        try {
-            regionUrl = fellEntity.getRegion().getUrl().toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return regionUrl;
+        return String.format("%s/regions/%d", apiProperties.getBaseUrl(), fellEntity.getRegion().getId());
     }
 
     private ProminenceDTO makeProminenceDTO(final FellEntity fellEntity) {
         return new ProminenceDTO(
-            fellEntity.getProminenceMeters(),
-            (int) Math.round(fellEntity.getProminenceMeters() * METERS_TO_FEET_CONVERSION));
+            String.valueOf(fellEntity.getProminenceMeters()),
+            String.valueOf((int) Math.round(fellEntity.getProminenceMeters() * METERS_TO_FEET_CONVERSION)));
     }
 
     private HeightDTO makeHeightDTO(final FellEntity fellEntity) {
         return new HeightDTO(
-            fellEntity.getHeightMeters(),
-            (int) Math.round(fellEntity.getHeightMeters() * METERS_TO_FEET_CONVERSION));
+            String.valueOf(fellEntity.getHeightMeters()),
+            String.valueOf((int) Math.round(fellEntity.getHeightMeters() * METERS_TO_FEET_CONVERSION)));
     }
 
     private Set<String> getClassificationUris(FellEntity fellEntity) {
         return fellEntity.getClassifications().stream()
-            .map(classification -> API_BASE_URL + "/classifications/" + classification.getId())
+            .map(classification -> apiProperties.getBaseUrl() + "/classifications/" + classification.getId())
             .collect(Collectors.toSet());
     }
 
     private Set<String> getOsMapUris(FellEntity fellEntity) {
         return fellEntity.getOsMaps().stream()
-            .map(osMap -> API_BASE_URL + "/maps/" + osMap.getId())
+            .map(osMap -> apiProperties.getBaseUrl() + "/maps/" + osMap.getId())
             .collect(Collectors.toSet());
     }
 }

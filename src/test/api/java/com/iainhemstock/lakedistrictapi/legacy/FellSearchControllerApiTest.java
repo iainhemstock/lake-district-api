@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi;
+package com.iainhemstock.lakedistrictapi.legacy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.controllers.FellSearchController;
@@ -34,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FellSearchController.class)
-@TestPropertySource("/test.properties")
 public class FellSearchControllerApiTest {
 
     @Autowired private MockMvc mockMvc;
@@ -44,10 +43,12 @@ public class FellSearchControllerApiTest {
     @MockBean private FellRepository fellRepository;
     @MockBean private FellDTOMapper fellDTOMapper;
 
-    @Value("${api.search-results.page-size}") private int MAX_RESULTS_PER_PAGE;
+    @Value("${api.search-results.page-size}")
+    private int MAX_RESULTS_PER_PAGE;
 
     @Test
     public void given_search_term_that_will_have_no_matches_when_sending_search_request_then_status_is_ok_and_content_type_is_json() throws Exception {
+        System.out.println(MAX_RESULTS_PER_PAGE);
         whenFellRepositoryThenReturn(Collections.emptyList());
         mockMvc.perform(get("/fells?search=abc"))
             .andExpect(status().isOk())

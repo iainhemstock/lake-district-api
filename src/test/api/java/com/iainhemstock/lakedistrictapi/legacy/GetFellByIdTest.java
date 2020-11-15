@@ -1,7 +1,6 @@
-package com.iainhemstock.lakedistrictapi;
+package com.iainhemstock.lakedistrictapi.legacy;
 
 import com.iainhemstock.lakedistrictapi.controllers.FellController;
-import com.iainhemstock.lakedistrictapi.controllers.FellSearchController;
 import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
@@ -20,7 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.Optional;
 
@@ -32,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FellController.class)
-@TestPropertySource("/test.properties")
 public class GetFellByIdTest {
 
     @Autowired private MockMvc mockMvc;
@@ -216,7 +213,7 @@ public class GetFellByIdTest {
             .andExpect(
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
-                jsonPath("$.location.region", is(equalTo("http://localhost/api/regions/4"))));
+                jsonPath("$.location.region", is(equalTo("http://localhost:8080/api/regions/4"))));
     }
 
     @Test
@@ -229,21 +226,21 @@ public class GetFellByIdTest {
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
                 jsonPath("$.classifications", containsInAnyOrder(
-                    "http://localhost/api/classifications/1",
-                    "http://localhost/api/classifications/2",
-                    "http://localhost/api/classifications/3",
-                    "http://localhost/api/classifications/4",
-                    "http://localhost/api/classifications/5",
-                    "http://localhost/api/classifications/7",
-                    "http://localhost/api/classifications/8",
-                    "http://localhost/api/classifications/9",
-                    "http://localhost/api/classifications/10",
-                    "http://localhost/api/classifications/11",
-                    "http://localhost/api/classifications/12",
-                    "http://localhost/api/classifications/13",
-                    "http://localhost/api/classifications/14",
-                    "http://localhost/api/classifications/15",
-                    "http://localhost/api/classifications/16")));
+                    "http://localhost:8080/api/classifications/1",
+                    "http://localhost:8080/api/classifications/2",
+                    "http://localhost:8080/api/classifications/3",
+                    "http://localhost:8080/api/classifications/4",
+                    "http://localhost:8080/api/classifications/5",
+                    "http://localhost:8080/api/classifications/7",
+                    "http://localhost:8080/api/classifications/8",
+                    "http://localhost:8080/api/classifications/9",
+                    "http://localhost:8080/api/classifications/10",
+                    "http://localhost:8080/api/classifications/11",
+                    "http://localhost:8080/api/classifications/12",
+                    "http://localhost:8080/api/classifications/13",
+                    "http://localhost:8080/api/classifications/14",
+                    "http://localhost:8080/api/classifications/15",
+                    "http://localhost:8080/api/classifications/16")));
     }
 
     @Test
@@ -267,9 +264,9 @@ public class GetFellByIdTest {
             .andExpect(
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.location.os_maps", containsInAnyOrder(
-                "http://localhost/api/maps/1",
-                "http://localhost/api/maps/2",
-                "http://localhost/api/maps/7")));
+                "http://localhost:8080/api/maps/1",
+                "http://localhost:8080/api/maps/2",
+                "http://localhost:8080/api/maps/7")));
     }
 
     /*******************************************************************************************************************

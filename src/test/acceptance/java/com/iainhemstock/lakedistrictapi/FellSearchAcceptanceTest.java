@@ -28,7 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringRunner.class)
-@TestPropertySource("/test.properties")
+@TestPropertySource("/application.properties")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public final class FellSearchAcceptanceTest {
 

@@ -13,12 +13,10 @@
 			"type": "object",
 			"properties": {
 				"feet": {
-					"type": "integer",
-					"minimum": 0
+					"type": "string"
 				},
 				"meters": {
-					"type": "integer",
-					"minimum": 0
+					"type": "string"
 				}
 			},
 			"required": ["feet", "meters"]
@@ -48,13 +46,13 @@
 									"type": "object",
 									"properties": {
 										"degrees": {
-											"type": "integer"
+											"type": "string"
 										},
 										"minutes": {
-											"type": "integer"
+											"type": "string"
 										},
 										"seconds": {
-											"type": "integer"
+											"type": "string"
 										},
 										"hemisphere": {
 											"type": "string"
@@ -69,13 +67,13 @@
 									"type": "object",
 									"properties": {
 										"degrees": {
-											"type": "integer"
+											"type": "string"
 										},
 										"minutes": {
-											"type": "integer"
+											"type": "string"
 										},
 										"seconds": {
-											"type": "integer"
+											"type": "string"
 										},
 										"hemisphere": {
 											"type": "string"
@@ -117,12 +115,10 @@
 			"type": "object",
 			"properties": {
 				"feet": {
-					"type": "integer",
-					"minimum": 0
+					"type": "string"
 				},
 				"meters": {
-					"type": "integer",
-					"minimum": 0
+					"type": "string"
 				}
 			},
 			"required": ["feet", "meters"]

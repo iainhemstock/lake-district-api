@@ -16,13 +16,13 @@ import java.util.Objects;
 @Setter
 @JsonPropertyOrder({"degrees", "minutes", "seconds", "hemisphere" })
 public class DmsDTO {
-    private int degrees;
-    private int minutes;
-    private int seconds;
+    private String degrees;
+    private String minutes;
+    private String seconds;
     private String hemisphere;
     private String formatted;
 
-    public DmsDTO(int degrees, int minutes, int seconds, String hemisphere) {
+    public DmsDTO(String degrees, String minutes, String seconds, String hemisphere) {
         this.degrees = degrees;
         this.minutes = minutes;
         this.seconds = seconds;
@@ -36,29 +36,29 @@ public class DmsDTO {
 
     @Override
     public String toString() {
-        return String.format("%d° %d' %d\" %s",
+        return String.format("%s° %s' %s\" %s",
                 degrees, minutes, seconds, hemisphere);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        DmsDTO dms = (DmsDTO) o;
-
-        if (degrees != dms.degrees) return false;
-        if (minutes != dms.minutes) return false;
-        if (seconds != dms.seconds) return false;
-        return Objects.equals(hemisphere, dms.hemisphere);
+        DmsDTO dmsDTO = (DmsDTO) o;
+        if (degrees != null ? !degrees.equals(dmsDTO.degrees) : dmsDTO.degrees != null) return false;
+        if (minutes != null ? !minutes.equals(dmsDTO.minutes) : dmsDTO.minutes != null) return false;
+        if (seconds != null ? !seconds.equals(dmsDTO.seconds) : dmsDTO.seconds != null) return false;
+        if (hemisphere != null ? !hemisphere.equals(dmsDTO.hemisphere) : dmsDTO.hemisphere != null) return false;
+        return formatted != null ? formatted.equals(dmsDTO.formatted) : dmsDTO.formatted == null;
     }
 
     @Override
     public int hashCode() {
-        int result = degrees;
-        result = 31 * result + minutes;
-        result = 31 * result + seconds;
+        int result = degrees != null ? degrees.hashCode() : 0;
+        result = 31 * result + (minutes != null ? minutes.hashCode() : 0);
+        result = 31 * result + (seconds != null ? seconds.hashCode() : 0);
         result = 31 * result + (hemisphere != null ? hemisphere.hashCode() : 0);
+        result = 31 * result + (formatted != null ? formatted.hashCode() : 0);
         return result;
     }
 }

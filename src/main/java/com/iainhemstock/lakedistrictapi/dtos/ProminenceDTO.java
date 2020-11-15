@@ -5,19 +5,19 @@ import java.util.Objects;
 
 @Embeddable
 public final class ProminenceDTO {
-    private int meters;
-    private int feet;
+    private String meters;
+    private String feet;
 
-    public ProminenceDTO(int meters, int feet) {
+    public ProminenceDTO(String meters, String feet) {
         this.meters = meters;
         this.feet = feet;
     }
 
-    public int getMeters() {
+    public String getMeters() {
         return meters;
     }
 
-    public int getFeet() {
+    public String getFeet() {
         return feet;
     }
 

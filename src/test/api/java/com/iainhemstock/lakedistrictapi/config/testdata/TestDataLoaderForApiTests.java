@@ -11,11 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-//@Component
-public final class InitialTestDataLoader implements ApplicationRunner {
+@Component
+public final class TestDataLoaderForApiTests implements ApplicationRunner {
 
     @Autowired private FellRepository fellRepository;
     @Autowired private ParentPeakRepository parentPeakRepository;
@@ -23,11 +22,11 @@ public final class InitialTestDataLoader implements ApplicationRunner {
     @Autowired private OsMapRepository osMapRepository;
     @Autowired private ClassificationsRepository classificationsRepository;
 
-    private Logger logger = LoggerFactory.getLogger(InitialTestDataLoaderForApiTests.class);
+    private Logger logger = LoggerFactory.getLogger(TestDataLoaderForApiTests.class);
 
     @Override
     public void run(final ApplicationArguments args) throws Exception {
-        logger.info("starting to load initial data");
+        logger.info("starting to load initial data for api tests");
 
         initializeRegionData();
         initializeOsMapData();
@@ -35,7 +34,7 @@ public final class InitialTestDataLoader implements ApplicationRunner {
         initializeParentPeakData();
         initializeFellData();
 
-        logger.info("finished loading initial data");
+        logger.info("finished loading initial data for api tests");
     }
 
     private void initializeRegionData() {

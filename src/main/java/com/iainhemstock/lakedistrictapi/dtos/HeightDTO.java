@@ -5,19 +5,19 @@ import java.util.Objects;
 
 @Embeddable
 public final class HeightDTO {
-    private int meters;
-    private int feet;
+    private String meters;
+    private String feet;
 
-    public HeightDTO(int meters, int feet) {
+    public HeightDTO(String meters, String feet) {
         this.meters = meters;
         this.feet = feet;
     }
 
-    public int getMeters() {
+    public String getMeters() {
         return meters;
     }
 
-    public int getFeet() {
+    public String getFeet() {
         return feet;
     }
 

@@ -146,9 +146,9 @@ public class DmsServiceTest {
         DmsService converter = new DmsService(new double[]{-33.858611, 151.214167});
 
         assertThat(converter.getFirstDms(),
-                is(equalTo(new DmsDTO(33, 51, 31, "S"))));
+                is(equalTo(new DmsDTO("33", "51", "31", "S"))));
         assertThat(converter.getSecondDms(),
-                is(equalTo(new DmsDTO(151, 12, 51, "E"))));
+                is(equalTo(new DmsDTO("151", "12", "51", "E"))));
 
     }
 }

@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.cucumber.glue;
+package com.iainhemstock.lakedistrictapi;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

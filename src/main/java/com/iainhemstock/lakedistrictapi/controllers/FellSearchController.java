@@ -19,7 +19,7 @@ public class FellSearchController {
     @Autowired private FellRepository fellRepository;
     @Autowired private FellDTOMapper fellDTOMapper;
 
-    @GetMapping("/fells")
+    @GetMapping("/api/fells")
     public SearchDTO getFells(@RequestParam("search") String searchTerm) {
         String processedSearchTerm = searchTerm
             .replace('+', ' ')

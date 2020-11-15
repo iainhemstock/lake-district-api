@@ -33,7 +33,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(JUnitParamsRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@TestPropertySource("/test.properties")
+@TestPropertySource("/application.properties")
 public class GetFellByIdAcceptanceTest {
 
     @ClassRule public static final SpringClassRule SPRING_CLASS_RULE = new SpringClassRule();

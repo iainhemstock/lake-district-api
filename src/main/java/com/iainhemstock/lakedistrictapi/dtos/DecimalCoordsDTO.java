@@ -15,8 +15,6 @@ public final class DecimalCoordsDTO {
     private final String longitude;
 
     public DecimalCoordsDTO(String latitude, String longitude) {
-//        this.latitude = new BigDecimal(String.valueOf(latitude));
-//        this.longitude = new BigDecimal(String.valueOf(longitude));
         this.latitude = latitude;
         this.longitude = longitude;
     }

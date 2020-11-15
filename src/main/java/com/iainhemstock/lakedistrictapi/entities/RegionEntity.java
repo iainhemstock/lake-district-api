@@ -2,10 +2,11 @@ package com.iainhemstock.lakedistrictapi.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 @Entity
 @Table(name = "regions")
@@ -14,8 +15,6 @@ import java.net.URL;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class RegionEntity {
-
-    private static String API_BASE_URL = "http://localhost:8080/api";
 
     @Id
     @Column(name = "id")
@@ -26,7 +25,4 @@ public class RegionEntity {
     @NotNull
     private String name;
 
-    public URL getUrl() throws MalformedURLException {
-        return new URL(API_BASE_URL + "/region/" + id);
-    }
 }

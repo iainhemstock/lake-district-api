@@ -10,6 +10,5 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Getter
 public class ApiProperties {
-    private String host;
     private String baseUrl;
 }

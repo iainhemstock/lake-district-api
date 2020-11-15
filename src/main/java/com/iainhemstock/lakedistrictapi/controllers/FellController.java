@@ -16,13 +16,11 @@ import java.util.Optional;
 @RestController
 public class FellController {
 
-    public static final double METERS_TO_FEET_CONVERSION = 3.2808;
-
     @Autowired private Clock clock;
     @Autowired private FellRepository fellRepository;
     @Autowired private FellDTOMapper fellDTOMapper;
 
-    @GetMapping("/fells/{id}")
+    @GetMapping("/api/fells/{id}")
     public FellDTO getFell(@PathVariable int id) {
         FellEntity fellEntity = fellRepository.findById(id)
             .orElseThrow(() -> new FellNotFoundException(id, clock.timestamp()));
@@ -31,7 +29,7 @@ public class FellController {
     }
 
     @RequestMapping(
-        value = "/fells/{id}",
+        value = "/api/fells/{id}",
         method = {
             RequestMethod.POST,
             RequestMethod.PUT,

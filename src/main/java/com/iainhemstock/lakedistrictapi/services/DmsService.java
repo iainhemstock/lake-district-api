@@ -70,7 +70,8 @@ public class DmsService {
 
         String hemisphere = calculateHemisphere(coordType);
 
-        return new DmsDTO(degree.intValue(), minute.intValue(), second.intValue(), hemisphere);
+        return new DmsDTO(String.valueOf(degree.intValue()), String.valueOf(minute.intValue()),
+            String.valueOf(second.intValue()), hemisphere);
     }
 
     /**
