@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.config;
+package com.iainhemstock.lakedistrictapi.config.cucumber;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

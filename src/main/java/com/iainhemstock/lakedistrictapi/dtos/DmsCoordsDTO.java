@@ -7,29 +7,29 @@ import java.util.Objects;
 
 @Embeddable
 public final class DmsCoordsDTO {
-    private final DmsDTO yDms;
-    private final DmsDTO xDms;
+    private final DmsDTO convertedLatitude;
+    private final DmsDTO convertedLongitude;
 
-    public DmsCoordsDTO(DmsDTO yDms, DmsDTO xDms) {
-        this.yDms = yDms;
-        this.xDms = xDms;
+    public DmsCoordsDTO(DmsDTO convertedLatitude, DmsDTO convertedLongitude) {
+        this.convertedLatitude = convertedLatitude;
+        this.convertedLongitude = convertedLongitude;
     }
 
-    @JsonGetter("y")
-    public DmsDTO getyDms() {
-        return yDms;
+    @JsonGetter("converted_longitude")
+    public DmsDTO getConvertedLongitude() {
+        return convertedLongitude;
     }
 
-    @JsonGetter("x")
-    public DmsDTO getxDms() {
-        return xDms;
+    @JsonGetter("converted_latitude")
+    public DmsDTO getConvertedLatitude() {
+        return convertedLatitude;
     }
 
     @Override
     public String toString() {
         return "DmsCoordsDTO{" +
-            "yDms=" + yDms +
-            ", xDms=" + xDms +
+            "yDms=" + convertedLongitude +
+            ", xDms=" + convertedLatitude +
             '}';
     }
 
@@ -38,12 +38,12 @@ public final class DmsCoordsDTO {
         if (this == o) return true;
         if (!(o instanceof DmsCoordsDTO)) return false;
         DmsCoordsDTO that = (DmsCoordsDTO) o;
-        return Objects.equals(yDms, that.yDms) &&
-                Objects.equals(xDms, that.xDms);
+        return Objects.equals(convertedLongitude, that.convertedLongitude) &&
+                Objects.equals(convertedLatitude, that.convertedLatitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(yDms, xDms);
+        return Objects.hash(convertedLongitude, convertedLatitude);
     }
 }

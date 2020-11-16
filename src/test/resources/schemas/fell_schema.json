@@ -42,7 +42,7 @@
 						"dms": {
 							"type": "object",
 							"properties": {
-								"y": {
+								"converted_longitude": {
 									"type": "object",
 									"properties": {
 										"degrees": {
@@ -63,7 +63,7 @@
 									},
 									"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"]
 								},
-								"x": {
+								"converted_latitude": {
 									"type": "object",
 									"properties": {
 										"degrees": {
@@ -85,7 +85,7 @@
 									"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"]
 								}
 							},
-							"required": ["y", "x"]
+							"required": ["converted_longitude", "converted_latitude"]
 						}
 					},
 					"required": ["decimal", "dms"]

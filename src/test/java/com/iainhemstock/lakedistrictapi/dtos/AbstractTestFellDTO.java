@@ -1,27 +1,42 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
+import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.services.DmsService;
+import com.iainhemstock.lakedistrictapi.services.LatLongToDmsCoordConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.stream.Collectors;
 
 public abstract class AbstractTestFellDTO extends FellDTO {
 
     private static final double METERS_TO_FEET_CONVERSION = 3.2808;
-    private static String API_BASE_URL = "http://localhost:8080/api";
+    @Autowired private ApiProperties apiProperties;
 
-    private DmsService dmsService;
+    private LatLongToDmsCoordConverter coordConverter;
 
     public AbstractTestFellDTO(final FellEntity entity) {
-        dmsService = new DmsService((new double[]{entity.getLatitude(), entity.getLongitude()}));
+        coordConverter = new LatLongToDmsCoordConverter();
+        coordConverter.convert(entity.getLatitude(), LatLongToDmsCoordConverter.CoordType.LATITUDE);
+        DmsDTO convertedLatitude = new DmsDTO(
+            String.valueOf(coordConverter.getDegrees()),
+            String.valueOf(coordConverter.getMinutes()),
+            String.valueOf(coordConverter.getSeconds()),
+            coordConverter.getHemisphere());
+
+        coordConverter.convert(entity.getLongitude(), LatLongToDmsCoordConverter.CoordType.LONGITUDE);
+        DmsDTO convertedLongitude = new DmsDTO(
+            String.valueOf(coordConverter.getDegrees()),
+            String.valueOf(coordConverter.getMinutes()),
+            String.valueOf(coordConverter.getSeconds()),
+            coordConverter.getHemisphere());
 
         if (entity.getParentPeak().isNull())
             setParentPeakUrl("");
         else
-            setParentPeakUrl(API_BASE_URL + "/fells/" + entity.getParentPeak().getFellId());
+            setParentPeakUrl(apiProperties.getBaseUrl() + "/fells/" + entity.getParentPeak().getFellId());
 
         setName(entity.getName());
-        setUrl(API_BASE_URL + "/fells/" + entity.getId());
+        setUrl(apiProperties.getBaseUrl() + "/fells/" + entity.getId());
 
         setHeight(new HeightDTO(
             String.valueOf(entity.getHeightMeters()),
@@ -37,18 +52,18 @@ public abstract class AbstractTestFellDTO extends FellDTO {
                     String.valueOf(entity.getLatitude()),
                     String.valueOf(entity.getLongitude())),
                 new DmsCoordsDTO(
-                    dmsService.getFirstDms(),
-                    dmsService.getSecondDms()
+                    convertedLatitude,
+                    convertedLongitude
                 )
             ),
-            API_BASE_URL + "/regions/" + entity.getRegion().getId(),
+            apiProperties.getBaseUrl() + "/regions/" + entity.getRegion().getId(),
             entity.getOsMapRef(),
             entity.getOsMaps().stream()
-                .map(osMap -> API_BASE_URL + "/maps/" + osMap.getId())
+                .map(osMap -> apiProperties.getBaseUrl() + "/maps/" + osMap.getId())
                 .collect(Collectors.toSet())));
 
         setClassifications(entity.getClassifications().stream()
-            .map(classification -> API_BASE_URL + "/classifications/" + classification.getId())
+            .map(classification -> apiProperties.getBaseUrl() + "/classifications/" + classification.getId())
             .collect(Collectors.toSet()));
     }
 }

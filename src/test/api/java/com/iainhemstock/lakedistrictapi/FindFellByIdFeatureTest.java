@@ -121,21 +121,21 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
     public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws UnsupportedEncodingException, JsonProcessingException {
         FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
 
-        assertEquals(expectedDms.get("degrees"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getxDms().getDegrees()));
-        assertEquals(expectedDms.get("minutes"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getxDms().getMinutes()));
-        assertEquals(expectedDms.get("seconds"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getxDms().getSeconds()));
-        assertEquals(expectedDms.get("hemisphere"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getxDms().getHemisphere()));
-        assertEquals(expectedDms.get("formatted"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getxDms().getFormatted()));
+        assertEquals(expectedDms.get("degrees"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getDegrees()));
+        assertEquals(expectedDms.get("minutes"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getMinutes()));
+        assertEquals(expectedDms.get("seconds"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getSeconds()));
+        assertEquals(expectedDms.get("hemisphere"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getHemisphere()));
+        assertEquals(expectedDms.get("formatted"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getFormatted()));
     }
 
     @And("^the response body will also contain the following northern dms coordinates$")
     public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws UnsupportedEncodingException, JsonProcessingException {
         FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
 
-        assertEquals(expectedDms.get("degrees"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getyDms().getDegrees()));
-        assertEquals(expectedDms.get("minutes"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getyDms().getMinutes()));
-        assertEquals(expectedDms.get("seconds"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getyDms().getSeconds()));
-        assertEquals(expectedDms.get("hemisphere"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getyDms().getHemisphere()));
-        assertEquals(expectedDms.get("formatted"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getyDms().getFormatted()));
+        assertEquals(expectedDms.get("degrees"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getDegrees()));
+        assertEquals(expectedDms.get("minutes"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getMinutes()));
+        assertEquals(expectedDms.get("seconds"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getSeconds()));
+        assertEquals(expectedDms.get("hemisphere"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getHemisphere()));
+        assertEquals(expectedDms.get("formatted"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getFormatted()));
     }
 }

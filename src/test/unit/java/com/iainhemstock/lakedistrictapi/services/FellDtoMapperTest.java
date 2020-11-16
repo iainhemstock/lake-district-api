@@ -1,120 +1,166 @@
 package com.iainhemstock.lakedistrictapi.services;
 
-import com.iainhemstock.lakedistrictapi.config.ApiProperties;
+import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.dtos.DmsCoordsDTO;
 import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.services.FellDTOMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FellDtoMapperTest {
 
-    private static final String API_BASE_URL = "http://localhost:8080/api";
-    @Mock private ApiProperties apiProperties;
+    @Mock private EndpointGenerator endpointGenerator;
+    @Mock private LatLongToDmsCoordConverter coordConverter;
 
-    private FellDTOMapper mapper;
+    private FellDTOMapper dtoMapper;
     private FellEntity entity;
     private FellDTO actualDto;
 
     @Before
     public void setUp() {
-        apiProperties = Mockito.mock(ApiProperties.class);
-        Mockito.when(apiProperties.getBaseUrl()).thenReturn(API_BASE_URL);
-
-        mapper = new FellDTOMapper(apiProperties);
+        dtoMapper = new FellDTOMapper(endpointGenerator, coordConverter);
         entity = new FleetwithPikeFellEntity();
-        actualDto = mapper.createDTO(entity);
     }
 
     @Test
     public void maps_classification_data_to_dto() {
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.eq("classifications"), Mockito.anyInt()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/classifications/11",
+                TestApiProperties.API_BASE_URL + "/classifications/15",
+                TestApiProperties.API_BASE_URL + "/classifications/2",
+                TestApiProperties.API_BASE_URL + "/classifications/12",
+                TestApiProperties.API_BASE_URL + "/classifications/4",
+                TestApiProperties.API_BASE_URL + "/classifications/13",
+                TestApiProperties.API_BASE_URL + "/classifications/14",
+                TestApiProperties.API_BASE_URL + "/classifications/16",
+                TestApiProperties.API_BASE_URL + "/classifications/1");
+
+        actualDto = dtoMapper.createDTO(entity);
         assertEquals(
-            Set.of(apiProperties.getBaseUrl() + "/classifications/11",
-                apiProperties.getBaseUrl() + "/classifications/15",
-                apiProperties.getBaseUrl() + "/classifications/2",
-                apiProperties.getBaseUrl() + "/classifications/12",
-                apiProperties.getBaseUrl() + "/classifications/4",
-                apiProperties.getBaseUrl() + "/classifications/13",
-                apiProperties.getBaseUrl() + "/classifications/14",
-                apiProperties.getBaseUrl() + "/classifications/16",
-                apiProperties.getBaseUrl() + "/classifications/1"),
+            Set.of(TestApiProperties.API_BASE_URL + "/classifications/11",
+                TestApiProperties.API_BASE_URL + "/classifications/15",
+                TestApiProperties.API_BASE_URL + "/classifications/2",
+                TestApiProperties.API_BASE_URL + "/classifications/12",
+                TestApiProperties.API_BASE_URL + "/classifications/4",
+                TestApiProperties.API_BASE_URL + "/classifications/13",
+                TestApiProperties.API_BASE_URL + "/classifications/14",
+                TestApiProperties.API_BASE_URL + "/classifications/16",
+                TestApiProperties.API_BASE_URL + "/classifications/1"),
             actualDto.getClassifications());
     }
 
     @Test
     public void maps_height_data_to_dto() {
+        actualDto = dtoMapper.createDTO(entity);
         assertEquals("648", actualDto.getHeight().getMeters());
         assertEquals("2126", actualDto.getHeight().getFeet());
     }
 
     @Test
     public void maps_latitude_and_longitude_to_dto() {
+        actualDto = dtoMapper.createDTO(entity);
         assertEquals("54.51594", actualDto.getLocation().getCoords().getDecimalCoords().getLatitude());
         assertEquals("-3.22956", actualDto.getLocation().getCoords().getDecimalCoords().getLongitude());
     }
 
     @Test
-    public void maps_dms_data_to_dto() {
-        assertEquals("3", actualDto.getLocation().getCoords().getDmsCoords().getxDms().getDegrees());
-        assertEquals("13", actualDto.getLocation().getCoords().getDmsCoords().getxDms().getMinutes());
-        assertEquals("46", actualDto.getLocation().getCoords().getDmsCoords().getxDms().getSeconds());
-        assertEquals("W", actualDto.getLocation().getCoords().getDmsCoords().getxDms().getHemisphere());
-        assertEquals("3° 13' 46\" W", actualDto.getLocation().getCoords().getDmsCoords().getxDms().getFormatted());
+    public void maps_converted_latitude_dms_data_to_dto() {
+        Mockito.when(coordConverter.getDegrees()).thenReturn(3);
+        Mockito.when(coordConverter.getMinutes()).thenReturn(13);
+        Mockito.when(coordConverter.getSeconds()).thenReturn(46);
+        Mockito.when(coordConverter.getHemisphere()).thenReturn("W");
 
-        assertEquals("54", actualDto.getLocation().getCoords().getDmsCoords().getyDms().getDegrees());
-        assertEquals("30", actualDto.getLocation().getCoords().getDmsCoords().getyDms().getMinutes());
-        assertEquals("57", actualDto.getLocation().getCoords().getDmsCoords().getyDms().getSeconds());
-        assertEquals("N", actualDto.getLocation().getCoords().getDmsCoords().getyDms().getHemisphere());
-        assertEquals("54° 30' 57\" N", actualDto.getLocation().getCoords().getDmsCoords().getyDms().getFormatted());
-        assertEquals("NY205141", actualDto.getLocation().getOsMapRef());
+        actualDto = dtoMapper.createDTO(entity);
+        DmsCoordsDTO dmsCoordsDTO = actualDto.getLocation().getCoords().getDmsCoords();
+
+        assertThat(dmsCoordsDTO.getConvertedLatitude().getDegrees(), is(equalTo("3")));
+        assertThat(dmsCoordsDTO.getConvertedLatitude().getMinutes(), is(equalTo("13")));
+        assertThat(dmsCoordsDTO.getConvertedLatitude().getSeconds(), is(equalTo("46")));
+        assertThat(dmsCoordsDTO.getConvertedLatitude().getHemisphere(), is(equalTo("W")));
+    }
+
+    @Test
+    public void maps_converted_longitude_dms_data_to_dto() {
+        Mockito.when(coordConverter.getDegrees()).thenReturn(54);
+        Mockito.when(coordConverter.getMinutes()).thenReturn(30);
+        Mockito.when(coordConverter.getSeconds()).thenReturn(57);
+        Mockito.when(coordConverter.getHemisphere()).thenReturn("N");
+
+        actualDto = dtoMapper.createDTO(entity);
+        DmsCoordsDTO dmsCoordsDTO = actualDto.getLocation().getCoords().getDmsCoords();
+
+        assertThat(dmsCoordsDTO.getConvertedLongitude().getDegrees(), is(equalTo("54")));
+        assertThat(dmsCoordsDTO.getConvertedLongitude().getMinutes(), is(equalTo("30")));
+        assertThat(dmsCoordsDTO.getConvertedLongitude().getSeconds(), is(equalTo("57")));
+        assertThat(dmsCoordsDTO.getConvertedLongitude().getHemisphere(), is(equalTo("N")));
     }
 
     @Test
     public void maps_map_data_to_dto() {
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.eq("maps"), Mockito.anyInt()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/maps/1",
+                TestApiProperties.API_BASE_URL + "/maps/2",
+                TestApiProperties.API_BASE_URL + "/maps/5");
+
+        actualDto = dtoMapper.createDTO(entity);
+
         assertEquals(
-            Set.of(apiProperties.getBaseUrl() + "/maps/1",
-                apiProperties.getBaseUrl() + "/maps/2",
-                apiProperties.getBaseUrl() + "/maps/5"),
+            Set.of(TestApiProperties.API_BASE_URL + "/maps/1",
+                TestApiProperties.API_BASE_URL + "/maps/2",
+                TestApiProperties.API_BASE_URL + "/maps/5"),
             actualDto.getLocation().getOsMaps());
     }
 
     @Test
     public void maps_region_url_to_dto() {
-        assertEquals(apiProperties.getBaseUrl() + "/regions/7", actualDto.getLocation().getRegionUri());
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), Mockito.anyInt()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/regions/7");
+
+        actualDto = dtoMapper.createDTO(entity);
+        assertEquals(TestApiProperties.API_BASE_URL + "/regions/7", actualDto.getLocation().getRegionUri());
     }
 
     @Test
     public void maps_name_to_dto() {
+        actualDto = dtoMapper.createDTO(entity);
         assertEquals("Fleetwith Pike", actualDto.getName());
     }
 
     @Test
     public void maps_parent_peak_url_to_dto() {
-        assertEquals(apiProperties.getBaseUrl() + "/fells/5", actualDto.getParentPeakUrl());
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), Mockito.anyInt()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/fells/5");
+
+        actualDto = dtoMapper.createDTO(entity);
+        assertEquals(TestApiProperties.API_BASE_URL + "/fells/5", actualDto.getParentPeakUrl());
     }
 
     @Test
     public void maps_prominence_data_to_dto() {
+        actualDto = dtoMapper.createDTO(entity);
         assertEquals("117", actualDto.getProminence().getMeters());
         assertEquals("384", actualDto.getProminence().getFeet());
     }
 
     @Test
     public void maps_url_to_dto() {
-        assertEquals(apiProperties.getBaseUrl() + "/fells/11", actualDto.getUrl());
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), Mockito.anyInt()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/fells/11");
+
+        actualDto = dtoMapper.createDTO(entity);
+        assertEquals(TestApiProperties.API_BASE_URL + "/fells/11", actualDto.getUrl());
     }
 }

@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -170,22 +169,22 @@ public class GetFellByIdTest {
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.degrees",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getyDms().getDegrees()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getDegrees()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.minutes",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getyDms().getMinutes()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getMinutes()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.seconds",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getyDms().getSeconds()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getSeconds()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.degrees",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getxDms().getDegrees()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getDegrees()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.minutes",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getxDms().getMinutes()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getMinutes()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.seconds",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getxDms().getSeconds()))));
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getSeconds()))));
     }
 
     @Test
@@ -198,10 +197,10 @@ public class GetFellByIdTest {
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.formatted",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getyDms().getFormatted()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getFormatted()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.formatted",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getxDms().getFormatted()))));
+                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getFormatted()))));
     }
 
     @Test

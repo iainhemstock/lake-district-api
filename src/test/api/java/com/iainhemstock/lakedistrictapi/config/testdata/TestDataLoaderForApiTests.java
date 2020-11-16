@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.config;
+package com.iainhemstock.lakedistrictapi.config.testdata;
 
 import com.iainhemstock.lakedistrictapi.entities.ParentFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
