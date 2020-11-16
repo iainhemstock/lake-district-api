@@ -25,19 +25,19 @@ Feature: Find fell by id
       | os_map_ref        | NY211104                            |
       | url               | http://localhost:8080/api/fells/5   |
       | parent_peak       | http://localhost:8080/api/fells/1   |
-    And the response body will also contain the following western dms coordinates
+    And the response body will also contain the following converted longitude dms coordinates
       | degrees     | 3           |
       | minutes     | 13          |
       | seconds     | 8           |
       | hemisphere  | W           |
       | formatted   | 3° 13' 8" W |
-    And the response body will also contain the following northern dms coordinates
+    And the response body will also contain the following converted latitude dms coordinates
       | degrees     | 54            |
       | minutes     | 28            |
       | seconds     | 55            |
       | hemisphere  | N             |
       | formatted   | 54° 28' 55" N |
-    And the response body will also contain the following classifications
+    And the response body will also contain the following classification urls
       | http://localhost:8080/api/classifications/11 |
       | http://localhost:8080/api/classifications/3  |
       | http://localhost:8080/api/classifications/15 |
@@ -48,7 +48,7 @@ Feature: Find fell by id
       | http://localhost:8080/api/classifications/14 |
       | http://localhost:8080/api/classifications/16 |
       | http://localhost:8080/api/classifications/1  |
-    And the response body will also contain the following maps
+    And the response body will also contain the following map urls
       | http://localhost:8080/api/maps/1  |
       | http://localhost:8080/api/maps/2  |
       | http://localhost:8080/api/maps/7  |

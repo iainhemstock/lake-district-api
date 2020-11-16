@@ -8,20 +8,20 @@ import java.util.Objects;
 import java.util.Set;
 
 @Embeddable
-public final class LocationDTO {
-    @Embedded private CoordsDTO coords;
+public final class LocationDto {
+    @Embedded private CoordsDto coords;
     private String regionUri;
     private String osMapRef;
     private Set<String> osMaps;
 
-    public LocationDTO(CoordsDTO coords, String regionUri, String osMapRef, Set<String> osMaps) {
+    public LocationDto(CoordsDto coords, String regionUri, String osMapRef, Set<String> osMaps) {
         this.coords = coords;
         this.regionUri = regionUri;
         this.osMapRef = osMapRef;
         this.osMaps = osMaps;
     }
 
-    public CoordsDTO getCoords() {
+    public CoordsDto getCoords() {
         return coords;
     }
 
@@ -53,8 +53,8 @@ public final class LocationDTO {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof LocationDTO)) return false;
-        LocationDTO that = (LocationDTO) o;
+        if (!(o instanceof LocationDto)) return false;
+        LocationDto that = (LocationDto) o;
         return Objects.equals(coords, that.coords) &&
                 Objects.equals(regionUri, that.regionUri) &&
                 Objects.equals(osMapRef, that.osMapRef) &&

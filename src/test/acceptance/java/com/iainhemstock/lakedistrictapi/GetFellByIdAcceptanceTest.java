@@ -1,9 +1,9 @@
 package com.iainhemstock.lakedistrictapi;
 
-import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
-import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDTO;
-import com.iainhemstock.lakedistrictapi.dtos.SailFellDTO;
-import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FellDto;
+import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDto;
+import com.iainhemstock.lakedistrictapi.dtos.SailFellDto;
+import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDto;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.SailFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
@@ -71,7 +71,7 @@ public class GetFellByIdAcceptanceTest {
 
     @Test
     @Parameters
-    public void when_sending_get_request_for_fell_by_id_then_all_data_of_that_fell_will_be_returned(int validId, FellDTO fellDTO) {
+    public void when_sending_get_request_for_fell_by_id_then_all_data_of_that_fell_will_be_returned(int validId, FellDto fellDTO) {
         when()
             .get("/fells/{id}", validId)
         .then().assertThat()
@@ -110,9 +110,9 @@ public class GetFellByIdAcceptanceTest {
 
     private Object[] parametersForWhen_sending_get_request_for_fell_by_id_then_all_data_of_that_fell_will_be_returned() {
         return new Object[] {
-            new Object[] { new ScafellPikeFellEntity().getId(), new ScafellPikeFellDTO() },
-            new Object[] { new FleetwithPikeFellEntity().getId(), new FleetwithPikeFellDTO() },
-            new Object[] { new SailFellEntity().getId(), new SailFellDTO() }
+            new Object[] { new ScafellPikeFellEntity().getId(), new ScafellPikeFellDto() },
+            new Object[] { new FleetwithPikeFellEntity().getId(), new FleetwithPikeFellDto() },
+            new Object[] { new SailFellEntity().getId(), new SailFellDto() }
         };
     }
 

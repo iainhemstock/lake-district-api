@@ -4,11 +4,11 @@ import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
-public final class ProminenceDTO {
+public final class ProminenceDto {
     private String meters;
     private String feet;
 
-    public ProminenceDTO(String meters, String feet) {
+    public ProminenceDto(String meters, String feet) {
         this.meters = meters;
         this.feet = feet;
     }
@@ -32,8 +32,8 @@ public final class ProminenceDTO {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProminenceDTO)) return false;
-        ProminenceDTO that = (ProminenceDTO) o;
+        if (!(o instanceof ProminenceDto)) return false;
+        ProminenceDto that = (ProminenceDto) o;
         return meters == that.meters &&
                 feet == that.feet;
     }

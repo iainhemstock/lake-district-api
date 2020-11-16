@@ -10,11 +10,11 @@ import java.util.Objects;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DecimalCoordsDTO {
+public final class DecimalCoordsDto {
     private final String latitude;
     private final String longitude;
 
-    public DecimalCoordsDTO(String latitude, String longitude) {
+    public DecimalCoordsDto(String latitude, String longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }

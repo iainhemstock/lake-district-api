@@ -1,17 +1,12 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
+import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -23,7 +18,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = FellNotFoundException.class)
     public ResponseEntity<Object> handleFellNotFoundException(FellNotFoundException ex) {
 
-        ErrorDTO errorDTO = new ErrorDTO(
+        ErrorDto errorDTO = new ErrorDto(
             HttpStatus.NOT_FOUND,
             ex.getMessage(),
             String.format("/fells/%d", ex.getUnrecognizedId()),
@@ -35,7 +30,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = HttpMethodNotAllowedException.class)
     public ResponseEntity<Object> handleMethodNotAllowedException(HttpMethodNotAllowedException ex) {
 
-        ErrorDTO errorDTO = new ErrorDTO(
+        ErrorDto errorDTO = new ErrorDto(
             HttpStatus.METHOD_NOT_ALLOWED,
             ex.getMessage(),
             ex.getPath(),

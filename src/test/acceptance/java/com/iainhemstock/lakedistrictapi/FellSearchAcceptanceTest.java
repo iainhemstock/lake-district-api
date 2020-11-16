@@ -34,7 +34,7 @@ public final class FellSearchAcceptanceTest {
 
     @Autowired private WebApplicationContext webApplicationContext;
 
-    private SearchDTO searchDTO;
+    private SearchDto searchDTO;
 
     @Before
     public void setUp() {
@@ -58,10 +58,10 @@ public final class FellSearchAcceptanceTest {
             .body("previous", is(nullValue()))
             .body("next", is(nullValue()))
             .body("results", hasSize(1))
-            .extract().response().as(SearchDTO.class);
+            .extract().response().as(SearchDto.class);
 
         assertThat(searchDTO.getResults().get(0),
-            is(equalTo(new ScafellPikeFellDTO())));
+            is(equalTo(new ScafellPikeFellDto())));
 
     }
 
@@ -75,9 +75,9 @@ public final class FellSearchAcceptanceTest {
             .body("previous", is(nullValue()))
             .body("next", is(nullValue()))
             .body("results", hasSize(2))
-            .extract().response().as(SearchDTO.class);
+            .extract().response().as(SearchDto.class);
         assertThat(searchDTO.getResults(),
-            containsInAnyOrder(new ScafellPikeFellDTO(), new FleetwithPikeFellDTO()));
+            containsInAnyOrder(new ScafellPikeFellDto(), new FleetwithPikeFellDto()));
     }
 
     @Test
@@ -90,10 +90,10 @@ public final class FellSearchAcceptanceTest {
             .body("previous", is(nullValue()))
             .body("next", is(nullValue()))
             .body("results", hasSize(2))
-            .extract().response().as(SearchDTO.class);
+            .extract().response().as(SearchDto.class);
 
         assertThat(searchDTO.getResults(),
-            containsInAnyOrder(new ScafellPikeFellDTO(), new ScafellFellDTO()));
+            containsInAnyOrder(new ScafellPikeFellDto(), new ScafellFellDto()));
     }
 
     @Test
@@ -106,9 +106,9 @@ public final class FellSearchAcceptanceTest {
             .body("previous", is(nullValue()))
             .body("next", is(nullValue()))
             .body("results", hasSize(2))
-            .extract().response().as(SearchDTO.class);
+            .extract().response().as(SearchDto.class);
 
         assertThat(searchDTO.getResults(),
-            containsInAnyOrder(new ScafellFellDTO(), new SailFellDTO()));
+            containsInAnyOrder(new ScafellFellDto(), new SailFellDto()));
     }
 }

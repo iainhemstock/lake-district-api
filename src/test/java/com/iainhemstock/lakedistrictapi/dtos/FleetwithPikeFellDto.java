@@ -2,9 +2,9 @@ package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 
-public class FleetwithPikeFellDTO extends AbstractTestFellDTO {
+public class FleetwithPikeFellDto extends AbstractTestFellDto {
 
-    public FleetwithPikeFellDTO() {
+    public FleetwithPikeFellDto() {
         super(new FleetwithPikeFellEntity());
     }
 }

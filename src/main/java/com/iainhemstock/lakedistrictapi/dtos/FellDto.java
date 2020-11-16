@@ -13,9 +13,10 @@ import java.util.Set;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FellDTO {
+public class FellDto {
 
-    @EqualsAndHashCode.Include private String url;
+    @EqualsAndHashCode.Include
+    private String url;
 
     private String name;
 
@@ -23,11 +24,14 @@ public class FellDTO {
 
     private String parentPeakUrl;
 
-    @Embedded private HeightDTO height;
+    @Embedded
+    private HeightDto height;
 
-    @Embedded private ProminenceDTO prominence;
+    @Embedded
+    private ProminenceDto prominence;
 
-    @Embedded private LocationDTO location;
+    @Embedded
+    private LocationDto location;
 
     @JsonGetter("parent_peak")
     public String getParentPeakUrl() {

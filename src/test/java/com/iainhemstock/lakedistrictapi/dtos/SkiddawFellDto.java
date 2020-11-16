@@ -2,9 +2,9 @@ package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.iainhemstock.lakedistrictapi.entities.fells.SkiddawFellEntity;
 
-public final class SkiddawFellDTO extends AbstractTestFellDTO {
+public final class SkiddawFellDto extends AbstractTestFellDto {
 
-    public SkiddawFellDTO() {
+    public SkiddawFellDto() {
         super(new SkiddawFellEntity());
     }
 }

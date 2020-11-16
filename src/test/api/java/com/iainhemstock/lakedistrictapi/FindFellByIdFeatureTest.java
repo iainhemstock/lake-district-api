@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FellDto;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.ValidationMessage;
 import io.cucumber.java.en.And;
@@ -88,38 +88,38 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
 
     @And("^the response body will contain the following values$")
     public void theResponseBodyWillContainTheFollwingValues(final Map<String, String> expectedValues) throws UnsupportedEncodingException, JsonProcessingException {
-        FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
+        FellDto fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDto.class);
 
+        assertEquals(expectedValues.get("url"), fellDTO.getUrl());
         assertEquals(expectedValues.get("name"), fellDTO.getName());
-        assertEquals(expectedValues.get("height_meters"), String.valueOf(fellDTO.getHeight().getMeters()));
-        assertEquals(expectedValues.get("height_feet"), String.valueOf(fellDTO.getHeight().getFeet()));
-        assertEquals(expectedValues.get("prominence_meters"), String.valueOf(fellDTO.getProminence().getMeters()));
-        assertEquals(expectedValues.get("prominence_feet"), String.valueOf(fellDTO.getProminence().getFeet()));
         assertEquals(expectedValues.get("region"), fellDTO.getLocation().getRegionUri());
         assertEquals(expectedValues.get("latitude"), fellDTO.getLocation().getCoords().getDecimalCoords().getLatitude());
         assertEquals(expectedValues.get("longitude"), fellDTO.getLocation().getCoords().getDecimalCoords().getLongitude());
         assertEquals(expectedValues.get("os_map_ref"), fellDTO.getLocation().getOsMapRef());
-        assertEquals(expectedValues.get("url"), fellDTO.getUrl());
+        assertEquals(expectedValues.get("height_feet"), String.valueOf(fellDTO.getHeight().getFeet()));
         assertEquals(expectedValues.get("parent_peak"), fellDTO.getParentPeakUrl());
+        assertEquals(expectedValues.get("height_meters"), String.valueOf(fellDTO.getHeight().getMeters()));
+        assertEquals(expectedValues.get("prominence_feet"), String.valueOf(fellDTO.getProminence().getFeet()));
+        assertEquals(expectedValues.get("prominence_meters"), String.valueOf(fellDTO.getProminence().getMeters()));
     }
 
-    @And("^the response body will also contain the following classifications$")
-    public void theResponseBodyWillContainTheFollwingClassifications(final List<String> expectedClassifications) throws UnsupportedEncodingException, JsonProcessingException {
-        FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
+    @And("^the response body will also contain the following classification urls$")
+    public void theResponseBodyWillContainTheFollwingClassifications(final List<String> expectedClassifications) throws IOException {
+        FellDto fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDto.class);
         assertTrue(fellDTO.getClassifications().containsAll(expectedClassifications) &&
                 expectedClassifications.containsAll(fellDTO.getClassifications()));
     }
 
-    @And("^the response body will also contain the following maps$")
-    public void theResponseBodyWillContainTheFollowingMaps(final List<String> expectedMaps) throws UnsupportedEncodingException, JsonProcessingException {
-        FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
+    @And("^the response body will also contain the following map urls$")
+    public void theResponseBodyWillContainTheFollowingMaps(final List<String> expectedMaps) throws IOException {
+        FellDto fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDto.class);
         assertTrue(fellDTO.getLocation().getOsMaps().containsAll(expectedMaps) &&
             expectedMaps.containsAll(fellDTO.getLocation().getOsMaps()));
     }
 
-    @And("^the response body will also contain the following western dms coordinates$")
-    public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws UnsupportedEncodingException, JsonProcessingException {
-        FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
+    @And("^the response body will also contain the following converted longitude dms coordinates$")
+    public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws IOException {
+        FellDto fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDto.class);
 
         assertEquals(expectedDms.get("degrees"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getDegrees()));
         assertEquals(expectedDms.get("minutes"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getMinutes()));
@@ -128,9 +128,9 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
         assertEquals(expectedDms.get("formatted"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getFormatted()));
     }
 
-    @And("^the response body will also contain the following northern dms coordinates$")
-    public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws UnsupportedEncodingException, JsonProcessingException {
-        FellDTO fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDTO.class);
+    @And("^the response body will also contain the following converted latitude dms coordinates$")
+    public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws IOException {
+        FellDto fellDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDto.class);
 
         assertEquals(expectedDms.get("degrees"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getDegrees()));
         assertEquals(expectedDms.get("minutes"), String.valueOf(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getMinutes()));

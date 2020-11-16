@@ -1,8 +1,8 @@
 package com.iainhemstock.lakedistrictapi.controllers;
 
-import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
-import com.iainhemstock.lakedistrictapi.services.FellDTOMapper;
-import com.iainhemstock.lakedistrictapi.dtos.SearchDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FellDto;
+import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
+import com.iainhemstock.lakedistrictapi.dtos.SearchDto;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +17,20 @@ import java.util.stream.Collectors;
 public class FellSearchController {
 
     @Autowired private FellRepository fellRepository;
-    @Autowired private FellDTOMapper fellDTOMapper;
+    @Autowired private FellDtoMapper fellDTOMapper;
 
     @GetMapping("/api/fells")
-    public SearchDTO getFells(@RequestParam("search") String searchTerm) {
+    public SearchDto getFells(@RequestParam("search") String searchTerm) {
         String processedSearchTerm = searchTerm
             .replace('+', ' ')
             .replace('*', '%');
         List<FellEntity> fellEntities = fellRepository.findByNameLikeIgnoreCase(processedSearchTerm);
 
-        List<FellDTO> fellDTOS = fellEntities.stream()
-            .map(entity -> fellDTOMapper.createDTO(entity))
+        List<FellDto> fellDtos = fellEntities.stream()
+            .map(entity -> fellDTOMapper.createDto(entity))
             .collect(Collectors.toList());
 
-        return new SearchDTO(fellDTOS);
+        return new SearchDto(fellDtos);
     }
 
 }

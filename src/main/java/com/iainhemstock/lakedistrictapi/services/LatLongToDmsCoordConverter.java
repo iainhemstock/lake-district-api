@@ -41,12 +41,11 @@ public class LatLongToDmsCoordConverter {
         BigDecimal minuteRemainder = x.subtract(minute);
         BigDecimal y = minuteRemainder.multiply(new BigDecimal(60));
         BigDecimal second = y.setScale(0, RoundingMode.HALF_UP);
-        String hemisphere = calculateHemisphere(coordType);
 
         this.degrees = degree.intValue();
         this.minutes = minute.intValue();
         this.seconds = second.intValue();
-        this.hemisphere = hemisphere;
+        this.hemisphere = calculateHemisphere(coordType);
     }
 
     private String calculateHemisphere(CoordType coordType) {

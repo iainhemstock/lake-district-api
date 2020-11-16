@@ -1,13 +1,13 @@
 package com.iainhemstock.lakedistrictapi.legacy;
 
 import com.iainhemstock.lakedistrictapi.controllers.FellController;
-import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDTO;
-import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDto;
+import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDto;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.services.Clock;
-import com.iainhemstock.lakedistrictapi.services.FellDTOMapper;
+import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,16 +34,16 @@ public class GetFellByIdTest {
     @Autowired private MockMvc mockMvc;
 
     @MockBean private FellRepository fellRepository;
-    @MockBean private FellDTOMapper fellDTOMapper;
+    @MockBean private FellDtoMapper fellDTOMapper;
     @MockBean private Clock clock;
 
     private ScafellPikeFellEntity scafellPikeFellEntity;
-    private ScafellPikeFellDTO scafellPikeFellDTO;
+    private ScafellPikeFellDto scafellPikeFellDTO;
 
     @Before
     public void setUp() throws Exception {
         scafellPikeFellEntity = new ScafellPikeFellEntity();
-        scafellPikeFellDTO = new ScafellPikeFellDTO();
+        scafellPikeFellDTO = new ScafellPikeFellDto();
         mockFellRepositoryBehaviour();
         mockFellDTOMapperBehaviour();
     }
@@ -54,7 +54,7 @@ public class GetFellByIdTest {
     }
 
     private void mockFellDTOMapperBehaviour() {
-        Mockito.when(fellDTOMapper.createDTO(scafellPikeFellEntity))
+        Mockito.when(fellDTOMapper.createDto(scafellPikeFellEntity))
             .thenReturn(scafellPikeFellDTO);
     }
 
@@ -78,8 +78,8 @@ public class GetFellByIdTest {
         FleetwithPikeFellEntity fleetwithPikeFellEntity = new FleetwithPikeFellEntity();
         Mockito.when(fellRepository.findById(anyInt()))
             .thenReturn(Optional.of(fleetwithPikeFellEntity));
-        Mockito.when(fellDTOMapper.createDTO(new FleetwithPikeFellEntity()))
-            .thenReturn(new FleetwithPikeFellDTO());
+        Mockito.when(fellDTOMapper.createDto(new FleetwithPikeFellEntity()))
+            .thenReturn(new FleetwithPikeFellDto());
 
         mockMvc.perform(
             get("/fells/{id}", fleetwithPikeFellEntity.getId()))
@@ -88,7 +88,7 @@ public class GetFellByIdTest {
             .andExpect(
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
-                jsonPath("$.parent_peak", is(equalTo(new FleetwithPikeFellDTO().getParentPeakUrl()))));
+                jsonPath("$.parent_peak", is(equalTo(new FleetwithPikeFellDto().getParentPeakUrl()))));
     }
 
     @Test

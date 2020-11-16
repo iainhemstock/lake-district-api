@@ -8,7 +8,7 @@ import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
-import com.iainhemstock.lakedistrictapi.services.FellDTOMapper;
+import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -41,7 +40,7 @@ public class FellSearchControllerApiTest {
     @Autowired private WebApplicationContext webApplicationContext;
 
     @MockBean private FellRepository fellRepository;
-    @MockBean private FellDTOMapper fellDTOMapper;
+    @MockBean private FellDtoMapper fellDTOMapper;
 
     @Value("${api.search-results.page-size}")
     private int MAX_RESULTS_PER_PAGE;
@@ -91,8 +90,8 @@ public class FellSearchControllerApiTest {
     @Test
     public void given_exact_fell_name_when_sending_search_request_then_response_count_will_be_one() throws Exception {
         whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDTO(any()))
-            .thenReturn(new ScafellPikeFellDTO());
+        Mockito.when(fellDTOMapper.createDto(any()))
+            .thenReturn(new ScafellPikeFellDto());
 
         mockMvc.perform(get("/fells?search=scafell+pike"))
             .andExpect(jsonPath("$.count", is(1)));
@@ -118,12 +117,12 @@ public class FellSearchControllerApiTest {
     @Test
     public void given_exact_fell_name_when_sending_search_request_then_response_will_contain_a_single_result() throws Exception {
         whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDTO(new ScafellPikeFellEntity()))
-            .thenReturn(new ScafellPikeFellDTO());
+        Mockito.when(fellDTOMapper.createDto(new ScafellPikeFellEntity()))
+            .thenReturn(new ScafellPikeFellDto());
 
-        SearchDTO searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=scafell+pike")));
+        SearchDto searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=scafell+pike")));
         assertThat(searchDTO.getResults().size(), is(1));
-        assertThat(searchDTO.getResults().get(0), is(equalTo(new ScafellPikeFellDTO())));
+        assertThat(searchDTO.getResults().get(0), is(equalTo(new ScafellPikeFellDto())));
         verifyFellRepositoryIsCalledOnlyOnce();
     }
 
@@ -146,8 +145,8 @@ public class FellSearchControllerApiTest {
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_then_response_will_contain_result_count() throws Exception {
         whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDTO(any()))
-            .thenReturn(new ScafellPikeFellDTO(), new FleetwithPikeFellDTO());
+        Mockito.when(fellDTOMapper.createDto(any()))
+            .thenReturn(new ScafellPikeFellDto(), new FleetwithPikeFellDto());
 
         mockMvc.perform(get("/fells?search=*pike"))
             .andExpect(jsonPath("$.count", is(2)));
@@ -157,13 +156,13 @@ public class FellSearchControllerApiTest {
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_then_response_will_contain_matching_fells_whose_names_end_with_search_term() throws Exception {
         whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDTO(any()))
-            .thenReturn(new ScafellPikeFellDTO(), new FleetwithPikeFellDTO());
+        Mockito.when(fellDTOMapper.createDto(any()))
+            .thenReturn(new ScafellPikeFellDto(), new FleetwithPikeFellDto());
 
-        SearchDTO searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=*pike")));
+        SearchDto searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=*pike")));
 
         assertThat(searchDTO.getResults(),
-            containsInAnyOrder(new ScafellPikeFellDTO(), new FleetwithPikeFellDTO()));
+            containsInAnyOrder(new ScafellPikeFellDto(), new FleetwithPikeFellDto()));
 
         verifyFellRepositoryIsCalledOnlyOnce();
     }
@@ -199,8 +198,8 @@ public class FellSearchControllerApiTest {
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_then_response_will_contain_result_count() throws Exception {
         whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
-        Mockito.when(fellDTOMapper.createDTO(any()))
-            .thenReturn(new ScafellPikeFellDTO(), new ScafellFellDTO());
+        Mockito.when(fellDTOMapper.createDto(any()))
+            .thenReturn(new ScafellPikeFellDto(), new ScafellFellDto());
 
         mockMvc.perform(get("/fells?search=sca*"))
             .andExpect(jsonPath("$.count", is(2)));
@@ -210,13 +209,13 @@ public class FellSearchControllerApiTest {
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_then_response_will_contain_matching_fells_whose_names_end_with_search_term() throws Exception {
         whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
-        Mockito.when(fellDTOMapper.createDTO(any()))
-            .thenReturn(new ScafellPikeFellDTO(), new ScafellFellDTO());
+        Mockito.when(fellDTOMapper.createDto(any()))
+            .thenReturn(new ScafellPikeFellDto(), new ScafellFellDto());
 
-        SearchDTO searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=sca*")));
+        SearchDto searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=sca*")));
 
         assertThat(searchDTO.getResults(),
-            containsInAnyOrder(new ScafellPikeFellDTO(), new ScafellFellDTO()));
+            containsInAnyOrder(new ScafellPikeFellDto(), new ScafellFellDto()));
 
         verifyFellRepositoryIsCalledOnlyOnce();
     }
@@ -259,10 +258,10 @@ public class FellSearchControllerApiTest {
         Mockito.verify(fellRepository, times(1)).findByNameLikeIgnoreCase(anyString());
     }
 
-    private SearchDTO mapResponseToDTO(final ResultActions resultActions) throws java.io.IOException {
+    private SearchDto mapResponseToDTO(final ResultActions resultActions) throws java.io.IOException {
         return objectMapper.readValue(
             resultActions.andReturn().getResponse().getContentAsByteArray(),
-            SearchDTO.class);
+            SearchDto.class);
     }
 
 }

@@ -2,9 +2,9 @@ package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellFellEntity;
 
-public final class ScafellFellDTO extends AbstractTestFellDTO {
+public final class ScafellFellDto extends AbstractTestFellDto {
 
-    public ScafellFellDTO() {
+    public ScafellFellDto() {
         super(new ScafellFellEntity());
     }
 }

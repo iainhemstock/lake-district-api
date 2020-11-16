@@ -6,22 +6,22 @@ import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
-public final class DmsCoordsDTO {
-    private final DmsDTO convertedLatitude;
-    private final DmsDTO convertedLongitude;
+public final class DmsCoordsDto {
+    private final DmsDto convertedLatitude;
+    private final DmsDto convertedLongitude;
 
-    public DmsCoordsDTO(DmsDTO convertedLatitude, DmsDTO convertedLongitude) {
+    public DmsCoordsDto(DmsDto convertedLatitude, DmsDto convertedLongitude) {
         this.convertedLatitude = convertedLatitude;
         this.convertedLongitude = convertedLongitude;
     }
 
     @JsonGetter("converted_longitude")
-    public DmsDTO getConvertedLongitude() {
+    public DmsDto getConvertedLongitude() {
         return convertedLongitude;
     }
 
     @JsonGetter("converted_latitude")
-    public DmsDTO getConvertedLatitude() {
+    public DmsDto getConvertedLatitude() {
         return convertedLatitude;
     }
 
@@ -36,8 +36,8 @@ public final class DmsCoordsDTO {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof DmsCoordsDTO)) return false;
-        DmsCoordsDTO that = (DmsCoordsDTO) o;
+        if (!(o instanceof DmsCoordsDto)) return false;
+        DmsCoordsDto that = (DmsCoordsDto) o;
         return Objects.equals(convertedLongitude, that.convertedLongitude) &&
                 Objects.equals(convertedLatitude, that.convertedLatitude);
     }

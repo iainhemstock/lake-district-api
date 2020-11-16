@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
-import java.util.Objects;
 
 @Embeddable
 @NoArgsConstructor
@@ -15,14 +14,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @JsonPropertyOrder({"degrees", "minutes", "seconds", "hemisphere" })
-public class DmsDTO {
+public class DmsDto {
     private String degrees;
     private String minutes;
     private String seconds;
     private String hemisphere;
     private String formatted;
 
-    public DmsDTO(String degrees, String minutes, String seconds, String hemisphere) {
+    public DmsDto(String degrees, String minutes, String seconds, String hemisphere) {
         this.degrees = degrees;
         this.minutes = minutes;
         this.seconds = seconds;
@@ -44,7 +43,7 @@ public class DmsDTO {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DmsDTO dmsDTO = (DmsDTO) o;
+        DmsDto dmsDTO = (DmsDto) o;
         if (degrees != null ? !degrees.equals(dmsDTO.degrees) : dmsDTO.degrees != null) return false;
         if (minutes != null ? !minutes.equals(dmsDTO.minutes) : dmsDTO.minutes != null) return false;
         if (seconds != null ? !seconds.equals(dmsDTO.seconds) : dmsDTO.seconds != null) return false;

@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class ErrorDTO {
+public class ErrorDto {
     private HttpStatus status;
     private String message;
     private String path;

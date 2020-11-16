@@ -11,7 +11,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class ParentPeakDTO {
+public class ParentPeakDto {
     private String name;
     private String url;
 
@@ -26,8 +26,8 @@ public class ParentPeakDTO {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof ParentPeakDTO)) return false;
-        ParentPeakDTO that = (ParentPeakDTO) o;
+        if (!(o instanceof ParentPeakDto)) return false;
+        ParentPeakDto that = (ParentPeakDto) o;
         return Objects.equals(name, that.name) &&
                 Objects.equals(url, that.url);
     }
