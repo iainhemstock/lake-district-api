@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+// todo: might be a nice idea to make an independent conversion rest service...
 @Service
 public class LatLongToDmsCoordConverter {
 

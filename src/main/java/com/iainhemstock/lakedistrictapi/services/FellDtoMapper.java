@@ -7,6 +7,7 @@ import com.iainhemstock.lakedistrictapi.services.LatLongToDmsCoordConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,28 +47,20 @@ public class FellDtoMapper {
 
     private LocationDto makeLocationDto(final FellEntity fellEntity) {
         return new LocationDto(
-            makeCoordsDto(fellEntity),
+            makeDecimalCoordsDto(fellEntity),
+            makeDmsCoordsDto(fellEntity),
             endpointGenerator.generateForResourceWithId("regions", fellEntity.getRegion().getId()),
             fellEntity.getOsMapRef(),
             makeOsMapUrls(fellEntity));
     }
 
-    private CoordsDto makeCoordsDto(final FellEntity fellEntity) {
-        DmsCoordsDto dmsCoords = makeDmsCoordsDto(fellEntity);
-        DecimalCoordsDto decimalCoords = makeDecimalCoordsDto(fellEntity);
-
-        return new CoordsDto(decimalCoords, dmsCoords);
-    }
-
     private DecimalCoordsDto makeDecimalCoordsDto(final FellEntity fellEntity) {
-        DecimalCoordsDto decimalCoords = new DecimalCoordsDto(
+        return new DecimalCoordsDto(
             String.valueOf(fellEntity.getLatitude()),
             String.valueOf(fellEntity.getLongitude()));
-
-        return decimalCoords;
     }
 
-    private DmsCoordsDto makeDmsCoordsDto(final FellEntity fellEntity) {
+    private List<DmsDto> makeDmsCoordsDto(final FellEntity fellEntity) {
         coordConverter.convert(fellEntity.getLatitude(), LatLongToDmsCoordConverter.CoordType.LATITUDE);
         DmsDto convertedLatitude = new DmsDto(
             String.valueOf(coordConverter.getDegrees()),
@@ -82,7 +75,7 @@ public class FellDtoMapper {
             String.valueOf(coordConverter.getSeconds()),
             coordConverter.getHemisphere());
 
-        return new DmsCoordsDto(convertedLatitude, convertedLongitude);
+        return List.of(convertedLatitude, convertedLongitude);
     }
 
     private HeightDto makeHeightDto(FellEntity fellEntity) {

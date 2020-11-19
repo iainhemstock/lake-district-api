@@ -6,7 +6,7 @@ import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDto;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
-import com.iainhemstock.lakedistrictapi.services.Clock;
+import com.iainhemstock.lakedistrictapi.services.ApiClock;
 import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class GetFellByIdTest {
 
     @MockBean private FellRepository fellRepository;
     @MockBean private FellDtoMapper fellDTOMapper;
-    @MockBean private Clock clock;
+    @MockBean private ApiClock apiClock;
 
     private ScafellPikeFellEntity scafellPikeFellEntity;
     private ScafellPikeFellDto scafellPikeFellDTO;
@@ -153,10 +153,10 @@ public class GetFellByIdTest {
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
                 jsonPath("$.location.coords.decimal.latitude",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDecimalCoords().getLatitude()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDecimalCoords().getLatitude()))))
             .andExpect(
                 jsonPath("$.location.coords.decimal.longitude",
-                    is((equalTo(scafellPikeFellDTO.getLocation().getCoords().getDecimalCoords().getLongitude())))));
+                    is((equalTo(scafellPikeFellDTO.getLocation().getDecimalCoords().getLongitude())))));
     }
 
     @Test
@@ -169,22 +169,22 @@ public class GetFellByIdTest {
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.degrees",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getDegrees()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(1).getDegrees()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.minutes",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getMinutes()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(1).getMinutes()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.seconds",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getSeconds()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(1).getSeconds()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.degrees",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getDegrees()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(0).getDegrees()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.minutes",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getMinutes()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(0).getMinutes()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.seconds",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getSeconds()))));
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(0).getSeconds()))));
     }
 
     @Test
@@ -197,10 +197,10 @@ public class GetFellByIdTest {
                 content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(
                 jsonPath("$.location.coords.dms.y.formatted",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getFormatted()))))
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(1).getFormatted()))))
             .andExpect(
                 jsonPath("$.location.coords.dms.x.formatted",
-                    is(equalTo(scafellPikeFellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getFormatted()))));
+                    is(equalTo(scafellPikeFellDTO.getLocation().getDmsCoords().get(0).getFormatted()))));
     }
 
     @Test
@@ -331,7 +331,7 @@ public class GetFellByIdTest {
         when(fellRepository.findById(invalidFellId))
             .thenReturn(Optional.empty());
         String NOW = "25-03-2017 13:54:02";
-        when(clock.timestamp())
+        when(apiClock.now())
             .thenReturn(NOW);
         mockMvc.perform(
             get("/fells/{id}", invalidFellId))
@@ -380,7 +380,7 @@ public class GetFellByIdTest {
     @Test
     public void given_endpoint_does_not_support_post_method_when_sending_post_request_to_url_then_response_will_contain_error_timestamp() throws Exception {
         String NOW = "25-03-2016 13:54:06";
-        when(clock.timestamp())
+        when(apiClock.now())
             .thenReturn(NOW);
         mockMvc.perform(post("/fells/3"))
             .andExpect(jsonPath("$.timestamp", is(equalTo(NOW))))
@@ -419,7 +419,7 @@ public class GetFellByIdTest {
     @Test
     public void given_endpoint_does_not_support_put_method_when_sending_put_request_to_url_then_response_will_contain_error_timestamp() throws Exception {
         String NOW = "25-03-2016 13:54:06";
-        when(clock.timestamp())
+        when(apiClock.now())
             .thenReturn(NOW);
         mockMvc.perform(put("/fells/3"))
             .andExpect(jsonPath("$.timestamp", is(equalTo(NOW))))
@@ -457,7 +457,7 @@ public class GetFellByIdTest {
     @Test
     public void given_endpoint_does_not_support_patch_method_when_sending_patch_request_to_url_then_response_will_contain_error_timestamp() throws Exception {
         String NOW = "25-03-2016 13:54:06";
-        when(clock.timestamp())
+        when(apiClock.now())
             .thenReturn(NOW);
         mockMvc.perform(patch("/fells/3"))
             .andExpect(jsonPath("$.timestamp", is(equalTo(NOW))))
@@ -495,7 +495,7 @@ public class GetFellByIdTest {
     @Test
     public void given_endpoint_does_not_support_delete_method_when_sending_delete_request_to_url_then_response_will_contain_error_timestamp() throws Exception {
         String NOW = "25-03-2016 13:54:06";
-        when(clock.timestamp())
+        when(apiClock.now())
             .thenReturn(NOW);
         mockMvc.perform(delete("/fells/3"))
             .andExpect(jsonPath("$.timestamp", is(equalTo(NOW))))

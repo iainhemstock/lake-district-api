@@ -19,76 +19,51 @@
 					"type": "string"
 				}
 			},
-			"required": ["feet", "meters"]
+			"required": ["feet", "meters"],
+			"additionalProperties": false
 		},
 		"location": {
 			"type": "object",
 			"properties": {
-				"coords": {
+				"decimal_coords": {
 					"type": "object",
 					"properties": {
-						"decimal": {
-							"type": "object",
-							"properties": {
-								"latitude": {
-									"type": "string"
-								},
-								"longitude": {
-									"type": "string"
-								}
-							},
-							"required": ["latitude", "longitude"]
+						"latitude": {
+							"type": "string"
 						},
-						"dms": {
-							"type": "object",
-							"properties": {
-								"converted_longitude": {
-									"type": "object",
-									"properties": {
-										"degrees": {
-											"type": "string"
-										},
-										"minutes": {
-											"type": "string"
-										},
-										"seconds": {
-											"type": "string"
-										},
-										"hemisphere": {
-											"type": "string"
-										},
-										"formatted": {
-											"type": "string"
-										}
-									},
-									"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"]
-								},
-								"converted_latitude": {
-									"type": "object",
-									"properties": {
-										"degrees": {
-											"type": "string"
-										},
-										"minutes": {
-											"type": "string"
-										},
-										"seconds": {
-											"type": "string"
-										},
-										"hemisphere": {
-											"type": "string"
-										},
-										"formatted": {
-											"type": "string"
-										}
-									},
-									"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"]
-								}
-							},
-							"required": ["converted_longitude", "converted_latitude"]
+						"longitude": {
+							"type": "string"
 						}
 					},
-					"required": ["decimal", "dms"]
+					"required": ["latitude", "longitude"],
+					"additionalProperties": false
+				},
+				"dms_coords": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"degrees": {
+								"type": "string"
+							},
+							"minutes": {
+								"type": "string"
+							},
+							"seconds": {
+								"type": "string"
+							},
+							"hemisphere": {
+								"type": "string"
+							},
+							"formatted": {
+								"type": "string"
+							}
+						},
+						"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"],
+						"additionalProperties": false
+					},
+					"minItems": 2,
+					"maxItems": 2
 				},
 				"region": {
 					"type": "string"
@@ -103,7 +78,7 @@
 					}
 				}
 			},
-			"required": ["coords", "region", "os_map_ref", "os_maps"]
+			"required": ["decimal_coords", "dms_coords", "region", "os_map_ref", "os_maps"]
 		},
 		"name": {
 			"type": "string"
@@ -121,7 +96,8 @@
 					"type": "string"
 				}
 			},
-			"required": ["feet", "meters"]
+			"required": ["feet", "meters"],
+			"additionalProperties": false
 		},
 		"url": {
 			"type": "string"

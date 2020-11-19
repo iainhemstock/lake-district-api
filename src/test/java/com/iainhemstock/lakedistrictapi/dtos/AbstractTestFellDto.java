@@ -5,6 +5,7 @@ import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
 import com.iainhemstock.lakedistrictapi.services.LatLongToDmsCoordConverter;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class AbstractTestFellDto extends FellDto {
@@ -44,15 +45,10 @@ public abstract class AbstractTestFellDto extends FellDto {
             String.valueOf((int) Math.round(entity.getProminenceMeters() * FellDtoMapper.METERS_TO_FEET_CONVERSION))));
 
         setLocation(new LocationDto(
-            new CoordsDto(
-                new DecimalCoordsDto(
+            new DecimalCoordsDto(
                     String.valueOf(entity.getLatitude()),
                     String.valueOf(entity.getLongitude())),
-                new DmsCoordsDto(
-                    convertedLatitude,
-                    convertedLongitude
-                )
-            ),
+            List.of(convertedLatitude, convertedLongitude),
             TestApiProperties.API_BASE_URL + "/regions/" + entity.getRegion().getId(),
             entity.getOsMapRef(),
             entity.getOsMaps().stream()

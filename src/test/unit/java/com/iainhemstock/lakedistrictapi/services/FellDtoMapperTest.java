@@ -4,9 +4,6 @@ import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.services.EndpointGenerator;
-import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
-import com.iainhemstock.lakedistrictapi.services.LatLongToDmsCoordConverter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -74,8 +72,8 @@ public class FellDtoMapperTest {
     @Test
     public void maps_latitude_and_longitude_to_dto() {
         actualDto = dtoMapper.createDto(entity);
-        assertEquals("54.51594", actualDto.getLocation().getCoords().getDecimalCoords().getLatitude());
-        assertEquals("-3.22956", actualDto.getLocation().getCoords().getDecimalCoords().getLongitude());
+        assertEquals("54.51594", actualDto.getLocation().getDecimalCoords().getLatitude());
+        assertEquals("-3.22956", actualDto.getLocation().getDecimalCoords().getLongitude());
     }
 
     @Test
@@ -86,12 +84,12 @@ public class FellDtoMapperTest {
         Mockito.when(coordConverter.getHemisphere()).thenReturn("N");
 
         actualDto = dtoMapper.createDto(entity);
-        DmsCoordsDto dmsCoordsDto = actualDto.getLocation().getCoords().getDmsCoords();
+        List<DmsDto> dmsCoordsDto = actualDto.getLocation().getDmsCoords();
 
-        assertThat(dmsCoordsDto.getConvertedLatitude().getDegrees(), is(equalTo("54")));
-        assertThat(dmsCoordsDto.getConvertedLatitude().getMinutes(), is(equalTo("30")));
-        assertThat(dmsCoordsDto.getConvertedLatitude().getSeconds(), is(equalTo("57")));
-        assertThat(dmsCoordsDto.getConvertedLatitude().getHemisphere(), is(equalTo("N")));
+        assertThat(dmsCoordsDto.get(0).getDegrees(), is(equalTo("54")));
+        assertThat(dmsCoordsDto.get(0).getMinutes(), is(equalTo("30")));
+        assertThat(dmsCoordsDto.get(0).getSeconds(), is(equalTo("57")));
+        assertThat(dmsCoordsDto.get(0).getHemisphere(), is(equalTo("N")));
     }
 
     @Test
@@ -102,12 +100,12 @@ public class FellDtoMapperTest {
         Mockito.when(coordConverter.getHemisphere()).thenReturn("W");
 
         actualDto = dtoMapper.createDto(entity);
-        DmsCoordsDto dmsCoordsDto = actualDto.getLocation().getCoords().getDmsCoords();
+        List<DmsDto> dmsCoordsDto = actualDto.getLocation().getDmsCoords();
 
-        assertThat(dmsCoordsDto.getConvertedLongitude().getDegrees(), is(equalTo("3")));
-        assertThat(dmsCoordsDto.getConvertedLongitude().getMinutes(), is(equalTo("13")));
-        assertThat(dmsCoordsDto.getConvertedLongitude().getSeconds(), is(equalTo("46")));
-        assertThat(dmsCoordsDto.getConvertedLongitude().getHemisphere(), is(equalTo("W")));
+        assertThat(dmsCoordsDto.get(1).getDegrees(), is(equalTo("3")));
+        assertThat(dmsCoordsDto.get(1).getMinutes(), is(equalTo("13")));
+        assertThat(dmsCoordsDto.get(1).getSeconds(), is(equalTo("46")));
+        assertThat(dmsCoordsDto.get(1).getHemisphere(), is(equalTo("W")));
     }
 
     @Test
@@ -132,7 +130,7 @@ public class FellDtoMapperTest {
             .thenReturn(TestApiProperties.API_BASE_URL + "/regions/7");
 
         actualDto = dtoMapper.createDto(entity);
-        assertEquals(TestApiProperties.API_BASE_URL + "/regions/7", actualDto.getLocation().getRegionUri());
+        assertEquals(TestApiProperties.API_BASE_URL + "/regions/7", actualDto.getLocation().getRegion());
     }
 
     @Test

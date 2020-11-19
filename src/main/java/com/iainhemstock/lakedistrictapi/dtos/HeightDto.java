@@ -1,12 +1,15 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
+@JsonPropertyOrder({"feet", "meters"})
 public final class HeightDto {
-    private String meters;
     private String feet;
+    private String meters;
 
     public HeightDto(String meters, String feet) {
         this.meters = meters;

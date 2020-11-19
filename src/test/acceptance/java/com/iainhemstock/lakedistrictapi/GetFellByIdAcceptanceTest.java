@@ -7,7 +7,7 @@ import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDto;
 import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.SailFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.services.Clock;
+import com.iainhemstock.lakedistrictapi.services.ApiClock;
 import io.restassured.http.ContentType;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -48,12 +48,12 @@ public class GetFellByIdAcceptanceTest {
 
     @Autowired WebApplicationContext webApplicationContext;
 
-    @MockBean private Clock clock;
+    @MockBean private ApiClock apiClock;
 
     @Before
     public void setUp() throws Exception {
         webAppContextSetup(webApplicationContext);
-        Mockito.when(clock.timestamp()).thenReturn(NOW);
+        Mockito.when(apiClock.now()).thenReturn(NOW);
     }
 
     /*******************************************************************************************************************
@@ -85,24 +85,24 @@ public class GetFellByIdAcceptanceTest {
                 .body("feet", is(fellDTO.getHeight().getFeet()))
                 .body("meters", is(fellDTO.getHeight().getMeters()))
             .root("location")
-                .body("region", is(fellDTO.getLocation().getRegionUri()))
+                .body("region", is(fellDTO.getLocation().getRegion()))
                 .body("os_map_ref", is(fellDTO.getLocation().getOsMapRef()))
                 .body("os_maps", containsInAnyOrder(fellDTO.getLocation().getOsMaps().toArray()))
             .root("location.coords.decimal")
-                .body("latitude", is(fellDTO.getLocation().getCoords().getDecimalCoords().getLatitude()))
-                .body("longitude", is(fellDTO.getLocation().getCoords().getDecimalCoords().getLongitude()))
+                .body("latitude", is(fellDTO.getLocation().getDecimalCoords().getLatitude()))
+                .body("longitude", is(fellDTO.getLocation().getDecimalCoords().getLongitude()))
             .root("location.coords.dms.y")
-                .body("formatted", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getFormatted()))
-                .body("degrees", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getDegrees()))
-                .body("minutes", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getMinutes()))
-                .body("seconds", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getSeconds()))
-                .body("hemisphere", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLongitude().getHemisphere()))
+                .body("formatted", is(fellDTO.getLocation().getDmsCoords().get(1).getFormatted()))
+                .body("degrees", is(fellDTO.getLocation().getDmsCoords().get(1).getDegrees()))
+                .body("minutes", is(fellDTO.getLocation().getDmsCoords().get(1).getMinutes()))
+                .body("seconds", is(fellDTO.getLocation().getDmsCoords().get(1).getSeconds()))
+                .body("hemisphere", is(fellDTO.getLocation().getDmsCoords().get(1).getHemisphere()))
             .root("location.coords.dms.x")
-                .body("formatted", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getFormatted()))
-                .body("degrees", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getDegrees()))
-                .body("minutes", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getMinutes()))
-                .body("seconds", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getSeconds()))
-                .body("hemisphere", is(fellDTO.getLocation().getCoords().getDmsCoords().getConvertedLatitude().getHemisphere()))
+                .body("formatted", is(fellDTO.getLocation().getDmsCoords().get(0).getFormatted()))
+                .body("degrees", is(fellDTO.getLocation().getDmsCoords().get(0).getDegrees()))
+                .body("minutes", is(fellDTO.getLocation().getDmsCoords().get(0).getMinutes()))
+                .body("seconds", is(fellDTO.getLocation().getDmsCoords().get(0).getSeconds()))
+                .body("hemisphere", is(fellDTO.getLocation().getDmsCoords().get(0).getHemisphere()))
             .root("prominence")
                 .body("feet", is(fellDTO.getProminence().getFeet()))
                 .body("meters", is(fellDTO.getProminence().getMeters()));
@@ -138,7 +138,7 @@ public class GetFellByIdAcceptanceTest {
             .body("path", equalTo(PATH))
             .body("timestamp", equalTo(NOW));
 
-        verify(clock, times(1)).timestamp();
+        verify(apiClock, times(1)).now();
     }
 
     @Test
@@ -154,7 +154,7 @@ public class GetFellByIdAcceptanceTest {
             .body("path", equalTo(PATH))
             .body("timestamp", equalTo(NOW));
 
-        verify(clock, times(1)).timestamp();
+        verify(apiClock, times(1)).now();
     }
 
     @Test
@@ -170,7 +170,7 @@ public class GetFellByIdAcceptanceTest {
             .body("path", equalTo(PATH))
             .body("timestamp", equalTo(NOW));
 
-        verify(clock, times(1)).timestamp();
+        verify(apiClock, times(1)).now();
     }
 
     @Test
@@ -186,7 +186,7 @@ public class GetFellByIdAcceptanceTest {
             .body("path", equalTo(PATH))
             .body("timestamp", equalTo(NOW));
 
-        verify(clock, times(1)).timestamp();
+        verify(apiClock, times(1)).now();
     }
 
     /*******************************************************************************************************************
@@ -205,7 +205,7 @@ public class GetFellByIdAcceptanceTest {
             .body("path", equalTo(String.format("/fells/%d", nonExistentId)))
             .body("timestamp", equalTo(NOW));
 
-        verify(clock, times(1)).timestamp();
+        verify(apiClock, times(1)).now();
     }
 
     /*******************************************************************************************************************

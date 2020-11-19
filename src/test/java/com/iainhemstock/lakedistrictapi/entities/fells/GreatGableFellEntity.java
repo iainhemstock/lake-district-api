@@ -32,15 +32,7 @@ public final class GreatGableFellEntity extends FellEntity {
             new HashSet<>(Set.of(
                 new BirkettClassficationEntity(),
                 new MarilynClassificationEntity(),
-                new FellrangerClassificationEntity(),
-                new HewittClassificationEntity(),
-                new HumpClassificationEntity(),
-                new NuttallClassificationEntity(),
-                new SimmClassificationEntity(),
-                new SyngeClassificationEntity(),
-                new TumpClassificationEntity(),
-                new WainwrightClassificationEntity())
-            )
+                new FellrangerClassificationEntity()))
         );
     }
 }

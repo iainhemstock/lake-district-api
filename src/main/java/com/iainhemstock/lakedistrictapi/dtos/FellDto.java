@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,28 +14,29 @@ import java.util.Set;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonPropertyOrder({"classifications", "height", "location", "name", "parent_peak", "prominence", "url"})
 public class FellDto {
 
-    @EqualsAndHashCode.Include
-    private String url;
-
-    private String name;
-
     private Set<String> classifications;
-
-    private String parentPeakUrl;
 
     @Embedded
     private HeightDto height;
 
     @Embedded
-    private ProminenceDto prominence;
+    private LocationDto location;
+
+    private String parentPeakUrl;
 
     @Embedded
-    private LocationDto location;
+    private ProminenceDto prominence;
+
+    private String name;
 
     @JsonGetter("parent_peak")
     public String getParentPeakUrl() {
         return parentPeakUrl;
     }
+
+    @EqualsAndHashCode.Include
+    private String url;
 }
