@@ -1,6 +1,5 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
-import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
 import com.iainhemstock.lakedistrictapi.services.ApiClock;
@@ -10,12 +9,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.context.request.WebRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,7 +27,6 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     private static final String NOW = "2012-21-05 12:01:32";
     private static final String REQUEST_URL = TestApiProperties.API_BASE_URL + "/fells/" + FELL_ID;
 
-    @Mock private ApiProperties apiProperties;
     @Mock private ApiClock apiClock;
 
     private HttpRequestMethodNotSupportedExceptionHandler exceptionHandler;
@@ -42,10 +39,10 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
             .thenReturn(NOW);
 
         methodNotAllowedException = new HttpRequestMethodNotSupportedException(
-            "POST",
+            HttpMethod.POST.name(),
             "Method POST is not supported");
 
-        exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiProperties, apiClock);
+        exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClock);
     }
 
     @Test
