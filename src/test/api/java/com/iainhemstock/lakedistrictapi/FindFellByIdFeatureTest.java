@@ -3,6 +3,7 @@ package com.iainhemstock.lakedistrictapi;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
+import com.iainhemstock.lakedistrictapi.controllers.FellController;
 import com.iainhemstock.lakedistrictapi.dtos.DmsDto;
 import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
 import com.iainhemstock.lakedistrictapi.dtos.FellDto;
@@ -13,12 +14,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -41,7 +45,6 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
     private static final int LONGITUDE = 1;
 
     @Autowired private MockMvc mockMvc;
-    @Autowired private ObjectMapper objectMapper;
 
     private MvcResult mvcResult;
     private FellDto fellDto;
@@ -59,7 +62,6 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
 
     @And("^the response content type will be (.*)$")
     public void theContentTypeWillBe(final String expectedContentType) throws UnsupportedEncodingException {
-        System.out.println(mvcResult.getResponse().getContentAsString());
         assertThat(mvcResult.getResponse().getContentType(),
             is(equalTo(expectedContentType)));
     }

@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 public class BaseFeatureTest {
 
-    @Autowired private ObjectMapper objectMapper;
+    @Autowired protected ObjectMapper objectMapper;
     private String endpointUnderTest;
 
     public void setEndpointUnderTest(final String endpoint) {

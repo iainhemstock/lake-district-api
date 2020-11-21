@@ -10,10 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.context.request.WebRequest;
 
 @Component
-public class HttpRequestMethodNotSupportedExceptionHandler implements ApiExceptionHandler {
+public class HttpRequestMethodNotSupportedExceptionHandler {
 
     private ApiProperties apiProperties;
     private ApiClock apiClock;
@@ -24,17 +23,13 @@ public class HttpRequestMethodNotSupportedExceptionHandler implements ApiExcepti
         this.apiClock = apiClock;
     }
 
-    @Override
-    public ResponseEntity<Object> handleException(Exception ex, WebRequest webRequest) {
-        HttpRequestMethodNotSupportedException theEx = (HttpRequestMethodNotSupportedException) ex;
+    public ResponseEntity<Object> handleException(final HttpRequestMethodNotSupportedException ex, final String requestUrl) {
         HttpStatus myStatus = HttpStatus.METHOD_NOT_ALLOWED;
 
         ErrorDto errorDto = new ErrorDto(
             String.valueOf(myStatus.value()),
-            String.format("Method %s is not supported", theEx.getMethod()),
-            // todo: if the full resource url could be obtained from webRequest (or subclass)
-            //  then the ApiProperties dependency can be removed
-            String.format("%s%s", apiProperties.getBaseUrl(), webRequest.getDescription(false).substring(8)),
+            String.format("Method %s is not supported", ex.getMethod()),
+            requestUrl,
             apiClock.now()
         );
 

@@ -6,22 +6,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.HttpURLConnection;
 
 @Component
-public class FellNotFoundExceptionHandler implements ApiExceptionHandler {
+public class FellNotFoundExceptionHandler {
 
-    @Override
-    public ResponseEntity<Object> handleException(Exception ex, final WebRequest webRequest) {
-        FellNotFoundException theEx = (FellNotFoundException) ex;
-
+    public ResponseEntity<Object> handleException(final FellNotFoundException ex) {
         ErrorDto errorDTO = new ErrorDto(
             String.valueOf(HttpURLConnection.HTTP_NOT_FOUND),
             ex.getMessage(),
-            String.format("%s", theEx.getRequestURL()),
-            theEx.getTimestamp());
+            String.format("%s", ex.getRequestUrl()),
+            ex.getTimestamp());
 
-        return new ResponseEntity<>(errorDTO, theEx.getHeaders(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDTO, ex.getHeaders(), HttpStatus.NOT_FOUND);
     }
 
 }

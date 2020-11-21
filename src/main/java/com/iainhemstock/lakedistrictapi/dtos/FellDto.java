@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonPropertyOrder({"classifications", "height", "location", "name", "parent_peak", "prominence", "url"})
-public class FellDto {
+public class FellDto  {
 
     private Set<String> classifications;
 

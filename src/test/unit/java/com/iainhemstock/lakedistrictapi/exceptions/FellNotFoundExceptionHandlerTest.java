@@ -48,35 +48,35 @@ public class FellNotFoundExceptionHandlerTest {
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_responseHeaderWillIndicateWhichMethodsAreAllowed() {
-        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException, webRequest);
+        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
         assertThat(fellNotFoundResponseEntity.getHeaders().get("Allow"),
             is(equalTo(List.of("GET"))));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatusCode() {
-        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException, webRequest);
+        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
         assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getStatus(),
             is(equalTo(String.valueOf(HttpStatus.NOT_FOUND.value()))));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
-        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException, webRequest);
+        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
         assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getMessage(),
             is(equalTo("Fell was not found for {id=" + FELL_ID + "}")));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
-        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException, webRequest);
+        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
         assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getPath(),
             is(equalTo("http://localhost:8080/api/fells/" + FELL_ID)));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
-        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException, webRequest);
+        fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
         assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getTimestamp(),
             is(equalTo(NOW)));
     }
