@@ -43,40 +43,41 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
             "Method POST is not supported");
 
         exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClock);
+        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_responseHeaderWillIndicateWhichMethodsAreAllowed() {
-        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
-        assertThat(methodNotAllowedResponseEntity.getHeaders().get("Allow"),
+        assertThat(
+            methodNotAllowedResponseEntity.getHeaders().get("Allow"),
             is(equalTo(List.of("GET"))));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatus() {
-        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
-        assertThat(((ErrorDto) methodNotAllowedResponseEntity.getBody()).getStatus(),
+        assertThat(
+            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getStatus(),
             is(equalTo(String.valueOf(HttpStatus.METHOD_NOT_ALLOWED.value()))));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
-        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
-        assertThat(((ErrorDto) methodNotAllowedResponseEntity.getBody()).getMessage(),
+        assertThat(
+            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getMessage(),
             is(equalTo("Method POST is not supported")));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
-        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
-        assertThat(((ErrorDto) methodNotAllowedResponseEntity.getBody()).getPath(),
+        assertThat(
+            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getPath(),
             is(equalTo(TestApiProperties.API_BASE_URL + "/fells/" + FELL_ID)));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
-        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
-        assertThat(((ErrorDto) methodNotAllowedResponseEntity.getBody()).getTimestamp(),
+        assertThat(
+            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getTimestamp(),
             is(equalTo(NOW)));
     }
 

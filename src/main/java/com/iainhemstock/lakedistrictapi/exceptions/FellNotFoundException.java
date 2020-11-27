@@ -1,7 +1,6 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 public class FellNotFoundException extends RuntimeException {
     private int fellId;

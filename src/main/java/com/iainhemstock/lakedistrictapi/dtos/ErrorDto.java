@@ -1,9 +1,6 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
 import lombok.*;
-import org.springframework.http.HttpStatus;
-
-import java.net.HttpURLConnection;
 
 @NoArgsConstructor
 @AllArgsConstructor

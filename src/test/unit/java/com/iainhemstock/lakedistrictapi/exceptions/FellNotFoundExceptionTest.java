@@ -2,8 +2,6 @@ package com.iainhemstock.lakedistrictapi.exceptions;
 
 import org.junit.Test;
 
-import java.net.http.HttpHeaders;
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

@@ -3,12 +3,12 @@ package com.iainhemstock.lakedistrictapi.legacy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.controllers.FellSearchController;
 import com.iainhemstock.lakedistrictapi.dtos.*;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellFellEntity;
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
-import com.iainhemstock.lakedistrictapi.services.FellDtoMapper;
+import com.iainhemstock.lakedistrictapi.services.mappers.FellMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -40,7 +40,7 @@ public class FellSearchControllerApiTest {
     @Autowired private WebApplicationContext webApplicationContext;
 
     @MockBean private FellRepository fellRepository;
-    @MockBean private FellDtoMapper fellDTOMapper;
+    @MockBean private FellMapper fellMapper;
 
     @Value("${api.search-results.page-size}")
     private int MAX_RESULTS_PER_PAGE;
@@ -89,8 +89,8 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_exact_fell_name_when_sending_search_request_then_response_count_will_be_one() throws Exception {
-        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDto(any()))
+        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFell()));
+        Mockito.when(fellMapper.map(any()))
             .thenReturn(new ScafellPikeFellDto());
 
         mockMvc.perform(get("/fells?search=scafell+pike"))
@@ -100,7 +100,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_exact_fell_name_when_sending_search_request_then_previous_uri_will_be_null() throws Exception {
-        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
+        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFell()));
         mockMvc.perform(get("/fells?search=scafell+pike"))
             .andExpect(jsonPath("$.previous", is(nullValue())));
         verifyFellRepositoryIsCalledOnlyOnce();
@@ -108,7 +108,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_exact_fell_name_when_sending_search_request_then_next_uri_will_be_null() throws Exception {
-        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
+        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFell()));
         mockMvc.perform(get("/fells?search=scafell+pike"))
             .andExpect(jsonPath("$.next", is(nullValue())));
         verifyFellRepositoryIsCalledOnlyOnce();
@@ -116,8 +116,8 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_exact_fell_name_when_sending_search_request_then_response_will_contain_a_single_result() throws Exception {
-        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDto(new ScafellPikeFellEntity()))
+        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFell()));
+        Mockito.when(fellMapper.map(new ScafellPikeFell()))
             .thenReturn(new ScafellPikeFellDto());
 
         SearchDto searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=scafell+pike")));
@@ -128,7 +128,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_multiple_word_search_term_when_sending_search_request_then_controller_will_replace_plus_char_with_space() throws Exception {
-        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFellEntity()));
+        whenFellRepositoryThenReturn(Collections.singletonList(new ScafellPikeFell()));
         mockMvc.perform(get("/fells?search=scafell+pike"));
         verify(fellRepository).findByNameLikeIgnoreCase("scafell pike");
         verifyFellRepositoryIsCalledOnlyOnce();
@@ -136,7 +136,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_then_status_is_ok_and_content_type_is_json() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new FleetwithPikeFell()));
         mockMvc.perform(get("/fells?search=*pike"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -144,8 +144,8 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_then_response_will_contain_result_count() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDto(any()))
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new FleetwithPikeFell()));
+        Mockito.when(fellMapper.map(any()))
             .thenReturn(new ScafellPikeFellDto(), new FleetwithPikeFellDto());
 
         mockMvc.perform(get("/fells?search=*pike"))
@@ -155,8 +155,8 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_then_response_will_contain_matching_fells_whose_names_end_with_search_term() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
-        Mockito.when(fellDTOMapper.createDto(any()))
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new FleetwithPikeFell()));
+        Mockito.when(fellMapper.map(any()))
             .thenReturn(new ScafellPikeFellDto(), new FleetwithPikeFellDto());
 
         SearchDto searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=*pike")));
@@ -169,7 +169,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_that_returns_less_than_a_page_of_results_then_previous_uri_will_be_null() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new FleetwithPikeFell()));
         mockMvc.perform(get("/fells?search=*pike"))
             .andExpect(jsonPath("$.count", lessThan(MAX_RESULTS_PER_PAGE)))
             .andExpect(jsonPath("$.previous", nullValue()));
@@ -179,7 +179,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_prefixed_with_wildcard_when_sending_search_request_that_returns_less_than_a_page_of_results_then_next_uri_will_be_null() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new FleetwithPikeFellEntity()));
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new FleetwithPikeFell()));
         mockMvc.perform(get("/fells?search=*pike"))
             .andExpect(jsonPath("$.count", lessThan(MAX_RESULTS_PER_PAGE)))
             .andExpect(jsonPath("$.next", nullValue()));
@@ -189,7 +189,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_then_status_is_ok_and_content_type_is_json() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new ScafellFell()));
         mockMvc.perform(get("/fells?search=sca*"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -197,8 +197,8 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_then_response_will_contain_result_count() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
-        Mockito.when(fellDTOMapper.createDto(any()))
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new ScafellFell()));
+        Mockito.when(fellMapper.map(any()))
             .thenReturn(new ScafellPikeFellDto(), new ScafellFellDto());
 
         mockMvc.perform(get("/fells?search=sca*"))
@@ -208,8 +208,8 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_then_response_will_contain_matching_fells_whose_names_end_with_search_term() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
-        Mockito.when(fellDTOMapper.createDto(any()))
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new ScafellFell()));
+        Mockito.when(fellMapper.map(any()))
             .thenReturn(new ScafellPikeFellDto(), new ScafellFellDto());
 
         SearchDto searchDTO = mapResponseToDTO(mockMvc.perform(get("/fells?search=sca*")));
@@ -222,7 +222,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_that_returns_less_than_a_page_of_results_then_previous_uri_will_be_null() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new ScafellFell()));
         mockMvc.perform(get("/fells?search=sca*"))
             .andExpect(jsonPath("$.count", lessThan(MAX_RESULTS_PER_PAGE)))
             .andExpect(jsonPath("$.previous", nullValue()));
@@ -232,7 +232,7 @@ public class FellSearchControllerApiTest {
 
     @Test
     public void given_search_term_suffixed_with_wildcard_when_sending_search_request_that_returns_less_than_a_page_of_results_then_next_uri_will_be_null() throws Exception {
-        whenFellRepositoryThenReturn(List.of(new ScafellPikeFellEntity(), new ScafellFellEntity()));
+        whenFellRepositoryThenReturn(List.of(new ScafellPikeFell(), new ScafellFell()));
         mockMvc.perform(get("/fells?search=sca*"))
             .andExpect(jsonPath("$.count", lessThan(MAX_RESULTS_PER_PAGE)))
             .andExpect(jsonPath("$.next", nullValue()));
@@ -249,7 +249,7 @@ public class FellSearchControllerApiTest {
             .andExpect(jsonPath("$.results", hasSize(0)));
     }
 
-    private void whenFellRepositoryThenReturn(final List<FellEntity> fellEntities) {
+    private void whenFellRepositoryThenReturn(final List<Fell> fellEntities) {
         Mockito.when(fellRepository.findByNameLikeIgnoreCase(anyString()))
             .thenReturn(fellEntities);
     }

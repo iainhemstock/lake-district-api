@@ -25,20 +25,13 @@
 		"location": {
 			"type": "object",
 			"properties": {
-				"decimal_coords": {
-					"type": "object",
-					"properties": {
-						"latitude": {
-							"type": "string"
-						},
-						"longitude": {
-							"type": "string"
-						}
-					},
-					"required": ["latitude", "longitude"],
-					"additionalProperties": false
+				"latitude": {
+					"type": "string"
 				},
-				"dms_coords": {
+				"longitude": {
+					"type": "string"
+				},
+				"dms": {
 					"type": "array",
 					"items": {
 						"type": "object",
@@ -54,12 +47,9 @@
 							},
 							"hemisphere": {
 								"type": "string"
-							},
-							"formatted": {
-								"type": "string"
 							}
 						},
-						"required": ["degrees", "minutes", "seconds", "hemisphere", "formatted"],
+						"required": ["degrees", "minutes", "seconds", "hemisphere"],
 						"additionalProperties": false
 					},
 					"minItems": 2,
@@ -78,7 +68,8 @@
 					}
 				}
 			},
-			"required": ["decimal_coords", "dms_coords", "region", "os_map_ref", "os_maps"]
+			"required": ["latitude", "longitude", "dms", "region", "os_map_ref", "os_maps"],
+			"additionalProperties": false
 		},
 		"name": {
 			"type": "string"

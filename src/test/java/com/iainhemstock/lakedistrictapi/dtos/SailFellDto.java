@@ -1,10 +1,10 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
-import com.iainhemstock.lakedistrictapi.entities.fells.SailFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.SailFell;
 
 public final class SailFellDto extends AbstractTestFellDto {
 
     public SailFellDto() {
-        super(new SailFellEntity());
+        super(new SailFell());
     }
 }

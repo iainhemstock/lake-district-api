@@ -9,5 +9,4 @@ public class LakeDistrictApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LakeDistrictApiApplication.class, args);
 	}
-
 }

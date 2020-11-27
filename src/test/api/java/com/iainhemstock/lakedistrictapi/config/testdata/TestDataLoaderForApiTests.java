@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
-import com.iainhemstock.lakedistrictapi.entities.ParentFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.fells.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.*;
@@ -38,61 +38,61 @@ public final class TestDataLoaderForApiTests implements ApplicationRunner {
     }
 
     private void initializeRegionData() {
-        regionRepository.save(new EasternRegionEntity());
-        regionRepository.save(new FarEasternRegionEntity());
-        regionRepository.save(new CentralRegionEntity());
-        regionRepository.save(new SouthernRegionEntity());
-        regionRepository.save(new NorthernRegionEntity());
-        regionRepository.save(new NorthWesternRegionEntity());
-        regionRepository.save(new WesternRegionEntity());
+        regionRepository.save(new EasternRegion());
+        regionRepository.save(new FarEasternRegion());
+        regionRepository.save(new CentralRegion());
+        regionRepository.save(new SouthernRegion());
+        regionRepository.save(new NorthernRegion());
+        regionRepository.save(new NorthWesternRegion());
+        regionRepository.save(new WesternRegion());
     }
 
     private void initializeOsMapData() {
-        osMapRepository.save(new Landranger89OsMapEntity());
-        osMapRepository.save(new Landranger90OsMapEntity());
-        osMapRepository.save(new OL4ExplorerOsMapEntity());
-        osMapRepository.save(new OL5ExplorerOsMapEntity());
-        osMapRepository.save(new OL6ExplorerOsMapEntity());
+        osMapRepository.save(new Landranger89OsMap());
+        osMapRepository.save(new Landranger90OsMap());
+        osMapRepository.save(new OL4ExplorerOsMap());
+        osMapRepository.save(new OL5ExplorerOsMap());
+        osMapRepository.save(new OL6ExplorerOsMap());
     }
 
     private void initializeClassificationData() {
-        classificationsRepository.save(new WainwrightClassificationEntity());
-        classificationsRepository.save(new HewittClassificationEntity());
-        classificationsRepository.save(new MarilynClassificationEntity());
-        classificationsRepository.save(new NuttallClassificationEntity());
-        classificationsRepository.save(new CHPClassificationEntity());
-        classificationsRepository.save(new CCTClassificationEntity());
-        classificationsRepository.save(new FurthClassificationEntity());
-        classificationsRepository.save(new HCTClassificationEntity());
-        classificationsRepository.save(new ACTClassificationEntity());
-        classificationsRepository.save(new BirkettClassficationEntity());
-        classificationsRepository.save(new HumpClassificationEntity());
-        classificationsRepository.save(new SimmClassificationEntity());
-        classificationsRepository.save(new SyngeClassificationEntity());
-        classificationsRepository.save(new FellrangerClassificationEntity());
-        classificationsRepository.save(new TumpClassificationEntity());
+        classificationsRepository.save(new WainwrightClassification());
+        classificationsRepository.save(new HewittClassification());
+        classificationsRepository.save(new MarilynClassification());
+        classificationsRepository.save(new NuttallClassification());
+        classificationsRepository.save(new CHPClassification());
+        classificationsRepository.save(new CCTClassification());
+        classificationsRepository.save(new FurthClassification());
+        classificationsRepository.save(new HCTClassification());
+        classificationsRepository.save(new ACTClassification());
+        classificationsRepository.save(new BirkettClassfication());
+        classificationsRepository.save(new HumpClassification());
+        classificationsRepository.save(new SimmClassification());
+        classificationsRepository.save(new SyngeClassification());
+        classificationsRepository.save(new FellrangerClassification());
+        classificationsRepository.save(new TumpClassification());
     }
 
     private void initializeParentPeakData() {
-        parentPeakRepository.save(ParentFellEntity.newNull());
-        parentPeakRepository.save(new ParentFellEntity(new ScafellPikeFellEntity().getId()));
-        parentPeakRepository.save(new ParentFellEntity(new HelvellynFellEntity().getId()));
-        parentPeakRepository.save(new ParentFellEntity(new SkiddawFellEntity().getId()));
-        parentPeakRepository.save(new ParentFellEntity(new GreatGableFellEntity().getId()));
-        parentPeakRepository.save(new ParentFellEntity(new HighRaiseLangdaleFellEntity().getId()));
+        parentPeakRepository.save(ParentFell.newNull());
+        parentPeakRepository.save(new ParentFell(new ScafellPikeFell().getId()));
+        parentPeakRepository.save(new ParentFell(new HelvellynFell().getId()));
+        parentPeakRepository.save(new ParentFell(new SkiddawFell().getId()));
+        parentPeakRepository.save(new ParentFell(new GreatGableFell().getId()));
+        parentPeakRepository.save(new ParentFell(new HighRaiseLangdaleFell().getId()));
     }
 
     private void initializeFellData() {
-        fellRepository.save(new ScafellPikeFellEntity());
-        fellRepository.save(new ScafellFellEntity());
-        fellRepository.save(new HelvellynFellEntity());
-        fellRepository.save(new SkiddawFellEntity());
-        fellRepository.save(new GreatGableFellEntity());
-        fellRepository.save(new GrasmoorFellEntity());
-        fellRepository.save(new HighStreetFellEntity());
-        fellRepository.save(new SailFellEntity());
-        fellRepository.save(new HighRaiseLangdaleFellEntity());
-        fellRepository.save(new PikeOfStickleFellEntity());
-        fellRepository.save(new FleetwithPikeFellEntity());
+        fellRepository.save(new ScafellPikeFell());
+        fellRepository.save(new ScafellFell());
+        fellRepository.save(new HelvellynFell());
+        fellRepository.save(new SkiddawFell());
+        fellRepository.save(new GreatGableFell());
+        fellRepository.save(new GrasmoorFell());
+        fellRepository.save(new HighStreetFell());
+        fellRepository.save(new SailFell());
+        fellRepository.save(new HighRaiseLangdaleFell());
+        fellRepository.save(new PikeOfStickleFell());
+        fellRepository.save(new FleetwithPikeFell());
     }
 }

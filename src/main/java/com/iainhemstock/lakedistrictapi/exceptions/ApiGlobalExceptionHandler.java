@@ -6,11 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @ControllerAdvice
 public class ApiGlobalExceptionHandler {
@@ -20,6 +17,7 @@ public class ApiGlobalExceptionHandler {
 
     @ExceptionHandler({ FellNotFoundException.class, HttpRequestMethodNotSupportedException.class })
     public ResponseEntity<Object> handleException(Exception ex, HttpServletRequest httpServletRequest) {
+
         if (ex instanceof FellNotFoundException)
             return fellNotFoundExceptionHandler.handleException((FellNotFoundException) ex);
         else if (ex instanceof HttpRequestMethodNotSupportedException)
@@ -29,4 +27,5 @@ public class ApiGlobalExceptionHandler {
         else
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

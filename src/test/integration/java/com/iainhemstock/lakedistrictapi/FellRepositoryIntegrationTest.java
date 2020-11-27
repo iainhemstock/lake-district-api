@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi;
 
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class FellRepositoryIntegrationTest {
 
     @Test
     public void size_is_one() {
-        assertEquals(new ScafellPikeFellEntity(), fellRepository.findByNameLikeIgnoreCase("Scafell Pike"));
+        assertEquals(new ScafellPikeFell(), fellRepository.findByNameLikeIgnoreCase("Scafell Pike"));
     }
 
 }

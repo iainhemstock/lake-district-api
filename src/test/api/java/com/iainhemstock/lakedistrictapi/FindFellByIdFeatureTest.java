@@ -1,12 +1,7 @@
 package com.iainhemstock.lakedistrictapi;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
-import com.iainhemstock.lakedistrictapi.controllers.FellController;
-import com.iainhemstock.lakedistrictapi.dtos.DmsDto;
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
-import com.iainhemstock.lakedistrictapi.dtos.FellDto;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.ValidationMessage;
 import io.cucumber.java.en.And;
@@ -14,26 +9,24 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.Assert.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ContextConfiguration(classes = TestApiConfiguration.class)
 @CucumberContextConfiguration
@@ -41,13 +34,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 public class FindFellByIdFeatureTest extends BaseFeatureTest {
 
-    private static final int LATITUDE = 0;
-    private static final int LONGITUDE = 1;
-
     @Autowired private MockMvc mockMvc;
-
-    private MvcResult mvcResult;
-    private FellDto fellDto;
+    private ResultActions result;
 
     @Given("^an endpoint (.*)$")
     public void anEndpoint(final String endpoint) {
@@ -55,33 +43,29 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
     }
 
     @When("^requesting a fell with id ([0-9]*)$")
-    public void whenRequestingFellWithThatsId(final int fellId) throws Exception {
-        mvcResult = mockMvc.perform(get(this.getEndpointUnderTest(), fellId)).andReturn();
-        fellDto = mapSuccessfulResponseToDto();
+    public void whenRequestingFellWithId(final int fellId) throws Exception {
+        result = mockMvc.perform(get(this.getEndpointUnderTest(), fellId));
     }
 
     @And("^the response content type will be (.*)$")
-    public void theContentTypeWillBe(final String expectedContentType) throws UnsupportedEncodingException {
-        assertThat(mvcResult.getResponse().getContentType(),
-            is(equalTo(expectedContentType)));
+    public void theContentTypeWillBe(final String expectedContentType) throws Exception {
+        result.andExpect(content().contentType(expectedContentType));
     }
 
     @Then("^the response status code will be ([0-9]{3})$")
-    public void theResponseWillContainStatusCode(final int expectedStatusCode) {
-        assertThat(mvcResult.getResponse().getStatus(),
-            is(equalTo(expectedStatusCode)));
+    public void theResponseWillContainStatusCode(final int expectedStatusCode) throws Exception {
+        result.andExpect(status().is(expectedStatusCode));
     }
 
     @Then("^the response headers will confirm only GET requests are allowed on this endpoint$")
-    public void theResponseHeadersWillContainAllowHeaderSetToGet() {
-        assertThat(mvcResult.getResponse().getHeaders("Allow"),
-            is(equalTo(List.of("GET"))));
+    public void theResponseHeadersWillContainAllowHeaderSetToGet() throws Exception {
+        result.andExpect(header().string("Allow", "GET"));
     }
 
     @And("^the response body will conform to the schema in (.*)$")
     public void theResponseWillConformToTheJsonSchema(final String schemaFilename) throws IOException {
         JsonSchema schema = this.getJsonSchemaFromClasspath(schemaFilename);
-        String responseBodyString = mvcResult.getResponse().getContentAsString();
+        String responseBodyString = result.andReturn().getResponse().getContentAsString();
         JsonNode responseBodyJsonNode = this.getJsonNodeFromStringContent(responseBodyString);
 
         Set<ValidationMessage> errors = schema.validate(responseBodyJsonNode);
@@ -90,152 +74,118 @@ public class FindFellByIdFeatureTest extends BaseFeatureTest {
     }
 
     @And("^the response body will contain the fell name (.*)$")
-    public void theReponseBodyWillContainTheFellName(final String fellName) throws IOException {
-        assertThat(fellDto.getName(),
-            is(equalTo(fellName)));
+    public void theReponseBodyWillContainTheFellName(final String expectedFellName) throws Exception {
+        result.andExpect(jsonPath("$.name", is(expectedFellName)));
     }
 
     @And("^the response body will contain the region (.*)$")
-    public void theResponseBodyWillContainTheRegion(final String region) throws IOException {
-        assertThat(fellDto.getLocation().getRegion(),
-            is(equalTo(region)));
+    public void theResponseBodyWillContainTheRegion(final String expectedRegion) throws Exception {
+        result.andExpect(jsonPath("$.location.region", is(expectedRegion)));
     }
 
     @And("^the response body will contain the latitude (.*)$")
-    public void theResponseBodyWillContainTheLatitude(final String latitude) throws IOException {
-        assertThat(fellDto.getLocation().getDecimalCoords().getLatitude(),
-            is(equalTo(latitude)));
+    public void theResponseBodyWillContainTheLatitude(final String expectedLatitude) throws Exception {
+        result.andExpect(jsonPath("$.location.latitude", is(expectedLatitude)));
     }
 
     @And("^the response body will contain the longitude (.*)$")
-    public void theResponseBodyWillContainTheLongitude(final String longitude) throws IOException {
-        assertThat(fellDto.getLocation().getDecimalCoords().getLongitude(),
-            is(equalTo(longitude)));
+    public void theResponseBodyWillContainTheLongitude(final String expectedLongitude) throws Exception {
+        result.andExpect(jsonPath("$.location.longitude", is(expectedLongitude)));
     }
 
     @And("^the response body will contain the os map reference (.*)$")
-    public void theResponseBodyWillContainTheOsMapRef(final String osMapRef) throws IOException {
-        assertThat(fellDto.getLocation().getOsMapRef(),
-            is(equalTo(osMapRef)));
+    public void theResponseBodyWillContainTheOsMapRef(final String expectedOsMapRef) throws Exception {
+        result.andExpect(jsonPath("$.location.os_map_ref", is(expectedOsMapRef)));
     }
 
-    @And("^the response body will contain the url (.*)$")
-    public void theResponseBodyWillContainTheUrl(final String url) throws IOException {
-        assertThat(fellDto.getUrl(),
-            is(equalTo(url)));
+    @And("^the response body will contain the url to itself (.*)$")
+    public void theResponseBodyWillContainTheUrl(final String expectedUrl) throws Exception {
+        result.andExpect(jsonPath("$.url", is(expectedUrl)));
     }
 
     @And("^the response body will contain the parent peak url (.*)$")
-    public void theResponseBodyWillContainTheParentPeakUrl(final String parentPeakUrl) throws IOException {
-        assertThat(fellDto.getParentPeakUrl(),
-            is(equalTo(parentPeakUrl)));
+    public void theResponseBodyWillContainTheParentPeakUrl(final String expectedParentPeakUrl) throws Exception {
+        result.andExpect(jsonPath("$.parent_peak", is(expectedParentPeakUrl)));
     }
 
     @And("^the response body will contain the height in feet (.*)$")
-    public void theResponseBodyWillContainTheFellHeightInFeet(final String heightInFeet) throws IOException {
-        assertThat(fellDto.getHeight().getFeet(),
-            is(equalTo(heightInFeet)));
+    public void theResponseBodyWillContainTheFellHeightInFeet(final String expectedHeightInFeet) throws Exception {
+        result.andExpect(jsonPath("$.height.feet", is(expectedHeightInFeet)));
     }
 
     @And("^the response body will contain the height in meters (.*)$")
-    public void theResponseBodyWillContainTheFellHeightInMeters(final String heightInMeters) throws IOException {
-        assertThat(fellDto.getHeight().getMeters(),
-            is(equalTo(heightInMeters)));
+    public void theResponseBodyWillContainTheFellHeightInMeters(final String expectedHeightInMeters) throws Exception {
+        result.andExpect(jsonPath("$.height.meters", is(expectedHeightInMeters)));
     }
 
     @And("^the response body will contain the prominence in feet (.*)$")
-    public void theResponseBodyWillContainTheFellProminenceInFeet(final String prominenceInFeet) throws IOException {
-        assertThat(fellDto.getProminence().getFeet(),
-            is(equalTo(prominenceInFeet)));
+    public void theResponseBodyWillContainTheFellProminenceInFeet(final String expectedProminenceInFeet) throws Exception {
+        result.andExpect(jsonPath("$.prominence.feet", is(expectedProminenceInFeet)));
     }
 
     @And("^the response body will contain the prominence in meters (.*)$")
-    public void theResponseBodyWillContainTheFellProminenceInMeters(final String prominenceInMeters) throws IOException {
-        assertThat(fellDto.getProminence().getMeters(),
-            is(equalTo(prominenceInMeters)));
+    public void theResponseBodyWillContainTheFellProminenceInMeters(final String expectedProminenceInMeters) throws Exception {
+        result.andExpect(jsonPath("$.prominence.meters", is(expectedProminenceInMeters)));
     }
 
-    @And("^the response body will contain the following classification urls$")
-    public void theResponseBodyWillContainTheFollwingClassifications(final List<String> expectedClassifications) throws IOException {
-        assertTrue(fellDto.getClassifications().containsAll(expectedClassifications) &&
-                expectedClassifications.containsAll(fellDto.getClassifications()));
+    @And("^the response body will contain the following classifications$")
+    public void theResponseBodyWillContainTheFollowingClassifications(final List<String> expectedClassifications) throws Exception {
+        result.andExpect(jsonPath("$.classifications", containsInAnyOrder(expectedClassifications.toArray())));
     }
 
     @And("^the response body will contain the following maps that this fell appears in$")
-    public void theResponseBodyWillContainTheFollowingMaps(final List<String> expectedMaps) throws IOException {
-        assertTrue(fellDto.getLocation().getOsMaps().containsAll(expectedMaps) &&
-            expectedMaps.containsAll(fellDto.getLocation().getOsMaps()));
+    public void theResponseBodyWillContainTheFollowingMaps(final List<String> expectedMaps) throws Exception {
+        result.andExpect(jsonPath("$.location.os_maps", containsInAnyOrder(expectedMaps.toArray())));
     }
 
     @And("^the response body will contain the following dms coordinates equivalent to the latitude$")
-    public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws IOException {
-        assertThatActualDmsMatchesExpectedDms(expectedDms, LATITUDE);
+    public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws Exception {
+        result.andExpect(jsonPath("$.location.dms[0].degrees", is(expectedDms.get("degrees"))))
+            .andExpect(jsonPath("$.location.dms[0].minutes", is(expectedDms.get("minutes"))))
+            .andExpect(jsonPath("$.location.dms[0].seconds", is(expectedDms.get("seconds"))))
+            .andExpect(jsonPath("$.location.dms[0].hemisphere", is(expectedDms.get("hemisphere"))));
     }
 
     @And("^the response body will contain the following dms coordinates equivalent to the longitude$")
-    public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws IOException {
-        assertThatActualDmsMatchesExpectedDms(expectedDms, LONGITUDE);
-    }
-
-    private void assertThatActualDmsMatchesExpectedDms(final Map<String, String> expectedDms, int latOrLong) {
-        DmsDto dmsDto = fellDto.getLocation().getDmsCoords().get(latOrLong);
-
-        assertThat(dmsDto.getDegrees(),
-            is(equalTo(expectedDms.get("degrees"))));
-        assertThat(dmsDto.getMinutes(),
-            is(equalTo(expectedDms.get("minutes"))));
-        assertThat(dmsDto.getSeconds(),
-            is(equalTo(expectedDms.get("seconds"))));
-        assertThat(dmsDto.getHemisphere(),
-            is(equalTo(expectedDms.get("hemisphere"))));
-        assertThat(dmsDto.getFormatted(),
-            is(equalTo(expectedDms.get("formatted"))));
+    public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws Exception {
+        result.andExpect(jsonPath("$.location.dms[1].degrees", is(expectedDms.get("degrees"))))
+            .andExpect(jsonPath("$.location.dms[1].minutes", is(expectedDms.get("minutes"))))
+            .andExpect(jsonPath("$.location.dms[1].seconds", is(expectedDms.get("seconds"))))
+            .andExpect(jsonPath("$.location.dms[1].hemisphere", is(expectedDms.get("hemisphere"))));
     }
 
     @When("^sending unsupported (.*) request with fell id ([0-9]*) to endpoint$")
     public void usingHttpMethodWithEndpoint(final String unsupportedHttpMethod, final int fellId) throws Exception {
-        if ("POST".equals(unsupportedHttpMethod)) mvcResult = mockMvc.perform(post(this.getEndpointUnderTest(), fellId)).andReturn();
-        else if ("PUT".equals(unsupportedHttpMethod)) mvcResult = mockMvc.perform(put(this.getEndpointUnderTest(), fellId)).andReturn();
-        else if ("PATCH".equals(unsupportedHttpMethod)) mvcResult = mockMvc.perform(patch(this.getEndpointUnderTest(), fellId)).andReturn();
-        else if ("DELETE".equals(unsupportedHttpMethod)) mvcResult = mockMvc.perform(delete(this.getEndpointUnderTest(), fellId)).andReturn();
+        if ("POST".equals(unsupportedHttpMethod))
+            result = mockMvc.perform(post(this.getEndpointUnderTest(), fellId));
+        else if ("PUT".equals(unsupportedHttpMethod))
+            result = mockMvc.perform(put(this.getEndpointUnderTest(), fellId));
+        else if ("PATCH".equals(unsupportedHttpMethod))
+            result = mockMvc.perform(patch(this.getEndpointUnderTest(), fellId));
+        else if ("DELETE".equals(unsupportedHttpMethod))
+            result = mockMvc.perform(delete(this.getEndpointUnderTest(), fellId));
         else {
             fail(String.format("Unrecognised http method submitted to test [%s]", unsupportedHttpMethod));
         }
     }
 
     @And("^the response body will contain the status code ([0-9]{3})$")
-    public void theResponseBodyWillContainStatusCode(final int statusCode) throws IOException {
-        ErrorDto errorDto = mapUnsuccessfulResposeToDto();
-        assertThat(errorDto.getStatus(),
-            is(equalTo(String.valueOf(statusCode))));
+    public void theResponseBodyWillContainStatusCode(final int expectedStatusCode) throws Exception {
+        result.andExpect(jsonPath("$.status", is(String.valueOf(expectedStatusCode))));
     }
 
     @And("^the response body will contain the message (.*)$")
-    public void theResponseBodyWillContainMessage(final String message) throws IOException {
-        ErrorDto errorDto = mapUnsuccessfulResposeToDto();
-        assertThat(errorDto.getMessage(),
-            is(equalTo(message)));
+    public void theResponseBodyWillContainMessage(final String expectedMessage) throws Exception {
+        result.andExpect(jsonPath("$.message", is(expectedMessage)));
     }
 
     @And("^the response body will contain the path (.*)$")
-    public void theResponseBodyWillContainThePath(final String path) throws IOException {
-        ErrorDto errorDto = mapUnsuccessfulResposeToDto();
-        assertThat(errorDto.getPath(),
-            is(equalTo(path)));
+    public void theResponseBodyWillContainThePath(final String expectedPath) throws Exception {
+        result.andExpect(jsonPath("$.path", is(expectedPath)));
     }
 
     @And("^the response body will contain the timestamp (.*)$")
-    public void theResponseBodyWillContainTheTimestamp(final String timestamp) throws IOException {
-        ErrorDto errorDto = mapUnsuccessfulResposeToDto();
-        assertThat(errorDto.getTimestamp(),
-            is(equalTo(timestamp)));
-    }
-
-    private FellDto mapSuccessfulResponseToDto() throws IOException {
-        return objectMapper.readValue(mvcResult.getResponse().getContentAsString(), FellDto.class);
-    }
-
-    private ErrorDto mapUnsuccessfulResposeToDto() throws IOException {
-        return objectMapper.readValue(mvcResult.getResponse().getContentAsString(), ErrorDto.class);
+    public void theResponseBodyWillContainTheTimestamp(final String expectedTimestamp) throws Exception {
+        result.andExpect(jsonPath("$.timestamp", is(expectedTimestamp)));
     }
 }
