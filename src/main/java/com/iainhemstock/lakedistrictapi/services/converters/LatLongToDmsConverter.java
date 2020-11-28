@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.services;
+package com.iainhemstock.lakedistrictapi.services.converters;
 
 import org.springframework.stereotype.Service;
 

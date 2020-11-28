@@ -54,15 +54,15 @@ public class FellMapperTest {
     public void maps_height_data_to_dto() {
         Mockito.when(meterToFootConverter.convertRoundedToNearestInteger(anyInt())).thenReturn(2126);
         actualDto = dtoMapper.map(entity);
-        assertEquals("648", actualDto.getHeight().get("meters"));
-        assertEquals("2126", actualDto.getHeight().get("feet"));
+        assertEquals("2126", actualDto.getHeight().getFeet());
+        assertEquals("648", actualDto.getHeight().getMeters());
     }
 
     @Test
     public void maps_latitude_and_longitude_to_dto() {
         actualDto = dtoMapper.map(entity);
-        assertEquals("54.51594", actualDto.getLocation().get("latitude"));
-        assertEquals("-3.22956", actualDto.getLocation().get("longitude"));
+        assertEquals("54.51594", actualDto.getLocation().getLatitude());
+        assertEquals("-3.22956", actualDto.getLocation().getLongitude());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class FellMapperTest {
         Mockito.when(coordConverter.getHemisphere()).thenReturn("N");
 
         actualDto = dtoMapper.map(entity);
-        List<Map<String, String>> dms = (List<Map<String, String>>) actualDto.getLocation().get("dms");
+        List<Map<String, String>> dms = actualDto.getLocation().getDms();
 
         assertThat(dms.get(0).get("degrees"), is(equalTo("54")));
         assertThat(dms.get(0).get("minutes"), is(equalTo("30")));
@@ -89,19 +89,19 @@ public class FellMapperTest {
         Mockito.when(coordConverter.getHemisphere()).thenReturn("W");
 
         actualDto = dtoMapper.map(entity);
-        List<Map<String, String>> dmsCoordsDto = (List<Map<String, String>>) actualDto.getLocation().get("dms");
+        List<Map<String, String>> dms = actualDto.getLocation().getDms();
 
-        assertThat(dmsCoordsDto.get(1).get("degrees"), is(equalTo("3")));
-        assertThat(dmsCoordsDto.get(1).get("minutes"), is(equalTo("13")));
-        assertThat(dmsCoordsDto.get(1).get("seconds"), is(equalTo("46")));
-        assertThat(dmsCoordsDto.get(1).get("hemisphere"), is(equalTo("W")));
+        assertThat(dms.get(1).get("degrees"), is(equalTo("3")));
+        assertThat(dms.get(1).get("minutes"), is(equalTo("13")));
+        assertThat(dms.get(1).get("seconds"), is(equalTo("46")));
+        assertThat(dms.get(1).get("hemisphere"), is(equalTo("W")));
     }
 
     @Test
     public void maps_osmaps_to_dto() {
         Set<String> expectedOsMaps = Set.of("OS Landranger 90", "OS Landranger 89", "OS Explorer OL4");
         actualDto = dtoMapper.map(entity);
-        Set<String> actualOsMaps = (Set<String>) actualDto.getLocation().get("os_maps");
+        Set<String> actualOsMaps = actualDto.getOsMaps();
 
         assertTrue(
             actualOsMaps.containsAll(expectedOsMaps) &&
@@ -111,7 +111,7 @@ public class FellMapperTest {
     @Test
     public void maps_region_to_dto() {
         actualDto = dtoMapper.map(entity);
-        assertThat(actualDto.getLocation().get("region"),
+        assertThat(actualDto.getLocation().getRegion(),
             is(equalTo("Western Lake District")));
     }
 
@@ -135,8 +135,8 @@ public class FellMapperTest {
         Mockito.when(meterToFootConverter.convertRoundedToNearestInteger(anyInt()))
             .thenReturn(384);
         actualDto = dtoMapper.map(entity);
-        assertEquals("117", actualDto.getProminence().get("meters"));
-        assertEquals("384", actualDto.getProminence().get("feet"));
+        assertEquals("384", actualDto.getProminence().getFeet());
+        assertEquals("117", actualDto.getProminence().getMeters());
     }
 
     @Test

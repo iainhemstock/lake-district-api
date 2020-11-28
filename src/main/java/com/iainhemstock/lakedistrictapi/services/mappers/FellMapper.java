@@ -14,7 +14,6 @@ public abstract class FellMapper {
         this.fell = fell;
         this.dto = new FellDto();
 
-        initialize();
         mapFellName();
         mapHeight();
         mapProminence();
@@ -31,7 +30,6 @@ public abstract class FellMapper {
         return this.dto;
     }
 
-    abstract protected void initialize();
     abstract protected void mapFellUrl();
     abstract protected void mapLatitude();
     abstract protected void mapLongitude();
