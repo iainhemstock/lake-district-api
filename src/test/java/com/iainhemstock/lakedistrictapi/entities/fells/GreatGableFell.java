@@ -16,15 +16,14 @@ import java.util.Set;
 public final class GreatGableFell extends Fell {
     public GreatGableFell() {
         super(
-            5,
+            "NY211104",
             "Great Gable",
             899,
             425,
             54.482,
             -3.219,
-            "NY211104",
             new CentralRegion(),
-            new ParentFell(new ScafellPikeFell().getId()),
+            new ParentFell(new ScafellPikeFell().getOsMapRef()),
             new HashSet<>(Set.of(
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),

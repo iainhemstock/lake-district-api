@@ -34,14 +34,14 @@ public class EndpointGeneratorTest {
 
     @Test
     public void will_generate_endpoint_for_resource_with_id() {
-        assertThat(endpointGenerator.generateForResourceWithId("fells", 12),
-            is(equalTo(TestApiProperties.API_BASE_URL + "/fells/12")));
+        assertThat(endpointGenerator.generateForResourceWithId("fells", "NY123456"),
+            is(equalTo(TestApiProperties.API_BASE_URL + "/fells/NY123456")));
     }
 
     @Test
     public void will_throw_when_attempting_to_generate_endpoint_for_null_resource() {
         try {
-            endpointGenerator.generateForResourceWithId(null, 12);
+            endpointGenerator.generateForResourceWithId(null, "NY123456");
             fail("Expected method under test to throw NullPointerException but it didn't");
         }
         catch (NullPointerException ex) {
@@ -50,14 +50,14 @@ public class EndpointGeneratorTest {
     }
 
     @Test
-    @Parameters({ "-1", "0" })
-    public void will_throw_when_attempting_to_generate_endpoint_with_invalid_resource_id(final int invalidResourceId) {
+    @Parameters({ "" })
+    public void will_throw_when_attempting_to_generate_endpoint_with_invalid_resource_id(final String invalidResourceId) {
         try {
             endpointGenerator.generateForResourceWithId("resource", invalidResourceId);
             fail("Expected method under test to throw IllegalArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
-            assertThat(ex.getMessage(), is(equalTo("Argument 'resourceId' cannot be negative")));
+            assertThat(ex.getMessage(), is(equalTo("Argument 'resourceId' cannot be blank")));
         }
     }
 }

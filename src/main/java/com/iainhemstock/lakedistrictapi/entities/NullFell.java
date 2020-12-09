@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 public final class NullFell extends ParentFell {
 
     public NullFell() {
-        super(-1);
+        super("");
     }
 
     @Override

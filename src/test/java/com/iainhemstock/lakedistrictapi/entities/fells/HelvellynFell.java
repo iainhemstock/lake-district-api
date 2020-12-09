@@ -16,31 +16,18 @@ public final class HelvellynFell extends Fell {
 
     public HelvellynFell() {
         super(
-            3,
+            "NY342151",
             "Helvellyn",
             950,
             712,
             54.527232,
             -3.016054,
-            "NY342151",
             new EasternRegion(),
-            new ParentFell(new ScafellPikeFell().getId()),
+            new ParentFell(new ScafellPikeFell().getOsMapRef()),
             new HashSet<>(Set.of(
                 new Landranger90OsMap(),
                 new OL5ExplorerOsMap())),
-            new HashSet<>(Set.of(
-                new WainwrightClassification(),
-                new HewittClassification(),
-                new MarilynClassification(),
-                new NuttallClassification(),
-                new FurthClassification(),
-                new HCTClassification(),
-                new BirkettClassfication(),
-                new HumpClassification(),
-                new SimmClassification(),
-                new SyngeClassification(),
-                new FellrangerClassification(),
-                new TumpClassification())));
+            new HashSet<>(Set.of(new MarilynClassification())));
     }
 
 }

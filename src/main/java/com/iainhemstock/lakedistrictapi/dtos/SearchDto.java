@@ -9,8 +9,8 @@ import java.util.List;
 @JsonPropertyOrder({ "count", "previous", "next", "results" })
 public class SearchDto {
     // todo: make resultCount a string
-    private int resultCount;
-    private List<FellDto> results;
+    private final int resultCount;
+    private final List<FellDto> results;
     private String previousUri;
     private String nextUri;
 

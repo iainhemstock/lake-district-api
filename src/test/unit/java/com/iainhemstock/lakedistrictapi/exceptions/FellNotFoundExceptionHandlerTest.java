@@ -5,12 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -20,33 +17,20 @@ import static org.hamcrest.Matchers.is;
 public class FellNotFoundExceptionHandlerTest {
 
     private static final String NOW = "2012-21-05 12:01:32";
-    private static final int FELL_ID = 3;
+    private static final String FELL_RESOURCE_ID = "missing";
 
-    private FellNotFoundExceptionHandler exceptionHandler;
     private ResponseEntity<Object> fellNotFoundResponseEntity;
-    private FellNotFoundException fellNotFoundException;
-    private HttpHeaders responseHeaders;
 
     @Before
     public void setUp() {
-        responseHeaders = new HttpHeaders();
-        responseHeaders.add("Allow", "GET");
-
-        fellNotFoundException = new FellNotFoundException(
-            FELL_ID,
+        FellNotFoundException fellNotFoundException = new FellNotFoundException(
+            FELL_RESOURCE_ID,
             NOW,
             HttpMethod.GET.name(),
-            String.format("http://localhost:8080/api/fells/%d", FELL_ID),
-            responseHeaders);
+            String.format("http://localhost:8080/api/fells/%s", FELL_RESOURCE_ID));
 
-        exceptionHandler = new FellNotFoundExceptionHandler();
+        FellNotFoundExceptionHandler exceptionHandler = new FellNotFoundExceptionHandler();
         fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
-    }
-
-    @Test
-    public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_responseHeaderWillIndicateWhichMethodsAreAllowed() {
-        assertThat(fellNotFoundResponseEntity.getHeaders().get("Allow"),
-            is(equalTo(List.of("GET"))));
     }
 
     @Test
@@ -58,13 +42,13 @@ public class FellNotFoundExceptionHandlerTest {
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
         assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getMessage(),
-            is(equalTo("Fell was not found for {id=" + FELL_ID + "}")));
+            is(equalTo("Fell was not found for {id=" + FELL_RESOURCE_ID + "}")));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
         assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getPath(),
-            is(equalTo("http://localhost:8080/api/fells/" + FELL_ID)));
+            is(equalTo("http://localhost:8080/api/fells/" + FELL_RESOURCE_ID)));
     }
 
     @Test

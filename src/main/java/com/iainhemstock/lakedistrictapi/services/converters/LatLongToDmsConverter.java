@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 public class LatLongToDmsConverter {
 
     public enum CoordType {
-        LATITUDE, LONGITUDE;
+        LATITUDE, LONGITUDE
     }
 
     private boolean isNegativeHemisphere;
@@ -50,17 +50,11 @@ public class LatLongToDmsConverter {
     }
 
     private String calculateHemisphere(CoordType coordType) {
-        String hemisphere = "";
-
-        switch (coordType) {
-            case LATITUDE:
-                hemisphere = this.isNegativeHemisphere ? "S" : "N";
-                break;
-            case LONGITUDE:
-                hemisphere = this.isNegativeHemisphere ? "W" : "E";
-                break;
-        }
-
+        String hemisphere = switch (coordType) {
+            case LATITUDE -> this.isNegativeHemisphere ? "S" : "N";
+            case LONGITUDE -> this.isNegativeHemisphere ? "W" : "E";
+            default -> "";
+        };
         return hemisphere;
     }
 

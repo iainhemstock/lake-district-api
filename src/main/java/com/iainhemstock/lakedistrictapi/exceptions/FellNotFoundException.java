@@ -1,33 +1,28 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
-import org.springframework.http.HttpHeaders;
-
 public class FellNotFoundException extends RuntimeException {
-    private int fellId;
-    private String timestamp;
-    private String httpMethod;
-    private String requestUrl;
-    private HttpHeaders headers;
+    private final String resourceId;
+    private final String timestamp;
+    private final String httpMethod;
+    private final String requestUrl;
 
-    public FellNotFoundException(int fellId,
+    public FellNotFoundException(String resourceId,
                                  String timestamp,
                                  String httpMethod,
-                                 String requestUrl,
-                                 HttpHeaders headers) {
-        this.fellId = fellId;
+                                 String requestUrl) {
+        this.resourceId = resourceId;
         this.timestamp = timestamp;
         this.httpMethod = httpMethod;
         this.requestUrl = requestUrl;
-        this.headers = headers;
     }
 
     @Override
     public String getMessage() {
-        return String.format("Fell was not found for {id=%d}", fellId);
+        return String.format("Fell was not found for {id=%s}", resourceId);
     }
 
-    public int getUnrecognizedId() {
-        return this.fellId;
+    public String getUnrecognizedId() {
+        return this.resourceId;
     }
 
     public String getTimestamp() {
@@ -36,9 +31,5 @@ public class FellNotFoundException extends RuntimeException {
 
     public String getRequestUrl() {
         return requestUrl;
-    }
-
-    public HttpHeaders getHeaders() {
-        return headers;
     }
 }

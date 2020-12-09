@@ -29,20 +29,18 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
 
     @Mock private ApiClock apiClock;
 
-    private HttpRequestMethodNotSupportedExceptionHandler exceptionHandler;
     private ResponseEntity<Object> methodNotAllowedResponseEntity;
-    private HttpRequestMethodNotSupportedException methodNotAllowedException;
 
     @Before
     public void setUp() {
         Mockito.when(apiClock.now())
             .thenReturn(NOW);
 
-        methodNotAllowedException = new HttpRequestMethodNotSupportedException(
+        HttpRequestMethodNotSupportedException methodNotAllowedException = new HttpRequestMethodNotSupportedException(
             HttpMethod.POST.name(),
             "Method POST is not supported");
 
-        exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClock);
+        HttpRequestMethodNotSupportedExceptionHandler exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClock);
         methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
     }
 

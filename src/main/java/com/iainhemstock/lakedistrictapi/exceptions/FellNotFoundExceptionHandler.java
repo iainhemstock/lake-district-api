@@ -17,7 +17,7 @@ public class FellNotFoundExceptionHandler {
             String.format("%s", ex.getRequestUrl()),
             ex.getTimestamp());
 
-        return new ResponseEntity<>(errorDTO, ex.getHeaders(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
     }
 
 }

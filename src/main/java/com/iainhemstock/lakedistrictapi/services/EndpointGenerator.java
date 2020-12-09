@@ -9,17 +9,17 @@ import static java.util.Objects.nonNull;
 @Service
 public class EndpointGenerator {
 
-    private ApiProperties apiProperties;
+    private final ApiProperties apiProperties;
 
     @Autowired
     public EndpointGenerator(final ApiProperties apiProperties) {
         this.apiProperties = apiProperties;
     }
 
-    public String generateForResourceWithId(final String resource, final int resourceId) {
+    public String generateForResourceWithId(final String resource, final String resourceId) {
         if (!nonNull(resource)) throw new NullPointerException("Argument 'resource' cannot be null");
-        if (resourceId <= 0) throw new IllegalArgumentException("Argument 'resourceId' cannot be negative");
+        if (resourceId.isBlank()) throw new IllegalArgumentException("Argument 'resourceId' cannot be blank");
 
-        return String.format("%s/%s/%d", apiProperties.getBaseUrl(), resource, resourceId);
+        return String.format("%s/%s/%s", apiProperties.getBaseUrl(), resource, resourceId);
     }
 }

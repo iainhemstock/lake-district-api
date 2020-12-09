@@ -1,21 +1,21 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://192.168.0.16:8080/schemas",
-  "type": "object",
-  "properties": {
-    "status": {
-      "type": "string"
-    },
-    "message": {
-      "type": "string"
-    },
-    "path": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "string"
-    }
-  },
-  "required": ["status", "message", "path", "timestamp"],
-  "additionalProperties": false
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://192.168.0.16:8080/schemas",
+	"type": "object",
+	"properties": {
+		"status": {
+			"type": "string"
+		},
+		"message": {
+			"type": "string"
+		},
+		"path": {
+			"type": "string"
+		},
+		"timestamp": {
+			"type": "string"
+		}
+	},
+	"required": ["status", "message", "path", "timestamp"],
+	"additionalProperties": false
 }

@@ -17,12 +17,12 @@ import javax.persistence.Id;
 public class ParentFell implements Nullable {
 
     @Id
-    @Column(name = "fell_id")
-    private int fellId;
+    @Column(name = "os_map_ref")
+    private String osMapRef;
 
     @Override
     public boolean isNull() {
-        return fellId < 1;
+        return osMapRef.isEmpty();
     }
 
     public static ParentFell newNull() {

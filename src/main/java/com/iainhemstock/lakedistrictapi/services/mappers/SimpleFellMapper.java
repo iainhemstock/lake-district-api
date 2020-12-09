@@ -50,7 +50,7 @@ public class SimpleFellMapper extends FellMapper {
     }
 
     private String constructParentPeakUrl() {
-        String parentPeakUrl = endpointGenerator.generateForResourceWithId("fells", getFell().getParentPeak().getFellId());
+        String parentPeakUrl = endpointGenerator.generateForResourceWithId("fells", getFell().getParentPeak().getOsMapRef());
         if (getFell().getParentPeak().isNull())
             parentPeakUrl = "";
         return parentPeakUrl;
@@ -116,7 +116,7 @@ public class SimpleFellMapper extends FellMapper {
 
     @Override
     protected void mapFellUrl() {
-        getDto().setUrl(endpointGenerator.generateForResourceWithId("fells", getFell().getId()));
+        getDto().setUrl(endpointGenerator.generateForResourceWithId("fells", getFell().getOsMapRef()));
     }
 
 }

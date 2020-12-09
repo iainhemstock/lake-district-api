@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.services.mappers;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
 import com.iainhemstock.lakedistrictapi.services.EndpointGenerator;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConverter;
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFootConverter;
@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FellMapperTest {
@@ -37,13 +38,12 @@ public class FellMapperTest {
     @Before
     public void setUp() {
         dtoMapper = new SimpleFellMapper(endpointGenerator, coordConverter, meterToFootConverter);
-        entity = new FleetwithPikeFell();
+        entity = new GreatGableFell();
     }
 
     @Test
     public void maps_classifications_to_dto() {
-        Set<String> expectedClassifications = Set.of("Birkett", "Fellranger", "Hewitt", "HuMP", "Nuttall",
-                                                        "Simm", "Synge", "Tump", "Wainwright");
+        Set<String> expectedClassifications = Set.of("Birkett", "Fellranger", "Marilyn");
         actualDto = dtoMapper.map(entity);
         assertTrue("Failed test: dto mapper did not map the expected classifications to the dto",
             actualDto.getClassifications().containsAll(expectedClassifications) &&
@@ -52,17 +52,17 @@ public class FellMapperTest {
 
     @Test
     public void maps_height_data_to_dto() {
-        Mockito.when(meterToFootConverter.convertRoundedToNearestInteger(anyInt())).thenReturn(2126);
+        Mockito.when(meterToFootConverter.convertRoundedToNearestInteger(anyInt())).thenReturn(2949);
         actualDto = dtoMapper.map(entity);
-        assertEquals("2126", actualDto.getHeight().getFeet());
-        assertEquals("648", actualDto.getHeight().getMeters());
+        assertEquals("2949", actualDto.getHeight().getFeet());
+        assertEquals("899", actualDto.getHeight().getMeters());
     }
 
     @Test
     public void maps_latitude_and_longitude_to_dto() {
         actualDto = dtoMapper.map(entity);
-        assertEquals("54.51594", actualDto.getLocation().getLatitude());
-        assertEquals("-3.22956", actualDto.getLocation().getLongitude());
+        assertEquals("54.482", actualDto.getLocation().getLatitude());
+        assertEquals("-3.219", actualDto.getLocation().getLongitude());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class FellMapperTest {
 
     @Test
     public void maps_osmaps_to_dto() {
-        Set<String> expectedOsMaps = Set.of("OS Landranger 90", "OS Landranger 89", "OS Explorer OL4");
+        Set<String> expectedOsMaps = Set.of("OS Landranger 90", "OS Landranger 89", "OS Explorer OL6");
         actualDto = dtoMapper.map(entity);
         Set<String> actualOsMaps = actualDto.getOsMaps();
 
@@ -112,39 +112,39 @@ public class FellMapperTest {
     public void maps_region_to_dto() {
         actualDto = dtoMapper.map(entity);
         assertThat(actualDto.getLocation().getRegion(),
-            is(equalTo("Western Lake District")));
+            is(equalTo("Central Lake District")));
     }
 
     @Test
     public void maps_fell_name_to_dto() {
         actualDto = dtoMapper.map(entity);
-        assertEquals("Fleetwith Pike", actualDto.getName());
+        assertEquals("Great Gable", actualDto.getName());
     }
 
     @Test
     public void maps_parent_peak_url_to_dto() {
-        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), anyInt()))
-            .thenReturn(TestApiProperties.API_BASE_URL + "/fells/5");
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), anyString()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/fells/NY211104");
 
         actualDto = dtoMapper.map(entity);
-        assertEquals(TestApiProperties.API_BASE_URL + "/fells/5", actualDto.getParentPeakUrl());
+        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getParentPeakUrl());
     }
 
     @Test
     public void maps_prominence_data_to_dto() {
         Mockito.when(meterToFootConverter.convertRoundedToNearestInteger(anyInt()))
-            .thenReturn(384);
+            .thenReturn(1394);
         actualDto = dtoMapper.map(entity);
-        assertEquals("384", actualDto.getProminence().getFeet());
-        assertEquals("117", actualDto.getProminence().getMeters());
+        assertEquals("1394", actualDto.getProminence().getFeet());
+        assertEquals("425", actualDto.getProminence().getMeters());
     }
 
     @Test
     public void maps_url_to_dto() {
-        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), anyInt()))
-            .thenReturn(TestApiProperties.API_BASE_URL + "/fells/11");
+        Mockito.when(endpointGenerator.generateForResourceWithId(Mockito.anyString(), anyString()))
+            .thenReturn(TestApiProperties.API_BASE_URL + "/fells/NY211104");
 
         actualDto = dtoMapper.map(entity);
-        assertEquals(TestApiProperties.API_BASE_URL + "/fells/11", actualDto.getUrl());
+        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getUrl());
     }
 }

@@ -16,13 +16,12 @@ import java.util.Set;
 public final class ScafellPikeFell extends Fell {
     public ScafellPikeFell() {
         super(
-            1,
+            "NY215072",
             "Scafell Pike",
             978,
             912,
             54.454222,
             -3.211528,
-            "NY215072",
             new SouthernRegion(),
             new NullFell(),
             new HashSet<>(Set.of(
@@ -30,22 +29,7 @@ public final class ScafellPikeFell extends Fell {
                 new Landranger90OsMap(),
                 new OL6ExplorerOsMap()
             )),
-            new HashSet<>(Set.of(
-                new ACTClassification(),
-                new BirkettClassfication(),
-                new CHPClassification(),
-                new CCTClassification(),
-                new FellrangerClassification(),
-                new FurthClassification(),
-                new HewittClassification(),
-                new HCTClassification(),
-                new HumpClassification(),
-                new MarilynClassification(),
-                new NuttallClassification(),
-                new SimmClassification(),
-                new SyngeClassification(),
-                new TumpClassification(),
-                new WainwrightClassification()))
+            new HashSet<>(Set.of(new BirkettClassfication(), new MarilynClassification()))
         );
     }
 }

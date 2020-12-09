@@ -8,6 +8,6 @@ class LakeDistrictApiApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}
 
+	}
 }

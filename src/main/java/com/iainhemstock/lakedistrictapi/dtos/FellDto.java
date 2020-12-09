@@ -12,9 +12,9 @@ import java.util.*;
 @JsonPropertyOrder({"name", "height", "prominence", "location", "parent_peak", "url", "classifications"})
 public class FellDto  {
 
-    private Height height;
-    private Height prominence;
-    private Location location;
+    private final Height height;
+    private final Height prominence;
+    private final Location location;
     private Set<String> classifications;
     private String parentPeakUrl;
     private String name;

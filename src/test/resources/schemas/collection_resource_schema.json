@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://192.168.0.16:8080/schemas",
+  "type": "object",
+  "required": [
+	"links",
+	"current_page",
+	"total_pages",
+	"resources"
+  ],
+  "properties": {
+	"links": {
+	  "type": "object",
+	  "properties": {
+		"first": {
+		  "type": "string"
+		},
+		"prev": {
+		  "type": "string"
+		},
+		"self": {
+		  "type": "string"
+		},
+		"next": {
+		  "type": "string"
+		},
+		"last": {
+		  "type": "string"
+		}
+	  },
+	  "required": [
+		"self"
+	  ]
+	},
+	"current_page": {
+	  "type": "string"
+	},
+	"total_pages": {
+	  "type": "string"
+	},
+	"resources": {
+	  "type": "object",
+	  "properties": {
+		"size": {
+		  "type": "string"
+		},
+		"data": {
+		  "type": "array",
+		  "items": {
+			"type": "object",
+			"required": [
+			  "name",
+			  "region",
+			  "links"
+			],
+			"properties": {
+			  "name": {
+				"type": "string"
+			  },
+			  "region": {
+				"type": "string"
+			  },
+			  "links": {
+				"type": "object",
+				"properties": {
+				  "self": {
+					"type": "string"
+				  }
+				},
+				"required": [ "self" ]
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  }
+}

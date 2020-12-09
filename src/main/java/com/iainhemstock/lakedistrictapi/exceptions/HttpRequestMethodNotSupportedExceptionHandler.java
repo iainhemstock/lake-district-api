@@ -13,7 +13,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 @Component
 public class HttpRequestMethodNotSupportedExceptionHandler {
 
-    private ApiClock apiClock;
+    private final ApiClock apiClock;
 
     @Autowired
     public HttpRequestMethodNotSupportedExceptionHandler(final ApiClock apiClock) {

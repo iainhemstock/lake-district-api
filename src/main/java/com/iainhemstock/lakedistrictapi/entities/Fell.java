@@ -15,9 +15,10 @@ import java.util.Set;
 public class Fell {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "os_map_ref")
+    @NotNull
     @EqualsAndHashCode.Include
-    private int id;
+    private String osMapRef;
 
     @Column(name = "name")
     @NotNull
@@ -39,10 +40,6 @@ public class Fell {
     @NotNull
     private double longitude;
 
-    @Column(name = "os_map_ref")
-    @NotNull
-    private String osMapRef;
-
     @ManyToOne
     @JoinColumn(name = "region_id")
     @NotNull
@@ -56,17 +53,17 @@ public class Fell {
     @ManyToMany
     @JoinTable(
         name = "fells_osmaps",
-        joinColumns = @JoinColumn(name = "fell_id"),
+        joinColumns = @JoinColumn(name = "os_map_ref"),
         inverseJoinColumns = @JoinColumn(name = "os_map_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = { "fell_id", "os_map_id" }))
+        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "os_map_id" }))
     private Set<OsMap> osMaps;
 
     @ManyToMany
     @JoinTable(
         name = "fells_classifications",
-        joinColumns = @JoinColumn(name = "fell_id"),
+        joinColumns = @JoinColumn(name = "os_map_ref"),
         inverseJoinColumns = @JoinColumn(name = "classification_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = { "fell_id", "classification_id" }))
+        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
     private Set<Classification> classifications;
 
 }
