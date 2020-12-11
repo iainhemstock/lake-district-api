@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
+import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,25 +35,25 @@ public class FellNotFoundExceptionHandlerTest {
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatusCode() {
-        assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getStatus(),
+        assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getStatus(),
             is(equalTo(String.valueOf(HttpStatus.NOT_FOUND.value()))));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
-        assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getMessage(),
+        assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getMessage(),
             is(equalTo("Fell was not found for {id=" + FELL_RESOURCE_ID + "}")));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
-        assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getPath(),
+        assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getPath(),
             is(equalTo("http://localhost:8080/api/fells/" + FELL_RESOURCE_ID)));
     }
 
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
-        assertThat(((ErrorDto) fellNotFoundResponseEntity.getBody()).getTimestamp(),
+        assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getTimestamp(),
             is(equalTo(NOW)));
     }
 

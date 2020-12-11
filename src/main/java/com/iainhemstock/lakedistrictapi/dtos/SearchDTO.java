@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonPropertyOrder({ "count", "previous", "next", "results" })
-public class SearchDto {
+public class SearchDTO {
     // todo: make resultCount a string
     private final int resultCount;
-    private final List<FellDto> results;
+    private final List<FellDetailedDTO> results;
     private String previousUri;
     private String nextUri;
 
-    public SearchDto() {
+    public SearchDTO() {
         this.resultCount = 0;
         this.results = new ArrayList<>();
     }
 
-    public SearchDto(final List<FellDto> results) {
+    public SearchDTO(final List<FellDetailedDTO> results) {
         this.results = results;
         this.resultCount = this.results.size();
     }
@@ -30,7 +30,7 @@ public class SearchDto {
     }
 
     @JsonGetter("results")
-    public List<FellDto> getResults() {
+    public List<FellDetailedDTO> getResults() {
         return results;
     }
 

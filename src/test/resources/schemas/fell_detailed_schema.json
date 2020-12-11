@@ -2,7 +2,36 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "http://192.168.0.16:8080/schemas",
 	"type": "object",
+	"required": ["classifications", "height", "location", "name", "prominence"],
+	"additionalProperties": false,
 	"properties": {
+		"links": {
+			"type": "object",
+			"required": ["self"],
+			"additionalProperties": true,
+			"properties": {
+				"self": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				},
+				"parent": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
 		"classifications": {
 			"type": "array",
 			"items": {
@@ -11,6 +40,8 @@
 		},
 		"height": {
 			"type": "object",
+			"required": ["feet", "meters"],
+			"additionalProperties": false,
 			"properties": {
 				"feet": {
 					"type": "string"
@@ -18,12 +49,12 @@
 				"meters": {
 					"type": "string"
 				}
-			},
-			"required": ["feet", "meters"],
-			"additionalProperties": false
+			}
 		},
 		"location": {
 			"type": "object",
+			"required": ["latitude", "longitude", "dms", "region", "os_map_ref", "os_maps"],
+			"additionalProperties": false,
 			"properties": {
 				"latitude": {
 					"type": "string"
@@ -35,6 +66,8 @@
 					"type": "array",
 					"items": {
 						"type": "object",
+						"required": ["degrees", "minutes", "seconds", "hemisphere"],
+						"additionalProperties": false,
 						"properties": {
 							"degrees": {
 								"type": "string"
@@ -48,9 +81,7 @@
 							"hemisphere": {
 								"type": "string"
 							}
-						},
-						"required": ["degrees", "minutes", "seconds", "hemisphere"],
-						"additionalProperties": false
+						}
 					},
 					"minItems": 2,
 					"maxItems": 2
@@ -67,18 +98,15 @@
 						"type": "string"
 					}
 				}
-			},
-			"required": ["latitude", "longitude", "dms", "region", "os_map_ref", "os_maps"],
-			"additionalProperties": false
+			}
 		},
 		"name": {
 			"type": "string"
 		},
-		"parent_peak": {
-			"type": "string"
-		},
 		"prominence": {
 			"type": "object",
+			"required": ["feet", "meters"],
+			"additionalProperties": false,
 			"properties": {
 				"feet": {
 					"type": "string"
@@ -86,14 +114,7 @@
 				"meters": {
 					"type": "string"
 				}
-			},
-			"required": ["feet", "meters"],
-			"additionalProperties": false
-		},
-		"url": {
-			"type": "string"
+			}
 		}
-	},
-	"required": ["classifications", "height", "location", "name", "parent_peak", "prominence", "url"],
-	"additionalProperties": false
+	}
 }

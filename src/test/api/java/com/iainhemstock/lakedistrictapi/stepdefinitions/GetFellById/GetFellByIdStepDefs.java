@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.stepdefinitions.GetFellById;
 
 import com.iainhemstock.lakedistrictapi.common.CommonTestState;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
+import com.iainhemstock.lakedistrictapi.pageobjects.LinksAttributes;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class GetFellResourceByIdStepDefs {
+public class GetFellByIdStepDefs {
 
     @Autowired
     private CommonTestState commonState;
@@ -53,14 +54,14 @@ public class GetFellResourceByIdStepDefs {
         commonState.getResult().andExpect(jsonPath("$.location.os_map_ref", is(expectedOsMapRef)));
     }
 
-    @And("^the body will contain the url to itself (.*)$")
-    public void theResponseBodyWillContainTheUrl(final String expectedUrl) throws Exception {
-        commonState.getResult().andExpect(jsonPath("$.url", is(expectedUrl)));
+    @And("^the body will contain a self href (.*)$")
+    public void theResponseBodyWillContainTheUrl(final String expectedHref) throws Exception {
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.SELF_HREF.value(), is(expectedHref)));
     }
 
-    @And("^the body will contain the parent peak url (.*)$")
-    public void theResponseBodyWillContainTheParentPeakUrl(final String expectedParentPeakUrl) throws Exception {
-        commonState.getResult().andExpect(jsonPath("$.parent_peak", is(expectedParentPeakUrl)));
+    @And("^the body will contain the parent peak href (.*)$")
+    public void theResponseBodyWillContainTheParentPeakHref(final String expectedParentPeakUrl) throws Exception {
+        commonState.getResult().andExpect(jsonPath("$.links.parent.href", is(expectedParentPeakUrl)));
     }
 
     @And("^the body will contain the height in feet (.*)$")

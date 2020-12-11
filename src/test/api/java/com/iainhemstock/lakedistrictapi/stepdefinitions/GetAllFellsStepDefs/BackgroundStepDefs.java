@@ -11,6 +11,9 @@ import static org.junit.Assert.assertThat;
 
 public class BackgroundStepDefs {
 
+    @Value("${api.pageable.default-page-offset}")
+    private int DEFAULT_PAGE_OFFSET = 1;
+
     @Value("${spring.data.web.pageable.default-page-size}")
     private int DEFAULT_PAGE_SIZE;
 
@@ -29,10 +32,13 @@ public class BackgroundStepDefs {
         testDataLoader.addScafellPike();
     }
 
-    @And("^each page of results is configured to display a single result$")
-    public void eachPageDisplaysSingleFellSummary() {
-        String errorMsg = String.format("Default page size should be 1 but was [%d]", DEFAULT_PAGE_SIZE);
-        assertThat(errorMsg, DEFAULT_PAGE_SIZE, is(1));
+    @And("^the offset of items returned in the response is ([0-9]+) by default$")
+    public void theOffsetOfItemsReturnedInTheResponseIsByDefault(final int defaultOffset) {
+        assertThat(DEFAULT_PAGE_OFFSET, is(defaultOffset));
     }
 
+    @And("^the limit of the number of items returned in the response is ([0-9]+) by default$")
+    public void theLimitOfTheNumberOfItemsReturnedInTheResponseIsByDefault(final int defaultLimit) {
+        assertThat(DEFAULT_PAGE_SIZE, is(defaultLimit));
+    }
 }

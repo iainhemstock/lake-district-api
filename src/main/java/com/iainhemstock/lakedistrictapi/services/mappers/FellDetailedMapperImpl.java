@@ -12,16 +12,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class SimpleFellMapper extends FellMapper {
+public class FellDetailedMapperImpl extends FellDetailedMapper {
 
     private final EndpointGenerator endpointGenerator;
     private final LatLongToDmsConverter latLongToDmsConverter;
     private final MeterToFootConverter meterToFootConverter;
 
     @Autowired
-    public SimpleFellMapper(final EndpointGenerator endpointGenerator,
-                            final LatLongToDmsConverter latLongToDmsConverter,
-                            final MeterToFootConverter meterToFootConverter) {
+    public FellDetailedMapperImpl(final EndpointGenerator endpointGenerator,
+                                  final LatLongToDmsConverter latLongToDmsConverter,
+                                  final MeterToFootConverter meterToFootConverter) {
         this.endpointGenerator = endpointGenerator;
         this.latLongToDmsConverter = latLongToDmsConverter;
         this.meterToFootConverter = meterToFootConverter;
@@ -46,7 +46,7 @@ public class SimpleFellMapper extends FellMapper {
 
     @Override
     protected void mapParentPeak() {
-        getDto().setParentPeak(constructParentPeakUrl());
+      getDto().getLinks().parent.href = constructParentPeakUrl();
     }
 
     private String constructParentPeakUrl() {
@@ -116,7 +116,7 @@ public class SimpleFellMapper extends FellMapper {
 
     @Override
     protected void mapFellUrl() {
-        getDto().setUrl(endpointGenerator.generateForResourceWithId("fells", getFell().getOsMapRef()));
+        getDto().getLinks().self.href = endpointGenerator.generateForResourceWithId("fells", getFell().getOsMapRef());
     }
 
 }

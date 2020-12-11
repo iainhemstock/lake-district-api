@@ -10,7 +10,7 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 	#VerifyResponsePayload
 	Scenario: API provides json body validated against schema
 		When making a GET request to http://localhost:8080/api/v1/fells/NY211104
-		Then the body will conform to the schema in schemas/fell_schema.json
+		Then the body will conform to the schema in schemas/fell_detailed_schema.json
 
 	#VerifyResponsePayload
 	Scenario: API provides a detailed view of a fell
@@ -20,8 +20,8 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 		And the body will contain the latitude 54.482
 		And the body will contain the longitude -3.219
 		And the body will contain the os map reference NY211104
-		And the body will contain the url to itself http://localhost:8080/api/v1/fells/NY211104
-		And the body will contain the parent peak url http://localhost:8080/api/v1/fells/NY215072
+		And the body will contain a self href http://localhost:8080/api/v1/fells/NY211104
+		And the body will contain the parent peak href http://localhost:8080/api/v1/fells/NY215072
 		And the body will contain the height in feet 2949
 		And the body will contain the height in meters 899
 		And the body will contain the prominence in feet 1394

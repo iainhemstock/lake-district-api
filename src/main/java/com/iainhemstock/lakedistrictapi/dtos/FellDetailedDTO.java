@@ -1,26 +1,27 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.*;
 
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@JsonPropertyOrder({"name", "height", "prominence", "location", "parent_peak", "url", "classifications"})
-public class FellDto  {
+@JsonPropertyOrder({"links", "name", "height", "prominence", "location", "url", "classifications"})
+public class FellDetailedDTO {
 
+    private final LinksDTO links;
     private final Height height;
     private final Height prominence;
     private final Location location;
     private Set<String> classifications;
-    private String parentPeakUrl;
     private String name;
-    @EqualsAndHashCode.Include private String url;
 
-    public FellDto() {
+    public FellDetailedDTO() {
+        links = new LinksDTO();
         height = new Height();
         prominence = new Height();
         location = new Location();
@@ -49,15 +50,6 @@ public class FellDto  {
 
     public Set<String> getClassifications() {
         return classifications;
-    }
-
-    public void setParentPeak(String parentPeak) {
-        this.parentPeakUrl = parentPeak;
-    }
-
-    @JsonGetter("parent_peak")
-    public String getParentPeakUrl() {
-        return parentPeakUrl;
     }
 
     public void setName(String name) {
@@ -97,17 +89,9 @@ public class FellDto  {
         return location.getOs_maps();
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
     @Data
     @AllArgsConstructor
-    public static class Location {
+    public class Location {
         private String latitude;
         private String longitude;
         private List<Map<String, String>> dms;
@@ -124,7 +108,7 @@ public class FellDto  {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Height {
+    public class Height {
         private String feet;
         private String meters;
     }

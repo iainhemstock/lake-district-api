@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi;
+package com.iainhemstock.lakedistrictapi.entities;
 
 public interface Nullable {
     boolean isNull();

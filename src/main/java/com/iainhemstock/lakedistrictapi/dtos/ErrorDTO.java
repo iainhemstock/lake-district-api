@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @ToString
-public class ErrorDto {
+public class ErrorDTO {
     private String status;
     private String message;
     private String path;

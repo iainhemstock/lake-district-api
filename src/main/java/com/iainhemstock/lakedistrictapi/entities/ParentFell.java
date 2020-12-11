@@ -1,7 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
 
-import com.iainhemstock.lakedistrictapi.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

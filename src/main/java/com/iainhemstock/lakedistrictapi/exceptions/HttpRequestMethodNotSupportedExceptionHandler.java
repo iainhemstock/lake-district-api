@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
+import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
 import com.iainhemstock.lakedistrictapi.services.ApiClock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +23,7 @@ public class HttpRequestMethodNotSupportedExceptionHandler {
     public ResponseEntity<Object> handleException(final HttpRequestMethodNotSupportedException ex, final String requestUrl) {
         HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
 
-        ErrorDto errorDto = new ErrorDto(
+        ErrorDTO errorDto = new ErrorDTO(
             String.valueOf(status.value()),
             String.format("Method %s is not supported", ex.getMethod()),
             requestUrl,

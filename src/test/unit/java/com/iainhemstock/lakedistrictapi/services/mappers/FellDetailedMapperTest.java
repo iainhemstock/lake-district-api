@@ -25,19 +25,19 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FellMapperTest {
+public class FellDetailedMapperTest {
 
     @Mock private EndpointGenerator endpointGenerator;
     @Mock private LatLongToDmsConverter coordConverter;
     @Mock private MeterToFootConverter meterToFootConverter;
 
-    private FellMapper dtoMapper;
+    private FellDetailedMapper dtoMapper;
     private Fell entity;
-    private FellDto actualDto;
+    private FellDetailedDTO actualDto;
 
     @Before
     public void setUp() {
-        dtoMapper = new SimpleFellMapper(endpointGenerator, coordConverter, meterToFootConverter);
+        dtoMapper = new FellDetailedMapperImpl(endpointGenerator, coordConverter, meterToFootConverter);
         entity = new GreatGableFell();
     }
 
@@ -127,7 +127,7 @@ public class FellMapperTest {
             .thenReturn(TestApiProperties.API_BASE_URL + "/fells/NY211104");
 
         actualDto = dtoMapper.map(entity);
-        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getParentPeakUrl());
+        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getLinks().parent.href);
     }
 
     @Test
@@ -145,6 +145,8 @@ public class FellMapperTest {
             .thenReturn(TestApiProperties.API_BASE_URL + "/fells/NY211104");
 
         actualDto = dtoMapper.map(entity);
-        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getUrl());
+
+        assertThat(actualDto.getLinks().self.href,
+            is(TestApiProperties.API_BASE_URL + "/fells/NY211104"));
     }
 }

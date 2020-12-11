@@ -1,18 +1,18 @@
 package com.iainhemstock.lakedistrictapi.services.mappers;
 
-import com.iainhemstock.lakedistrictapi.dtos.FellDto;
+import com.iainhemstock.lakedistrictapi.dtos.FellDetailedDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import lombok.AccessLevel;
 import lombok.Getter;
 
 @Getter(AccessLevel.PROTECTED)
-public abstract class FellMapper {
+public abstract class FellDetailedMapper {
     private Fell fell;
-    private FellDto dto;
+    private FellDetailedDTO dto;
 
-    public final FellDto map(Fell fell) {
+    public final FellDetailedDTO map(Fell fell) {
         this.fell = fell;
-        this.dto = new FellDto();
+        this.dto = new FellDetailedDTO();
 
         mapFellName();
         mapHeight();

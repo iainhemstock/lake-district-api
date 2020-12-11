@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDto;
+import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
 import com.iainhemstock.lakedistrictapi.services.ApiClock;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,28 +54,28 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatus() {
         assertThat(
-            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getStatus(),
+            ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getStatus(),
             is(equalTo(String.valueOf(HttpStatus.METHOD_NOT_ALLOWED.value()))));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
         assertThat(
-            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getMessage(),
+            ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getMessage(),
             is(equalTo("Method POST is not supported")));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
         assertThat(
-            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getPath(),
+            ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getPath(),
             is(equalTo(TestApiProperties.API_BASE_URL + "/fells/" + FELL_ID)));
     }
 
     @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
         assertThat(
-            ((ErrorDto) methodNotAllowedResponseEntity.getBody()).getTimestamp(),
+            ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getTimestamp(),
             is(equalTo(NOW)));
     }
 

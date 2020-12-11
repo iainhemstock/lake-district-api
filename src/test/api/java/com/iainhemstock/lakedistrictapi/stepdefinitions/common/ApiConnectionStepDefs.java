@@ -25,6 +25,7 @@ public class ApiConnectionStepDefs {
             case "OPTIONS" -> commonState.getMockMvc().perform(options(commonState.getEndpointUnderTest()));
             default -> fail(String.format("Unrecognised http method submitted to test [%s]", requestMethod));
         });
+        System.out.println(commonState.getResult().andReturn().getResponse().getContentAsString());
     }
 
 }
