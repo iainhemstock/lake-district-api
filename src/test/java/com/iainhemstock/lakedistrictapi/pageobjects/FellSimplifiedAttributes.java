@@ -12,7 +12,7 @@ public enum FellSimplifiedAttributes {
         this.value = value;
     }
 
-    public String at(final int i) {
+    public String valueAt(final int i) {
         return String.format(value, i);
     }
 }

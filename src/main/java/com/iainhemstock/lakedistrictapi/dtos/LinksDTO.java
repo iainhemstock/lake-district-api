@@ -2,37 +2,30 @@ package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.iainhemstock.lakedistrictapi.serializers.LinksDTOSerializer;
+import lombok.Getter;
+import lombok.Setter;
 
 @JsonSerialize(using = LinksDTOSerializer.class)
+@Getter
+@Setter
 public class LinksDTO {
-    public FirstLink first = new FirstLink();
-    public PrevLink prev = new PrevLink();
-    public SelfLink self = new SelfLink();
-    public NextLink next = new NextLink();
-    public LastLink last = new LastLink();
-    public ParentLink parent = new ParentLink();
+    private FirstLink first = new FirstLink();
+    private PrevLink prev = new PrevLink();
+    private SelfLink self = new SelfLink();
+    private NextLink next = new NextLink();
+    private LastLink last = new LastLink();
+    private ParentLink parent = new ParentLink();
 
-    public static class FirstLink {
-        public String href = "";
+    @Getter
+    @Setter
+    private abstract class AbstractLink {
+        private String href = "";
     }
 
-    public static class PrevLink {
-        public String href = "";
-    }
-
-    public static class SelfLink {
-        public String href = "";
-    }
-
-    public static class NextLink {
-        public String href = "";
-    }
-
-    public static class LastLink {
-        public String href = "";
-    }
-
-    public static class ParentLink {
-        public String href = "";
-    }
+    public class FirstLink extends AbstractLink {}
+    public class PrevLink extends AbstractLink {}
+    public class SelfLink extends AbstractLink {}
+    public class NextLink extends AbstractLink {}
+    public class LastLink extends AbstractLink {}
+    public class ParentLink extends AbstractLink {}
 }

@@ -32,12 +32,12 @@ public class LinksDTOSerializerTest {
 
     private LinksDTO getPopulatedLinksDTO() {
         LinksDTO dto = new LinksDTO();
-        dto.first.href = "http://localhost:8080/api/v1/fells?offset=0&limit=25";
-        dto.prev.href = "http://localhost:8080/api/v1/fells?offset=25&limit=25";
-        dto.self.href = "http://localhost:8080/api/v1/fells?offset=50&limit=25";
-        dto.next.href = "http://localhost:8080/api/v1/fells?offset=75&limit=25";
-        dto.last.href = "http://localhost:8080/api/v1/fells?offset=100&limit=25";
-        dto.parent.href = "http://localhost:8080/api/v1/fells/NY123456";
+        dto.getFirst().setHref("http://localhost:8080/api/v1/fells?offset=0&limit=25");
+        dto.getPrev().setHref("http://localhost:8080/api/v1/fells?offset=25&limit=25");
+        dto.getSelf().setHref("http://localhost:8080/api/v1/fells?offset=50&limit=25");
+        dto.getNext().setHref("http://localhost:8080/api/v1/fells?offset=75&limit=25");
+        dto.getLast().setHref("http://localhost:8080/api/v1/fells?offset=100&limit=25");
+        dto.getParent().setHref("http://localhost:8080/api/v1/fells/NY123456");
         return dto;
     }
 

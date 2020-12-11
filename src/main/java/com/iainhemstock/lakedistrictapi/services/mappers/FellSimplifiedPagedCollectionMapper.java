@@ -3,7 +3,6 @@ package com.iainhemstock.lakedistrictapi.services.mappers;
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.FellSimplifiedDTO;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
-import com.iainhemstock.lakedistrictapi.dtos.FellDetailedDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,10 +14,10 @@ import org.springframework.stereotype.Component;
 public class FellSimplifiedPagedCollectionMapper {
 
     @Autowired private ApiProperties apiProperties;
-    private PagedCollectionDTO<FellSimplifiedDTO> dto;
+    private PagedCollectionDTO<FellSimplifiedDTO> pagedCollection;
 
     public PagedCollectionDTO<FellSimplifiedDTO> map(final Page<Fell> page) {
-        dto = new PagedCollectionDTO<>();
+        pagedCollection = new PagedCollectionDTO<>();
 
         mapNavigationLinks(page);
         mapOffset(page.getPageable());
@@ -26,31 +25,31 @@ public class FellSimplifiedPagedCollectionMapper {
         mapTotalItems(page);
         mapSimpleFells(page);
 
-        return dto;
+        return pagedCollection;
 
     }
 
     private void mapOffset(final Pageable pageable) {
-        dto.offset = String.valueOf(pageable.getOffset());
+        pagedCollection.setOffset(String.valueOf(pageable.getOffset()));
     }
 
     private void mapLimit(final Page<Fell> page) {
-        dto.limit = String.valueOf(page.getNumberOfElements());
+        pagedCollection.setLimit(String.valueOf(page.getNumberOfElements()));
     }
 
     private void mapTotalItems(final Page<Fell> page) {
-        dto.total_items = String.valueOf(page.getTotalElements());
+        pagedCollection.setTotal_items(String.valueOf(page.getTotalElements()));
     }
 
     private void mapSimpleFells(final Page<Fell> page) {
         for (Fell fell : page.toList()) {
             FellSimplifiedDTO fellSimplifiedDTO = new FellSimplifiedDTO();
-            fellSimplifiedDTO.name = fell.getName();
-            fellSimplifiedDTO.region = fell.getRegion().getName();
-            fellSimplifiedDTO.links.self.href = String.format("%s/fells/%s",
+            fellSimplifiedDTO.setName(fell.getName());
+            fellSimplifiedDTO.setRegion(fell.getRegion().getName());
+            fellSimplifiedDTO.getLinks().getSelf().setHref(String.format("%s/fells/%s",
                 apiProperties.getBaseUrl(),
-                fell.getOsMapRef());
-            dto.items.add(fellSimplifiedDTO);
+                fell.getOsMapRef()));
+            pagedCollection.getItems().add(fellSimplifiedDTO);
         }
     }
 
@@ -60,10 +59,10 @@ public class FellSimplifiedPagedCollectionMapper {
             mapPreviousPageLink(page);
         }
 
-        dto.links.self.href = String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().getSelf().setHref(String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().getPageNumber(),
-            page.getNumberOfElements());
+            page.getNumberOfElements()));
 
         if (currentPageIsNotLastPage(page)) {
             mapNextPageLink(page);
@@ -72,31 +71,31 @@ public class FellSimplifiedPagedCollectionMapper {
     }
 
     private void mapFirstPageLink(final Page<Fell> page) {
-        dto.links.first.href = String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().getFirst().setHref(String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().first().getPageNumber(),
-            page.getNumberOfElements());
+            page.getNumberOfElements()));
     }
 
     private void mapPreviousPageLink(final Page<Fell> page) {
-        dto.links.prev.href = String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().getPrev().setHref(String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().previousOrFirst().getPageNumber(),
-            page.getNumberOfElements());
+            page.getNumberOfElements()));;
     }
 
     private void mapNextPageLink(final Page<Fell> page) {
-        dto.links.next.href = String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().getNext().setHref(String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().next().getPageNumber(),
-            page.getNumberOfElements());
+            page.getNumberOfElements()));;
     }
 
     private void mapLastPageLink(final Page<Fell> page) {
-        dto.links.last.href = String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().getLast().setHref(String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getTotalPages() - 1,
-            page.getNumberOfElements());
+            page.getNumberOfElements()));;
     }
 
     private boolean currentPageIsNotLastPage(final Page<Fell> page) {

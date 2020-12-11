@@ -127,7 +127,7 @@ public class FellDetailedMapperTest {
             .thenReturn(TestApiProperties.API_BASE_URL + "/fells/NY211104");
 
         actualDto = dtoMapper.map(entity);
-        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getLinks().parent.href);
+        assertEquals(TestApiProperties.API_BASE_URL + "/fells/NY211104", actualDto.getLinks().getParent().getHref());
     }
 
     @Test
@@ -146,7 +146,7 @@ public class FellDetailedMapperTest {
 
         actualDto = dtoMapper.map(entity);
 
-        assertThat(actualDto.getLinks().self.href,
+        assertThat(actualDto.getLinks().getSelf().getHref(),
             is(TestApiProperties.API_BASE_URL + "/fells/NY211104"));
     }
 }

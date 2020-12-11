@@ -14,12 +14,12 @@ public class LinksDTOSerializer extends JsonSerializer<LinksDTO> {
                           final SerializerProvider serializerProvider) throws IOException {
 
         jgen.writeStartObject();
-        serializeFirstHrefIfNotBlank(linksDTO.first.href, jgen);
-        serializePrevHrefIfNotBlank(linksDTO.prev.href, jgen);
-        serializeSelfHref(linksDTO.self.href, jgen);
-        serializeNextHrefIfNotBlank(linksDTO.next.href, jgen);
-        serializeLastHrefIfNotBlank(linksDTO.last.href, jgen);
-        serializeParentHrefIfNotBlank(linksDTO.parent.href, jgen);
+        serializeFirstHrefIfNotBlank(linksDTO.getFirst().getHref(), jgen);
+        serializePrevHrefIfNotBlank(linksDTO.getPrev().getHref(), jgen);
+        serializeSelfHref(linksDTO.getSelf().getHref(), jgen);
+        serializeNextHrefIfNotBlank(linksDTO.getNext().getHref(), jgen);
+        serializeLastHrefIfNotBlank(linksDTO.getLast().getHref(), jgen);
+        serializeParentHrefIfNotBlank(linksDTO.getParent().getHref(), jgen);
         jgen.writeEndObject();
 
     }

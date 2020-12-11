@@ -5,7 +5,8 @@ public enum LinksAttributes {
     PREV_HREF("$.links.prev.href"),
     SELF_HREF("$.links.self.href"),
     NEXT_HREF("$.links.next.href"),
-    LAST_HREF("$.links.last.href");
+    LAST_HREF("$.links.last.href"),
+    PARENT_HREF("$.links.parent.href");
 
     private String value;
 

@@ -23,7 +23,7 @@ public class PagedCollectionDTOSerializerTest {
     public void setUp() {
         objectMapper = new ObjectMapper();
         CollectionLikeType type = objectMapper.getTypeFactory().constructCollectionLikeType(PagedCollectionDTO.class, FellSimplifiedDTO.class);
-        FellSimplifiedPagedCollectionDtoSerializer serializer = new FellSimplifiedPagedCollectionDtoSerializer(type);
+        PagedCollectionDtoSerializer serializer = new PagedCollectionDtoSerializer(type);
         objectMapper.registerModule(new SimpleModule().addSerializer(serializer));
 
         pagedCollection = getTestPageCollection();
@@ -31,24 +31,24 @@ public class PagedCollectionDTOSerializerTest {
 
     private PagedCollectionDTO<FellSimplifiedDTO> getTestPageCollection() {
         PagedCollectionDTO<FellSimplifiedDTO> pagedCollection = new PagedCollectionDTO<>();
-        pagedCollection.links.first.href = "http://localhost:8080/api/v1/fells?offset=0&limit=1";
-        pagedCollection.links.prev.href = "http://localhost:8080/api/v1/fells?offset=4&limit=1";
-        pagedCollection.links.self.href = "http://localhost:8080/api/v1/fells?offset=5&limit=1";
-        pagedCollection.links.next.href = "http://localhost:8080/api/v1/fells?offset=6&limit=1";
-        pagedCollection.links.last.href = "http://localhost:8080/api/v1/fells?offset=11&limit=1";
-        pagedCollection.offset = "0";
-        pagedCollection.limit = "25";
-        pagedCollection.total_items = "214";
+        pagedCollection.getLinks().getFirst().setHref("http://localhost:8080/api/v1/fells?offset=0&limit=1");
+        pagedCollection.getLinks().getPrev().setHref("http://localhost:8080/api/v1/fells?offset=4&limit=1");
+        pagedCollection.getLinks().getSelf().setHref("http://localhost:8080/api/v1/fells?offset=5&limit=1");
+        pagedCollection.getLinks().getNext().setHref("http://localhost:8080/api/v1/fells?offset=6&limit=1");
+        pagedCollection.getLinks().getLast().setHref("http://localhost:8080/api/v1/fells?offset=11&limit=1");
+        pagedCollection.setOffset("0");
+        pagedCollection.setLimit("25");
+        pagedCollection.setTotal_items("214");
         FellSimplifiedDTO simpleGreatGable = new FellSimplifiedDTO();
-        simpleGreatGable.name = "Great Gable";
-        simpleGreatGable.region = "Central Lake District";
-        simpleGreatGable.links.self.href = "http://localhost:8080/api/v1/fells/NY211104";
-        pagedCollection.items.add(simpleGreatGable);
+        simpleGreatGable.setName("Great Gable");
+        simpleGreatGable.setRegion("Central Lake District");
+        simpleGreatGable.getLinks().getSelf().setHref("http://localhost:8080/api/v1/fells/NY211104");
+        pagedCollection.getItems().add(simpleGreatGable);
         FellSimplifiedDTO simpleHelvellyn = new FellSimplifiedDTO();
-        simpleHelvellyn.name = "Helvellyn";
-        simpleHelvellyn.region = "Eastern Lake District";
-        simpleHelvellyn.links.self.href = "http://localhost:8080/api/v1/fells/NY342151";
-        pagedCollection.items.add(simpleHelvellyn);
+        simpleHelvellyn.setName("Helvellyn");
+        simpleHelvellyn.setRegion("Eastern Lake District");
+        simpleHelvellyn.getLinks().getSelf().setHref("http://localhost:8080/api/v1/fells/NY342151");
+        pagedCollection.getItems().add(simpleHelvellyn);
         return pagedCollection;
     }
 

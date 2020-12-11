@@ -46,7 +46,7 @@ public class FellDetailedMapperImpl extends FellDetailedMapper {
 
     @Override
     protected void mapParentPeak() {
-      getDto().getLinks().parent.href = constructParentPeakUrl();
+      getDto().getLinks().getParent().setHref(constructParentPeakUrl());
     }
 
     private String constructParentPeakUrl() {
@@ -116,7 +116,7 @@ public class FellDetailedMapperImpl extends FellDetailedMapper {
 
     @Override
     protected void mapFellUrl() {
-        getDto().getLinks().self.href = endpointGenerator.generateForResourceWithId("fells", getFell().getOsMapRef());
+        getDto().getLinks().getSelf().setHref(endpointGenerator.generateForResourceWithId("fells", getFell().getOsMapRef()));
     }
 
 }

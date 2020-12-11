@@ -1,7 +1,12 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class FellSimplifiedDTO {
-    public String name;
-    public String region;
-    public LinksDTO links = new LinksDTO();
+    private String name;
+    private String region;
+    private LinksDTO links = new LinksDTO();
 }
