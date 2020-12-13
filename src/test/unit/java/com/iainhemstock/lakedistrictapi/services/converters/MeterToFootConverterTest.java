@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.services.converters;
 
+import com.iainhemstock.lakedistrictapi.services.converters.MeterToFootConverter;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

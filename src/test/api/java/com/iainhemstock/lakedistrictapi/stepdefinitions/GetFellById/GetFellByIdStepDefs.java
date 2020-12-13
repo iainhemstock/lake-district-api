@@ -2,9 +2,8 @@ package com.iainhemstock.lakedistrictapi.stepdefinitions.GetFellById;
 
 import com.iainhemstock.lakedistrictapi.common.CommonTestState;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
-import com.iainhemstock.lakedistrictapi.pageobjects.ErrorAttributes;
-import com.iainhemstock.lakedistrictapi.pageobjects.FellDetailedAttributes;
-import com.iainhemstock.lakedistrictapi.pageobjects.LinksAttributes;
+import com.iainhemstock.lakedistrictapi.attributes.ErrorAttributes;
+import com.iainhemstock.lakedistrictapi.attributes.FellDetailedAttributes;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;

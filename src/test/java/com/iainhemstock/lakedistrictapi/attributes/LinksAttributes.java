@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.pageobjects;
+package com.iainhemstock.lakedistrictapi.attributes;
 
 public enum LinksAttributes {
     FIRST_HREF("$.links.first.href"),

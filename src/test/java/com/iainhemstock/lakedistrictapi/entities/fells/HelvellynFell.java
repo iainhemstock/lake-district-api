@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public final class HelvellynFell extends Fell {
+public class HelvellynFell extends Fell {
 
     public HelvellynFell() {
         super(
