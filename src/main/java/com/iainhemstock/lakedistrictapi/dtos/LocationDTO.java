@@ -9,9 +9,8 @@ import java.util.*;
 public class LocationDTO {
     private String latitude;
     private String longitude;
-    private List<Map<String, String>> dms;
-    private Map<String, String> dmsLatitude;
-    private Map<String, String> dmsLongitude;
+    private DmsDTO dms_latitude;
+    private DmsDTO dms_longitude;
     private String region;
     private String os_map_ref;
     private Set<String> os_maps;

@@ -11,12 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonSerialize(using = LinksDTOSerializer.class)
 public class LinksDTO {
-    private FirstLink first;
-    private PrevLink prev;
-    private SelfLink self;
-    private NextLink next;
-    private LastLink last;
-    private ParentLink parent;
-
+    private Link first;
+    private Link prev;
+    private Link self;
+    private Link next;
+    private Link last;
+    private Link parent;
 }
 

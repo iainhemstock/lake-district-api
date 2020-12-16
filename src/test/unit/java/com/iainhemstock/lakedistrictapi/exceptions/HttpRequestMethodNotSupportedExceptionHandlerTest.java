@@ -25,14 +25,16 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
 
     private static final int FELL_ID = 3;
     private static final String NOW = "2012-21-05 12:01:32";
-    private static final String REQUEST_URL = TestApiProperties.API_BASE_URL + "/fells/" + FELL_ID;
 
     @Mock private ApiClock apiClock;
 
     private ResponseEntity<Object> methodNotAllowedResponseEntity;
+    private TestApiProperties apiProperties;
 
     @Before
     public void setUp() {
+        apiProperties = new TestApiProperties();
+
         Mockito.when(apiClock.now())
             .thenReturn(NOW);
 
@@ -41,7 +43,7 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
             "Method POST is not supported");
 
         HttpRequestMethodNotSupportedExceptionHandler exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClock);
-        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, REQUEST_URL);
+        methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, apiProperties.getBaseUrl() + "/fells/" + FELL_ID);
     }
 
     @Test
@@ -69,7 +71,7 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
         assertThat(
             ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getPath(),
-            is(equalTo(TestApiProperties.API_BASE_URL + "/fells/" + FELL_ID)));
+            is(equalTo(apiProperties.getBaseUrl() + "/fells/" + FELL_ID)));
     }
 
     @Test

@@ -11,13 +11,15 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 public class Fell {
 
     @Id
     @Column(name = "os_map_ref")
     @NotNull
-    @EqualsAndHashCode.Include
+//    @EqualsAndHashCode.Include
     private String osMapRef;
 
     @Column(name = "name")

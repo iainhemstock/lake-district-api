@@ -3,7 +3,8 @@ package com.iainhemstock.lakedistrictapi.serializers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.dtos.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,12 +20,14 @@ public class LinksDTOSerializerTest {
     private ObjectMapper objectMapper;
     private LinksDTO emptyLinksDTO;
     private LinksDTO populatedLinksDTO;
+    private TestApiProperties apiProperties;
 
     @Before
     public void setUp() {
         objectMapper = new ObjectMapper();
         LinksDTOSerializer serializer = new LinksDTOSerializer();
         objectMapper.registerModule(new SimpleModule().addSerializer(LinksDTO.class, serializer));
+        apiProperties = new TestApiProperties();
 
         emptyLinksDTO = getEmptyLinksDTO();
         populatedLinksDTO = getPopulatedLinksDTO();
@@ -32,17 +35,18 @@ public class LinksDTOSerializerTest {
 
     private LinksDTO getPopulatedLinksDTO() {
         LinksDTO dto = new LinksDTO();
-        dto.getFirst().setHref("http://localhost:8080/api/v1/fells?offset=0&limit=25");
-        dto.getPrev().setHref("http://localhost:8080/api/v1/fells?offset=25&limit=25");
-        dto.getSelf().setHref("http://localhost:8080/api/v1/fells?offset=50&limit=25");
-        dto.getNext().setHref("http://localhost:8080/api/v1/fells?offset=75&limit=25");
-        dto.getLast().setHref("http://localhost:8080/api/v1/fells?offset=100&limit=25");
-        dto.getParent().setHref("http://localhost:8080/api/v1/fells/NY123456");
+        dto.setFirst(new Link(String.format("%s/fells?offset=0&limit=25", apiProperties.getBaseUrl())));
+        dto.setPrev(new Link(String.format("%s/fells?offset=25&limit=25", apiProperties.getBaseUrl())));
+        dto.setSelf(new Link(String.format("%s/fells?offset=50&limit=25", apiProperties.getBaseUrl())));
+        dto.setNext(new Link(String.format("%s/fells?offset=75&limit=25", apiProperties.getBaseUrl())));
+        dto.setLast(new Link(String.format("%s/fells?offset=100&limit=25", apiProperties.getBaseUrl())));
+        dto.setParent(new Link(String.format("%s/fells/NY123456", apiProperties.getBaseUrl())));
         return dto;
     }
 
     private LinksDTO getEmptyLinksDTO() {
-        return new LinksDTO();
+        LinksDTO linksDTO = new LinksDTO();
+        return linksDTO;
     }
 
     @Test
@@ -51,11 +55,11 @@ public class LinksDTOSerializerTest {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         assertThat(jsonNode.get("first").get("href").asText(),
-            is("http://localhost:8080/api/v1/fells?offset=0&limit=25"));
+            is(String.format("%s/fells?offset=0&limit=25", apiProperties.getBaseUrl())));
     }
 
     @Test
-    public void will_not_serialize_first_link_when_blank() throws IOException {
+    public void will_not_serialize_first_link_when_null() throws IOException {
         String json = objectMapper.writeValueAsString(emptyLinksDTO);
         JsonNode jsonNode = objectMapper.readTree(json);
 
@@ -68,11 +72,11 @@ public class LinksDTOSerializerTest {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         assertThat(jsonNode.get("prev").get("href").asText(),
-            is("http://localhost:8080/api/v1/fells?offset=25&limit=25"));
+            is(String.format("%s/fells?offset=25&limit=25", apiProperties.getBaseUrl())));
     }
 
     @Test
-    public void will_not_serialize_prev_link_when_blank() throws IOException {
+    public void will_not_serialize_prev_link_when_null() throws IOException {
         String json = objectMapper.writeValueAsString(emptyLinksDTO);
         JsonNode jsonNode = objectMapper.readTree(json);
 
@@ -85,7 +89,7 @@ public class LinksDTOSerializerTest {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         assertThat(jsonNode.get("self").get("href").asText(),
-            is("http://localhost:8080/api/v1/fells?offset=50&limit=25"));
+            is(String.format("%s/fells?offset=50&limit=25", apiProperties.getBaseUrl())));
     }
 
     @Test
@@ -94,11 +98,11 @@ public class LinksDTOSerializerTest {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         assertThat(jsonNode.get("next").get("href").asText(),
-            is("http://localhost:8080/api/v1/fells?offset=75&limit=25"));
+            is(String.format("%s/fells?offset=75&limit=25", apiProperties.getBaseUrl())));
     }
 
     @Test
-    public void will_not_serialize_next_link_when_blank() throws IOException {
+    public void will_not_serialize_next_link_when_null() throws IOException {
         String json = objectMapper.writeValueAsString(emptyLinksDTO);
         JsonNode jsonNode = objectMapper.readTree(json);
 
@@ -111,11 +115,11 @@ public class LinksDTOSerializerTest {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         assertThat(jsonNode.get("last").get("href").asText(),
-            is("http://localhost:8080/api/v1/fells?offset=100&limit=25"));
+            is(String.format("%s/fells?offset=100&limit=25", apiProperties.getBaseUrl())));
     }
 
     @Test
-    public void will_not_serialize_last_link_when_blank() throws IOException {
+    public void will_not_serialize_last_link_when_null() throws IOException {
         String json = objectMapper.writeValueAsString(emptyLinksDTO);
         JsonNode jsonNode = objectMapper.readTree(json);
 
@@ -128,11 +132,11 @@ public class LinksDTOSerializerTest {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         assertThat(jsonNode.get("parent").get("href").asText(),
-            is("http://localhost:8080/api/v1/fells/NY123456"));
+            is(String.format("%s/fells/NY123456", apiProperties.getBaseUrl())));
     }
 
     @Test
-    public void will_not_serialize_parent_link_when_blank() throws IOException {
+    public void will_not_serialize_parent_link_when_null() throws IOException {
         String json = objectMapper.writeValueAsString(emptyLinksDTO);
         JsonNode jsonNode = objectMapper.readTree(json);
 

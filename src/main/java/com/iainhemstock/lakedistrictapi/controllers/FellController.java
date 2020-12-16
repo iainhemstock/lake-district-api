@@ -1,14 +1,16 @@
 package com.iainhemstock.lakedistrictapi.controllers;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
+import com.iainhemstock.lakedistrictapi.dtos.FellDetailedDTO;
 import com.iainhemstock.lakedistrictapi.dtos.FellSimplifiedDTO;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.entities.*;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.services.ApiClock;
 import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
-import com.iainhemstock.lakedistrictapi.services.mappers.FellDetailedMapper;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +19,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/v1")
 public class FellController {
@@ -24,7 +29,7 @@ public class FellController {
     @Autowired private ApiClock apiClock;
     @Autowired private ApiProperties apiProperties;
     @Autowired private FellRepository fellRepository;
-    @Autowired private FellDetailedMapper fellDetailedMapper;
+    @Autowired private ModelMapper mapper;
     @Autowired private FellSimplifiedPagedCollectionMapper pagedCollectionMapper;
 
     @GetMapping(value = "/fells")
@@ -33,7 +38,6 @@ public class FellController {
         if (offset < 0) {
             throw new IllegalArgumentException("Param 'offset' cannot be negative");
         }
-
         Page<Fell> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
         PagedCollectionDTO<FellSimplifiedDTO> pagedCollectionDTO = pagedCollectionMapper.map(fellPage);
         return new ResponseEntity<>(pagedCollectionDTO, HttpStatus.OK);
@@ -47,7 +51,8 @@ public class FellController {
                 apiClock.now(),
                 HttpMethod.GET.name(),
                 String.format("%s/fells/%s", apiProperties.getBaseUrl(), id)));
-        return new ResponseEntity<>(fellDetailedMapper.map(fell), HttpStatus.OK);
+        FellDetailedDTO dto = mapper.map(fell, FellDetailedDTO.class);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

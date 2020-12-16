@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "http://192.168.0.16:8080/schemas",
 	"type": "object",
-	"required": ["classifications", "height", "location", "name", "prominence"],
+	"required": ["links", "classifications", "height", "location", "name", "prominence"],
 	"additionalProperties": false,
 	"properties": {
 		"links": {
@@ -53,7 +53,7 @@
 		},
 		"location": {
 			"type": "object",
-			"required": ["latitude", "longitude", "dms", "region", "os_map_ref", "os_maps"],
+			"required": ["latitude", "longitude", "dms_latitude", "dms_longitude", "region", "os_map_ref", "os_maps"],
 			"additionalProperties": false,
 			"properties": {
 				"latitude": {
@@ -62,29 +62,43 @@
 				"longitude": {
 					"type": "string"
 				},
-				"dms": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"required": ["degrees", "minutes", "seconds", "hemisphere"],
-						"additionalProperties": false,
-						"properties": {
-							"degrees": {
-								"type": "string"
-							},
-							"minutes": {
-								"type": "string"
-							},
-							"seconds": {
-								"type": "string"
-							},
-							"hemisphere": {
-								"type": "string"
-							}
+				"dms_latitude": {
+					"type": "object",
+					"required": ["degrees", "minutes", "seconds", "hemisphere"],
+					"additionalProperties": false,
+					"properties": {
+						"degrees": {
+							"type": "string"
+						},
+						"minutes": {
+							"type": "string"
+						},
+						"seconds": {
+							"type": "string"
+						},
+						"hemisphere": {
+							"type": "string"
 						}
-					},
-					"minItems": 2,
-					"maxItems": 2
+					}
+				},
+				"dms_longitude": {
+					"type": "object",
+					"required": ["degrees", "minutes", "seconds", "hemisphere"],
+					"additionalProperties": false,
+					"properties": {
+						"degrees": {
+							"type": "string"
+						},
+						"minutes": {
+							"type": "string"
+						},
+						"seconds": {
+							"type": "string"
+						},
+						"hemisphere": {
+							"type": "string"
+						}
+					}
 				},
 				"region": {
 					"type": "string"

@@ -23,19 +23,19 @@ public class EndpointGeneratorTest {
 
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
-    @Mock private ApiProperties apiProperties;
+    private TestApiProperties apiProperties;
     private EndpointGenerator endpointGenerator;
 
     @Before
     public void setUp() {
-        Mockito.when(apiProperties.getBaseUrl()).thenReturn(TestApiProperties.API_BASE_URL);
+        apiProperties = new TestApiProperties();
         endpointGenerator = new EndpointGenerator(apiProperties);
     }
 
     @Test
     public void will_generate_endpoint_for_resource_with_id() {
         assertThat(endpointGenerator.generateForResourceWithId("fells", "NY123456"),
-            is(equalTo(TestApiProperties.API_BASE_URL + "/fells/NY123456")));
+            is(equalTo(apiProperties.getBaseUrl() + "/fells/NY123456")));
     }
 
     @Test

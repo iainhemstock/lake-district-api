@@ -12,61 +12,25 @@ public class LinksDTOSerializer extends JsonSerializer<LinksDTO> {
     public void serialize(final LinksDTO linksDTO,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
-
         jgen.writeStartObject();
-        serializeFirstHrefIfNotBlank(linksDTO.getFirst().getHref(), jgen);
-        serializePrevHrefIfNotBlank(linksDTO.getPrev().getHref(), jgen);
-        serializeSelfHref(linksDTO.getSelf().getHref(), jgen);
-        serializeNextHrefIfNotBlank(linksDTO.getNext().getHref(), jgen);
-        serializeLastHrefIfNotBlank(linksDTO.getLast().getHref(), jgen);
-        serializeParentHrefIfNotBlank(linksDTO.getParent().getHref(), jgen);
+        if (linksDTO.getFirst() != null)
+            serializeLink(jgen, "first", linksDTO.getFirst().toString());
+        if (linksDTO.getPrev() != null)
+            serializeLink(jgen, "prev", linksDTO.getPrev().toString());
+        if (linksDTO.getSelf() != null)
+            serializeLink(jgen, "self", linksDTO.getSelf().toString());
+        if (linksDTO.getNext() != null)
+            serializeLink(jgen, "next", linksDTO.getNext().toString());
+        if (linksDTO.getLast() != null)
+            serializeLink(jgen, "last", linksDTO.getLast().toString());
+        if (linksDTO.getParent() != null)
+            serializeLink(jgen, "parent", linksDTO.getParent().toString());
         jgen.writeEndObject();
-
     }
 
-    private void serializeFirstHrefIfNotBlank(final String href, final JsonGenerator jgen) throws IOException {
-        if (!href.isBlank()) {
-            jgen.writeObjectFieldStart("first");
-            jgen.writeStringField("href", href);
-            jgen.writeEndObject();
-        }
-    }
-
-    private void serializePrevHrefIfNotBlank(final String href, final JsonGenerator jgen) throws IOException {
-        if (!href.isBlank()) {
-            jgen.writeObjectFieldStart("prev");
-            jgen.writeStringField("href", href);
-            jgen.writeEndObject();
-        }
-    }
-
-    private void serializeSelfHref(final String href, final JsonGenerator jgen) throws IOException {
-        jgen.writeObjectFieldStart("self");
+    private void serializeLink(final JsonGenerator jgen, final String rel, final String href) throws IOException {
+        jgen.writeObjectFieldStart(rel);
         jgen.writeStringField("href", href);
         jgen.writeEndObject();
-    }
-
-    private void serializeNextHrefIfNotBlank(final String href, final JsonGenerator jgen) throws IOException {
-        if (!href.isBlank()) {
-            jgen.writeObjectFieldStart("next");
-            jgen.writeStringField("href", href);
-            jgen.writeEndObject();
-        }
-    }
-
-    private void serializeLastHrefIfNotBlank(final String href, final JsonGenerator jgen) throws IOException {
-        if (!href.isBlank()) {
-            jgen.writeObjectFieldStart("last");
-            jgen.writeStringField("href", href);
-            jgen.writeEndObject();
-        }
-    }
-
-    private void serializeParentHrefIfNotBlank(final String href, final JsonGenerator jgen) throws IOException {
-        if (!href.isBlank()) {
-            jgen.writeObjectFieldStart("parent");
-            jgen.writeStringField("href", href);
-            jgen.writeEndObject();
-        }
     }
 }

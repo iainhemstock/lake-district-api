@@ -1,10 +1,19 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
-import com.iainhemstock.lakedistrictapi.entities.ParentFell;
-import com.iainhemstock.lakedistrictapi.entities.classifications.*;
-import com.iainhemstock.lakedistrictapi.entities.fells.*;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.*;
-import com.iainhemstock.lakedistrictapi.entities.regions.*;
+import com.iainhemstock.lakedistrictapi.entities.*;
+import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
+import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
+import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
+import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
+import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
+import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
+import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
 import com.iainhemstock.lakedistrictapi.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public final class TestDataLoaderForApiTests {
@@ -37,7 +48,23 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addGreatGable() {
-        fellRepository.save(new GreatGableFell());
+        Fell greatGable = new Fell("NY211104",
+            "Great Gable",
+            899,
+            425,
+            54.482,
+            -3.219,
+            new Region(3, "Central Lake District"),
+            new ParentFell("NY215072"),
+            new HashSet<>(Set.of(
+                new OsMap(1, "OS Landranger 89"),
+                new OsMap(2, "OS Landranger 90"),
+                new OsMap(7, "OS Explorer OL6"))),
+            new HashSet<>(Set.of(
+                new Classification(3, "Marilyn"),
+                new Classification(15, "Fellranger"),
+                new Classification(11, "Birkett"))));
+        fellRepository.save(greatGable);
     }
 
     public void addHelvellyn() {

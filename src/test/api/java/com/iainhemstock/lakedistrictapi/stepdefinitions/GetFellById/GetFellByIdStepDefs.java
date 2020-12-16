@@ -110,18 +110,18 @@ public class GetFellByIdStepDefs {
 
     @And("^the body will contain the following dms coordinates equivalent to the latitude$")
     public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.DMS_DEGREES.valueAt(0), is(expectedDms.get("degrees"))))
-            .andExpect(jsonPath(FellDetailedAttributes.DMS_MINUTES.valueAt(0), is(expectedDms.get("minutes"))))
-            .andExpect(jsonPath(FellDetailedAttributes.DMS_SECONDS.valueAt(0), is(expectedDms.get("seconds"))))
-            .andExpect(jsonPath(FellDetailedAttributes.DMS_HEMISPHERE.valueAt(0), is(expectedDms.get("hemisphere"))));
+        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_DEGREES.valueAt(0), is(expectedDms.get("degrees"))))
+            .andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_MINUTES.valueAt(0), is(expectedDms.get("minutes"))))
+            .andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_SECONDS.valueAt(0), is(expectedDms.get("seconds"))))
+            .andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_HEMISPHERE.valueAt(0), is(expectedDms.get("hemisphere"))));
     }
 
     @And("^the body will contain the following dms coordinates equivalent to the longitude$")
     public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.DMS_DEGREES.valueAt(1), is(expectedDms.get("degrees"))))
-            .andExpect(jsonPath(FellDetailedAttributes.DMS_MINUTES.valueAt(1), is(expectedDms.get("minutes"))))
-            .andExpect(jsonPath(FellDetailedAttributes.DMS_SECONDS.valueAt(1), is(expectedDms.get("seconds"))))
-            .andExpect(jsonPath(FellDetailedAttributes.DMS_HEMISPHERE.valueAt(1), is(expectedDms.get("hemisphere"))));
+        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_DEGREES.valueAt(1), is(expectedDms.get("degrees"))))
+            .andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_MINUTES.valueAt(1), is(expectedDms.get("minutes"))))
+            .andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_SECONDS.valueAt(1), is(expectedDms.get("seconds"))))
+            .andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_HEMISPHERE.valueAt(1), is(expectedDms.get("hemisphere"))));
     }
 
     @When("^sending unsupported (.*) request to (.*)")

@@ -14,10 +14,14 @@ public enum FellDetailedAttributes {
     PROMINENCE_METERS("$.prominence.meters"),
     CLASSIFICATIONS("$.classifications"),
     OS_MAPS("$.location.os_maps"),
-    DMS_DEGREES("$.location.dms[%d].degrees"),
-    DMS_MINUTES("$.location.dms[%d].minutes"),
-    DMS_SECONDS("$.location.dms[%d].seconds"),
-    DMS_HEMISPHERE("$.location.dms[%d].hemisphere");
+    LATITUDE_DMS_DEGREES("$.location.dms_latitude.degrees"),
+    LATITUDE_DMS_MINUTES("$.location.dms_latitude.minutes"),
+    LATITUDE_DMS_SECONDS("$.location.dms_latitude.seconds"),
+    LATITUDE_DMS_HEMISPHERE("$.location.dms_latitude.hemisphere"),
+    LONGITUDE_DMS_DEGREES("$.location.dms_longitude.degrees"),
+    LONGITUDE_DMS_MINUTES("$.location.dms_longitude.minutes"),
+    LONGITUDE_DMS_SECONDS("$.location.dms_longitude.seconds"),
+    LONGITUDE_DMS_HEMISPHERE("$.location.dms_longitude.hemisphere");
 
     private String value;
 

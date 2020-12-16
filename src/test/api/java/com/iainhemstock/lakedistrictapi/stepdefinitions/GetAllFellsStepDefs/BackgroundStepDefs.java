@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 public class BackgroundStepDefs {
 
     @Value("${api.pageable.default-page-offset}")
-    private int DEFAULT_PAGE_OFFSET = 1;
+    private int DEFAULT_PAGE_OFFSET;
 
     @Value("${spring.data.web.pageable.default-page-size}")
     private int DEFAULT_PAGE_SIZE;
@@ -22,7 +22,7 @@ public class BackgroundStepDefs {
 
     @Given("^Great Gable exists$")
     public void fellExists() {
-        testDataLoader.addGreatGable();
+//        testDataLoader.addGreatGable();
     }
 
     @Given("^Great Gable, Helvellyn and Scafell Pike exist$")
