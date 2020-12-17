@@ -2,13 +2,16 @@ package com.iainhemstock.lakedistrictapi.services.mappers;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.FellSimplifiedDTO;
-import com.iainhemstock.lakedistrictapi.dtos.Link;
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // todo: this class doesn't have unit tests!!
 @Component
@@ -55,9 +58,11 @@ public class FellSimplifiedPagedCollectionMapper {
     }
 
     private void mapNavigationLinks(final Page<Fell> page) {
+        Map<String, Link> links = new HashMap<>();
+
         if (currentPageIsNotFirstPage(page.getPageable())) {
-            mapFirstPageLink(page);
-            mapPreviousPageLink(page);
+            mapFirstPageLink(page, links);
+            mapPreviousPageLink(page, links);
         }
 
         pagedCollection.getLinks().setSelf(new Link((String.format("%s/fells?offset=%d&limit=%d",
@@ -66,33 +71,33 @@ public class FellSimplifiedPagedCollectionMapper {
             page.getNumberOfElements()))));
 
         if (currentPageIsNotLastPage(page)) {
-            mapNextPageLink(page);
-            mapLastPageLink(page);
+            mapNextPageLink(page, links);
+            mapLastPageLink(page, links);
         }
     }
 
-    private void mapFirstPageLink(final Page<Fell> page) {
+    private void mapFirstPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setFirst(new Link((String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().first().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapPreviousPageLink(final Page<Fell> page) {
+    private void mapPreviousPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setPrev(new Link((String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().previousOrFirst().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapNextPageLink(final Page<Fell> page) {
+    private void mapNextPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setNext(new Link((String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().next().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapLastPageLink(final Page<Fell> page) {
+    private void mapLastPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setLast(new Link((String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getTotalPages() - 1,

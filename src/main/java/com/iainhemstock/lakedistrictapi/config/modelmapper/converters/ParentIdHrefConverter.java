@@ -1,17 +1,18 @@
 package com.iainhemstock.lakedistrictapi.config.modelmapper.converters;
 
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import org.modelmapper.AbstractConverter;
 
-public class ParentHrefConverter extends AbstractConverter<ParentFell, String> {
-    private String href;
+public class ParentIdHrefConverter extends AbstractConverter<ParentFell, Link> {
+    private String baseUrl;
 
-    public ParentHrefConverter(final String href) {
-        this.href = href;
+    public ParentIdHrefConverter(final String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 
     @Override
-    protected String convert(final ParentFell parent) {
-        return String.format("%s/fells/%s", href, parent.getOsMapRef());
+    protected Link convert(final ParentFell parent) {
+        return new Link(String.format("%s/fells/%s", baseUrl, parent.getOsMapRef()));
     }
 }

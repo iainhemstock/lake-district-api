@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.config;
+package com.iainhemstock.lakedistrictapi.config.modelmapper.converters;
 
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFootConverter;
 import org.modelmapper.AbstractConverter;

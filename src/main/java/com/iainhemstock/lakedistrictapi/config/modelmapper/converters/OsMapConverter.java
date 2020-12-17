@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.config;
+package com.iainhemstock.lakedistrictapi.config.modelmapper.converters;
 
 import com.iainhemstock.lakedistrictapi.entities.OsMap;
 import org.modelmapper.AbstractConverter;

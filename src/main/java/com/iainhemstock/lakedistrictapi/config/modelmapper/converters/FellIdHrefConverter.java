@@ -1,16 +1,17 @@
 package com.iainhemstock.lakedistrictapi.config.modelmapper.converters;
 
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import org.modelmapper.AbstractConverter;
 
-public class HrefConverter extends AbstractConverter<String, String> {
-    private String href;
+public class FellIdHrefConverter extends AbstractConverter<String, Link> {
+    private String baseUrl;
 
-    public HrefConverter(final String href) {
-        this.href = href;
+    public FellIdHrefConverter(final String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 
     @Override
-    protected String convert(final String osMapRef) {
-        return String.format("%s/fells/%s", href, osMapRef);
+    protected Link convert(final String osMapRef) {
+        return new Link(String.format("%s/fells/%s", baseUrl, osMapRef));
     }
 }

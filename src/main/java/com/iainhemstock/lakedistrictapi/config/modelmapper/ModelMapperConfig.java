@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.config.modelmapper;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.*;
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.DmsDTO;
 import com.iainhemstock.lakedistrictapi.dtos.FellDetailedDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
@@ -38,9 +39,10 @@ public class ModelMapperConfig {
                 mapper.using(new ClassificationConverter()).map(Fell::getClassifications, (dest, v) -> dest.setClassifications((Set) v));
                 mapper.using(new DmsLongitudeConverter()).map(Fell::getLongitude, (dest, v) -> dest.getLocation().setDms_longitude((DmsDTO) v));
                 mapper.using(new MeterToFeetConverter()).map(Fell::getProminenceMeters, (dest, v) -> dest.getProminence().setFeet((String) v));
-                mapper.using(new FellIdHrefConverter(apiProperties.getBaseUrl())).map(Fell::getOsMapRef, (dest, v) -> dest.getLinks().getSelf().setHref((String) v));
-                mapper.using(new ParentIdHrefConverter(apiProperties.getBaseUrl())).map(Fell::getParentPeak, (dest, v) -> dest.getLinks().getParent().setHref((String) v));
+                mapper.using(new FellIdHrefConverter(apiProperties.getBaseUrl())).map(Fell::getOsMapRef, (dest, v) -> dest.getLinks().setSelf((Link) v));
+                mapper.using(new ParentIdHrefConverter(apiProperties.getBaseUrl())).map(Fell::getParentPeak, (dest, v) -> dest.getLinks().setParent((Link) v));
             });
+
         return mm;
     }
 

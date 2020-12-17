@@ -12,6 +12,7 @@ public class LinksDTOSerializer extends JsonSerializer<LinksDTO> {
     public void serialize(final LinksDTO linksDTO,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
+
         jgen.writeStartObject();
         if (linksDTO.getFirst() != null)
             serializeLink(jgen, "first", linksDTO.getFirst().toString());

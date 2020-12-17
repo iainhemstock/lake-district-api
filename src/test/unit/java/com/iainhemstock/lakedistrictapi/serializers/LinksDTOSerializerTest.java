@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import org.junit.Before;
 import org.junit.Test;
