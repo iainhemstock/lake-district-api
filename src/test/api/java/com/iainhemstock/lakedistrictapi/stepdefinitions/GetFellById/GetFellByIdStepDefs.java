@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.stepdefinitions.GetFellById;
 import com.iainhemstock.lakedistrictapi.common.CommonTestState;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
 import com.iainhemstock.lakedistrictapi.attributes.ErrorAttributes;
-import com.iainhemstock.lakedistrictapi.attributes.FellDetailedAttributes;
+import com.iainhemstock.lakedistrictapi.attributes.DetailedFellAttributes;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -32,96 +32,96 @@ public class GetFellByIdStepDefs {
 
     @And("^the body will contain the fell name (.*)$")
     public void theResponseBodyWillContainTheFellName(final String expectedFellName) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.NAME.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.NAME.value(),
             is(expectedFellName)));
     }
 
     @And("^the body will contain the region (.*)$")
     public void theResponseBodyWillContainTheRegion(final String expectedRegion) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.REGION.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.REGION.value(),
             is(expectedRegion)));
     }
 
     @And("^the body will contain the latitude (.*)$")
     public void theResponseBodyWillContainTheLatitude(final String expectedLatitude) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.LATITUDE.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.LATITUDE.value(),
             is(expectedLatitude)));
     }
 
     @And("^the body will contain the longitude (.*)$")
     public void theResponseBodyWillContainTheLongitude(final String expectedLongitude) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.LONGITUDE.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.LONGITUDE.value(),
             is(expectedLongitude)));
     }
 
     @And("^the body will contain the os map reference ([A-Z]{2}[0-9]{6})$")
     public void theResponseBodyWillContainTheOsMapRef(final String expectedOsMapRef) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.OS_MAP_REF.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.OS_MAP_REF.value(),
             is(expectedOsMapRef)));
     }
 
     @And("^the body will contain a self href (.*)$")
     public void theResponseBodyWillContainTheUrl(final String expectedHref) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.SELF_HREF.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.SELF_HREF.value(),
             is(expectedHref)));
     }
 
     @And("^the body will contain the parent peak href (.*)$")
     public void theResponseBodyWillContainTheParentPeakHref(final String expectedParentPeakUrl) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.PARENT_HREF.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.PARENT_HREF.value(),
             is(expectedParentPeakUrl)));
     }
 
     @And("^the body will contain the height in feet (.*)$")
     public void theResponseBodyWillContainTheFellHeightInFeet(final String expectedHeightInFeet) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.HEIGHT_FEET.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.HEIGHT_FEET.value(),
             is(expectedHeightInFeet)));
     }
 
     @And("^the body will contain the height in meters (.*)$")
     public void theResponseBodyWillContainTheFellHeightInMeters(final String expectedHeightInMeters) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.HEIGHT_METERS.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.HEIGHT_METERS.value(),
             is(expectedHeightInMeters)));
     }
 
     @And("^the body will contain the prominence in feet (.*)$")
     public void theResponseBodyWillContainTheFellProminenceInFeet(final String expectedProminenceInFeet) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.PROMINENCE_FEET.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.PROMINENCE_FEET.value(),
             is(expectedProminenceInFeet)));
     }
 
     @And("^the body will contain the prominence in meters (.*)$")
     public void theResponseBodyWillContainTheFellProminenceInMeters(final String expectedProminenceInMeters) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.PROMINENCE_METERS.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.PROMINENCE_METERS.value(),
             is(expectedProminenceInMeters)));
     }
 
     @And("^the body will contain the following classifications$")
     public void theResponseBodyWillContainTheFollowingClassifications(final List<String> expectedClassifications) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.CLASSIFICATIONS.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.CLASSIFICATIONS.value(),
             containsInAnyOrder(expectedClassifications.toArray())));
     }
 
     @And("^the body will contain the following maps that this fell appears in$")
     public void theResponseBodyWillContainTheFollowingMaps(final List<String> expectedMaps) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.OS_MAPS.value(),
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.OS_MAPS.value(),
             containsInAnyOrder(expectedMaps.toArray())));
     }
 
     @And("^the body will contain the following dms coordinates equivalent to the latitude$")
     public void theResponseBodyWillContainTheFollowingNorthernDmsCoordinates(final Map<String, String> expectedDms) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_DEGREES.valueAt(0), is(expectedDms.get("degrees"))))
-            .andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_MINUTES.valueAt(0), is(expectedDms.get("minutes"))))
-            .andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_SECONDS.valueAt(0), is(expectedDms.get("seconds"))))
-            .andExpect(jsonPath(FellDetailedAttributes.LATITUDE_DMS_HEMISPHERE.valueAt(0), is(expectedDms.get("hemisphere"))));
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.LATITUDE_AS_DMS_DEGREES.valueAt(0), is(expectedDms.get("degrees"))))
+            .andExpect(jsonPath(DetailedFellAttributes.LATITUDE_AS_DMS_MINUTES.valueAt(0), is(expectedDms.get("minutes"))))
+            .andExpect(jsonPath(DetailedFellAttributes.LATITUDE_AS_DMS_SECONDS.valueAt(0), is(expectedDms.get("seconds"))))
+            .andExpect(jsonPath(DetailedFellAttributes.LATITUDE_AS_DMS_HEMISPHERE.valueAt(0), is(expectedDms.get("hemisphere"))));
     }
 
     @And("^the body will contain the following dms coordinates equivalent to the longitude$")
     public void theResponseBodyWillContainTheFollowingWesternDmsCoordinates(final Map<String, String> expectedDms) throws Exception {
-        commonState.getResult().andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_DEGREES.valueAt(1), is(expectedDms.get("degrees"))))
-            .andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_MINUTES.valueAt(1), is(expectedDms.get("minutes"))))
-            .andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_SECONDS.valueAt(1), is(expectedDms.get("seconds"))))
-            .andExpect(jsonPath(FellDetailedAttributes.LONGITUDE_DMS_HEMISPHERE.valueAt(1), is(expectedDms.get("hemisphere"))));
+        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.LONGITUDE_AS_DMS_DEGREES.valueAt(1), is(expectedDms.get("degrees"))))
+            .andExpect(jsonPath(DetailedFellAttributes.LONGITUDE_AS_DMS_MINUTES.valueAt(1), is(expectedDms.get("minutes"))))
+            .andExpect(jsonPath(DetailedFellAttributes.LONGITUDE_AS_DMS_SECONDS.valueAt(1), is(expectedDms.get("seconds"))))
+            .andExpect(jsonPath(DetailedFellAttributes.LONGITUDE_AS_DMS_HEMISPHERE.valueAt(1), is(expectedDms.get("hemisphere"))));
     }
 
     @When("^sending unsupported (.*) request to (.*)")

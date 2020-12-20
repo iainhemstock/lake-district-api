@@ -7,7 +7,7 @@ import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
 
 import java.io.IOException;
 
-public class LinksDTOSerializer extends JsonSerializer<LinksDTO> {
+public class    LinksDTOSerializer extends JsonSerializer<LinksDTO> {
     @Override
     public void serialize(final LinksDTO linksDTO,
                           final JsonGenerator jgen,

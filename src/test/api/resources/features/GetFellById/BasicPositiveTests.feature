@@ -10,7 +10,7 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 	#VerifyResponsePayload
 	Scenario: API provides json body validated against schema
 		When making a GET request to http://localhost:8080/api/v1/fells/NY211104
-		Then the body will conform to the schema in schemas/fell_detailed_schema.json
+		Then the body will conform to the schema in schemas/detailed_fell_schema.json
 
 	#VerifyResponsePayload
 	Scenario: API provides a detailed view of a fell

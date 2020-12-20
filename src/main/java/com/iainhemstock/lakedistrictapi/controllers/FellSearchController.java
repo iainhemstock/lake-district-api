@@ -1,8 +1,8 @@
 package com.iainhemstock.lakedistrictapi.controllers;
 
-import com.iainhemstock.lakedistrictapi.dtos.FellDetailedDTO;
+import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SearchDTO;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class FellSearchController {
         String processedSearchTerm = searchTerm
             .replace('+', ' ')
             .replace('*', '%');
-        List<Fell> fells = fellRepository.findByNameLikeIgnoreCase(processedSearchTerm);
+        List<FellEntity> fells = fellRepository.findByNameLikeIgnoreCase(processedSearchTerm);
 
-        List<FellDetailedDTO> fellDetailedDTOS = fells.stream()
-            .map(fell -> mapper.map(fell, FellDetailedDTO.class))
+        List<DetailedFellDTO> detailedFellDTOS = fells.stream()
+            .map(fell -> mapper.map(fell, DetailedFellDTO.class))
             .collect(Collectors.toList());
 
-        return new SearchDTO(fellDetailedDTOS);
+        return new SearchDTO(detailedFellDTOS);
     }
 
 }

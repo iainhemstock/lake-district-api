@@ -4,9 +4,9 @@ import com.iainhemstock.lakedistrictapi.entities.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
 import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
-import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
@@ -48,7 +48,7 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addGreatGable() {
-        Fell greatGable = new Fell("NY211104",
+        FellEntity greatGable = new FellEntity("NY211104",
             "Great Gable",
             899,
             425,
@@ -68,11 +68,11 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addHelvellyn() {
-        fellRepository.save(new HelvellynFell());
+        fellRepository.save(new HelvellynFellEntity());
     }
 
     public void addScafellPike() {
-        fellRepository.save(new ScafellPikeFell());
+        fellRepository.save(new ScafellPikeFellEntity());
     }
 
     private void initializeRegionData() {
@@ -96,7 +96,7 @@ public final class TestDataLoaderForApiTests {
 
     private void initializeParentPeakData() {
         parentPeakRepository.save(ParentFell.newNull());
-        parentPeakRepository.save(new ParentFell(new ScafellPikeFell().getOsMapRef()));
-        parentPeakRepository.save(new ParentFell(new GreatGableFell().getOsMapRef()));
+        parentPeakRepository.save(new ParentFell(new ScafellPikeFellEntity().getOsMapRef()));
+        parentPeakRepository.save(new ParentFell(new GreatGableFellEntity().getOsMapRef()));
     }
 }

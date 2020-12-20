@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.exceptions;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
-import com.iainhemstock.lakedistrictapi.services.ApiClock;
+import com.iainhemstock.lakedistrictapi.services.ApiClockServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,7 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     private static final int FELL_ID = 3;
     private static final String NOW = "2012-21-05 12:01:32";
 
-    @Mock private ApiClock apiClock;
+    @Mock private ApiClockServiceImpl apiClockService;
 
     private ResponseEntity<Object> methodNotAllowedResponseEntity;
     private TestApiProperties apiProperties;
@@ -35,14 +35,14 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     public void setUp() {
         apiProperties = new TestApiProperties();
 
-        Mockito.when(apiClock.now())
+        Mockito.when(apiClockService.now())
             .thenReturn(NOW);
 
         HttpRequestMethodNotSupportedException methodNotAllowedException = new HttpRequestMethodNotSupportedException(
             HttpMethod.POST.name(),
             "Method POST is not supported");
 
-        HttpRequestMethodNotSupportedExceptionHandler exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClock);
+        HttpRequestMethodNotSupportedExceptionHandler exceptionHandler = new HttpRequestMethodNotSupportedExceptionHandler(apiClockService);
         methodNotAllowedResponseEntity = exceptionHandler.handleException(methodNotAllowedException, apiProperties.getBaseUrl() + "/fells/" + FELL_ID);
     }
 

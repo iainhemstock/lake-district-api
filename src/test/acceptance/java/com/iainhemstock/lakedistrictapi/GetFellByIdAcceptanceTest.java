@@ -66,7 +66,7 @@
 //            .get("/fells/{id}", validId)
 //        .then()
 //        .assertThat()
-//            .body(matchesJsonSchemaInClasspath("schemas/fell_detailed_schema.json"));
+//            .body(matchesJsonSchemaInClasspath("schemas/detailed_fell_schema.json"));
 //    }
 //
 //    @Test

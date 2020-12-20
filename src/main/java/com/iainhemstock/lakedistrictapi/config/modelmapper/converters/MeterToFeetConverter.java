@@ -1,12 +1,13 @@
 package com.iainhemstock.lakedistrictapi.config.modelmapper.converters;
 
-import com.iainhemstock.lakedistrictapi.services.converters.MeterToFootConverter;
+import com.iainhemstock.lakedistrictapi.domain.Meters;
+import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
 import org.modelmapper.AbstractConverter;
 
 public class MeterToFeetConverter extends AbstractConverter<Integer, String> {
     @Override
     protected String convert(final Integer meter) {
-        MeterToFootConverter m2fConverter = new MeterToFootConverter();
-        return String.valueOf(m2fConverter.convertRoundedToNearestInteger(meter));
+        MeterToFeetConversionServiceImpl m2fConverter = new MeterToFeetConversionServiceImpl();
+        return String.valueOf(m2fConverter.convertRoundedToNearestInteger(new Meters(meter)));
     }
 }

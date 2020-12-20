@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
 import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
-import com.iainhemstock.lakedistrictapi.services.ApiClock;
+import com.iainhemstock.lakedistrictapi.services.ApiClockServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,11 +13,11 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 @Component
 public class HttpRequestMethodNotSupportedExceptionHandler {
 
-    private final ApiClock apiClock;
+    private final ApiClockServiceImpl apiClockService;
 
     @Autowired
-    public HttpRequestMethodNotSupportedExceptionHandler(final ApiClock apiClock) {
-        this.apiClock = apiClock;
+    public HttpRequestMethodNotSupportedExceptionHandler(final ApiClockServiceImpl apiClockService) {
+        this.apiClockService = apiClockService;
     }
 
     public ResponseEntity<Object> handleException(final HttpRequestMethodNotSupportedException ex, final String requestUrl) {
@@ -27,7 +27,7 @@ public class HttpRequestMethodNotSupportedExceptionHandler {
             String.valueOf(status.value()),
             String.format("Method %s is not supported", ex.getMethod()),
             requestUrl,
-            apiClock.now()
+            apiClockService.now()
         );
 
         HttpHeaders responseHeaders = new HttpHeaders();
