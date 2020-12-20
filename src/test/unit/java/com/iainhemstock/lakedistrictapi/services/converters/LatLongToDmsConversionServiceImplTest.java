@@ -15,7 +15,7 @@
 package com.iainhemstock.lakedistrictapi.services.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConverter;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
 import junitparams.JUnitParamsRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +25,12 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(JUnitParamsRunner.class)
-public class LatLongToDmsConverterImplTest {
+public class LatLongToDmsConversionServiceImplTest {
 
     private static final Latitude LATITUDE = new Latitude(54.482);
     private static final Longitude LONGITUDE = new Longitude(-3.219);
 
-    private final LatLongToDmsConverter converter = new LatLongToDmsConverterImpl();
+    private final LatLongToDmsConversionService converter = new LatLongToDmsConversionServiceImpl();
 
     @Test
     public void calculate_degrees_component_of_latitude() {

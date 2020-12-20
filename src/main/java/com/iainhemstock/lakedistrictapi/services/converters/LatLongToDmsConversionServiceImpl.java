@@ -1,15 +1,16 @@
 package com.iainhemstock.lakedistrictapi.services.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConverter;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 // todo: might be a nice idea to make an independent conversion rest service...
-@Component
-public class LatLongToDmsConverterImpl implements LatLongToDmsConverter {
+@Service
+public class LatLongToDmsConversionServiceImpl implements LatLongToDmsConversionService {
 
     public enum CoordType {
         LATITUDE, LONGITUDE

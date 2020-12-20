@@ -2,11 +2,12 @@ package com.iainhemstock.lakedistrictapi.services.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.Feet;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConverter;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class MeterToFeetConverterImpl implements MeterToFeetConverter {
+@Service
+public class MeterToFeetConversionServiceImpl implements MeterToFeetConversionService {
     private static final double METER_TO_FOOT_CONVERSION = 3.2808;
 
     @Override
