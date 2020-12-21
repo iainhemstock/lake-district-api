@@ -17,7 +17,7 @@ import java.util.Set;
 public final class ScafellPikeFellEntity extends FellEntity {
     public ScafellPikeFellEntity() {
         super(
-            "NY215072",
+            new OsMapRef("NY215072"),
             new FellName("Scafell Pike"),
             new Meters(978),
             new Meters(912),

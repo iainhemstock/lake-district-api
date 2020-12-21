@@ -50,7 +50,7 @@ public final class TestDataLoaderForApiTests {
 
     public void addGreatGable() {
         FellEntity greatGable = new FellEntity(
-            "NY211104",
+            new OsMapRef("NY211104"),
             new FellName("Great Gable"),
             new Meters(899),
             new Meters(425),
@@ -98,7 +98,7 @@ public final class TestDataLoaderForApiTests {
 
     private void initializeParentPeakData() {
         parentPeakRepository.save(ParentFell.newNull());
-        parentPeakRepository.save(new ParentFell(new ScafellPikeFellEntity().getOsMapRef()));
-        parentPeakRepository.save(new ParentFell(new GreatGableFellEntity().getOsMapRef()));
+        parentPeakRepository.save(new ParentFell(new ScafellPikeFellEntity().getOsMapRef().toString()));
+        parentPeakRepository.save(new ParentFell(new GreatGableFellEntity().getOsMapRef().toString()));
     }
 }

@@ -17,14 +17,14 @@ import java.util.Set;
 public final class GreatGableFellEntity extends FellEntity {
     public GreatGableFellEntity() {
         super(
-            "NY211104",
+            new OsMapRef("NY211104"),
             new FellName("Great Gable"),
             new Meters(899),
             new Meters(425),
             new Latitude(54.482),
             new Longitude(-3.219),
             new CentralRegion(),
-            new ParentFell(new ScafellPikeFellEntity().getOsMapRef()),
+            new ParentFell(new ScafellPikeFellEntity().getOsMapRef().toString()),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),

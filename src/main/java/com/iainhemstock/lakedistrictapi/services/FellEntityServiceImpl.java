@@ -37,7 +37,7 @@ public class FellEntityServiceImpl implements FellEntityService {
 
     @Override
     public FellEntity getById(final OsMapRef osMapRef) {
-        Optional<FellEntity> fell = fellRepository.findById(osMapRef.toString());
+        Optional<FellEntity> fell = fellRepository.findById(osMapRef);
         if (fell.isEmpty()) {
             String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);

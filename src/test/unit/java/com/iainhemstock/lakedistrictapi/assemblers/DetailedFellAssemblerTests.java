@@ -42,7 +42,7 @@ public class DetailedFellAssemblerTests {
     @Test
     public void will_map_os_map_ref() {
         assertThat(detailedFell.getOsMapRef(),
-            is(new OsMapRef(helvellynFellEntity.getOsMapRef())));
+            is(new OsMapRef(helvellynFellEntity.getOsMapRef().toString())));
     }
 
     @Test

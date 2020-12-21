@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 @Table(name = "fells")
@@ -16,11 +15,8 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FellEntity {
 
-    @Id
-    @Column(name = "os_map_ref")
-    @NotNull
-    @EqualsAndHashCode.Include
-    private String osMapRef;
+    @EmbeddedId
+    private OsMapRef osMapRef;
 
     @Embedded
     private FellName name;

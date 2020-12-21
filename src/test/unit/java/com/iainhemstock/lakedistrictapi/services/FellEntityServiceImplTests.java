@@ -49,7 +49,7 @@ public class FellEntityServiceImplTests {
     public void get_fell_by_id() {
         Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
             .thenReturn(Optional.of(helvellynFellEntity));
-        FellEntity actualFellEntity = fellEntityService.getById(new OsMapRef(helvellynFellEntity.getOsMapRef()));
+        FellEntity actualFellEntity = fellEntityService.getById(new OsMapRef(helvellynFellEntity.getOsMapRef().toString()));
         assertThat(actualFellEntity, is(helvellynFellEntity));
     }
 

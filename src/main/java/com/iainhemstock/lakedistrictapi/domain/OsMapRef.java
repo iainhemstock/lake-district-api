@@ -1,7 +1,24 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-public class OsMapRef  {
-    private final String value;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@EqualsAndHashCode
+public class OsMapRef implements Serializable {
+
+    @Column(name = "os_map_ref")
+    @NotNull
+    private String value;
 
     public OsMapRef(final String value) {
         if (value == null) throw new NullPointerException("OsMapRef cannot be null");
@@ -12,10 +29,5 @@ public class OsMapRef  {
     @Override
     public String toString() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return value.equals(((OsMapRef) other).value);
     }
 }

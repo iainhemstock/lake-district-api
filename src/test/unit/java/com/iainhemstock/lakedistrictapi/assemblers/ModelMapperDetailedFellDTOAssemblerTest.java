@@ -38,14 +38,14 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
     public void setUp() {
         ModelMapperConfig config = new ModelMapperConfig();
         mapper = config.modelMapper();
-        FellEntity helvellyn = new FellEntity("NY342151",
+        FellEntity helvellyn = new FellEntity(new OsMapRef("NY342151"),
             new FellName("Helvellyn"),
             new Meters(950),
             new Meters(712),
             new Latitude(54.527232),
             new Longitude(-3.016054),
             new EasternRegion(),
-            new ParentFell(new ScafellPikeFellEntity().getOsMapRef()),
+            new ParentFell(new ScafellPikeFellEntity().getOsMapRef().toString()),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMap(),
                 new OL5ExplorerOsMap()))),
