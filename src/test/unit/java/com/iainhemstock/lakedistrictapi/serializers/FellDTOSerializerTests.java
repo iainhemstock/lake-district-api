@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
 
-public class DetailedFellDTOSerializerTests {
+public class FellDTOSerializerTests {
 
     private FellDTO fellDTO;
     private ObjectMapper mapper;
