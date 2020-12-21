@@ -47,7 +47,7 @@ public class DetailedFell {
         this.latitude = new Latitude(fell.getLatitude().toDouble());
         this.longitude = new Longitude(fell.getLongitude().toDouble());
         this.regionName = new RegionName(fell.getRegion().getName());
-        this.osMapRef = new OsMapRef(fell.getOsMapRef().toString());
+        this.osMapRef = fell.getOsMapRef();
         this.parentFell = fell.getParentPeak();
 
         latLong2DMSConverter.convert(latitude);

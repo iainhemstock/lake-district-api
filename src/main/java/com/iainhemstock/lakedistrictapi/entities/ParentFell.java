@@ -1,14 +1,12 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
 
+import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,13 +16,12 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class ParentFell implements Nullable {
 
-    @Id
-    @Column(name = "os_map_ref")
-    private String osMapRef;
+    @EmbeddedId
+    private OsMapRef osMapRef;
 
     @Override
     public boolean isNull() {
-        return osMapRef.isEmpty();
+        return osMapRef.toString().isEmpty();
     }
 
     public static ParentFell newNull() {

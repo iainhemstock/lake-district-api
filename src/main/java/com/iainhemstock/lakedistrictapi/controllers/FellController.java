@@ -58,7 +58,7 @@ public class FellController {
         DetailedFell detailedFell = detailedFellAssembler.toDetailedFell(fellEntity);
         Links links = new Links(
             linkService.buildForResourceWithIdAndRel("fells", detailedFell.getOsMapRef().toString(), LinkRel.SELF),
-            linkService.buildForResourceWithIdAndRel("fells", detailedFell.getParentFell().getOsMapRef(), LinkRel.PARENT));
+            linkService.buildForResourceWithIdAndRel("fells", detailedFell.getParentFell().getOsMapRef().toString(), LinkRel.PARENT));
         DetailedFellDTO detailedFellDTO = detailedFellDTOAssembler.toDTO(detailedFell);
         LinksDTO linksDTO = linksDTOAssembler.toDTO(links);
         ItemDTO itemDTO = new ItemDTO(linksDTO, detailedFellDTO);

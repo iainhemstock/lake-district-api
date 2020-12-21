@@ -57,7 +57,7 @@ public final class TestDataLoaderForApiTests {
             new Latitude(54.482),
             new Longitude(-3.219),
             new Region(3, "Central Lake District"),
-            new ParentFell("NY215072"),
+            new ParentFell(new OsMapRef("NY215072")),
             new OsMaps(new HashSet<>(Set.of(
                 new OsMap(1, "OS Landranger 89"),
                 new OsMap(2, "OS Landranger 90"),
@@ -98,7 +98,7 @@ public final class TestDataLoaderForApiTests {
 
     private void initializeParentPeakData() {
         parentPeakRepository.save(ParentFell.newNull());
-        parentPeakRepository.save(new ParentFell(new ScafellPikeFellEntity().getOsMapRef().toString()));
-        parentPeakRepository.save(new ParentFell(new GreatGableFellEntity().getOsMapRef().toString()));
+        parentPeakRepository.save(new ParentFell(new ScafellPikeFellEntity().getOsMapRef()));
+        parentPeakRepository.save(new ParentFell(new GreatGableFellEntity().getOsMapRef()));
     }
 }
