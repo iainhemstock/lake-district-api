@@ -38,7 +38,8 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
     public void setUp() {
         ModelMapperConfig config = new ModelMapperConfig();
         mapper = config.modelMapper();
-        FellEntity helvellyn = new FellEntity(new OsMapRef("NY342151"),
+        FellEntity helvellyn = new FellEntity(
+            new OsMapRef("NY342151"),
             new FellName("Helvellyn"),
             new Meters(950),
             new Meters(712),
