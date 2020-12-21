@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.assemblers;
 
-import com.iainhemstock.lakedistrictapi.domain.DetailedFell;
 import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
+import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellDTOAssembler;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ModelMapperDetailedFellDTOAssembler implements DetailedFellDTOAssem
     }
 
     @Override
-    public DetailedFellDTO toDTO(final DetailedFell detailedFell) {
-        return mapper.map(detailedFell, DetailedFellDTO.class);
+    public DetailedFellDTO toDTO(final FellEntity fellEntity) {
+        return mapper.map(fellEntity, DetailedFellDTO.class);
     }
 }

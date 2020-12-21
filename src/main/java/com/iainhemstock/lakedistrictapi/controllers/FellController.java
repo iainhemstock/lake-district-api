@@ -1,14 +1,14 @@
 package com.iainhemstock.lakedistrictapi.controllers;
 
-import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.domain.Links;
+import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellAssembler;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.FellEntityServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 public class FellController {
 
     @Autowired private FellEntityServiceImpl fellEntityService;
-    @Autowired private DetailedFellAssembler detailedFellAssembler;
     @Autowired private DetailedFellDTOAssembler detailedFellDTOAssembler;
     @Autowired private LinksDTOAssembler linksDTOAssembler;
     @Autowired private LinkService linkService;
@@ -55,11 +54,10 @@ public class FellController {
     @GetMapping("/fells/{id}")
     public ResponseEntity<Object> getFell(@PathVariable final String id) {
         FellEntity fellEntity = fellEntityService.getById(new OsMapRef(id));
-        DetailedFell detailedFell = detailedFellAssembler.toDetailedFell(fellEntity);
         Links links = new Links(
-            linkService.buildForResourceWithIdAndRel("fells", detailedFell.getOsMapRef().toString(), LinkRel.SELF),
-            linkService.buildForResourceWithIdAndRel("fells", detailedFell.getParentFell().getOsMapRef().toString(), LinkRel.PARENT));
-        DetailedFellDTO detailedFellDTO = detailedFellDTOAssembler.toDTO(detailedFell);
+            linkService.buildForResourceWithIdAndRel("fells", fellEntity.getOsMapRef().toString(), LinkRel.SELF),
+            linkService.buildForResourceWithIdAndRel("fells", fellEntity.getParentPeak().getOsMapRef().toString(), LinkRel.PARENT));
+        DetailedFellDTO detailedFellDTO = detailedFellDTOAssembler.toDTO(fellEntity);
         LinksDTO linksDTO = linksDTOAssembler.toDTO(links);
         ItemDTO itemDTO = new ItemDTO(linksDTO, detailedFellDTO);
 

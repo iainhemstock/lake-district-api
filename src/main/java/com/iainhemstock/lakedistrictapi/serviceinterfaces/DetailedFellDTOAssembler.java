@@ -1,8 +1,8 @@
 package com.iainhemstock.lakedistrictapi.serviceinterfaces;
 
-import com.iainhemstock.lakedistrictapi.domain.DetailedFell;
 import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
+import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 
 public interface DetailedFellDTOAssembler {
-    DetailedFellDTO toDTO(final DetailedFell detailedFell);
+    DetailedFellDTO toDTO(final FellEntity fellEntity);
 }

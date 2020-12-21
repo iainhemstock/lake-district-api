@@ -7,6 +7,8 @@ import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.ApiClockService;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
 import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +33,8 @@ public class FellEntityServiceImplTests {
     @Mock private ApiClockService apiClockService;
     @Mock private FellRepository fellRepository;
     @Mock private FellSimplifiedPagedCollectionMapper fellSimplifiedPagedCollectionMapper;
+    @Mock private MeterToFeetConversionService meterToFeetConversionService;
+    @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
 
     @Before
     public void setUp() {
@@ -41,7 +45,9 @@ public class FellEntityServiceImplTests {
             fellRepository,
             apiClockService,
             fellSimplifiedPagedCollectionMapper,
-            apiProperties);
+            apiProperties,
+            meterToFeetConversionService,
+            latLongToDmsConversionService);
 
     }
 

@@ -22,17 +22,23 @@ public class FellEntityServiceImpl implements FellEntityService {
     private final FellRepository fellRepository;
     private final ApiClockService apiClockService;
     private final FellSimplifiedPagedCollectionMapper pagedCollectionMapper;
+    private final MeterToFeetConversionService meterToFeetConversionService;
+    private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final ApiProperties apiProperties;
 
     @Autowired
     public FellEntityServiceImpl(final FellRepository fellRepository,
                                  final ApiClockService apiClockService,
                                  final FellSimplifiedPagedCollectionMapper pagedCollectionMapper,
-                                 final ApiProperties apiProperties) {
+                                 final ApiProperties apiProperties,
+                                 final MeterToFeetConversionService meterToFeetConversionService,
+                                 final LatLongToDmsConversionService latLongToDmsConversionService) {
         this.apiClockService = apiClockService;
         this.apiProperties = apiProperties;
         this.fellRepository = fellRepository;
         this.pagedCollectionMapper = pagedCollectionMapper;
+        this.meterToFeetConversionService = meterToFeetConversionService;
+        this.latLongToDmsConversionService = latLongToDmsConversionService;
     }
 
     @Override
@@ -42,7 +48,10 @@ public class FellEntityServiceImpl implements FellEntityService {
             String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);
         }
-        return fell.get();
+        FellEntity fellEntity = fell.get();
+        fellEntity.setMeterToFeetConversionService(meterToFeetConversionService);
+        fellEntity.setLatLongToDmsConversionService(latLongToDmsConversionService);
+        return fellEntity;
     }
 
     public PagedCollectionDTO<SummarisedFellDTO> getSummarisedFells(final Integer offset, final Integer limit) {
