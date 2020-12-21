@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
+import com.iainhemstock.lakedistrictapi.domain.Latitude;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.entities.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
@@ -55,7 +56,7 @@ public final class TestDataLoaderForApiTests {
             new FellName("Great Gable"),
             new Meters(899),
             new Meters(425),
-            54.482,
+            new Latitude(54.482),
             -3.219,
             new Region(3, "Central Lake District"),
             new ParentFell("NY215072"),

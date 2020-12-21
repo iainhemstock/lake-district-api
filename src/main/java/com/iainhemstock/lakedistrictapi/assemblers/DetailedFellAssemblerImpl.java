@@ -31,12 +31,12 @@ public class DetailedFellAssemblerImpl implements DetailedFellAssembler {
         detailedFell.setHeightFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getHeightMeters().toInt())));
         detailedFell.setProminenceMeters(new Meters(fellEntity.getProminenceMeters().toInt()));
         detailedFell.setProminenceFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getProminenceMeters().toInt())));
-        detailedFell.setLatitude(new Latitude(fellEntity.getLatitude()));
+        detailedFell.setLatitude(new Latitude(fellEntity.getLatitude().toDouble()));
         detailedFell.setLongitude(new Longitude(fellEntity.getLongitude()));
         detailedFell.setRegionName(new RegionName(fellEntity.getRegion().getName()));
         detailedFell.setParentFell(new ParentFell(fellEntity.getParentPeak().getOsMapRef()));
 
-        latLongToDMSConversionService.convert(new Latitude(fellEntity.getLatitude()));
+        latLongToDMSConversionService.convert(new Latitude(fellEntity.getLatitude().toDouble()));
         detailedFell.setConvertedLatitude(new DMS(
             latLongToDMSConversionService.getDegrees(),
             latLongToDMSConversionService.getMinutes(),

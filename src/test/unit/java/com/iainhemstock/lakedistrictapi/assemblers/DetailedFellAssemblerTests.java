@@ -78,7 +78,7 @@ public class DetailedFellAssemblerTests {
     @Test
     public void will_map_latitude() {
         assertThat(detailedFell.getLatitude(),
-            is(new Latitude(helvellynFellEntity.getLatitude())));
+            is(new Latitude(helvellynFellEntity.getLatitude().toDouble())));
     }
 
     @Test

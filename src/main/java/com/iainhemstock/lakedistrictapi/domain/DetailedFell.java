@@ -44,7 +44,7 @@ public class DetailedFell {
         this.heightFeet = m2fConverter.convertRoundedToNearestInteger(new Meters(fell.getHeightMeters().toInt()));
         this.prominenceMeters = new Meters(fell.getProminenceMeters().toInt());
         this.prominenceFeet = m2fConverter.convertRoundedToNearestInteger(new Meters(fell.getProminenceMeters().toInt()));
-        this.latitude = new Latitude(fell.getLatitude());
+        this.latitude = new Latitude(fell.getLatitude().toDouble());
         this.longitude = new Longitude(fell.getLongitude());
         this.regionName = new RegionName(fell.getRegion().getName());
         this.osMapRef = new OsMapRef(fell.getOsMapRef());

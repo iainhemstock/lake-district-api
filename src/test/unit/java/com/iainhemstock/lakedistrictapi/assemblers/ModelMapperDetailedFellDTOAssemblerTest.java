@@ -4,6 +4,7 @@ import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.DetailedFell;
 import com.iainhemstock.lakedistrictapi.domain.FellName;
+import com.iainhemstock.lakedistrictapi.domain.Latitude;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
@@ -44,7 +45,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
             new FellName("Helvellyn"),
             new Meters(950),
             new Meters(712),
-            54.527232,
+            new Latitude(54.527232),
             -3.016054,
             new EasternRegion(),
             new ParentFell(new ScafellPikeFellEntity().getOsMapRef()),

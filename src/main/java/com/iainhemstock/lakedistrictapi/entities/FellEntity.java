@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
+import com.iainhemstock.lakedistrictapi.domain.Latitude;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import lombok.*;
 
@@ -34,9 +35,8 @@ public class FellEntity {
     @AttributeOverride(name = "value", column = @Column(name = "prominence_meters"))
     private Meters prominenceMeters;
 
-    @Column(name = "latitude")
-    @NotNull
-    private double latitude;
+    @Embedded
+    private Latitude latitude;
 
     @Column(name = "longitude")
     @NotNull

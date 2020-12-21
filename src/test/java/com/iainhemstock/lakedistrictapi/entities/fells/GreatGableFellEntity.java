@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
+import com.iainhemstock.lakedistrictapi.domain.Latitude;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
@@ -22,7 +23,7 @@ public final class GreatGableFellEntity extends FellEntity {
             new FellName("Great Gable"),
             new Meters(899),
             new Meters(425),
-            54.482,
+            new Latitude(54.482),
             -3.219,
             new CentralRegion(),
             new ParentFell(new ScafellPikeFellEntity().getOsMapRef()),
