@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.iainhemstock.lakedistrictapi.serializers.DetailedFellDTOSerializer;
+import com.iainhemstock.lakedistrictapi.serializers.FellDTOSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@JsonSerialize(using = DetailedFellDTOSerializer.class)
+@JsonSerialize(using = FellDTOSerializer.class)
 public class FellDTO {
     private String heightMeters;
     private String heightFeet;

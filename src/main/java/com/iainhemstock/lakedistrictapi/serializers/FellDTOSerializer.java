@@ -7,7 +7,7 @@ import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 
 import java.io.IOException;
 
-public class DetailedFellDTOSerializer extends JsonSerializer<FellDTO> {
+public class FellDTOSerializer extends JsonSerializer<FellDTO> {
     @Override
     public void serialize(final FellDTO fellDTO,
                           final JsonGenerator jgen,
