@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,7 @@ public class PagedCollection {
     private long totalItems;
     private SummarisedFells items;
 
-    public PagedCollection(final int offset, final int limit, final List<FellEntity> fells, final int totalPages, final long totalElements) {
+    public PagedCollection(final int offset, final int limit, final List<Fell> fells, final int totalPages, final long totalElements) {
         this.offset = offset;
         this.limit = limit;
         this.items = new SummarisedFells();

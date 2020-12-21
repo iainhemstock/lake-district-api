@@ -1,8 +1,8 @@
 package com.iainhemstock.lakedistrictapi.serviceinterfaces;
 
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
 
 public interface FellEntityService {
-    FellEntity getById(final OsMapRef osMapRef);
+    Fell getById(final OsMapRef osMapRef);
 }

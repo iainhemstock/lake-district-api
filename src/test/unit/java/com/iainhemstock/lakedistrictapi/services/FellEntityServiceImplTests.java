@@ -2,8 +2,8 @@ package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.ApiClockService;
@@ -27,7 +27,7 @@ import static org.junit.Assert.fail;
 public class FellEntityServiceImplTests {
 
     private FellEntityServiceImpl fellEntityService;
-    private FellEntity helvellynFellEntity;
+    private Fell helvellynFell;
     private TestApiProperties apiProperties;
 
     @Mock private ApiClockService apiClockService;
@@ -39,7 +39,7 @@ public class FellEntityServiceImplTests {
     @Before
     public void setUp() {
         apiProperties = new TestApiProperties();
-        helvellynFellEntity = new HelvellynFellEntity();
+        helvellynFell = new HelvellynFell();
 
         fellEntityService = new FellEntityServiceImpl(
             fellRepository,
@@ -53,10 +53,10 @@ public class FellEntityServiceImplTests {
 
     @Test
     public void get_fell_by_id() {
-        Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
-            .thenReturn(Optional.of(helvellynFellEntity));
-        FellEntity actualFellEntity = fellEntityService.getById(helvellynFellEntity.getOsMapRef());
-        assertThat(actualFellEntity, is(helvellynFellEntity));
+        Mockito.when(fellRepository.findById(helvellynFell.getOsMapRef()))
+            .thenReturn(Optional.of(helvellynFell));
+        Fell actualFell = fellEntityService.getById(helvellynFell.getOsMapRef());
+        assertThat(actualFell, is(helvellynFell));
     }
 
     @Test

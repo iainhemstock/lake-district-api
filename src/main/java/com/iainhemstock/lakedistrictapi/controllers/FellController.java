@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.dtos.*;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
@@ -53,11 +53,11 @@ public class FellController {
 //
     @GetMapping("/fells/{id}")
     public ResponseEntity<Object> getFell(@PathVariable final String id) {
-        FellEntity fellEntity = fellEntityService.getById(new OsMapRef(id));
+        Fell fell = fellEntityService.getById(new OsMapRef(id));
         Links links = new Links(
-            linkService.buildForResourceWithIdAndRel("fells", fellEntity.getOsMapRef().toString(), LinkRel.SELF),
-            linkService.buildForResourceWithIdAndRel("fells", fellEntity.getParentPeak().getOsMapRef().toString(), LinkRel.PARENT));
-        FellDTO fellDTO = fellDTOAssembler.toDTO(fellEntity);
+            linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
+            linkService.buildForResourceWithIdAndRel("fells", fell.getParentPeak().getOsMapRef().toString(), LinkRel.PARENT));
+        FellDTO fellDTO = fellDTOAssembler.toDTO(fell);
         LinksDTO linksDTO = linksDTOAssembler.toDTO(links);
         ItemDTO itemDTO = new ItemDTO(linksDTO, fellDTO);
 

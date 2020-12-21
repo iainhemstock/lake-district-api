@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FellEntity {
+public class Fell {
 
     @EmbeddedId
     @EqualsAndHashCode.Include
@@ -59,16 +59,16 @@ public class FellEntity {
     @Transient
     private MeterToFeetConversionService meterToFeetConversionService;
 
-    public FellEntity(final OsMapRef osMapRef,
-                      final FellName name,
-                      final Meters heightMeters,
-                      final Meters prominenceMeters,
-                      final Latitude latitude,
-                      final Longitude longitude,
-                      @NotNull final Region region,
-                      @NotNull final ParentFell parentPeak,
-                      final OsMaps osMaps,
-                      final Classifications classifications) {
+    public Fell(final OsMapRef osMapRef,
+                final FellName name,
+                final Meters heightMeters,
+                final Meters prominenceMeters,
+                final Latitude latitude,
+                final Longitude longitude,
+                @NotNull final Region region,
+                @NotNull final ParentFell parentPeak,
+                final OsMaps osMaps,
+                final Classifications classifications) {
         this.osMapRef = osMapRef;
         this.name = name;
         this.heightMeters = heightMeters;

@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.*;
@@ -42,13 +42,13 @@ public class FellEntityServiceImpl implements FellEntityService {
     }
 
     @Override
-    public FellEntity getById(final OsMapRef osMapRef) {
-        Optional<FellEntity> fell = fellRepository.findById(osMapRef);
+    public Fell getById(final OsMapRef osMapRef) {
+        Optional<Fell> fell = fellRepository.findById(osMapRef);
         if (fell.isEmpty()) {
             String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);
         }
-        FellEntity fellEntity = fell.get();
+        Fell fellEntity = fell.get();
         fellEntity.setMeterToFeetConversionService(meterToFeetConversionService);
         fellEntity.setLatLongToDmsConversionService(latLongToDmsConversionService);
         return fellEntity;
@@ -58,12 +58,12 @@ public class FellEntityServiceImpl implements FellEntityService {
         if (offset < 0) {
             throw new IllegalArgumentException("Param 'offset' cannot be negative");
         }
-        Page<FellEntity> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
+        Page<Fell> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
         return pagedCollectionMapper.map(fellPage);
     }
 
     public PagedCollection getSummarisedFells2(final int offset, final int limit) {
-        Page<FellEntity> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
+        Page<Fell> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
         PagedCollection pagedCollection = new PagedCollection(offset, limit, fellPage.toList(), fellPage.getTotalPages(), fellPage.getTotalElements());
         pagedCollection.setFirstLink(new Link(LinkRel.FIRST, String.format("%s/fells?offset=%d&limit=%d", apiProperties.getBaseUrl(), offset, limit)));
         return pagedCollection;

@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ public class FellSimplifiedPagedCollectionMapper {
     @Autowired private ApiProperties apiProperties;
     private PagedCollectionDTO<SummarisedFellDTO> pagedCollection;
 
-    public PagedCollectionDTO<SummarisedFellDTO> map(final Page<FellEntity> page) {
+    public PagedCollectionDTO<SummarisedFellDTO> map(final Page<Fell> page) {
         pagedCollection = new PagedCollectionDTO<>();
 
         mapNavigationLinks(page);
@@ -38,16 +38,16 @@ public class FellSimplifiedPagedCollectionMapper {
         pagedCollection.setOffset(String.valueOf(pageable.getOffset()));
     }
 
-    private void mapLimit(final Page<FellEntity> page) {
+    private void mapLimit(final Page<Fell> page) {
         pagedCollection.setLimit(String.valueOf(page.getNumberOfElements()));
     }
 
-    private void mapTotalItems(final Page<FellEntity> page) {
+    private void mapTotalItems(final Page<Fell> page) {
         pagedCollection.setTotal_items(String.valueOf(page.getTotalElements()));
     }
 
-    private void mapSimpleFells(final Page<FellEntity> page) {
-        for (FellEntity fell : page.toList()) {
+    private void mapSimpleFells(final Page<Fell> page) {
+        for (Fell fell : page.toList()) {
             SummarisedFellDTO summarisedFellDTO = new SummarisedFellDTO();
             summarisedFellDTO.setName(fell.getName().toString());
             summarisedFellDTO.setRegion(fell.getRegion().getName());
@@ -58,7 +58,7 @@ public class FellSimplifiedPagedCollectionMapper {
         }
     }
 
-    private void mapNavigationLinks(final Page<FellEntity> page) {
+    private void mapNavigationLinks(final Page<Fell> page) {
         Map<String, Link> links = new HashMap<>();
 
         if (currentPageIsNotFirstPage(page.getPageable())) {
@@ -77,35 +77,35 @@ public class FellSimplifiedPagedCollectionMapper {
         }
     }
 
-    private void mapFirstPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
+    private void mapFirstPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setFirst(new Link(LinkRel.FIRST, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().first().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapPreviousPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
+    private void mapPreviousPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setPrev(new Link(LinkRel.PREV, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().previousOrFirst().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapNextPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
+    private void mapNextPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setNext(new Link(LinkRel.NEXT, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().next().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapLastPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
+    private void mapLastPageLink(final Page<Fell> page, final Map<String, Link> links) {
         pagedCollection.getLinks().setLast(new Link(LinkRel.LAST, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getTotalPages() - 1,
             page.getNumberOfElements()))));
     }
 
-    private boolean currentPageIsNotLastPage(final Page<FellEntity> page) {
+    private boolean currentPageIsNotLastPage(final Page<Fell> page) {
         return page.getPageable().getPageNumber() != page.getTotalPages() - 1;
     }
 
