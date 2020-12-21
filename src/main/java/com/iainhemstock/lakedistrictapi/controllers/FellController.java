@@ -57,9 +57,9 @@ public class FellController {
         Links links = new Links(
             linkService.buildForResourceWithIdAndRel("fells", fellEntity.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fellEntity.getParentPeak().getOsMapRef().toString(), LinkRel.PARENT));
-        DetailedFellDTO detailedFellDTO = detailedFellDTOAssembler.toDTO(fellEntity);
+        FellDTO fellDTO = detailedFellDTOAssembler.toDTO(fellEntity);
         LinksDTO linksDTO = linksDTOAssembler.toDTO(links);
-        ItemDTO itemDTO = new ItemDTO(linksDTO, detailedFellDTO);
+        ItemDTO itemDTO = new ItemDTO(linksDTO, fellDTO);
 
         return new ResponseEntity<>(itemDTO, HttpStatus.OK);
     }

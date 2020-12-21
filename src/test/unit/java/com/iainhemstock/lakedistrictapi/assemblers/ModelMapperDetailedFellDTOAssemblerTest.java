@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 
 import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
@@ -11,14 +11,10 @@ import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellDTOAssembler;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
 import java.util.HashSet;
@@ -33,7 +29,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
 
 
     private DetailedFellDTOAssembler detailedFellDTOAssembler;
-    private DetailedFellDTO dto;
+    private FellDTO dto;
     private ModelMapper mapper;
     private FellEntity helvellynFellEntity;
 

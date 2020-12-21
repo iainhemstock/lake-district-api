@@ -8,10 +8,10 @@ import lombok.Getter;
 @JsonSerialize(using = ItemDTOSerializer.class)
 public class ItemDTO {
     private final LinksDTO linksDTO;
-    private final DetailedFellDTO detailedFellDTO;
+    private final FellDTO fellDTO;
 
-    public ItemDTO(final LinksDTO linksDTO, final DetailedFellDTO detailedFellDTO) {
+    public ItemDTO(final LinksDTO linksDTO, final FellDTO fellDTO) {
         this.linksDTO = linksDTO;
-        this.detailedFellDTO = detailedFellDTO;
+        this.fellDTO = fellDTO;
     }
 }

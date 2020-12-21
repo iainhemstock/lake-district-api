@@ -1,17 +1,12 @@
 package com.iainhemstock.lakedistrictapi.controllers;
 
-import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SearchDTO;
-import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class FellSearchController {

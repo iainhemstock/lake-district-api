@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.dtos.ItemDTO;
 import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
 import org.junit.Before;
@@ -80,21 +80,21 @@ public class ItemDTOSerializerTests {
         assertTrue(jsonNode.get("item").get("location").get("longitude_as_dms").has("hemisphere"));
     }
 
-    private DetailedFellDTO getDetailedFellDTO() {
-        DetailedFellDTO detailedFellDTO = new DetailedFellDTO();
-        detailedFellDTO.setHeightMeters("899");
-        detailedFellDTO.setHeightFeet("2999");
-        detailedFellDTO.setProminenceMeters("150");
-        detailedFellDTO.setProminenceFeet("476");
-        detailedFellDTO.setOsMapRef("NY123456");
-        detailedFellDTO.setRegion("Central Lake District");
-        detailedFellDTO.setName("Green Fell");
-        detailedFellDTO.setLatitude("54.123");
-        detailedFellDTO.setLongitude("-3.345");
-        detailedFellDTO.setLatitudeAsDms(Map.of("degrees", "54", "minutes", "23", "seconds", "12", "hemisphere", "N"));
-        detailedFellDTO.setLongitudeAsDms(Map.of("degrees", "3", "minutes", "42", "seconds", "56", "hemisphere", "W"));
-        detailedFellDTO.setClassificationNames(Set.of("Marilyn", "Birkett"));
-        detailedFellDTO.setOsMapNames(Set.of("OS Landranger 90", "OS Explorer OL5"));
-        return detailedFellDTO;
+    private FellDTO getDetailedFellDTO() {
+        FellDTO fellDTO = new FellDTO();
+        fellDTO.setHeightMeters("899");
+        fellDTO.setHeightFeet("2999");
+        fellDTO.setProminenceMeters("150");
+        fellDTO.setProminenceFeet("476");
+        fellDTO.setOsMapRef("NY123456");
+        fellDTO.setRegion("Central Lake District");
+        fellDTO.setName("Green Fell");
+        fellDTO.setLatitude("54.123");
+        fellDTO.setLongitude("-3.345");
+        fellDTO.setLatitudeAsDms(Map.of("degrees", "54", "minutes", "23", "seconds", "12", "hemisphere", "N"));
+        fellDTO.setLongitudeAsDms(Map.of("degrees", "3", "minutes", "42", "seconds", "56", "hemisphere", "W"));
+        fellDTO.setClassificationNames(Set.of("Marilyn", "Birkett"));
+        fellDTO.setOsMapNames(Set.of("OS Landranger 90", "OS Explorer OL5"));
+        return fellDTO;
     }
 }

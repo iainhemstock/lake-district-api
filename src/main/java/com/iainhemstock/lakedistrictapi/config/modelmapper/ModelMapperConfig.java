@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.config.modelmapper;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.ClassificationConverter;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.DmsConverter;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.OsMapConverter;
-import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
+import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -21,7 +21,7 @@ public class ModelMapperConfig {
         ModelMapper mm = new ModelMapper();
         mm.getConfiguration()
             .setMatchingStrategy(MatchingStrategies.STRICT);
-        mm.createTypeMap(FellEntity.class, DetailedFellDTO.class)
+        mm.createTypeMap(FellEntity.class, FellDTO.class)
             .addMappings(mapper -> {
                 mapper.map(source -> source.getName().toString(), (dest, v) -> dest.setName((String) v));
                 mapper.map(source -> source.getRegion().getName(), (dest, v) -> dest.setRegion((String) v));

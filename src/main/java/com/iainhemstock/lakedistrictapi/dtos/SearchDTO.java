@@ -10,7 +10,7 @@ import java.util.List;
 public class SearchDTO {
     // todo: make resultCount a string
     private final int resultCount;
-    private final List<DetailedFellDTO> results;
+    private final List<FellDTO> results;
     private String previousUri;
     private String nextUri;
 
@@ -19,7 +19,7 @@ public class SearchDTO {
         this.results = new ArrayList<>();
     }
 
-    public SearchDTO(final List<DetailedFellDTO> results) {
+    public SearchDTO(final List<FellDTO> results) {
         this.results = results;
         this.resultCount = this.results.size();
     }
@@ -30,7 +30,7 @@ public class SearchDTO {
     }
 
     @JsonGetter("results")
-    public List<DetailedFellDTO> getResults() {
+    public List<FellDTO> getResults() {
         return results;
     }
 
