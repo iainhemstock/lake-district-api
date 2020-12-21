@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.attributes;
 
-public enum DetailedFellAttributes {
+public enum FellAttributes {
     NAME("$.item.name"),
     REGION("$.item.location.region"),
     LATITUDE("$.item.location.latitude"),
@@ -25,7 +25,7 @@ public enum DetailedFellAttributes {
 
     private final String value;
 
-    DetailedFellAttributes(final String value) {
+    FellAttributes(final String value) {
         this.value = value;
     }
 
