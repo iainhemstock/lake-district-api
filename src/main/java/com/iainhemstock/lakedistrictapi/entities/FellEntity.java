@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class FellEntity {
 
     @EmbeddedId
+    @EqualsAndHashCode.Include
     private OsMapRef osMapRef;
 
     @Embedded
