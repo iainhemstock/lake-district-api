@@ -6,6 +6,7 @@ import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.FellServiceImpl;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class FellController {
 
-    @Autowired private FellServiceImpl fellEntityService;
+    @Autowired private FellService fellService;
     @Autowired private FellDTOAssembler fellDTOAssembler;
     @Autowired private LinksDTOAssembler linksDTOAssembler;
     @Autowired private LinkService linkService;
@@ -47,13 +48,13 @@ public class FellController {
 //
 //        return new ResponseEntity<SummarisedFell>(pagedCollectionDTO, HttpStatus.OK);
 //======================================================================================================================
-        PagedCollectionDTO<SummarisedFellDTO> pagedCollectionDTO = fellEntityService.getSummarisedFells(offset, limit);
+        PagedCollectionDTO<SummarisedFellDTO> pagedCollectionDTO = fellService.getSummarisedFells(offset, limit);
         return new ResponseEntity<>(pagedCollectionDTO, HttpStatus.OK);
     }
 //
     @GetMapping("/fells/{id}")
     public ResponseEntity<Object> getFell(@PathVariable final String id) {
-        Fell fell = fellEntityService.getById(new OsMapRef(id));
+        Fell fell = fellService.getById(new OsMapRef(id));
         Links links = new Links(
             linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fell.getParentPeak().getOsMapRef().toString(), LinkRel.PARENT));
