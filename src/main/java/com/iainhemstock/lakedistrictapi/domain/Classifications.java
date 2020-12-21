@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.function.Consumer;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -23,7 +24,9 @@ public class Classifications {
         this.classifications = classifications;
     }
 
-    public Set<Classification> toSet() {
-        return classifications;
+    public void forEach(final Consumer<? super Classification> consumer) {
+        for (Classification classification : this.classifications) {
+            consumer.accept(classification);
+        }
     }
 }

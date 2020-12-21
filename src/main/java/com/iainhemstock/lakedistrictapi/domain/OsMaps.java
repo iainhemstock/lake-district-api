@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.function.Consumer;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -23,7 +24,9 @@ public class OsMaps {
         this.osMaps = osMaps;
     }
 
-    public Set<OsMap> toSet() {
-        return osMaps;
+    public void forEach(final Consumer<? super OsMap> consumer) {
+        for (OsMap osMap : this.osMaps) {
+            consumer.accept(osMap);
+        }
     }
 }
