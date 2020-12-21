@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class FellServiceImpl implements FellEntityService {
+public class FellServiceImpl implements FellService {
     private final FellRepository fellRepository;
     private final ApiClockService apiClockService;
     private final FellSimplifiedPagedCollectionMapper pagedCollectionMapper;

@@ -3,6 +3,6 @@ package com.iainhemstock.lakedistrictapi.serviceinterfaces;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 
-public interface FellEntityService {
+public interface FellService {
     Fell getById(final OsMapRef osMapRef);
 }
