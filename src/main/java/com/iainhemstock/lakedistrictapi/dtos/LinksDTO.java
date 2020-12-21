@@ -7,11 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonSerialize(using = LinksDTOSerializer.class)
 public class LinksDTO {
+    private Map<String, String> links;
     private Link first;
     private Link prev;
     private Link self;

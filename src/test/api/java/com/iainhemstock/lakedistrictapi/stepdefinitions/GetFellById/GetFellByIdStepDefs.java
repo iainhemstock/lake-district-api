@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.stepdefinitions.GetFellById;
 
+import com.iainhemstock.lakedistrictapi.attributes.LinksAttributes;
 import com.iainhemstock.lakedistrictapi.common.CommonTestState;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
 import com.iainhemstock.lakedistrictapi.attributes.ErrorAttributes;
@@ -68,7 +69,7 @@ public class GetFellByIdStepDefs {
 
     @And("^the body will contain the parent peak href (.*)$")
     public void theResponseBodyWillContainTheParentPeakHref(final String expectedParentPeakUrl) throws Exception {
-        commonState.getResult().andExpect(jsonPath(DetailedFellAttributes.PARENT_HREF.value(),
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.PARENT_HREF.value(),
             is(expectedParentPeakUrl)));
     }
 

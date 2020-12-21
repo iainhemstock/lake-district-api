@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.services.mappers;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
+import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
@@ -50,7 +51,7 @@ public class FellSimplifiedPagedCollectionMapper {
             SummarisedFellDTO summarisedFellDTO = new SummarisedFellDTO();
             summarisedFellDTO.setName(fell.getName());
             summarisedFellDTO.setRegion(fell.getRegion().getName());
-            summarisedFellDTO.getLinks().setSelf(new Link((String.format("%s/fells/%s",
+            summarisedFellDTO.getLinks().setSelf(new Link(LinkRel.SELF, (String.format("%s/fells/%s",
                 apiProperties.getBaseUrl(),
                 fell.getOsMapRef()))));
             pagedCollection.getItems().add(summarisedFellDTO);
@@ -65,7 +66,7 @@ public class FellSimplifiedPagedCollectionMapper {
             mapPreviousPageLink(page, links);
         }
 
-        pagedCollection.getLinks().setSelf(new Link((String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().setSelf(new Link(LinkRel.PARENT, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().getPageNumber(),
             page.getNumberOfElements()))));
@@ -77,28 +78,28 @@ public class FellSimplifiedPagedCollectionMapper {
     }
 
     private void mapFirstPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setFirst(new Link((String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().setFirst(new Link(LinkRel.FIRST, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().first().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
     private void mapPreviousPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setPrev(new Link((String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().setPrev(new Link(LinkRel.PREV, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().previousOrFirst().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
     private void mapNextPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setNext(new Link((String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().setNext(new Link(LinkRel.NEXT, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().next().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
     private void mapLastPageLink(final Page<FellEntity> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setLast(new Link((String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().setLast(new Link(LinkRel.LAST, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getTotalPages() - 1,
             page.getNumberOfElements()))));

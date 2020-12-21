@@ -30,4 +30,9 @@ public class ParentFell implements Nullable {
     public static ParentFell newNull() {
         return new NullFell();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return osMapRef.equals(((ParentFell) other).osMapRef);
+    }
 }

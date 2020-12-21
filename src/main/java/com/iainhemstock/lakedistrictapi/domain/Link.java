@@ -1,9 +1,14 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Link {
+    private final LinkRel rel;
     private final String href;
 
-    public Link(final String href) {
+    public Link(final LinkRel rel, final String href) {
+        this.rel = rel;
         this.href = href;
     }
 

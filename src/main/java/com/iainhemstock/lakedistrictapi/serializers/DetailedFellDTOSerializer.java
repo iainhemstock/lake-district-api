@@ -13,14 +13,6 @@ public class DetailedFellDTOSerializer extends JsonSerializer<DetailedFellDTO> {
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
-            jgen.writeObjectFieldStart("links");
-                jgen.writeObjectFieldStart("self");
-                    jgen.writeStringField("href", detailedFellDTO.getSelfLink());
-                jgen.writeEndObject();
-                jgen.writeObjectFieldStart("parent");
-                    jgen.writeStringField("href", detailedFellDTO.getParentLink());
-                jgen.writeEndObject();
-            jgen.writeEndObject();
             jgen.writeStringField("name", detailedFellDTO.getName());
             jgen.writeObjectField("classifications", detailedFellDTO.getClassificationNames());
             jgen.writeObjectFieldStart("height");

@@ -26,8 +26,6 @@ public class DetailedFellDTOSerializerTests {
     public void setUp() throws JsonProcessingException {
         mapper = new ObjectMapper();
         detailedFellDTO = new DetailedFellDTO();
-        detailedFellDTO.setSelfLink("http://localhost:8080/api/v1/fells/NY123456");
-        detailedFellDTO.setParentLink("http://localhost:8080/api/v1/fells/NY987654");
         detailedFellDTO.setHeightMeters("899");
         detailedFellDTO.setHeightFeet("2999");
         detailedFellDTO.setProminenceMeters("150");
@@ -43,18 +41,6 @@ public class DetailedFellDTOSerializerTests {
         detailedFellDTO.setOsMapNames(Set.of("OS Landranger 90", "OS Explorer OL5"));
         json = mapper.writeValueAsString(detailedFellDTO);
         jsonNode = mapper.readTree(json);
-    }
-
-    @Test
-    public void will_serialize_self_link() {
-        assertThat(jsonNode.get("links").get("self").get("href").asText(),
-            is(detailedFellDTO.getSelfLink()));
-    }
-
-    @Test
-    public void will_serialize_parent_link() {
-        assertThat(jsonNode.get("links").get("parent").get("href").asText(),
-            is(detailedFellDTO.getParentLink()));
     }
 
     @Test

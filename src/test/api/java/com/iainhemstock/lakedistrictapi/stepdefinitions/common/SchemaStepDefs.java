@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.fail;
@@ -30,6 +31,17 @@ public class SchemaStepDefs {
         JsonNode responseBodyAsJsonNode = getResponseBodyAsJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
         validate(schema, responseBodyAsJsonNode);
+    }
+
+    @Then("^the body will conform to the following schemas$")
+    public void theBodyWillConformToTheFollowingSchemas(final List<String> schemaFilenames) {
+        schemaFilenames.forEach(schema -> {
+            try {
+                theResponseWillConformToTheJsonSchema(schema);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Then("^the pagination attributes will conform to the schema in (.*)$")

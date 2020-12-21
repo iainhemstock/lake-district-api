@@ -7,7 +7,7 @@ import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.ApiClockService;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.EndpointGeneratorService;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
 import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
@@ -17,10 +17,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,9 +25,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.fail;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FellServiceTests {
+public class FellEntityServiceImplTests {
 
-    private FellService fellService;
+    private FellEntityServiceImpl fellEntityService;
     private FellEntity helvellynFellEntity;
     private TestApiProperties apiProperties;
 
@@ -38,7 +35,7 @@ public class FellServiceTests {
     @Mock private FellRepository fellRepository;
     @Mock private MeterToFeetConversionService meterToFeetConversionService;
     @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
-    @Mock private EndpointGeneratorService endpointGeneratorService;
+    @Mock private LinkService linkService;
     @Mock private FellSimplifiedPagedCollectionMapper fellSimplifiedPagedCollectionMapper;
 //    @Mock private Page<FellEntity> fellPage;
 
@@ -47,60 +44,40 @@ public class FellServiceTests {
         apiProperties = new TestApiProperties();
         helvellynFellEntity = new HelvellynFellEntity();
 
-        fellService = new FellService(
+        fellEntityService = new FellEntityServiceImpl(
             fellRepository,
             meterToFeetConversionService,
             latLongToDmsConversionService,
             apiClockService,
-            endpointGeneratorService,
+            linkService,
             fellSimplifiedPagedCollectionMapper,
             apiProperties);
 
     }
 
     @Test
-    public void gets_detailed_fell() {
+    public void get_fell_by_id() {
         Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
             .thenReturn(Optional.of(helvellynFellEntity));
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getHeightMeters())))
-            .thenReturn(new Feet(3117));
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getProminenceMeters())))
-            .thenReturn(new Feet(2336));
-        Mockito.when(latLongToDmsConversionService.getDegrees())
-            .thenReturn(new Degrees(0), new Degrees(0));
-        Mockito.when(latLongToDmsConversionService.getMinutes())
-            .thenReturn(new Minutes(0), new Minutes(0));
-        Mockito.when(latLongToDmsConversionService.getSeconds())
-            .thenReturn(new Seconds(0), new Seconds(0));
-        Mockito.when(latLongToDmsConversionService.getHemisphere())
-            .thenReturn(new Hemisphere(""), new Hemisphere(""));
-        Mockito.when(endpointGeneratorService.generateForResourceWithId("fells", helvellynFellEntity.getOsMapRef()))
-            .thenReturn(new Link(String.format("%s/fells/%s", apiProperties.getBaseUrl(), helvellynFellEntity.getOsMapRef())));
-        Mockito.when(endpointGeneratorService.generateForResourceWithId("fells", helvellynFellEntity.getParentPeak().getOsMapRef()))
-            .thenReturn(new Link(String.format("%s/fells/%s", apiProperties.getBaseUrl(), helvellynFellEntity.getParentPeak().getOsMapRef())));
-
-        assertThat(fellService.getDetailedFell(new OsMapRef(helvellynFellEntity.getOsMapRef())),
-            is(new DetailedFell(helvellynFellEntity,
-                meterToFeetConversionService,
-                latLongToDmsConversionService,
-                endpointGeneratorService)));
+        FellEntity actualFellEntity = fellEntityService.getById(new OsMapRef(helvellynFellEntity.getOsMapRef()));
+        assertThat(actualFellEntity, is(helvellynFellEntity));
     }
 
     @Test
     public void will_throw_when_fell_not_found() {
         try {
-            fellService.getDetailedFell(new OsMapRef("NY000000"));
+            fellEntityService.getById(new OsMapRef("NY000000"));
             fail("Expected method under test to throw FellNotFoundException but it didn't");
         }
         catch (FellNotFoundException ex) {
-            assertThat(ex.getMessage(), is(String.format("Fell was not found for {id=%s}", "NY000000")));
+            assertThat(ex.getMessage(), is("Fell was not found for {id=NY000000}"));
         }
     }
 
     @Test
     public void will_throw_when_getting_fell_with_blank_id() {
         try {
-            fellService.getDetailedFell(new OsMapRef(""));
+            fellEntityService.getById(new OsMapRef(""));
             fail("Expected method under test to throw IllegalArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -111,13 +88,54 @@ public class FellServiceTests {
     @Test
     public void will_throw_when_getting_fell_with_null_id() {
         try {
-            fellService.getDetailedFell(new OsMapRef(null));
+            fellEntityService.getById(new OsMapRef(null));
             fail("Expected method under test to throw NullPointerException but it didn't");
         }
         catch (NullPointerException ex) {
             assertThat(ex.getMessage(), is("OsMapRef cannot be null"));
         }
     }
+
+//    @Test
+//    public void gets_detailed_fell() {
+//        Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
+//            .thenReturn(Optional.of(helvellynFellEntity));
+//        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getHeightMeters())))
+//            .thenReturn(new Feet(3117));
+//        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getProminenceMeters())))
+//            .thenReturn(new Feet(2336));
+//        Mockito.when(latLongToDmsConversionService.getDegrees())
+//            .thenReturn(new Degrees(0), new Degrees(0));
+//        Mockito.when(latLongToDmsConversionService.getMinutes())
+//            .thenReturn(new Minutes(0), new Minutes(0));
+//        Mockito.when(latLongToDmsConversionService.getSeconds())
+//            .thenReturn(new Seconds(0), new Seconds(0));
+//        Mockito.when(latLongToDmsConversionService.getHemisphere())
+//            .thenReturn(new Hemisphere(""), new Hemisphere(""));
+//        Mockito.when(endpointGeneratorService.generateForResourceWithId("fells", helvellynFellEntity.getOsMapRef()))
+//            .thenReturn(new Link(String.format("%s/fells/%s", apiProperties.getBaseUrl(), helvellynFellEntity.getOsMapRef())));
+//        Mockito.when(endpointGeneratorService.generateForResourceWithId("fells", helvellynFellEntity.getParentPeak().getOsMapRef()))
+//            .thenReturn(new Link(String.format("%s/fells/%s", apiProperties.getBaseUrl(), helvellynFellEntity.getParentPeak().getOsMapRef())));
+//
+//        assertThat(fellEntityService.getDetailedFell(new OsMapRef(helvellynFellEntity.getOsMapRef())),
+//            is(new DetailedFell(helvellynFellEntity,
+//                meterToFeetConversionService,
+//                latLongToDmsConversionService,
+//                endpointGeneratorService)));
+//    }
+
+//    @Test
+//    public void will_throw_when_fell_not_found() {
+//        try {
+//            fellEntityService.getDetailedFell(new OsMapRef("NY000000"));
+//            fail("Expected method under test to throw FellNotFoundException but it didn't");
+//        }
+//        catch (FellNotFoundException ex) {
+//            assertThat(ex.getMessage(), is(String.format("Fell was not found for {id=%s}", "NY000000")));
+//        }
+//    }
+
+
 
 //    @Test
 //    public void get_paged_collection() {

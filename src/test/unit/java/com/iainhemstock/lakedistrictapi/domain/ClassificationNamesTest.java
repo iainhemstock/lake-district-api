@@ -8,14 +8,14 @@ import static org.hamcrest.Matchers.is;
 public class ClassificationNamesTest {
 
     @Test
-    public void add_one_simple_classification_by_constructor() {
+    public void add_one_classification_by_constructor() {
         ClassificationNames classificationNames = new ClassificationNames(new ClassificationName("Marilyn"));
         assertThat(classificationNames.get(0),
             is(new ClassificationName("Marilyn")));
     }
 
     @Test
-    public void add_multiple_simple_classifications_by_constructor() {
+    public void add_multiple_classifications_by_constructor() {
         ClassificationNames classificationNames = new ClassificationNames(
             new ClassificationName("Marilyn"),
             new ClassificationName("Wainwright"));
@@ -27,7 +27,7 @@ public class ClassificationNamesTest {
     }
 
     @Test
-    public void add_simple_classification() {
+    public void add_classification() {
         ClassificationNames classifications = new ClassificationNames();
         classifications.add(new ClassificationName("Wainwright"));
         assertThat(classifications.get(0),

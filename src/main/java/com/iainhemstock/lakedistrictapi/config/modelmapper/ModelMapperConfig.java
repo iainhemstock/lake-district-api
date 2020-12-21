@@ -1,7 +1,9 @@
 package com.iainhemstock.lakedistrictapi.config.modelmapper;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
-import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.*;
+import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.ClassificationConverter;
+import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.DmsConverter;
+import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.OsMapConverter;
 import com.iainhemstock.lakedistrictapi.domain.DetailedFell;
 import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
 import org.modelmapper.ModelMapper;

@@ -1,0 +1,76 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://192.168.0.16:8080/schemas",
+	"type": "object",
+	"required": ["links"],
+	"additionalProperties": false,
+	"properties": {
+		"links": {
+			"type": "object",
+			"required": ["self"],
+			"additionalProperties": false,
+			"properties": {
+				"self": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				},
+				"first": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				},
+				"prev": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				},
+				"next": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				},
+				"last": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				},
+				"parent": {
+					"type": "object",
+					"required": ["href"],
+					"additionalProperties": false,
+					"properties": {
+						"href": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}

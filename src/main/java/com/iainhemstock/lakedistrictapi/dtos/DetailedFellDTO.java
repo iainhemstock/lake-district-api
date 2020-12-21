@@ -12,8 +12,6 @@ import java.util.Set;
 @Setter
 @JsonSerialize(using = DetailedFellDTOSerializer.class)
 public class DetailedFellDTO {
-    private String selfLink;
-    private String parentLink;
     private String heightMeters;
     private String heightFeet;
     private String prominenceMeters;

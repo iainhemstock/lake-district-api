@@ -10,7 +10,7 @@ import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
-import com.iainhemstock.lakedistrictapi.services.EndpointGeneratorServiceImpl;
+import com.iainhemstock.lakedistrictapi.services.LinkServiceImpl;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
 import org.junit.Before;
@@ -53,7 +53,7 @@ public class ModelMapperConfigTest {
         detailedFell = new DetailedFell(helvellyn,
             new MeterToFeetConversionServiceImpl(),
             new LatLongToDmsConversionServiceImpl(),
-            new EndpointGeneratorServiceImpl(apiProperties));
+            new LinkServiceImpl(apiProperties));
     }
 
     @Test
@@ -149,20 +149,6 @@ public class ModelMapperConfigTest {
         Set<String> expected = Set.of("Marilyn");
         Set<String> actual = dto.getClassificationNames();
         assertTrue(actual.containsAll(expected) && expected.containsAll(actual));
-    }
-
-    @Test
-    public void will_map_self_href() {
-        dto = mapper.map(detailedFell, DetailedFellDTO.class);
-        assertThat(dto.getSelfLink(),
-            is(String.format("%s/fells/NY342151", apiProperties.getBaseUrl())));
-    }
-
-    @Test
-    public void will_map_parent_href() {
-        dto = mapper.map(detailedFell, DetailedFellDTO.class);
-        assertThat(dto.getParentLink(),
-            is(String.format("%s/fells/NY215072", apiProperties.getBaseUrl())));
     }
 
 }
