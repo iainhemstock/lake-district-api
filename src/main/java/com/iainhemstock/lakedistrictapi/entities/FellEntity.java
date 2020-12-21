@@ -1,8 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +8,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "fells")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -67,28 +67,4 @@ public class FellEntity {
         uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
     private Set<Classification> classifications;
 
-    public FellEntity(@NotNull String osMapRef,
-                      @NotNull String name,
-                      @NotNull int heightMeters,
-                      @NotNull int prominenceMeters,
-                      @NotNull double latitude,
-                      @NotNull double longitude,
-                      @NotNull Region region,
-                      @NotNull ParentFell parentPeak,
-                      Set<OsMap> osMaps,
-                      Set<Classification> classifications) {
-        this.osMapRef = osMapRef;
-        this.name = name;
-        this.heightMeters = heightMeters;
-        this.prominenceMeters = prominenceMeters;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.region = region;
-        this.parentPeak = parentPeak;
-        this.osMaps = osMaps;
-        this.classifications = classifications;
-    }
-
-    protected FellEntity() {
-    }
 }
