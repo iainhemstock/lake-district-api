@@ -1,9 +1,6 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
-import com.iainhemstock.lakedistrictapi.domain.FellName;
-import com.iainhemstock.lakedistrictapi.domain.Latitude;
-import com.iainhemstock.lakedistrictapi.domain.Longitude;
-import com.iainhemstock.lakedistrictapi.domain.Meters;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
 import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
@@ -61,14 +58,14 @@ public final class TestDataLoaderForApiTests {
             new Longitude(-3.219),
             new Region(3, "Central Lake District"),
             new ParentFell("NY215072"),
-            new HashSet<>(Set.of(
+            new OsMaps(new HashSet<>(Set.of(
                 new OsMap(1, "OS Landranger 89"),
                 new OsMap(2, "OS Landranger 90"),
-                new OsMap(7, "OS Explorer OL6"))),
-            new HashSet<>(Set.of(
+                new OsMap(7, "OS Explorer OL6")))),
+            new Classifications(new HashSet<>(Set.of(
                 new Classification(3, "Marilyn"),
                 new Classification(15, "Fellranger"),
-                new Classification(11, "Birkett"))));
+                new Classification(11, "Birkett")))));
         fellRepository.save(greatGable);
     }
 

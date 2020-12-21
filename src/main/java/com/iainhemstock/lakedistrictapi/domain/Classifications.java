@@ -1,0 +1,29 @@
+package com.iainhemstock.lakedistrictapi.domain;
+
+import com.iainhemstock.lakedistrictapi.entities.Classification;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Classifications {
+
+    @ManyToMany
+    @JoinTable(
+        name = "fells_classifications",
+        joinColumns = @JoinColumn(name = "os_map_ref"),
+        inverseJoinColumns = @JoinColumn(name = "classification_id"),
+        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
+    private Set<Classification> classifications;
+
+    public Classifications(final Set<Classification> classifications) {
+        this.classifications = classifications;
+    }
+
+    public Set<Classification> toSet() {
+        return classifications;
+    }
+}

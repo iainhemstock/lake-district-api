@@ -65,12 +65,12 @@ public class DetailedFell {
             latLong2DMSConverter.getHemisphere());
 
         this.osMapNames = new OsMapNames();
-        fell.getOsMaps().stream()
+        fell.getOsMaps().toSet().stream()
             .map(OsMap::getName)
             .forEach(name -> this.osMapNames.add(new OsMapName(name)));
 
         this.classificationNames = new ClassificationNames();
-        fell.getClassifications().stream()
+        fell.getClassifications().toSet().stream()
             .map(Classification::getName)
             .forEach(name -> this.classificationNames.add(new ClassificationName(name)));
     }

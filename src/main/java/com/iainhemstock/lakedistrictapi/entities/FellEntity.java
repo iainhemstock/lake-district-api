@@ -1,9 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
-import com.iainhemstock.lakedistrictapi.domain.FellName;
-import com.iainhemstock.lakedistrictapi.domain.Latitude;
-import com.iainhemstock.lakedistrictapi.domain.Longitude;
-import com.iainhemstock.lakedistrictapi.domain.Meters;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -52,20 +49,10 @@ public class FellEntity {
     @NotNull
     private ParentFell parentPeak;
 
-    @ManyToMany
-    @JoinTable(
-        name = "fells_osmaps",
-        joinColumns = @JoinColumn(name = "os_map_ref"),
-        inverseJoinColumns = @JoinColumn(name = "os_map_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "os_map_id" }))
-    private Set<OsMap> osMaps;
+    @Embedded
+    private OsMaps osMaps;
 
-    @ManyToMany
-    @JoinTable(
-        name = "fells_classifications",
-        joinColumns = @JoinColumn(name = "os_map_ref"),
-        inverseJoinColumns = @JoinColumn(name = "classification_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
-    private Set<Classification> classifications;
+    @Embedded
+    private Classifications classifications;
 
 }

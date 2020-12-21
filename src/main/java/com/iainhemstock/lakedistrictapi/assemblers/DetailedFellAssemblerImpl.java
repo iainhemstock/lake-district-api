@@ -51,11 +51,11 @@ public class DetailedFellAssemblerImpl implements DetailedFellAssembler {
             latLongToDMSConversionService.getHemisphere()));
 
         ClassificationNames classificationNames = new ClassificationNames();
-        fellEntity.getClassifications().forEach(classification -> classificationNames.add(new ClassificationName(classification.getName())));
+        fellEntity.getClassifications().toSet().forEach(classification -> classificationNames.add(new ClassificationName(classification.getName())));
         detailedFell.setClassificationNames(classificationNames);
 
         OsMapNames osMapNames = new OsMapNames();
-        fellEntity.getOsMaps().forEach(osMap -> osMapNames.add(new OsMapName(osMap.getName())));
+        fellEntity.getOsMaps().toSet().forEach(osMap -> osMapNames.add(new OsMapName(osMap.getName())));
         detailedFell.setOsMapNames(osMapNames);
 
         return detailedFell;

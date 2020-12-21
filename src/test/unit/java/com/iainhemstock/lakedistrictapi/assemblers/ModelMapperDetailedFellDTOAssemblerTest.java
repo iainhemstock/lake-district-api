@@ -46,10 +46,10 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
             new Longitude(-3.016054),
             new EasternRegion(),
             new ParentFell(new ScafellPikeFellEntity().getOsMapRef()),
-            new HashSet<>(Set.of(
+            new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMap(),
-                new OL5ExplorerOsMap())),
-            new HashSet<>(Set.of(new MarilynClassification())));
+                new OL5ExplorerOsMap()))),
+            new Classifications(new HashSet<>(Set.of(new MarilynClassification()))));
         detailedFell = new DetailedFell(
             helvellyn,
             new MeterToFeetConversionServiceImpl(),
