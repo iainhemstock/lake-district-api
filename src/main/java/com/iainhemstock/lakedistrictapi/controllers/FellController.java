@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.dtos.*;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellDTOAssembler;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.FellEntityServiceImpl;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class FellController {
 
     @Autowired private FellEntityServiceImpl fellEntityService;
-    @Autowired private DetailedFellDTOAssembler detailedFellDTOAssembler;
+    @Autowired private FellDTOAssembler fellDTOAssembler;
     @Autowired private LinksDTOAssembler linksDTOAssembler;
     @Autowired private LinkService linkService;
 
@@ -57,7 +57,7 @@ public class FellController {
         Links links = new Links(
             linkService.buildForResourceWithIdAndRel("fells", fellEntity.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fellEntity.getParentPeak().getOsMapRef().toString(), LinkRel.PARENT));
-        FellDTO fellDTO = detailedFellDTOAssembler.toDTO(fellEntity);
+        FellDTO fellDTO = fellDTOAssembler.toDTO(fellEntity);
         LinksDTO linksDTO = linksDTOAssembler.toDTO(links);
         ItemDTO itemDTO = new ItemDTO(linksDTO, fellDTO);
 

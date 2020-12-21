@@ -10,7 +10,7 @@ import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellDTOAssembler;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
 import org.junit.Before;
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
 public class ModelMapperDetailedFellDTOAssemblerTest {
 
 
-    private DetailedFellDTOAssembler detailedFellDTOAssembler;
+    private FellDTOAssembler fellDTOAssembler;
     private FellDTO dto;
     private ModelMapper mapper;
     private FellEntity helvellynFellEntity;
@@ -53,75 +53,75 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
         helvellynFellEntity.setLatLongToDmsConversionService(new LatLongToDmsConversionServiceImpl());
         helvellynFellEntity.setMeterToFeetConversionService(new MeterToFeetConversionServiceImpl());
 
-        detailedFellDTOAssembler = new ModelMapperDetailedFellDTOAssembler(mapper);
+        fellDTOAssembler = new ModelMapperDetailedFellDTOAssembler(mapper);
     }
 
     @Test
     public void will_map_fell_name() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getName(),
             is("Helvellyn"));
     }
 
     @Test
     public void will_map_height_in_meters() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getHeightMeters(),
             is("950"));
     }
 
     @Test
     public void will_map_height_in_feet() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getHeightFeet(),
             is("3117"));
     }
 
     @Test
     public void will_map_prominence_in_meters() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getProminenceMeters(),
             is("712"));
     }
 
     @Test
     public void will_map_prominence_in_feet() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getProminenceFeet(),
             is("2336"));
     }
 
     @Test
     public void will_map_os_map_ref() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getOsMapRef(),
             is("NY342151"));
     }
 
     @Test
     public void will_map_latitude() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getLatitude(),
             is("54.527232"));
     }
 
     @Test
     public void will_map_longitude() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getLongitude(),
             is("-3.016054"));
     }
 
     @Test
     public void will_map_region() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         assertThat(dto.getRegion(),
             is("Eastern Lake District"));
     }
 
     @Test
     public void will_map_os_maps() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         Set<String> expected = Set.of("OS Landranger 90", "OS Explorer OL5");
         Set<String> actual = dto.getOsMapNames();
         assertTrue(actual.containsAll(expected) && expected.containsAll(actual));
@@ -129,7 +129,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
 
     @Test
     public void will_map_dms_converted_from_latitude() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         Map<String, String> expected = Map.of("degrees", "54", "minutes", "31","seconds", "38", "hemisphere", "N");
         Map<String, String> actual = dto.getLatitudeAsDms();
         assertThat(actual, is(expected));
@@ -137,7 +137,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
 
     @Test
     public void will_map_dms_converted_from_longitude() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         Map<String, String> expected = Map.of("degrees", "3","minutes", "0", "seconds", "58", "hemisphere", "W");
         Map<String, String> actual = dto.getLongitudeAsDms();
         assertThat(actual, is(expected));
@@ -145,7 +145,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
 
     @Test
     public void will_map_classifications() {
-        dto = detailedFellDTOAssembler.toDTO(helvellynFellEntity);
+        dto = fellDTOAssembler.toDTO(helvellynFellEntity);
         Set<String> expected = Set.of("Marilyn");
         Set<String> actual = dto.getClassificationNames();
         assertTrue(actual.containsAll(expected) && expected.containsAll(actual));

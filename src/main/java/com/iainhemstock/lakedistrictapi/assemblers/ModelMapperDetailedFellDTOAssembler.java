@@ -2,13 +2,13 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 
 import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.DetailedFellDTOAssembler;
+import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ModelMapperDetailedFellDTOAssembler implements DetailedFellDTOAssembler {
+public class ModelMapperDetailedFellDTOAssembler implements FellDTOAssembler {
 
     private ModelMapper mapper;
 
