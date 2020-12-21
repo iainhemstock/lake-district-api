@@ -53,7 +53,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
         helvellynFellEntity.setLatLongToDmsConversionService(new LatLongToDmsConversionServiceImpl());
         helvellynFellEntity.setMeterToFeetConversionService(new MeterToFeetConversionServiceImpl());
 
-        fellDTOAssembler = new ModelMapperDetailedFellDTOAssembler(mapper);
+        fellDTOAssembler = new ModelMapperFellDTOAssembler(mapper);
     }
 
     @Test

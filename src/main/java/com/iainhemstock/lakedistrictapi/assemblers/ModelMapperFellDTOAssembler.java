@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ModelMapperDetailedFellDTOAssembler implements FellDTOAssembler {
+public class ModelMapperFellDTOAssembler implements FellDTOAssembler {
 
     private ModelMapper mapper;
 
     @Autowired
-    public ModelMapperDetailedFellDTOAssembler(final ModelMapper mapper) {
+    public ModelMapperFellDTOAssembler(final ModelMapper mapper) {
         this.mapper = mapper;
     }
 
