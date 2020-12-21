@@ -26,7 +26,7 @@ import static org.junit.Assert.fail;
 @RunWith(MockitoJUnitRunner.class)
 public class FellServiceImplTests {
 
-    private FellServiceImpl fellEntityService;
+    private FellServiceImpl fellService;
     private Fell helvellynFell;
     private TestApiProperties apiProperties;
 
@@ -41,7 +41,7 @@ public class FellServiceImplTests {
         apiProperties = new TestApiProperties();
         helvellynFell = new HelvellynFell();
 
-        fellEntityService = new FellServiceImpl(
+        fellService = new FellServiceImpl(
             fellRepository,
             apiClockService,
             fellSimplifiedPagedCollectionMapper,
@@ -55,14 +55,14 @@ public class FellServiceImplTests {
     public void get_fell_by_id() {
         Mockito.when(fellRepository.findById(helvellynFell.getOsMapRef()))
             .thenReturn(Optional.of(helvellynFell));
-        Fell actualFell = fellEntityService.getById(helvellynFell.getOsMapRef());
+        Fell actualFell = fellService.getById(helvellynFell.getOsMapRef());
         assertThat(actualFell, is(helvellynFell));
     }
 
     @Test
     public void will_throw_when_fell_not_found() {
         try {
-            fellEntityService.getById(new OsMapRef("NY000000"));
+            fellService.getById(new OsMapRef("NY000000"));
             fail("Expected method under test to throw FellNotFoundException but it didn't");
         }
         catch (FellNotFoundException ex) {
@@ -73,7 +73,7 @@ public class FellServiceImplTests {
     @Test
     public void will_throw_when_getting_fell_with_blank_id() {
         try {
-            fellEntityService.getById(new OsMapRef(""));
+            fellService.getById(new OsMapRef(""));
             fail("Expected method under test to throw IllegalArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -84,7 +84,7 @@ public class FellServiceImplTests {
     @Test
     public void will_throw_when_getting_fell_with_null_id() {
         try {
-            fellEntityService.getById(new OsMapRef(null));
+            fellService.getById(new OsMapRef(null));
             fail("Expected method under test to throw NullPointerException but it didn't");
         }
         catch (NullPointerException ex) {
