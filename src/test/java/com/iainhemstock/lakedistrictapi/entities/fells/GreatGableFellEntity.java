@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
+import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
@@ -19,7 +20,7 @@ public final class GreatGableFellEntity extends FellEntity {
         super(
             "NY211104",
             new FellName("Great Gable"),
-            899,
+            new Meters(899),
             425,
             54.482,
             -3.219,

@@ -48,12 +48,12 @@ public class DetailedFellAssemblerTests {
     @Test
     public void will_map_height_in_meters() {
         assertThat(detailedFell.getHeightMeters(),
-            is(new Meters(helvellynFellEntity.getHeightMeters())));
+            is(new Meters(helvellynFellEntity.getHeightMeters().toInt())));
     }
 
     @Test
     public void will_map_height_in_feet() {
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getHeightMeters())))
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getHeightMeters().toInt())))
             .thenReturn(new Feet(3117));
         detailedFell = detailedFellAssembler.toDetailedFell(helvellynFellEntity);
         assertThat(detailedFell.getHeightFeet(),

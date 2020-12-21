@@ -27,8 +27,8 @@ public class DetailedFellAssemblerImpl implements DetailedFellAssembler {
         DetailedFell detailedFell = new DetailedFell();
         detailedFell.setFellName(new FellName(fellEntity.getName().toString()));
         detailedFell.setOsMapRef(new OsMapRef(fellEntity.getOsMapRef()));
-        detailedFell.setHeightMeters(new Meters(fellEntity.getHeightMeters()));
-        detailedFell.setHeightFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getHeightMeters())));
+        detailedFell.setHeightMeters(new Meters(fellEntity.getHeightMeters().toInt()));
+        detailedFell.setHeightFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getHeightMeters().toInt())));
         detailedFell.setProminenceMeters(new Meters(fellEntity.getProminenceMeters()));
         detailedFell.setProminenceFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getProminenceMeters())));
         detailedFell.setLatitude(new Latitude(fellEntity.getLatitude()));

@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
+import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.NullFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
@@ -19,7 +20,7 @@ public final class ScafellPikeFellEntity extends FellEntity {
         super(
             "NY215072",
             new FellName("Scafell Pike"),
-            978,
+            new Meters(978),
             912,
             54.454222,
             -3.211528,

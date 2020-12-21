@@ -1,7 +1,18 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Meters {
-    private final int value;
+    @Column(name = "height_meters")
+    @NotNull
+    private int value;
 
     public Meters(final int value) {
         this.value = value;
