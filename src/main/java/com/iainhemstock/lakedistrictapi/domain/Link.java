@@ -12,10 +12,6 @@ public class Link {
         this.href = href;
     }
 
-    public String toString() {
-        return this.href;
-    }
-
     @Override
     public boolean equals(final Object other) {
         return href.equals(((Link) other).href);
