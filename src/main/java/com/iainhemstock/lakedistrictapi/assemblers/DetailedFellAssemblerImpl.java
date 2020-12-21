@@ -32,7 +32,7 @@ public class DetailedFellAssemblerImpl implements DetailedFellAssembler {
         detailedFell.setProminenceMeters(new Meters(fellEntity.getProminenceMeters().toInt()));
         detailedFell.setProminenceFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getProminenceMeters().toInt())));
         detailedFell.setLatitude(new Latitude(fellEntity.getLatitude().toDouble()));
-        detailedFell.setLongitude(new Longitude(fellEntity.getLongitude()));
+        detailedFell.setLongitude(new Longitude(fellEntity.getLongitude().toDouble()));
         detailedFell.setRegionName(new RegionName(fellEntity.getRegion().getName()));
         detailedFell.setParentFell(new ParentFell(fellEntity.getParentPeak().getOsMapRef()));
 
@@ -43,7 +43,7 @@ public class DetailedFellAssemblerImpl implements DetailedFellAssembler {
             latLongToDMSConversionService.getSeconds(),
             latLongToDMSConversionService.getHemisphere()));
 
-        latLongToDMSConversionService.convert(new Longitude(fellEntity.getLongitude()));
+        latLongToDMSConversionService.convert(new Longitude(fellEntity.getLongitude().toDouble()));
         detailedFell.setConvertedLongitude(new DMS(
             latLongToDMSConversionService.getDegrees(),
             latLongToDMSConversionService.getMinutes(),

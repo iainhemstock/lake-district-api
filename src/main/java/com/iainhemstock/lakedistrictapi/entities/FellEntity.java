@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.entities;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
 import com.iainhemstock.lakedistrictapi.domain.Latitude;
+import com.iainhemstock.lakedistrictapi.domain.Longitude;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import lombok.*;
 
@@ -38,9 +39,8 @@ public class FellEntity {
     @Embedded
     private Latitude latitude;
 
-    @Column(name = "longitude")
-    @NotNull
-    private double longitude;
+    @Embedded
+    private Longitude longitude;
 
     @ManyToOne
     @JoinColumn(name = "region_id")

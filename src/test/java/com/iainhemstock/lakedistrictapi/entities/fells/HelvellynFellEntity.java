@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
 import com.iainhemstock.lakedistrictapi.domain.Latitude;
+import com.iainhemstock.lakedistrictapi.domain.Longitude;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
@@ -24,7 +25,7 @@ public class HelvellynFellEntity extends FellEntity {
             new Meters(950),
             new Meters(712),
             new Latitude(54.527232),
-            -3.016054,
+            new Longitude(-3.016054),
             new EasternRegion(),
             new ParentFell(new ScafellPikeFellEntity().getOsMapRef()),
             new HashSet<>(Set.of(

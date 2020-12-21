@@ -84,7 +84,7 @@ public class DetailedFellAssemblerTests {
     @Test
     public void will_map_longitude() {
         assertThat(detailedFell.getLongitude(),
-            is(new Longitude(helvellynFellEntity.getLongitude())));
+            is(new Longitude(helvellynFellEntity.getLongitude().toDouble())));
     }
 
     @Test
