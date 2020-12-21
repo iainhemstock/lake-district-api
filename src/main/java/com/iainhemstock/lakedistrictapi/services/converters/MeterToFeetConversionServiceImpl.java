@@ -3,7 +3,6 @@ package com.iainhemstock.lakedistrictapi.services.converters;
 import com.iainhemstock.lakedistrictapi.domain.Feet;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
