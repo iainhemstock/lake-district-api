@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FellEntityTests {
+public class FellTests {
 
     @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
     @Mock private MeterToFeetConversionService meterToFeetConversionService;
