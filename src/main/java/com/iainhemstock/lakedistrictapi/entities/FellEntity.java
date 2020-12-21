@@ -27,6 +27,7 @@ public class FellEntity {
     private FellName name;
 
     @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "height_meters"))
     private Meters heightMeters;
 
     @Column(name = "prominence_meters")
