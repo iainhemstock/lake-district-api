@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
+import com.iainhemstock.lakedistrictapi.domain.FellName;
 import com.iainhemstock.lakedistrictapi.entities.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
 import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
@@ -48,8 +49,9 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addGreatGable() {
-        FellEntity greatGable = new FellEntity("NY211104",
-            "Great Gable",
+        FellEntity greatGable = new FellEntity(
+            "NY211104",
+            new FellName("Great Gable"),
             899,
             425,
             54.482,

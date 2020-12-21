@@ -36,7 +36,7 @@ public class DetailedFellAssemblerTests {
     @Test
     public void will_map_fell_name() {
         assertThat(detailedFell.getFellName(),
-            is(new FellName(helvellynFellEntity.getName())));
+            is(new FellName(helvellynFellEntity.getName().toString())));
     }
 
     @Test

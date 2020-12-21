@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities.fells;
 
+import com.iainhemstock.lakedistrictapi.domain.FellName;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
@@ -17,7 +18,7 @@ public class HelvellynFellEntity extends FellEntity {
     public HelvellynFellEntity() {
         super(
             "NY342151",
-            "Helvellyn",
+            new FellName("Helvellyn"),
             950,
             712,
             54.527232,

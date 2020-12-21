@@ -49,7 +49,7 @@ public class FellSimplifiedPagedCollectionMapper {
     private void mapSimpleFells(final Page<FellEntity> page) {
         for (FellEntity fell : page.toList()) {
             SummarisedFellDTO summarisedFellDTO = new SummarisedFellDTO();
-            summarisedFellDTO.setName(fell.getName());
+            summarisedFellDTO.setName(fell.getName().toString());
             summarisedFellDTO.setRegion(fell.getRegion().getName());
             summarisedFellDTO.getLinks().setSelf(new Link(LinkRel.SELF, (String.format("%s/fells/%s",
                 apiProperties.getBaseUrl(),

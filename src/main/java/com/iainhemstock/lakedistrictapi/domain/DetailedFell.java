@@ -39,7 +39,7 @@ public class DetailedFell {
                         final MeterToFeetConversionService m2fConverter,
                         final LatLongToDmsConversionService latLong2DMSConverter,
                         final LinkService linkService) {
-        this.fellName = new FellName(fell.getName());
+        this.fellName = new FellName(fell.getName().toString());
         this.heightMeters = new Meters(fell.getHeightMeters());
         this.heightFeet = m2fConverter.convertRoundedToNearestInteger(new Meters(fell.getHeightMeters()));
         this.prominenceMeters = new Meters(fell.getProminenceMeters());

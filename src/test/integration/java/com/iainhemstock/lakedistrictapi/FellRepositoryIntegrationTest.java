@@ -16,9 +16,6 @@ public class FellRepositoryIntegrationTest {
 
     @Autowired private FellRepository fellRepository;
 
-    @Test
-    public void size_is_one() {
-        assertEquals(new ScafellPikeFellEntity(), fellRepository.findByNameLikeIgnoreCase("Scafell Pike").get(0));
-    }
+
 
 }

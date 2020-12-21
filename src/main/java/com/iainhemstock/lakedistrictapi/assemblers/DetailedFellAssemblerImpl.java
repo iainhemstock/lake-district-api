@@ -25,7 +25,7 @@ public class DetailedFellAssemblerImpl implements DetailedFellAssembler {
     @Override
     public DetailedFell toDetailedFell(final FellEntity fellEntity) {
         DetailedFell detailedFell = new DetailedFell();
-        detailedFell.setFellName(new FellName(fellEntity.getName()));
+        detailedFell.setFellName(new FellName(fellEntity.getName().toString()));
         detailedFell.setOsMapRef(new OsMapRef(fellEntity.getOsMapRef()));
         detailedFell.setHeightMeters(new Meters(fellEntity.getHeightMeters()));
         detailedFell.setHeightFeet(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(fellEntity.getHeightMeters())));

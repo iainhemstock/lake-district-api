@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface FellRepository extends JpaRepository<FellEntity, String> {
-    List<FellEntity> findByNameLikeIgnoreCase(String name);
+//    List<FellEntity> findByNameLikeIgnoreCase(String name);
 }

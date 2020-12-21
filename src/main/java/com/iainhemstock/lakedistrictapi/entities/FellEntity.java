@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
+import com.iainhemstock.lakedistrictapi.domain.FellName;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,9 +22,8 @@ public class FellEntity {
     @EqualsAndHashCode.Include
     private String osMapRef;
 
-    @Column(name = "name")
-    @NotNull
-    private String name;
+    @Embedded
+    private FellName name;
 
     @Column(name = "height_meters")
     @NotNull

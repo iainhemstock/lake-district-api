@@ -28,7 +28,7 @@ public class PagedCollection {
         this.limit = limit;
         this.items = new SummarisedFells();
         fells.stream()
-            .forEach(fell -> items.add(new SummarisedFell(new FellName(fell.getName()), new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fell.getOsMapRef()))));
+            .forEach(fell -> items.add(new SummarisedFell(new FellName(fell.getName().toString()), new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fell.getOsMapRef()))));
         firstLink = new Link(LinkRel.FIRST, String.format("http://localhost:8080/api/v1/fells?offset=%d&limit=%d", 0, limit));
         prevLink = new Link(LinkRel.PREV, String.format("http://localhost:8080/api/v1/fells?offset=%d&limit=%d", offset-1, limit));
         selfLink = new Link(LinkRel.SELF, String.format("http://localhost:8080/api/v1/fells?offset=%d&limit=%d", offset, limit));

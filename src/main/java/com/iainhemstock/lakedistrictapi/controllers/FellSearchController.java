@@ -21,16 +21,17 @@ public class FellSearchController {
 
     @GetMapping("/api/fells")
     public SearchDTO getFells(@RequestParam("search") String searchTerm) {
-        String processedSearchTerm = searchTerm
-            .replace('+', ' ')
-            .replace('*', '%');
-        List<FellEntity> fells = fellRepository.findByNameLikeIgnoreCase(processedSearchTerm);
-
-        List<DetailedFellDTO> detailedFellDTOS = fells.stream()
-            .map(fell -> mapper.map(fell, DetailedFellDTO.class))
-            .collect(Collectors.toList());
-
-        return new SearchDTO(detailedFellDTOS);
+//        String processedSearchTerm = searchTerm
+//            .replace('+', ' ')
+//            .replace('*', '%');
+//        List<FellEntity> fells = fellRepository.findByNameLikeIgnoreCase(processedSearchTerm);
+//
+//        List<DetailedFellDTO> detailedFellDTOS = fells.stream()
+//            .map(fell -> mapper.map(fell, DetailedFellDTO.class))
+//            .collect(Collectors.toList());
+//
+//        return new SearchDTO(detailedFellDTOS);
+        return new SearchDTO();
     }
 
 }

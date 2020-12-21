@@ -3,6 +3,7 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.DetailedFell;
+import com.iainhemstock.lakedistrictapi.domain.FellName;
 import com.iainhemstock.lakedistrictapi.dtos.DetailedFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.ParentFell;
@@ -39,7 +40,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
         ModelMapperConfig config = new ModelMapperConfig();
         mapper = config.modelMapper();
         FellEntity helvellyn = new FellEntity("NY342151",
-            "Helvellyn",
+            new FellName("Helvellyn"),
             950,
             712,
             54.527232,
