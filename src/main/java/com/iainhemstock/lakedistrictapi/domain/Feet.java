@@ -11,10 +11,6 @@ public class Feet {
         return String.valueOf(value);
     }
 
-    public int toInt() {
-        return value;
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
