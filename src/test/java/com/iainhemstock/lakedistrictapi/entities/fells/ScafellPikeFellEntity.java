@@ -21,7 +21,7 @@ public final class ScafellPikeFellEntity extends FellEntity {
             "NY215072",
             new FellName("Scafell Pike"),
             new Meters(978),
-            912,
+            new Meters(912),
             54.454222,
             -3.211528,
             new SouthernRegion(),

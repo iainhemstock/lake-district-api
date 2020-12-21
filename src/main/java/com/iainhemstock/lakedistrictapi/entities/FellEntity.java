@@ -30,9 +30,9 @@ public class FellEntity {
     @AttributeOverride(name = "value", column = @Column(name = "height_meters"))
     private Meters heightMeters;
 
-    @Column(name = "prominence_meters")
-    @NotNull
-    private int prominenceMeters;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "prominence_meters"))
+    private Meters prominenceMeters;
 
     @Column(name = "latitude")
     @NotNull

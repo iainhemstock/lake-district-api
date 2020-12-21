@@ -63,12 +63,12 @@ public class DetailedFellAssemblerTests {
     @Test
     public void will_map_prominence_in_meters() {
         assertThat(detailedFell.getProminenceMeters(),
-            is(new Meters(helvellynFellEntity.getProminenceMeters())));
+            is(new Meters(helvellynFellEntity.getProminenceMeters().toInt())));
     }
 
     @Test
     public void will_map_prominence_in_feet() {
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getProminenceMeters())))
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellynFellEntity.getProminenceMeters().toInt())))
             .thenReturn(new Feet(2336));
         detailedFell = detailedFellAssembler.toDetailedFell(helvellynFellEntity);
         assertThat(detailedFell.getProminenceFeet(),

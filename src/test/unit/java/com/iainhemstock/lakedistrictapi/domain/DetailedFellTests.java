@@ -55,7 +55,7 @@ public class DetailedFellTests {
 
     @Test
     public void get_prominence_feet() {
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellyn.getProminenceMeters())))
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(helvellyn.getProminenceMeters().toInt())))
             .thenReturn(new Feet(2335));
         DetailedFell detailedFell = new DetailedFell(helvellyn, meterToFeetConversionService, latLongToDmsConverter, linkService);
         assertThat(detailedFell.getProminenceFeet(),

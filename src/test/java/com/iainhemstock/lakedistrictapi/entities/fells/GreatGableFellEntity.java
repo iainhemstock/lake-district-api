@@ -21,7 +21,7 @@ public final class GreatGableFellEntity extends FellEntity {
             "NY211104",
             new FellName("Great Gable"),
             new Meters(899),
-            425,
+            new Meters(425),
             54.482,
             -3.219,
             new CentralRegion(),

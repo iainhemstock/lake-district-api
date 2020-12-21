@@ -43,7 +43,7 @@ public class ModelMapperDetailedFellDTOAssemblerTest {
         FellEntity helvellyn = new FellEntity("NY342151",
             new FellName("Helvellyn"),
             new Meters(950),
-            712,
+            new Meters(712),
             54.527232,
             -3.016054,
             new EasternRegion(),
