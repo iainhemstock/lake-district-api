@@ -28,20 +28,23 @@ public class SchemaStepDefs {
 
     @And("^the body will conform to the schema in (.*)$")
     public void theResponseWillConformToTheJsonSchema(final String schemaFilename) throws IOException {
-        JsonNode responseBodyAsJsonNode = getResponseBodyAsJsonNode();
+        JsonNode jsonNode = getResponseBodyAsJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
-        validate(schema, responseBodyAsJsonNode);
+        validate(schema, jsonNode);
     }
 
-    @Then("^the body will conform to the following schemas$")
-    public void theBodyWillConformToTheFollowingSchemas(final List<String> schemaFilenames) {
-        schemaFilenames.forEach(schema -> {
-            try {
-                theResponseWillConformToTheJsonSchema(schema);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+    @Then("^the links attribute will conform to the schema in (.*)$")
+    public void theLinksAttributeWillConformToTheSchemaIn(final String schemaFilename) throws IOException {
+        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
+        validate(schema, jsonNode.get("links"));
+    }
+
+    @Then("^the item attribute will conform to the schema in (.*)$")
+    public void theItemAttributeWillConformToTheSchemaIn(final String schemaFilename) throws IOException {
+        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
+        validate(schema, jsonNode.get("item"));
     }
 
     @Then("^the pagination attributes will conform to the schema in (.*)$")
