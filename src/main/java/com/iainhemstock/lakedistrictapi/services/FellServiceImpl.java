@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class FellEntityServiceImpl implements FellEntityService {
+public class FellServiceImpl implements FellEntityService {
     private final FellRepository fellRepository;
     private final ApiClockService apiClockService;
     private final FellSimplifiedPagedCollectionMapper pagedCollectionMapper;
@@ -27,12 +27,12 @@ public class FellEntityServiceImpl implements FellEntityService {
     private final ApiProperties apiProperties;
 
     @Autowired
-    public FellEntityServiceImpl(final FellRepository fellRepository,
-                                 final ApiClockService apiClockService,
-                                 final FellSimplifiedPagedCollectionMapper pagedCollectionMapper,
-                                 final ApiProperties apiProperties,
-                                 final MeterToFeetConversionService meterToFeetConversionService,
-                                 final LatLongToDmsConversionService latLongToDmsConversionService) {
+    public FellServiceImpl(final FellRepository fellRepository,
+                           final ApiClockService apiClockService,
+                           final FellSimplifiedPagedCollectionMapper pagedCollectionMapper,
+                           final ApiProperties apiProperties,
+                           final MeterToFeetConversionService meterToFeetConversionService,
+                           final LatLongToDmsConversionService latLongToDmsConversionService) {
         this.apiClockService = apiClockService;
         this.apiProperties = apiProperties;
         this.fellRepository = fellRepository;

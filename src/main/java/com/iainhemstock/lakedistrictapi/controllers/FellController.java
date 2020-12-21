@@ -8,7 +8,7 @@ import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
-import com.iainhemstock.lakedistrictapi.services.FellEntityServiceImpl;
+import com.iainhemstock.lakedistrictapi.services.FellServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class FellController {
 
-    @Autowired private FellEntityServiceImpl fellEntityService;
+    @Autowired private FellServiceImpl fellEntityService;
     @Autowired private FellDTOAssembler fellDTOAssembler;
     @Autowired private LinksDTOAssembler linksDTOAssembler;
     @Autowired private LinkService linkService;

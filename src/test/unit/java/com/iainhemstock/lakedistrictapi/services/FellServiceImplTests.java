@@ -24,9 +24,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.fail;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FellEntityServiceImplTests {
+public class FellServiceImplTests {
 
-    private FellEntityServiceImpl fellEntityService;
+    private FellServiceImpl fellEntityService;
     private Fell helvellynFell;
     private TestApiProperties apiProperties;
 
@@ -41,7 +41,7 @@ public class FellEntityServiceImplTests {
         apiProperties = new TestApiProperties();
         helvellynFell = new HelvellynFell();
 
-        fellEntityService = new FellEntityServiceImpl(
+        fellEntityService = new FellServiceImpl(
             fellRepository,
             apiClockService,
             fellSimplifiedPagedCollectionMapper,
