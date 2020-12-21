@@ -1,15 +1,12 @@
 package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
-import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.ApiClockService;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
 import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,11 +30,7 @@ public class FellEntityServiceImplTests {
 
     @Mock private ApiClockService apiClockService;
     @Mock private FellRepository fellRepository;
-    @Mock private MeterToFeetConversionService meterToFeetConversionService;
-    @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
-    @Mock private LinkService linkService;
     @Mock private FellSimplifiedPagedCollectionMapper fellSimplifiedPagedCollectionMapper;
-//    @Mock private Page<FellEntity> fellPage;
 
     @Before
     public void setUp() {
@@ -46,10 +39,7 @@ public class FellEntityServiceImplTests {
 
         fellEntityService = new FellEntityServiceImpl(
             fellRepository,
-            meterToFeetConversionService,
-            latLongToDmsConversionService,
             apiClockService,
-            linkService,
             fellSimplifiedPagedCollectionMapper,
             apiProperties);
 

@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.services;
 
+import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
@@ -15,7 +16,7 @@ import static org.junit.Assert.fail;
 
 public class LinkServiceImplTest {
 
-    private TestApiProperties apiProperties;
+    private ApiProperties apiProperties;
     private LinkService linkService;
 
     @Before

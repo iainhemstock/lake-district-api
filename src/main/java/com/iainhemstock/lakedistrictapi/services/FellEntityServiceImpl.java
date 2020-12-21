@@ -20,27 +20,18 @@ import java.util.Optional;
 @Service
 public class FellEntityServiceImpl implements FellEntityService {
     private final FellRepository fellRepository;
-    private final MeterToFeetConversionService m2fConversionService;
-    private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final ApiClockService apiClockService;
-    private final LinkService linkService;
     private final FellSimplifiedPagedCollectionMapper pagedCollectionMapper;
     private final ApiProperties apiProperties;
 
     @Autowired
     public FellEntityServiceImpl(final FellRepository fellRepository,
-                                 final MeterToFeetConversionService m2fConversionService,
-                                 final LatLongToDmsConversionService latLongToDmsConversionService,
                                  final ApiClockService apiClockService,
-                                 final LinkService linkService,
                                  final FellSimplifiedPagedCollectionMapper pagedCollectionMapper,
                                  final ApiProperties apiProperties) {
         this.apiClockService = apiClockService;
         this.apiProperties = apiProperties;
         this.fellRepository = fellRepository;
-        this.m2fConversionService = m2fConversionService;
-        this.latLongToDmsConversionService = latLongToDmsConversionService;
-        this.linkService = linkService;
         this.pagedCollectionMapper = pagedCollectionMapper;
     }
 
@@ -53,15 +44,6 @@ public class FellEntityServiceImpl implements FellEntityService {
         }
         return fell.get();
     }
-
-//    public DetailedFell getDetailedFell(OsMapRef osMapRef) {
-//        FellEntity fell = fellRepository.findById(osMapRef.toString())
-//            .orElseThrow(() -> {
-//                String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
-//                return new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);
-//            });
-//        return new DetailedFell(fell, m2fConversionService, latLongToDmsConversionService, endpointGeneratorService);
-//    }
 
     public PagedCollectionDTO<SummarisedFellDTO> getSummarisedFells(final Integer offset, final Integer limit) {
         if (offset < 0) {
