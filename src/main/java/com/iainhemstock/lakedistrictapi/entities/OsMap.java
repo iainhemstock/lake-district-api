@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "os_maps")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class OsMap {
@@ -23,8 +24,4 @@ public class OsMap {
     @NotNull
     private OsMapName osMapName;
 
-    public OsMap(final int id, final OsMapName osMapName) {
-        this.id = id;
-        this.osMapName = osMapName;
-    }
 }
