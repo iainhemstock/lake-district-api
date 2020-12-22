@@ -2,7 +2,6 @@ package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
@@ -24,7 +23,7 @@ public final class GreatGableFell extends Fell {
             new Latitude(54.482),
             new Longitude(-3.219),
             new CentralRegion(),
-            new ParentFell(new ScafellPikeFell().getOsMapRef()),
+            new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),

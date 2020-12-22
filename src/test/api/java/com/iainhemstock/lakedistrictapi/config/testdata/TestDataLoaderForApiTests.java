@@ -29,7 +29,6 @@ import java.util.Set;
 public final class TestDataLoaderForApiTests {
 
     @Autowired private FellRepository fellRepository;
-    @Autowired private ParentPeakRepository parentPeakRepository;
     @Autowired private RegionRepository regionRepository;
     @Autowired private OsMapRepository osMapRepository;
     @Autowired private ClassificationsRepository classificationsRepository;
@@ -43,7 +42,6 @@ public final class TestDataLoaderForApiTests {
         initializeRegionData();
         initializeOsMapData();
         initializeClassificationData();
-        initializeParentPeakData();
 
         logger.info("finished loading initial data for api tests");
     }
@@ -57,7 +55,7 @@ public final class TestDataLoaderForApiTests {
             new Latitude(54.482),
             new Longitude(-3.219),
             new Region(3, "Central Lake District"),
-            new ParentFell(new OsMapRef("NY215072")),
+            new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new OsMap(1, "OS Landranger 89"),
                 new OsMap(2, "OS Landranger 90"),
@@ -94,11 +92,5 @@ public final class TestDataLoaderForApiTests {
         classificationsRepository.save(new MarilynClassification());
         classificationsRepository.save(new BirkettClassfication());
         classificationsRepository.save(new FellrangerClassification());
-    }
-
-    private void initializeParentPeakData() {
-        parentPeakRepository.save(ParentFell.newNull());
-        parentPeakRepository.save(new ParentFell(new ScafellPikeFell().getOsMapRef()));
-        parentPeakRepository.save(new ParentFell(new GreatGableFell().getOsMapRef()));
     }
 }

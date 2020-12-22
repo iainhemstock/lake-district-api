@@ -2,7 +2,6 @@ package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.NullFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
@@ -24,7 +23,7 @@ public final class ScafellPikeFell extends Fell {
             new Latitude(54.454222),
             new Longitude(-3.211528),
             new SouthernRegion(),
-            new NullFell(),
+            new NullOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),

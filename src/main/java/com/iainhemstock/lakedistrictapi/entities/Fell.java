@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Fell {
 
     @EmbeddedId
+    @AttributeOverride(name = "value", column = @Column(name = "os_map_ref"))
     @EqualsAndHashCode.Include
     private OsMapRef osMapRef;
 
@@ -42,10 +43,9 @@ public class Fell {
     @NotNull
     private Region region;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_peak_id")
-    @NotNull
-    private ParentFell parentPeak;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "parent_os_map_ref"))
+    private OsMapRef parentOsMapRef;
 
     @Embedded
     private OsMaps osMaps;
@@ -66,7 +66,7 @@ public class Fell {
                 final Latitude latitude,
                 final Longitude longitude,
                 @NotNull final Region region,
-                @NotNull final ParentFell parentPeak,
+                final OsMapRef parentOsMapRef,
                 final OsMaps osMaps,
                 final Classifications classifications) {
         this.osMapRef = osMapRef;
@@ -76,7 +76,7 @@ public class Fell {
         this.latitude = latitude;
         this.longitude = longitude;
         this.region = region;
-        this.parentPeak = parentPeak;
+        this.parentOsMapRef = parentOsMapRef;
         this.osMaps = osMaps;
         this.classifications = classifications;
     }

@@ -4,7 +4,6 @@ import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.ParentFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
@@ -45,7 +44,7 @@ public class ModelMapperFellDTOAssemblerTest {
             new Latitude(54.527232),
             new Longitude(-3.016054),
             new EasternRegion(),
-            new ParentFell(new ScafellPikeFell().getOsMapRef()),
+            new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMap(),
                 new OL5ExplorerOsMap()))),
