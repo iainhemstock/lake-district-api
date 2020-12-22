@@ -8,6 +8,6 @@ import javax.persistence.Entity;
 @Entity
 public final class FellrangerClassification extends Classification {
     public FellrangerClassification() {
-        super(15, "Fellranger", new ClassificationName("Fellranger"));
+        super(15, new ClassificationName("Fellranger"));
     }
 }

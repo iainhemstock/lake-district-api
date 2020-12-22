@@ -8,6 +8,6 @@ import javax.persistence.Entity;
 @Entity
 public final class BirkettClassfication extends Classification {
     public BirkettClassfication() {
-        super(11, "Birkett", new ClassificationName("Birkett"));
+        super(11, new ClassificationName("Birkett"));
     }
 }

@@ -8,6 +8,6 @@ import javax.persistence.Entity;
 @Entity
 public final class MarilynClassification extends Classification {
     public MarilynClassification() {
-        super(3, "Marilyn", new ClassificationName("Marilyn"));
+        super(3, new ClassificationName("Marilyn"));
     }
 }

@@ -61,9 +61,9 @@ public final class TestDataLoaderForApiTests {
                 new OsMap(2, "OS Landranger 90"),
                 new OsMap(7, "OS Explorer OL6")))),
             new Classifications(new HashSet<>(Set.of(
-                new Classification(3, "Marilyn", new ClassificationName("Marilyn")),
-                new Classification(15, "Fellranger", new ClassificationName("Fellranger")),
-                new Classification(11, "Birkett", new ClassificationName("Birkett"))))));
+                new Classification(3, new ClassificationName("Marilyn")),
+                new Classification(15, new ClassificationName("Fellranger")),
+                new Classification(11, new ClassificationName("Birkett"))))));
         fellRepository.save(greatGable);
     }
 
