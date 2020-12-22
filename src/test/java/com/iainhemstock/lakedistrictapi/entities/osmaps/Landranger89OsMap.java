@@ -8,6 +8,6 @@ import javax.persistence.Entity;
 @Entity
 public final class Landranger89OsMap extends OsMap {
     public Landranger89OsMap() {
-        super(1, "OS Landranger 89", new OsMapName("OS Landranger 89"));
+        super(1, new OsMapName("OS Landranger 89"));
     }
 }
