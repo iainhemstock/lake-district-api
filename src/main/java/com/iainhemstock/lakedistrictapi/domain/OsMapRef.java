@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @EqualsAndHashCode
 public class OsMapRef implements Serializable {
