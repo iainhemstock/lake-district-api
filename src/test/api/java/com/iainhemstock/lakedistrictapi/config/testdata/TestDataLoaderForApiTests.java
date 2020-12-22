@@ -57,7 +57,6 @@ public final class TestDataLoaderForApiTests {
             new Latitude(54.482),
             new Longitude(-3.219),
             new Region(3, "Central Lake District"),
-            new ParentFell(new OsMapRef("NY215072")),
             new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new OsMap(1, "OS Landranger 89"),

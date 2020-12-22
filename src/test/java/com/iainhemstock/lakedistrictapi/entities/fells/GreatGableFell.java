@@ -24,7 +24,6 @@ public final class GreatGableFell extends Fell {
             new Latitude(54.482),
             new Longitude(-3.219),
             new CentralRegion(),
-            new ParentFell(new ScafellPikeFell().getOsMapRef()),
             new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMap(),
