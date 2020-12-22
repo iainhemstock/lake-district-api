@@ -14,12 +14,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class ParentFell implements Nullable {
+public class ParentFell  {
 
     @EmbeddedId
     private OsMapRef osMapRef;
 
-    @Override
     public boolean isNull() {
         return osMapRef.toString().isEmpty();
     }
