@@ -73,6 +73,19 @@ public class Fell {
                 final OsMapRef parentOsMapRef,
                 final OsMaps osMaps,
                 final Classifications classifications) {
+        this(osMapRef, name, heightMeters, prominenceMeters, latitude, longitude, region, parentOsMapRef, osMaps, classifications);
+    }
+
+    public Fell(final OsMapRef osMapRef,
+                final FellName name,
+                final Meters heightMeters,
+                final Meters prominenceMeters,
+                final Latitude latitude,
+                final Longitude longitude,
+                @NotNull final Region region,
+                final OsMapRef parentOsMapRef,
+                final OsMaps osMaps,
+                final Classifications classifications) {
         this.osMapRef = osMapRef;
         this.name = name;
         this.heightMeters = heightMeters;
@@ -80,7 +93,6 @@ public class Fell {
         this.latitude = latitude;
         this.longitude = longitude;
         this.region = region;
-        this.parentPeak = parentPeak;
         this.parentOsMapRef = parentOsMapRef;
         this.osMaps = osMaps;
         this.classifications = classifications;
