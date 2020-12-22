@@ -42,11 +42,6 @@ public class Fell {
     @NotNull
     private Region region;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_peak_id")
-    @NotNull
-    private ParentFell parentPeak;
-
     @Transient
     private OsMapRef parentOsMapRef;
 
