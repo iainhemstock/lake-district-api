@@ -69,20 +69,6 @@ public class Fell {
                 final Latitude latitude,
                 final Longitude longitude,
                 @NotNull final Region region,
-                @NotNull final ParentFell parentPeak,
-                final OsMapRef parentOsMapRef,
-                final OsMaps osMaps,
-                final Classifications classifications) {
-        this(osMapRef, name, heightMeters, prominenceMeters, latitude, longitude, region, parentOsMapRef, osMaps, classifications);
-    }
-
-    public Fell(final OsMapRef osMapRef,
-                final FellName name,
-                final Meters heightMeters,
-                final Meters prominenceMeters,
-                final Latitude latitude,
-                final Longitude longitude,
-                @NotNull final Region region,
                 final OsMapRef parentOsMapRef,
                 final OsMaps osMaps,
                 final Classifications classifications) {
