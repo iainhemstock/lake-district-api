@@ -4,10 +4,7 @@ import com.iainhemstock.lakedistrictapi.domain.ClassificationName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -21,10 +18,12 @@ public class Classification {
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(name = "name")
-    @NotNull
+    @Transient
     private String name;
 
+    @Embedded
+    @Column(name = "name")
+    @NotNull
     private ClassificationName classificationName;
 
     public Classification(final int id, final ClassificationName classificationName) {
