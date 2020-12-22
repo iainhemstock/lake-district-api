@@ -1,14 +1,17 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
-import lombok.*;
+import com.iainhemstock.lakedistrictapi.domain.ClassificationName;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "classifications")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Classification {
@@ -22,4 +25,16 @@ public class Classification {
     @NotNull
     private String name;
 
+    public Classification(int id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Classification(final int id, @NotNull String name, final ClassificationName classificationName) {
+        this.id = id;
+        this.name = name;
+    }
+
+    private Classification() {
+    }
 }
