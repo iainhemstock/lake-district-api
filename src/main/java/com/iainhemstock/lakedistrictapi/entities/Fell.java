@@ -47,6 +47,9 @@ public class Fell {
     @NotNull
     private ParentFell parentPeak;
 
+    @Transient
+    private OsMapRef parentOsMapRef;
+
     @Embedded
     private OsMaps osMaps;
 
@@ -69,6 +72,20 @@ public class Fell {
                 @NotNull final ParentFell parentPeak,
                 final OsMaps osMaps,
                 final Classifications classifications) {
+        this(osMapRef, name, heightMeters, prominenceMeters, latitude, longitude, region, parentPeak, null, osMaps, classifications);
+    }
+
+    public Fell(final OsMapRef osMapRef,
+                final FellName name,
+                final Meters heightMeters,
+                final Meters prominenceMeters,
+                final Latitude latitude,
+                final Longitude longitude,
+                @NotNull final Region region,
+                @NotNull final ParentFell parentPeak,
+                final OsMapRef parentOsMapRef,
+                final OsMaps osMaps,
+                final Classifications classifications) {
         this.osMapRef = osMapRef;
         this.name = name;
         this.heightMeters = heightMeters;
@@ -77,6 +94,7 @@ public class Fell {
         this.longitude = longitude;
         this.region = region;
         this.parentPeak = parentPeak;
+        this.parentOsMapRef = parentOsMapRef;
         this.osMaps = osMaps;
         this.classifications = classifications;
     }
