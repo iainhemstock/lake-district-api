@@ -23,12 +23,6 @@ public class OsMap {
     private String name;
     private OsMapName osMapName;
 
-    public OsMap(final int id, @NotNull final String name, final OsMapName osMapName) {
-        this.id = id;
-        this.name = name;
-        this.osMapName = osMapName;
-    }
-
     public OsMap(final int id, final OsMapName osMapName) {
         this.id = id;
         this.osMapName = osMapName;
