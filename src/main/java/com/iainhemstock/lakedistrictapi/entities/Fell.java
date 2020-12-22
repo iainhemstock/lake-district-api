@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Fell {
 
     @EmbeddedId
+    @AttributeOverride(name = "value", column = @Column(name = "os_map_ref"))
     @EqualsAndHashCode.Include
     private OsMapRef osMapRef;
 
@@ -42,7 +43,8 @@ public class Fell {
     @NotNull
     private Region region;
 
-    @Transient
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "parent_os_map_ref"))
     private OsMapRef parentOsMapRef;
 
     @Embedded

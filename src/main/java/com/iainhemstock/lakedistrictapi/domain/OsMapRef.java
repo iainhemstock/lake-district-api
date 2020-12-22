@@ -16,7 +16,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class OsMapRef implements Serializable {
 
-    @Column(name = "os_map_ref")
     @NotNull
     private String value;
 
