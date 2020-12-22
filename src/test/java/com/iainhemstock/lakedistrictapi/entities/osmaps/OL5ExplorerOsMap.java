@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 public final class OL5ExplorerOsMap extends OsMap {
 
     public OL5ExplorerOsMap() {
-        super(6, "OS Explorer OL5");
+        super(6, "OS Explorer OL5", null);
     }
 
 }

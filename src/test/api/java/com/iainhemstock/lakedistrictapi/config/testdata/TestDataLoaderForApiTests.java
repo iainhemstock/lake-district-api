@@ -57,9 +57,9 @@ public final class TestDataLoaderForApiTests {
             new Region(3, "Central Lake District"),
             new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
-                new OsMap(1, "OS Landranger 89"),
-                new OsMap(2, "OS Landranger 90"),
-                new OsMap(7, "OS Explorer OL6")))),
+                new OsMap(1, "OS Landranger 89", null),
+                new OsMap(2, "OS Landranger 90", null),
+                new OsMap(7, "OS Explorer OL6", null)))),
             new Classifications(new HashSet<>(Set.of(
                 new Classification(3, new ClassificationName("Marilyn")),
                 new Classification(15, new ClassificationName("Fellranger")),
