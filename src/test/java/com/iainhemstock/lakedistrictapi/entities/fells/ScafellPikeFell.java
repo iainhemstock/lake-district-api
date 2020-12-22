@@ -25,7 +25,7 @@ public final class ScafellPikeFell extends Fell {
             new Longitude(-3.211528),
             new SouthernRegion(),
             new NullFell(),
-            null,
+            new NullOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),
