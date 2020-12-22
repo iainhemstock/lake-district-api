@@ -28,4 +28,9 @@ public class OsMap {
         this.name = name;
         this.osMapName = osMapName;
     }
+
+    public OsMap(final int id, final OsMapName osMapName) {
+        this.id = id;
+        this.osMapName = osMapName;
+    }
 }
