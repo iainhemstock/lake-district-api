@@ -12,7 +12,7 @@ public class ClassificationConverter extends AbstractConverter<Classifications, 
     @Override
     protected Set<String> convert(final Classifications classifications) {
         Set<String> classificationNames = new HashSet<>();
-        classifications.forEach(classification -> classificationNames.add(classification.getName()));
+        classifications.forEach(classification -> classificationNames.add(classification.getClassificationName().toString()));
         return classificationNames;
     }
 }
