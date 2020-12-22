@@ -29,7 +29,6 @@ import java.util.Set;
 public final class TestDataLoaderForApiTests {
 
     @Autowired private FellRepository fellRepository;
-    @Autowired private ParentPeakRepository parentPeakRepository;
     @Autowired private RegionRepository regionRepository;
     @Autowired private OsMapRepository osMapRepository;
     @Autowired private ClassificationsRepository classificationsRepository;
@@ -43,7 +42,6 @@ public final class TestDataLoaderForApiTests {
         initializeRegionData();
         initializeOsMapData();
         initializeClassificationData();
-        initializeParentPeakData();
 
         logger.info("finished loading initial data for api tests");
     }
@@ -94,10 +92,5 @@ public final class TestDataLoaderForApiTests {
         classificationsRepository.save(new MarilynClassification());
         classificationsRepository.save(new BirkettClassfication());
         classificationsRepository.save(new FellrangerClassification());
-    }
-
-    private void initializeParentPeakData() {
-        parentPeakRepository.save(new ParentFell(new ScafellPikeFell().getOsMapRef()));
-        parentPeakRepository.save(new ParentFell(new GreatGableFell().getOsMapRef()));
     }
 }
