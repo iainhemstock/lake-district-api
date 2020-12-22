@@ -20,6 +20,7 @@ public class Classification {
     @Column(name = "id")
     @EqualsAndHashCode.Include
     private int id;
+    private ClassificationName classificationName;
 
     @Column(name = "name")
     @NotNull
@@ -27,7 +28,12 @@ public class Classification {
 
     public Classification(final int id, @NotNull String name, final ClassificationName classificationName) {
         this.id = id;
-        this.name = name;
+        this.classificationName = classificationName;
+    }
+
+    public Classification(final int id, final ClassificationName classificationName) {
+        this.id = id;
+        this.classificationName = classificationName;
     }
 
     private Classification() {
