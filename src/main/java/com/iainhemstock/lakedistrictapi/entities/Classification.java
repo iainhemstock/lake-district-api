@@ -20,15 +20,15 @@ public class Classification {
     @Column(name = "id")
     @EqualsAndHashCode.Include
     private int id;
-    private ClassificationName classificationName;
 
     @Column(name = "name")
     @NotNull
     private String name;
 
+    private ClassificationName classificationName;
+
     public Classification(final int id, @NotNull String name, final ClassificationName classificationName) {
-        this.id = id;
-        this.classificationName = classificationName;
+        this(id, classificationName);
     }
 
     public Classification(final int id, final ClassificationName classificationName) {
