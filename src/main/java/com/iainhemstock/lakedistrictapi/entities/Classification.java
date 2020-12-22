@@ -18,9 +18,6 @@ public class Classification {
     @EqualsAndHashCode.Include
     private int id;
 
-    @Transient
-    private String name;
-
     @Embedded
     @Column(name = "name")
     @NotNull
