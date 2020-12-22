@@ -18,9 +18,12 @@ public class OsMap {
     @EqualsAndHashCode.Include
     private int id;
 
+    @Transient
+    private String name;
+
+    @Embedded
     @Column(name = "name")
     @NotNull
-    private String name;
     private OsMapName osMapName;
 
     public OsMap(final int id, final OsMapName osMapName) {
