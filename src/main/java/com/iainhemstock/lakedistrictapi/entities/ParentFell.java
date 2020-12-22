@@ -23,10 +23,6 @@ public class ParentFell  {
         return osMapRef.toString().isEmpty();
     }
 
-    public static ParentFell newNull() {
-        return new NullFell();
-    }
-
     @Override
     public boolean equals(Object other) {
         return osMapRef.equals(((ParentFell) other).osMapRef);

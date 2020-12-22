@@ -97,7 +97,6 @@ public final class TestDataLoaderForApiTests {
     }
 
     private void initializeParentPeakData() {
-        parentPeakRepository.save(ParentFell.newNull());
         parentPeakRepository.save(new ParentFell(new ScafellPikeFell().getOsMapRef()));
         parentPeakRepository.save(new ParentFell(new GreatGableFell().getOsMapRef()));
     }

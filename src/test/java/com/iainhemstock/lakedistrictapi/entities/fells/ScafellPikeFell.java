@@ -2,7 +2,6 @@ package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.NullFell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
