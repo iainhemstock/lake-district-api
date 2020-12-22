@@ -27,10 +27,6 @@ public class Classification {
 
     private ClassificationName classificationName;
 
-    public Classification(final int id, @NotNull String name, final ClassificationName classificationName) {
-        this(id, classificationName);
-    }
-
     public Classification(final int id, final ClassificationName classificationName) {
         this.id = id;
         this.classificationName = classificationName;
