@@ -46,6 +46,7 @@ public class ModelMapperFellDTOAssemblerTest {
             new Longitude(-3.016054),
             new EasternRegion(),
             new ParentFell(new ScafellPikeFell().getOsMapRef()),
+            new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMap(),
                 new OL5ExplorerOsMap()))),
