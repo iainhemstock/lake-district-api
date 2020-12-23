@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public final class EasternRegion extends Region {
 
     public EasternRegion() {
-        super(1, "Eastern Lake District", new RegionName("Eastern Lake District"));
+        super(1, new RegionName("Eastern Lake District"));
     }
 
 }

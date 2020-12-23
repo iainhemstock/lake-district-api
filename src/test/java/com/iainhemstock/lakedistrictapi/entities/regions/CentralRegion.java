@@ -8,6 +8,6 @@ import javax.persistence.Entity;
 @Entity
 public final class CentralRegion extends Region {
     public CentralRegion() {
-        super(3, "Central Lake District", new RegionName("Central Lake District"));
+        super(3, new RegionName("Central Lake District"));
     }
 }
