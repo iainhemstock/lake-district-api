@@ -27,4 +27,9 @@ public class Region {
         this.id = id;
         this.regionName = regionName;
     }
+
+    public Region(final int id, @NotNull final RegionName regionName) {
+        this.id = id;
+        this.regionName = regionName;
+    }
 }
