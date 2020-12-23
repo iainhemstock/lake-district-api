@@ -3,10 +3,7 @@ package com.iainhemstock.lakedistrictapi.entities;
 import com.iainhemstock.lakedistrictapi.domain.RegionName;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -21,9 +18,12 @@ public class Region {
     @EqualsAndHashCode.Include
     private int id;
 
+    @Transient
+    private String name;
+
+    @Embedded
     @Column(name = "name")
     @NotNull
-    private String name;
     private RegionName regionName;
 
     public Region(final int id, @NotNull final String name, final RegionName regionName) {
