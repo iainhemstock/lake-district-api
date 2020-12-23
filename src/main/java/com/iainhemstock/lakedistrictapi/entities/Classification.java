@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
+import com.iainhemstock.lakedistrictapi.domain.ClassificationName;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,8 +19,9 @@ public class Classification {
     @EqualsAndHashCode.Include
     private int id;
 
+    @Embedded
     @Column(name = "name")
     @NotNull
-    private String name;
-
+    private ClassificationName classificationName;
+    
 }

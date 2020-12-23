@@ -54,16 +54,16 @@ public final class TestDataLoaderForApiTests {
             new Meters(425),
             new Latitude(54.482),
             new Longitude(-3.219),
-            new Region(3, "Central Lake District"),
+            new Region(3, new RegionName("Central Lake District")),
             new ScafellPikeFell().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
-                new OsMap(1, "OS Landranger 89"),
-                new OsMap(2, "OS Landranger 90"),
-                new OsMap(7, "OS Explorer OL6")))),
+                new OsMap(1, new OsMapName("OS Landranger 89")),
+                new OsMap(2, new OsMapName("OS Landranger 90")),
+                new OsMap(7, new OsMapName("OS Explorer OL6"))))),
             new Classifications(new HashSet<>(Set.of(
-                new Classification(3, "Marilyn"),
-                new Classification(15, "Fellranger"),
-                new Classification(11, "Birkett")))));
+                new Classification(3, new ClassificationName("Marilyn")),
+                new Classification(15, new ClassificationName("Fellranger")),
+                new Classification(11, new ClassificationName("Birkett"))))));
         fellRepository.save(greatGable);
     }
 

@@ -20,7 +20,7 @@ public class ClassificationsTests {
 
         Set<String> expectedNames = Set.of("Marilyn", "Birkett");
         Set<String> actualNames = new HashSet<>();
-        classifications.forEach(classification -> actualNames.add(classification.getName()));
+        classifications.forEach(classification -> actualNames.add(classification.getClassificationName().toString()));
         assertTrue(actualNames.containsAll(expectedNames) && expectedNames.containsAll(actualNames));
     }
 }

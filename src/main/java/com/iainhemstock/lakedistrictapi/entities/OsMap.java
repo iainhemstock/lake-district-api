@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
+import com.iainhemstock.lakedistrictapi.domain.OsMapName;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,8 +19,9 @@ public class OsMap {
     @EqualsAndHashCode.Include
     private int id;
 
+    @Embedded
     @Column(name = "name")
     @NotNull
-    private String name;
+    private OsMapName osMapName;
 
 }

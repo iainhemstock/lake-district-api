@@ -1,17 +1,14 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
+import com.iainhemstock.lakedistrictapi.domain.RegionName;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "regions")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Region {
@@ -21,8 +18,13 @@ public class Region {
     @EqualsAndHashCode.Include
     private int id;
 
+    @Embedded
     @Column(name = "name")
     @NotNull
-    private String name;
+    private RegionName regionName;
 
+    public Region(final int id, final RegionName regionName) {
+        this.id = id;
+        this.regionName = regionName;
+    }
 }
