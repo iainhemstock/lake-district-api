@@ -28,7 +28,6 @@ public class Region {
 
     public Region(final int id, @NotNull final String name, final RegionName regionName) {
         this.id = id;
-        this.name = name;
         this.regionName = regionName;
     }
 }
