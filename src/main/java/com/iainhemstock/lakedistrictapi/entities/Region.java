@@ -23,10 +23,6 @@ public class Region {
     @NotNull
     private RegionName regionName;
 
-    public Region(final int id, @NotNull final String name, final RegionName regionName) {
-        this(id, regionName);
-    }
-
     public Region(final int id, final RegionName regionName) {
         this.id = id;
         this.regionName = regionName;
