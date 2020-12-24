@@ -62,7 +62,7 @@ public class FellSimplifiedPagedCollectionMapper {
         Map<String, Link> links = new HashMap<>();
 
         if (currentPageIsNotFirstPage(page.getPageable())) {
-            mapFirstPageLink(page, links);
+            mapFirstPageLink(page);
             mapPreviousPageLink(page, links);
         }
 
@@ -77,7 +77,7 @@ public class FellSimplifiedPagedCollectionMapper {
         }
     }
 
-    private void mapFirstPageLink(final Page<Fell> page, final Map<String, Link> links) {
+    private void mapFirstPageLink(final Page<Fell> page) {
         pagedCollection.getLinks().setFirst(new Link(LinkRel.FIRST, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().first().getPageNumber(),
