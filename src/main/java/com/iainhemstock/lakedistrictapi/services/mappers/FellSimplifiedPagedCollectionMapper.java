@@ -66,7 +66,7 @@ public class FellSimplifiedPagedCollectionMapper {
             mapPreviousPageLink(page, links);
         }
 
-        pagedCollection.getLinks().setSelf(new Link(LinkRel.PARENT, (String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().setSelf(new Link(LinkRel.SELF, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().getPageNumber(),
             page.getNumberOfElements()))));
