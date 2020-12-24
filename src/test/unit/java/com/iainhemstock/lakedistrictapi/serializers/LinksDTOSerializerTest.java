@@ -22,10 +22,11 @@ public class LinksDTOSerializerTest {
     private static final String LAST_HREF = "http://localhost:8080/api/v1/fells?offset=213&limit=1";
 
     private JsonNode jsonNode;
+    private ObjectMapper objectMapper;
 
     @Before
     public void setUp() throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper = new ObjectMapper();
         LinksDTOSerializer serializer = new LinksDTOSerializer();
         objectMapper.registerModule(new SimpleModule().addSerializer(LinksDTO.class, serializer));
 
@@ -57,5 +58,13 @@ public class LinksDTOSerializerTest {
 
         assertThat(jsonNode.get("last").get("href").asText(),
             is(LAST_HREF));
+    }
+
+    @Test
+    public void will_write_empty_object_for_zero_links() throws JsonProcessingException {
+        String json = objectMapper.writeValueAsString(new LinksDTO());
+        jsonNode = objectMapper.readTree(json);
+
+        assertThat(jsonNode.isEmpty(), is(true));
     }
 }
