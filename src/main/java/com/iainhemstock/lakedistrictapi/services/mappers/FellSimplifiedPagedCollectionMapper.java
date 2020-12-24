@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.services.mappers;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
@@ -59,8 +60,6 @@ public class FellSimplifiedPagedCollectionMapper {
     }
 
     private void mapNavigationLinks(final Page<Fell> page) {
-        
-
         if (currentPageIsNotFirstPage(page.getPageable())) {
             mapFirstPageLink(page);
             mapPreviousPageLink(page);
