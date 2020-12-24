@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.services.mappers;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
@@ -51,58 +52,60 @@ public class FellSimplifiedPagedCollectionMapper {
             SummarisedFellDTO summarisedFellDTO = new SummarisedFellDTO();
             summarisedFellDTO.setName(fell.getName().toString());
             summarisedFellDTO.setRegion(fell.getRegion().getRegionName().toString());
-            summarisedFellDTO.getLinks().setSelf(new Link(LinkRel.SELF, (String.format("%s/fells/%s",
-                apiProperties.getBaseUrl(),
-                fell.getOsMapRef()))));
+            summarisedFellDTO.getLinks().setLinks(Map.of(
+                LinkRel.SELF.toString(),
+                String.format("%s/fells/%s",
+                    apiProperties.getBaseUrl(),
+                    fell.getOsMapRef())
+            ));
             pagedCollection.getItems().add(summarisedFellDTO);
         }
     }
 
     private void mapNavigationLinks(final Page<Fell> page) {
-        Map<String, Link> links = new HashMap<>();
-
+        pagedCollection.getLinks().setLinks(new HashMap<>());
         if (currentPageIsNotFirstPage(page.getPageable())) {
-            mapFirstPageLink(page, links);
-            mapPreviousPageLink(page, links);
+            mapFirstPageLink(page);
+            mapPreviousPageLink(page);
         }
 
-        pagedCollection.getLinks().setSelf(new Link(LinkRel.PARENT, (String.format("%s/fells?offset=%d&limit=%d",
+        pagedCollection.getLinks().getLinks().put(LinkRel.SELF.toString(), String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().getPageNumber(),
-            page.getNumberOfElements()))));
+            page.getNumberOfElements()));
 
         if (currentPageIsNotLastPage(page)) {
-            mapNextPageLink(page, links);
-            mapLastPageLink(page, links);
+            mapNextPageLink(page);
+            mapLastPageLink(page);
         }
     }
 
-    private void mapFirstPageLink(final Page<Fell> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setFirst(new Link(LinkRel.FIRST, (String.format("%s/fells?offset=%d&limit=%d",
+    private void mapFirstPageLink(final Page<Fell> page) {
+        pagedCollection.getLinks().getLinks().put(LinkRel.FIRST.toString(), String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().first().getPageNumber(),
-            page.getNumberOfElements()))));
+            page.getNumberOfElements()));
     }
 
-    private void mapPreviousPageLink(final Page<Fell> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setPrev(new Link(LinkRel.PREV, (String.format("%s/fells?offset=%d&limit=%d",
+    private void mapPreviousPageLink(final Page<Fell> page) {
+        pagedCollection.getLinks().getLinks().put(LinkRel.PREV.toString(), String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().previousOrFirst().getPageNumber(),
-            page.getNumberOfElements()))));
+            page.getNumberOfElements()));
     }
 
-    private void mapNextPageLink(final Page<Fell> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setNext(new Link(LinkRel.NEXT, (String.format("%s/fells?offset=%d&limit=%d",
+    private void mapNextPageLink(final Page<Fell> page) {
+        pagedCollection.getLinks().getLinks().put(LinkRel.NEXT.toString(), (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().next().getPageNumber(),
-            page.getNumberOfElements()))));
+            page.getNumberOfElements())));
     }
 
-    private void mapLastPageLink(final Page<Fell> page, final Map<String, Link> links) {
-        pagedCollection.getLinks().setLast(new Link(LinkRel.LAST, (String.format("%s/fells?offset=%d&limit=%d",
+    private void mapLastPageLink(final Page<Fell> page) {
+        pagedCollection.getLinks().getLinks().put(LinkRel.LAST.toString(), (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getTotalPages() - 1,
-            page.getNumberOfElements()))));
+            page.getNumberOfElements())));
     }
 
     private boolean currentPageIsNotLastPage(final Page<Fell> page) {

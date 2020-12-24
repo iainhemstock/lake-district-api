@@ -62,12 +62,5 @@ public class FellServiceImpl implements FellService {
         return pagedCollectionMapper.map(fellPage);
     }
 
-    public PagedCollection getSummarisedFells2(final int offset, final int limit) {
-        Page<Fell> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
-        PagedCollection pagedCollection = new PagedCollection(offset, limit, fellPage.toList(), fellPage.getTotalPages(), fellPage.getTotalElements());
-        pagedCollection.setFirstLink(new Link(LinkRel.FIRST, String.format("%s/fells?offset=%d&limit=%d", apiProperties.getBaseUrl(), offset, limit)));
-        return pagedCollection;
-    }
-
 
 }

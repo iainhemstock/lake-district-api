@@ -15,11 +15,5 @@ import java.util.Map;
 @JsonSerialize(using = LinksDTOSerializer.class)
 public class LinksDTO {
     private Map<String, String> links;
-    private Link first;
-    private Link prev;
-    private Link self;
-    private Link next;
-    private Link last;
-    private Link parent;
 }
 

@@ -14,7 +14,8 @@ public class LinksDTOSerializer extends JsonSerializer<LinksDTO> {
                           final SerializerProvider serializerProvider) throws IOException {
 
         jgen.writeStartObject();
-        linksDTO.getLinks().forEach((rel, href) -> serializeLink(jgen, rel, href));
+        if (linksDTO.getLinks() != null)
+            linksDTO.getLinks().forEach((rel, href) -> serializeLink(jgen, rel, href));
         jgen.writeEndObject();
     }
 
