@@ -59,11 +59,11 @@ public class FellSimplifiedPagedCollectionMapper {
     }
 
     private void mapNavigationLinks(final Page<Fell> page) {
-        Map<String, Link> links = new HashMap<>();
+        
 
         if (currentPageIsNotFirstPage(page.getPageable())) {
             mapFirstPageLink(page);
-            mapPreviousPageLink(page, links);
+            mapPreviousPageLink(page);
         }
 
         pagedCollection.getLinks().setSelf(new Link(LinkRel.SELF, (String.format("%s/fells?offset=%d&limit=%d",
@@ -72,8 +72,8 @@ public class FellSimplifiedPagedCollectionMapper {
             page.getNumberOfElements()))));
 
         if (currentPageIsNotLastPage(page)) {
-            mapNextPageLink(page, links);
-            mapLastPageLink(page, links);
+            mapNextPageLink(page);
+            mapLastPageLink(page);
         }
     }
 
@@ -84,21 +84,21 @@ public class FellSimplifiedPagedCollectionMapper {
             page.getNumberOfElements()))));
     }
 
-    private void mapPreviousPageLink(final Page<Fell> page, final Map<String, Link> links) {
+    private void mapPreviousPageLink(final Page<Fell> page) {
         pagedCollection.getLinks().setPrev(new Link(LinkRel.PREV, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().previousOrFirst().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapNextPageLink(final Page<Fell> page, final Map<String, Link> links) {
+    private void mapNextPageLink(final Page<Fell> page) {
         pagedCollection.getLinks().setNext(new Link(LinkRel.NEXT, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getPageable().next().getPageNumber(),
             page.getNumberOfElements()))));
     }
 
-    private void mapLastPageLink(final Page<Fell> page, final Map<String, Link> links) {
+    private void mapLastPageLink(final Page<Fell> page) {
         pagedCollection.getLinks().setLast(new Link(LinkRel.LAST, (String.format("%s/fells?offset=%d&limit=%d",
             apiProperties.getBaseUrl(),
             page.getTotalPages() - 1,
