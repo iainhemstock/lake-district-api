@@ -1,9 +1,9 @@
-package com.iainhemstock.lakedistrictapi.serializers;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
 
 import java.io.IOException;
 

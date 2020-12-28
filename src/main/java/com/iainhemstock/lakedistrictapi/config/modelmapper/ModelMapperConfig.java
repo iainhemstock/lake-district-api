@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.config.modelmapper;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.ClassificationConverter;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.DmsConverter;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.OsMapConverter;
-import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

@@ -1,7 +1,8 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.HttpRequestMethodNotSupportedExceptionHandler;
 import com.iainhemstock.lakedistrictapi.services.ApiClockServiceImpl;
 import org.junit.Before;
 import org.junit.Test;

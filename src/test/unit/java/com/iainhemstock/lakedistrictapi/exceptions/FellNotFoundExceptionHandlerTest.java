@@ -1,6 +1,8 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundExceptionHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
-package com.iainhemstock.lakedistrictapi.assemblers;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers;
 
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
 import org.springframework.stereotype.Service;
 

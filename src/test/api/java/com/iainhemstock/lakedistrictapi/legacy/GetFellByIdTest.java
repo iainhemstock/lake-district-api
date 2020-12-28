@@ -1,6 +1,6 @@
 //package com.iainhemstock.lakedistrictapi.legacy;
 //
-//import com.iainhemstock.lakedistrictapi.controllers.FellController;
+//import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.controllers.FellController;
 //import com.iainhemstock.lakedistrictapi.dtos.FleetwithPikeFellDto;
 //import com.iainhemstock.lakedistrictapi.dtos.ScafellPikeFellDto;
 //import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFellEntity;

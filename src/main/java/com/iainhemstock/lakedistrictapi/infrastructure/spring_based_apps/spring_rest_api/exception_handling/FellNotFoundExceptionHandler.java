@@ -1,6 +1,6 @@
-package com.iainhemstock.lakedistrictapi.exceptions;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling;
 
-import com.iainhemstock.lakedistrictapi.dtos.ErrorDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

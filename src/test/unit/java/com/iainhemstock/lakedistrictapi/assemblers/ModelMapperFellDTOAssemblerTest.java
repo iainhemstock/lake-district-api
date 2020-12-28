@@ -2,7 +2,8 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 
 import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.ModelMapperFellDTOAssembler;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;

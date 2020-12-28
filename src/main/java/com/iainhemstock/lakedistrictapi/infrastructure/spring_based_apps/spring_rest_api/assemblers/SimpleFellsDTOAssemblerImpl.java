@@ -1,9 +1,9 @@
-package com.iainhemstock.lakedistrictapi.assemblers;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
-import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
-import com.iainhemstock.lakedistrictapi.dtos.SimpleFellDTO;
-import com.iainhemstock.lakedistrictapi.dtos.SimpleFellsDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellsDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.SimpleFellsDTOAssembler;
 import org.springframework.beans.factory.annotation.Autowired;

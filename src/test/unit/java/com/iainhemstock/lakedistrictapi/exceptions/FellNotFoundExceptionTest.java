@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.exceptions;
 
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;

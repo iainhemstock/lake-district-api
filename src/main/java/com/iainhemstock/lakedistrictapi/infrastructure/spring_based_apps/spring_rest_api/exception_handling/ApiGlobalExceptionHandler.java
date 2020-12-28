@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.exceptions;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

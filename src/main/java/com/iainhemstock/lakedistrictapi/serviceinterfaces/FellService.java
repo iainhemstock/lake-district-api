@@ -1,8 +1,6 @@
 package com.iainhemstock.lakedistrictapi.serviceinterfaces;
 
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
-import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
-import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import org.springframework.data.domain.Page;
 

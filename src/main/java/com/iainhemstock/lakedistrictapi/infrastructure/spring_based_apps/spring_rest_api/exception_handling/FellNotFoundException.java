@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.exceptions;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling;
 
 public class FellNotFoundException extends RuntimeException {
     private final String resourceId;

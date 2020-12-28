@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.dtos;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

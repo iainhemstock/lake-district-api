@@ -3,10 +3,9 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.LinksDTOAssemblerImpl;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.util.Map;

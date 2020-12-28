@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.dtos.FellDTO;
-import com.iainhemstock.lakedistrictapi.dtos.ItemDTO;
-import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
 import org.junit.Before;
 import org.junit.Test;
 
