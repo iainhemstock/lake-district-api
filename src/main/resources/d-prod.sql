@@ -805,58 +805,58 @@ VALUES
 /***************************************************************************************************
 * Classifications
 ***************************************************************************************************/
-INSERT INTO classifications (name) VALUES ('Wainwright')^;
+INSERT INTO classificationEntities (name) VALUES ('Wainwright')^;
 SET @wainwright_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Hewitt')^;
+INSERT INTO classificationEntities (name) VALUES ('Hewitt')^;
 SET @hewitt_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Marilyn')^;
+INSERT INTO classificationEntities (name) VALUES ('Marilyn')^;
 SET @marilyn_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Nuttall')^;
+INSERT INTO classificationEntities (name) VALUES ('Nuttall')^;
 SET @nuttall_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Country high point')^;
+INSERT INTO classificationEntities (name) VALUES ('Country high point')^;
 SET @country_high_point_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Hardy')^;
+INSERT INTO classificationEntities (name) VALUES ('Hardy')^;
 SET @hardy_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Current county top')^;
+INSERT INTO classificationEntities (name) VALUES ('Current county top')^;
 SET @current_county_top_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Furth')^;
+INSERT INTO classificationEntities (name) VALUES ('Furth')^;
 SET @furth_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Historic county top')^;
+INSERT INTO classificationEntities (name) VALUES ('Historic county top')^;
 SET @historic_county_top_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Administrative county top')^;
+INSERT INTO classificationEntities (name) VALUES ('Administrative county top')^;
 SET @administrative_county_top_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Birkett')^;
+INSERT INTO classificationEntities (name) VALUES ('Birkett')^;
 SET @birkett_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('HuMP')^;
+INSERT INTO classificationEntities (name) VALUES ('HuMP')^;
 SET @hump_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Nuttal')^;
+INSERT INTO classificationEntities (name) VALUES ('Nuttal')^;
 SET @nuttal_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Simm')^;
+INSERT INTO classificationEntities (name) VALUES ('Simm')^;
 SET @simm_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Synge')^;
+INSERT INTO classificationEntities (name) VALUES ('Synge')^;
 SET @synge_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Fellranger')^;
+INSERT INTO classificationEntities (name) VALUES ('Fellranger')^;
 SET @fellranger_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Tump')^;
+INSERT INTO classificationEntities (name) VALUES ('Tump')^;
 SET @tump_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Dewey')^;
+INSERT INTO classificationEntities (name) VALUES ('Dewey')^;
 SET @dewey_id = (SELECT last_insert_id())^;
 
 /***************************************************************************************************

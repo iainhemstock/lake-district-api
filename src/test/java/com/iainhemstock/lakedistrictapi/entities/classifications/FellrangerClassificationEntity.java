@@ -6,8 +6,8 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import javax.persistence.Entity;
 
 @Entity
-public final class BirkettClassfication extends ClassificationEntity {
-    public BirkettClassfication() {
-        super(11, new ClassificationName("Birkett"));
+public final class FellrangerClassificationEntity extends ClassificationEntity {
+    public FellrangerClassificationEntity() {
+        super(15, new ClassificationName("Fellranger"));
     }
 }

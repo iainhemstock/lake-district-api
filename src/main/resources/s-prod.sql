@@ -24,7 +24,7 @@ CREATE TABLE os_maps (
     PRIMARY KEY (id)
 )^;
 
-CREATE TABLE classifications (
+CREATE TABLE classificationEntities (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL,
     PRIMARY KEY (id)
@@ -55,7 +55,7 @@ CREATE TABLE fells_classifications (
     fell_id INT NOT NULL,
     classification_id INT NOT NULL,
     FOREIGN KEY (fell_id) REFERENCES fells(id),
-    FOREIGN KEY (classification_id) REFERENCES classifications(id),
+    FOREIGN KEY (classification_id) REFERENCES classificationEntities(id),
     UNIQUE (fell_id, classification_id)
 )^;
 

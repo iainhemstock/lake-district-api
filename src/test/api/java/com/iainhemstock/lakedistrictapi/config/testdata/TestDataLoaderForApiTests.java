@@ -2,8 +2,8 @@ package com.iainhemstock.lakedistrictapi.config.testdata;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
-import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
+import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassificationEntity;
+import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
@@ -13,7 +13,7 @@ import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Classification;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ClassificationEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMap;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Region;
@@ -63,9 +63,9 @@ public final class TestDataLoaderForApiTests {
                 new OsMap(2, new OsMapName("OS Landranger 90")),
                 new OsMap(7, new OsMapName("OS Explorer OL6"))))),
             new Classifications(new HashSet<>(Set.of(
-                new Classification(3, new ClassificationName("Marilyn")),
-                new Classification(15, new ClassificationName("Fellranger")),
-                new Classification(11, new ClassificationName("Birkett"))))));
+                new ClassificationEntity(3, new ClassificationName("Marilyn")),
+                new ClassificationEntity(15, new ClassificationName("Fellranger")),
+                new ClassificationEntity(11, new ClassificationName("Birkett"))))));
         fellRepository.save(greatGable);
     }
 
@@ -91,8 +91,8 @@ public final class TestDataLoaderForApiTests {
     }
 
     private void initializeClassificationData() {
-        classificationsRepository.save(new MarilynClassification());
+        classificationsRepository.save(new MarilynClassificationEntity());
         classificationsRepository.save(new BirkettClassfication());
-        classificationsRepository.save(new FellrangerClassification());
+        classificationsRepository.save(new FellrangerClassificationEntity());
     }
 }

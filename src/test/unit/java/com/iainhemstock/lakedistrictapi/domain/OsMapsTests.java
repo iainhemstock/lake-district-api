@@ -1,7 +1,5 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
 import org.junit.Test;

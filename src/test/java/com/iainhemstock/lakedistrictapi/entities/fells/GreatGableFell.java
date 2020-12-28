@@ -30,8 +30,8 @@ public final class GreatGableFell extends Fell {
                 new OL6ExplorerOsMap()))),
             new Classifications(new HashSet<>(Set.of(
                 new BirkettClassfication(),
-                new MarilynClassification(),
-                new FellrangerClassification())))
+                new MarilynClassificationEntity(),
+                new FellrangerClassificationEntity())))
         );
     }
 }

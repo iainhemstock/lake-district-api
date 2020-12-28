@@ -28,7 +28,7 @@ public final class ScafellPikeFell extends Fell {
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),
                 new OL6ExplorerOsMap()))),
-            new Classifications(new HashSet<>(Set.of(new BirkettClassfication(), new MarilynClassification())))
+            new Classifications(new HashSet<>(Set.of(new BirkettClassfication(), new MarilynClassificationEntity())))
         );
     }
 }

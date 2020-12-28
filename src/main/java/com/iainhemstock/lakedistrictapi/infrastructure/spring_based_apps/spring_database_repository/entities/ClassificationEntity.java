@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Classification {
+public class ClassificationEntity {
 
     @Id
     @Column(name = "id")

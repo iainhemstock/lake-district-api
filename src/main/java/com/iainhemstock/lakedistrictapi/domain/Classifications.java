@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Classification;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ClassificationEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -18,15 +18,15 @@ public class Classifications {
         joinColumns = @JoinColumn(name = "os_map_ref"),
         inverseJoinColumns = @JoinColumn(name = "classification_id"),
         uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
-    private Set<Classification> classifications;
+    private Set<ClassificationEntity> classificationEntities;
 
-    public Classifications(final Set<Classification> classifications) {
-        this.classifications = classifications;
+    public Classifications(final Set<ClassificationEntity> classificationEntities) {
+        this.classificationEntities = classificationEntities;
     }
 
-    public void forEach(final Consumer<? super Classification> consumer) {
-        for (Classification classification : this.classifications) {
-            consumer.accept(classification);
+    public void forEach(final Consumer<? super ClassificationEntity> consumer) {
+        for (ClassificationEntity classificationEntity : this.classificationEntities) {
+            consumer.accept(classificationEntity);
         }
     }
 }

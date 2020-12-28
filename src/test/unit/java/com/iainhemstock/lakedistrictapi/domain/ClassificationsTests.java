@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
+import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class ClassificationsTests {
     @Test
     public void can_perform_some_action_for_each_item() {
         Classifications classifications = new Classifications(Set.of(
-            new MarilynClassification(),
+            new MarilynClassificationEntity(),
             new BirkettClassfication()));
 
         Set<String> expectedNames = Set.of("Marilyn", "Birkett");

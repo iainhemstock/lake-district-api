@@ -10,23 +10,23 @@ INSERT INTO regions (id, name)
         (8, 'Scottish Highlands'),--8
         (9, 'Snowdonia');--9
 
-INSERT INTO classifications (id, name) VALUES (1, 'Wainwright');--1
-INSERT INTO classifications (id, name) VALUES (2, 'Hewitt');--2
-INSERT INTO classifications (id, name) VALUES (3, 'Marilyn');--3
-INSERT INTO classifications (id, name) VALUES (4, 'Nuttall');--4
-INSERT INTO classifications (id, name) VALUES (5, 'Country high point');--5
-INSERT INTO classifications (id, name) VALUES (6, 'Hardy');--6
-INSERT INTO classifications (id, name) VALUES (7, 'Current county top');--7
-INSERT INTO classifications (id, name) VALUES (8, 'Furth');--8
-INSERT INTO classifications (id, name) VALUES (9, 'Historic county top');--9
-INSERT INTO classifications (id, name) VALUES (10, 'Administrative county top');--10
-INSERT INTO classifications (id, name) VALUES (11, 'Birkett');--11
-INSERT INTO classifications (id, name) VALUES (12, 'HuMP');--12
-INSERT INTO classifications (id, name) VALUES (13, 'Simm');--13
-INSERT INTO classifications (id, name) VALUES (14, 'Synge');--14
-INSERT INTO classifications (id, name) VALUES (15, 'Fellranger');--15
-INSERT INTO classifications (id, name) VALUES (16, 'Tump');--16
-INSERT INTO classifications (id, name) VALUES (17, 'Dewey');--17
+INSERT INTO classificationEntities (id, name) VALUES (1, 'Wainwright');--1
+INSERT INTO classificationEntities (id, name) VALUES (2, 'Hewitt');--2
+INSERT INTO classificationEntities (id, name) VALUES (3, 'Marilyn');--3
+INSERT INTO classificationEntities (id, name) VALUES (4, 'Nuttall');--4
+INSERT INTO classificationEntities (id, name) VALUES (5, 'Country high point');--5
+INSERT INTO classificationEntities (id, name) VALUES (6, 'Hardy');--6
+INSERT INTO classificationEntities (id, name) VALUES (7, 'Current county top');--7
+INSERT INTO classificationEntities (id, name) VALUES (8, 'Furth');--8
+INSERT INTO classificationEntities (id, name) VALUES (9, 'Historic county top');--9
+INSERT INTO classificationEntities (id, name) VALUES (10, 'Administrative county top');--10
+INSERT INTO classificationEntities (id, name) VALUES (11, 'Birkett');--11
+INSERT INTO classificationEntities (id, name) VALUES (12, 'HuMP');--12
+INSERT INTO classificationEntities (id, name) VALUES (13, 'Simm');--13
+INSERT INTO classificationEntities (id, name) VALUES (14, 'Synge');--14
+INSERT INTO classificationEntities (id, name) VALUES (15, 'Fellranger');--15
+INSERT INTO classificationEntities (id, name) VALUES (16, 'Tump');--16
+INSERT INTO classificationEntities (id, name) VALUES (17, 'Dewey');--17
 
 INSERT INTO os_maps (id, name) VALUES (1, 'OS Landranger 89');--1
 INSERT INTO os_maps (id, name) VALUES (2, 'OS Landranger 90');--2

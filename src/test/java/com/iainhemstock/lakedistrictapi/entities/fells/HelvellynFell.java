@@ -27,7 +27,7 @@ public class HelvellynFell extends Fell {
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMap(),
                 new OL5ExplorerOsMap()))),
-            new Classifications(new HashSet<>(Set.of(new MarilynClassification()))));
+            new Classifications(new HashSet<>(Set.of(new MarilynClassificationEntity()))));
     }
 
 }

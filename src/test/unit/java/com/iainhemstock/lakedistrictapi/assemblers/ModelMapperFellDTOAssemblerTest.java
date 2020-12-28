@@ -2,10 +2,10 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 
 import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.ModelMapperFellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
@@ -49,7 +49,7 @@ public class ModelMapperFellDTOAssemblerTest {
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMap(),
                 new OL5ExplorerOsMap()))),
-            new Classifications(new HashSet<>(Set.of(new MarilynClassification()))));
+            new Classifications(new HashSet<>(Set.of(new MarilynClassificationEntity()))));
         helvellynFell.setLatLongToDmsConversionService(new LatLongToDmsConversionServiceImpl());
         helvellynFell.setMeterToFeetConversionService(new MeterToFeetConversionServiceImpl());
 
