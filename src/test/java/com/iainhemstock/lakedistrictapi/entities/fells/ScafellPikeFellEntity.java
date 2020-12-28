@@ -3,9 +3,9 @@ package com.iainhemstock.lakedistrictapi.entities.fells;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
 
 import javax.persistence.Entity;
@@ -25,9 +25,9 @@ public final class ScafellPikeFellEntity extends FellEntity {
             new SouthernRegion(),
             new NullOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
-                new Landranger89OsMap(),
-                new Landranger90OsMap(),
-                new OL6ExplorerOsMap()))),
+                new Landranger89OsMapEntity(),
+                new Landranger90OsMapEntity(),
+                new OL6ExplorerOsMapEntity()))),
             new Classifications(new HashSet<>(Set.of(new BirkettClassfication(), new MarilynClassificationEntity())))
         );
     }

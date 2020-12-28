@@ -6,16 +6,15 @@ import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClass
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.*;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ClassificationEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMap;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMapEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Region;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.*;
 import org.slf4j.Logger;
@@ -59,9 +58,9 @@ public final class TestDataLoaderForApiTests {
             new Region(3, new RegionName("Central Lake District")),
             new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
-                new OsMap(1, new OsMapName("OS Landranger 89")),
-                new OsMap(2, new OsMapName("OS Landranger 90")),
-                new OsMap(7, new OsMapName("OS Explorer OL6"))))),
+                new OsMapEntity(1, new OsMapName("OS Landranger 89")),
+                new OsMapEntity(2, new OsMapName("OS Landranger 90")),
+                new OsMapEntity(7, new OsMapName("OS Explorer OL6"))))),
             new Classifications(new HashSet<>(Set.of(
                 new ClassificationEntity(3, new ClassificationName("Marilyn")),
                 new ClassificationEntity(15, new ClassificationName("Fellranger")),
@@ -84,10 +83,10 @@ public final class TestDataLoaderForApiTests {
     }
 
     private void initializeOsMapData() {
-        osMapRepository.save(new Landranger89OsMap());
-        osMapRepository.save(new Landranger90OsMap());
-        osMapRepository.save(new OL5ExplorerOsMap());
-        osMapRepository.save(new OL6ExplorerOsMap());
+        osMapRepository.save(new Landranger89OsMapEntity());
+        osMapRepository.save(new Landranger90OsMapEntity());
+        osMapRepository.save(new OL5ExplorerOsMapEntity());
+        osMapRepository.save(new OL6ExplorerOsMapEntity());
     }
 
     private void initializeClassificationData() {

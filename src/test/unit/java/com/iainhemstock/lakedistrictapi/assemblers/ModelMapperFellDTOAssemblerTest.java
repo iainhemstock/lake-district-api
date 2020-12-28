@@ -3,12 +3,12 @@ package com.iainhemstock.lakedistrictapi.assemblers;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.ModelMapperFellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
@@ -47,8 +47,8 @@ public class ModelMapperFellDTOAssemblerTest {
             new EasternRegion(),
             new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
-                new Landranger90OsMap(),
-                new OL5ExplorerOsMap()))),
+                new Landranger90OsMapEntity(),
+                new OL5ExplorerOsMapEntity()))),
             new Classifications(new HashSet<>(Set.of(new MarilynClassificationEntity()))));
         helvellynFellEntity.setLatLongToDmsConversionService(new LatLongToDmsConversionServiceImpl());
         helvellynFellEntity.setMeterToFeetConversionService(new MeterToFeetConversionServiceImpl());

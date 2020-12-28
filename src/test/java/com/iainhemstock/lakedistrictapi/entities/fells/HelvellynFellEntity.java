@@ -1,10 +1,10 @@
 package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 
 import javax.persistence.Entity;
@@ -25,8 +25,8 @@ public class HelvellynFellEntity extends FellEntity {
             new EasternRegion(),
             new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
-                new Landranger90OsMap(),
-                new OL5ExplorerOsMap()))),
+                new Landranger90OsMapEntity(),
+                new OL5ExplorerOsMapEntity()))),
             new Classifications(new HashSet<>(Set.of(new MarilynClassificationEntity()))));
     }
 

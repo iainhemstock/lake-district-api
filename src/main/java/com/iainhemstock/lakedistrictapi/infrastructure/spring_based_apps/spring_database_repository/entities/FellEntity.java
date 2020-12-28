@@ -48,7 +48,7 @@ public class FellEntity {
     private OsMapRef parentOsMapRef;
 
     @Embedded
-    private OsMaps osMaps;
+    private OsMaps osMapEntities;
 
     @Embedded
     private Classifications classifications;
@@ -67,7 +67,7 @@ public class FellEntity {
                       final Longitude longitude,
                       @NotNull final Region region,
                       final OsMapRef parentOsMapRef,
-                      final OsMaps osMaps,
+                      final OsMaps osMapEntities,
                       final Classifications classifications) {
         this.osMapRef = osMapRef;
         this.name = name;
@@ -77,7 +77,7 @@ public class FellEntity {
         this.longitude = longitude;
         this.region = region;
         this.parentOsMapRef = parentOsMapRef;
-        this.osMaps = osMaps;
+        this.osMapEntities = osMapEntities;
         this.classifications = classifications;
     }
 

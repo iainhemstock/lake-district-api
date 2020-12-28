@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class OsMap {
+public class OsMapEntity {
 
     @Id
     @Column(name = "id")
