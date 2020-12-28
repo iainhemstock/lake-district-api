@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 public class FellServiceImpl implements FellService {
     private final FellRepository fellRepository;
     private final ApiClockService apiClockService;
@@ -25,7 +24,6 @@ public class FellServiceImpl implements FellService {
     private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final ApiProperties apiProperties;
 
-    @Autowired
     public FellServiceImpl(final FellRepository fellRepository,
                            final ApiClockService apiClockService,
                            final ApiProperties apiProperties,
