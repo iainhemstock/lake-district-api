@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.application_logic.converters;
+package com.iainhemstock.lakedistrictapi.application_logic;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;

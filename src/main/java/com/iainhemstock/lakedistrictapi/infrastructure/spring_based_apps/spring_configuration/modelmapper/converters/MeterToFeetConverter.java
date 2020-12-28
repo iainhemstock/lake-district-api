@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.config.modelmapper.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.Meters;
-import com.iainhemstock.lakedistrictapi.application_logic.converters.MeterToFeetConversionServiceImpl;
+import com.iainhemstock.lakedistrictapi.application_logic.MeterToFeetConversionServiceImpl;
 import org.modelmapper.AbstractConverter;
 
 public class MeterToFeetConverter extends AbstractConverter<Integer, String> {

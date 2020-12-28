@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.services.converters;
 
-import com.iainhemstock.lakedistrictapi.application_logic.converters.MeterToFeetConversionServiceImpl;
+import com.iainhemstock.lakedistrictapi.application_logic.MeterToFeetConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.domain.Feet;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
