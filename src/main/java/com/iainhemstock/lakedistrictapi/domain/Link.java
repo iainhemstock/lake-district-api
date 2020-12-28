@@ -1,8 +1,10 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class Link {
     private final LinkRel rel;
     private final String href;

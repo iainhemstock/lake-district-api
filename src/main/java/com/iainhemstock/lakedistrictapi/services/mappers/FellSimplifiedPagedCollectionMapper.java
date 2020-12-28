@@ -58,7 +58,7 @@ public class FellSimplifiedPagedCollectionMapper {
                     apiProperties.getBaseUrl(),
                     fell.getOsMapRef())
             ));
-            pagedCollection.getItems().add(summarisedFellDTO);
+//            pagedCollection.getItems().add(summarisedFellDTO);
         }
     }
 

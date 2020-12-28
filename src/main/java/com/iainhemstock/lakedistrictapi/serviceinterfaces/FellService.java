@@ -4,8 +4,9 @@ import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
 import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
+import org.springframework.data.domain.Page;
 
 public interface FellService {
     Fell getById(final OsMapRef osMapRef);
-    PagedCollectionDTO<SummarisedFellDTO> getSummarisedFells(final Integer offset, final Integer limit);
+    Page<Fell> getFells(int offset, int limit);
 }

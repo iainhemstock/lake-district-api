@@ -16,10 +16,10 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Scenario Outline: API provides contextual navigational links depending on the current page
 		When making a GET request to http://localhost:8080/api/v1/fells
-		Then the body will contain the following <first>, <prev>, <current>, <next> and <last> links
+		Then the body will contain the following <prev>, <current> and <next> links
 		Examples:
-			| first | prev | current                                             | next                                                 | last                                                |
-			|       |      | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1  | http://localhost:8080/api/v1/fells?offset=2&limit=1 |
+			| prev | current                                             | next                                                 |
+			|      | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1  |
 
 	Scenario Outline: API provides pagination metadata for this collection of resources
 		When making a GET request to http://localhost:8080/api/v1/fells

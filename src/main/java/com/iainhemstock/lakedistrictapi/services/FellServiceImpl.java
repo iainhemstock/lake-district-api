@@ -8,6 +8,7 @@ import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.*;
+//import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,12 +55,15 @@ public class FellServiceImpl implements FellService {
         return fellEntity;
     }
 
-    public PagedCollectionDTO<SummarisedFellDTO> getSummarisedFells(final Integer offset, final Integer limit) {
-        if (offset < 0) {
-            throw new IllegalArgumentException("Param 'offset' cannot be negative");
-        }
-        Page<Fell> fellPage = fellRepository.findAll(PageRequest.of(offset, limit));
-        return pagedCollectionMapper.map(fellPage);
+    @Override
+    public Page<Fell> getFells(final int offset, final int limit) {
+        if (offset < 0)
+            throw new IllegalArgumentException("Offset cannot be negative");
+
+        if (limit <= 0)
+            throw new IllegalArgumentException("Limit cannot be negative or zero");
+
+        return fellRepository.findAll(PageRequest.of(offset, limit));
     }
 
 

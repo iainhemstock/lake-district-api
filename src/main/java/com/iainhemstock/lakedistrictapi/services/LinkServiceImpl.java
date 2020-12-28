@@ -3,8 +3,11 @@ package com.iainhemstock.lakedistrictapi.services;
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.domain.Links;
+import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.nonNull;
@@ -24,5 +27,28 @@ public class LinkServiceImpl implements LinkService {
         if (!nonNull(resource)) throw new NullPointerException("Argument 'resource' cannot be null");
         if (resourceId.isBlank()) throw new IllegalArgumentException("Argument 'resourceId' cannot be blank");
         return new Link(rel, String.format("%s/%s/%s", apiProperties.getBaseUrl(), resource, resourceId));
+    }
+
+    @Override
+    public Links buildNavLinksForPageAndCollectionType(final Page<Fell> page, final String collection) {
+        if (page.getPageable().isUnpaged())
+            return Links.empty();
+
+        Links links = new Links();
+
+        if (page.hasPrevious())
+            links.add(buildLink(collection, LinkRel.PREV, page.previousPageable().getOffset(), page.previousPageable().getPageSize()));
+
+        links.add(buildLink(collection, LinkRel.SELF, page.getPageable().getOffset(), page.getPageable().getPageSize()));
+
+        if (page.hasNext())
+            links.add(buildLink(collection, LinkRel.NEXT, page.nextPageable().getOffset(), page.nextPageable().getPageSize()));
+
+        return links;
+    }
+
+    private Link buildLink(final String collection, final LinkRel rel, final long offset, final int limit) {
+        return new Link(rel, String.format("%s/%s?offset=%d&limit=%d",
+            apiProperties.getBaseUrl(), collection, offset, limit));
     }
 }

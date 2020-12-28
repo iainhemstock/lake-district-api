@@ -10,4 +10,9 @@ public final class SouthernRegion extends Region {
     public SouthernRegion() {
         super(4, new RegionName("Southern Lake District"));
     }
+
+    @Override
+    public String toString() {
+        return this.getRegionName().toString();
+    }
 }

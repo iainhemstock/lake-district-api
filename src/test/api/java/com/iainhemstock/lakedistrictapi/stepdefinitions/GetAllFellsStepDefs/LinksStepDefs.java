@@ -13,15 +13,10 @@ public class LinksStepDefs {
     @Autowired
     private CommonTestState commonState;
 
-    @Then("^the body will contain the following (.*), (.*), (.*), (.*) and (.*) links$")
-    public void pageWillContainFirstPrevCurrentNextAndLastLinks(final String expectedFirstLink,
-                                                                   final String expectedPrevLink,
-                                                                   final String expectedSelfLink,
-                                                                   final String expectedNextLink,
-                                                                   final String expectedLastLink) throws Exception {
-
-        if (expectedFirstLink.isBlank()) assertLinkDoesNotExistInResponse(PagedCollectionAttributes.FIRST_HREF);
-        else assertLinkDoesExistInResponse(PagedCollectionAttributes.FIRST_HREF, expectedFirstLink);
+    @Then("^the body will contain the following (.*), (.*) and (.*) links$")
+    public void pageWillContainFirstPrevCurrentNextAndLastLinks(final String expectedPrevLink,
+                                                                final String expectedSelfLink,
+                                                                final String expectedNextLink) throws Exception {
 
         if (expectedPrevLink.isBlank()) assertLinkDoesNotExistInResponse(PagedCollectionAttributes.PREV_HREF);
         else assertLinkDoesExistInResponse(PagedCollectionAttributes.PREV_HREF, expectedPrevLink);
@@ -31,10 +26,6 @@ public class LinksStepDefs {
 
         if (expectedNextLink.isBlank()) assertLinkDoesNotExistInResponse(PagedCollectionAttributes.NEXT_HREF);
         else assertLinkDoesExistInResponse(PagedCollectionAttributes.NEXT_HREF, expectedNextLink);
-
-        if (expectedLastLink.isBlank()) assertLinkDoesNotExistInResponse(PagedCollectionAttributes.LAST_HREF);
-        else assertLinkDoesExistInResponse(PagedCollectionAttributes.LAST_HREF, expectedLastLink);
-
     }
 
     private void assertLinkDoesNotExistInResponse(final PagedCollectionAttributes pageObjectLink) throws Exception {

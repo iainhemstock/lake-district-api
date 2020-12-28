@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class LinksTest {
@@ -29,5 +30,32 @@ public class LinksTest {
         links.forEach(link -> linksList.add(link));
 
         assertThat(linksList, is(List.of(expectedLink1, expectedLink2)));
+    }
+
+    @Test
+    public void when_adding_links_then_they_are_saved() {
+        Link expectedLink1 = new Link(LinkRel.SELF, String.format("%s/fells/NY123456", apiProperties.getBaseUrl()));
+        Link expectedLink2 = new Link(LinkRel.PARENT, String.format("%s/fells/NY987654", apiProperties.getBaseUrl()));
+
+        Links actualLinks = new Links();
+        actualLinks.add(expectedLink1);
+        actualLinks.add(expectedLink2);
+        Links expectedLinks = new Links(expectedLink1, expectedLink2);
+
+        assertThat(actualLinks, is(expectedLinks));
+    }
+
+    @Test
+    public void given_rel_type_link_already_exists_when_adding_same_rel_type_again_then_old_one_is_replaced_with_new_one() {
+        Link selfLink = new Link(LinkRel.SELF, String.format("%s/fells/NY123456", apiProperties.getBaseUrl()));
+        Link otherSelfLinkWithDifferentHref = new Link(LinkRel.SELF, String.format("%s/fells/NY987654", apiProperties.getBaseUrl()));
+
+        Links actualLinks = new Links();
+        actualLinks.add(selfLink);
+        actualLinks.add(otherSelfLinkWithDifferentHref);
+
+        Links expectedLinks = new Links(otherSelfLinkWithDifferentHref);
+
+        assertThat(actualLinks, is(equalTo(expectedLinks)));
     }
 }

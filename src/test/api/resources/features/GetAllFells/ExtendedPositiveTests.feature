@@ -26,12 +26,12 @@ Feature: GET /fells?page={}&size={} - EXTENDED POSITIVE TESTS WITH OPTIONAL PARA
 	#VerifyResponsePayload
 	Scenario Outline: API provides contextual navigational links depending on the current page
 		When making a GET request to http://localhost:8080/api/v1/fells?offset=<offset>&limit=<limit>
-		Then the body will contain the following <first>, <prev>, <current>, <next> and <last> links
+		Then the body will contain the following <prev>, <current> and <next> links
 		Examples:
-			| offset | limit | first                                               | prev                                                | current                                             | next                                                 | last                                                |
-			| 0      | 1     |                                                     |                                                     | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1  | http://localhost:8080/api/v1/fells?offset=2&limit=1 |
-			| 1      | 1     | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1 | http://localhost:8080/api/v1/fells?offset=2&limit=1  | http://localhost:8080/api/v1/fells?offset=2&limit=1 |
-			| 2      | 1     | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1 | http://localhost:8080/api/v1/fells?offset=2&limit=1 |                                                      |                                                     |
+			| offset | limit | prev                                                | current                                             | next                                                 |
+			| 0      | 1     |                                                     | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1  |
+			| 1      | 1     | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1 | http://localhost:8080/api/v1/fells?offset=2&limit=1  |
+			| 2      | 1     | http://localhost:8080/api/v1/fells?offset=1&limit=1 | http://localhost:8080/api/v1/fells?offset=2&limit=1 |                                                      |
 
 	#VerifyResponsePayload
 	Scenario Outline: API provides pagination metadata for this collection of resources

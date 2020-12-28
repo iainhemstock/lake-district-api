@@ -1,5 +1,7 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
+import com.iainhemstock.lakedistrictapi.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.dtos.SimpleFellsDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,5 +37,9 @@ public class PagedCollection {
         nextLink = new Link(LinkRel.NEXT, String.format("http://localhost:8080/api/v1/fells?offset=%d&limit=%d", offset+1, limit));
         lastLink = new Link(LinkRel.LAST, String.format("http://localhost:8080/api/v1/fells?offset=%d&limit=%d", totalPages, limit));
         totalItems = totalElements;
+    }
+
+    public PagedCollection(final LinksDTO linksDTO, final Object objectDTO) {
+        throw new UnsupportedOperationException();
     }
 }

@@ -10,4 +10,9 @@ public final class CentralRegion extends Region {
     public CentralRegion() {
         super(3, new RegionName("Central Lake District"));
     }
+
+    @Override
+    public String toString() {
+        return this.getRegionName().toString();
+    }
 }
