@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.infrastructure.spring_application_main;
+package com.iainhemstock.lakedistrictapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
