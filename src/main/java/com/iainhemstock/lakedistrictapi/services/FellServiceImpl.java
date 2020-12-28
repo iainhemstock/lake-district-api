@@ -2,14 +2,11 @@ package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.config.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.dtos.PagedCollectionDTO;
-import com.iainhemstock.lakedistrictapi.dtos.SummarisedFellDTO;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.*;
 //import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
-import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +19,6 @@ import java.util.Optional;
 public class FellServiceImpl implements FellService {
     private final FellRepository fellRepository;
     private final ApiClockService apiClockService;
-    private final FellSimplifiedPagedCollectionMapper pagedCollectionMapper;
     private final MeterToFeetConversionService meterToFeetConversionService;
     private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final ApiProperties apiProperties;
@@ -30,14 +26,12 @@ public class FellServiceImpl implements FellService {
     @Autowired
     public FellServiceImpl(final FellRepository fellRepository,
                            final ApiClockService apiClockService,
-                           final FellSimplifiedPagedCollectionMapper pagedCollectionMapper,
                            final ApiProperties apiProperties,
                            final MeterToFeetConversionService meterToFeetConversionService,
                            final LatLongToDmsConversionService latLongToDmsConversionService) {
         this.apiClockService = apiClockService;
         this.apiProperties = apiProperties;
         this.fellRepository = fellRepository;
-        this.pagedCollectionMapper = pagedCollectionMapper;
         this.meterToFeetConversionService = meterToFeetConversionService;
         this.latLongToDmsConversionService = latLongToDmsConversionService;
     }

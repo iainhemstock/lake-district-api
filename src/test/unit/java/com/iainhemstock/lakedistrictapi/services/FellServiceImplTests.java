@@ -9,8 +9,6 @@ import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
-import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
-import com.sun.el.stream.Stream;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -20,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -46,7 +43,6 @@ public class FellServiceImplTests {
 
     @Mock private ApiClockService apiClockService;
     @Mock private FellRepository fellRepository;
-    @Mock private FellSimplifiedPagedCollectionMapper fellSimplifiedPagedCollectionMapper;
     @Mock private MeterToFeetConversionService meterToFeetConversionService;
     @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
 
@@ -58,7 +54,6 @@ public class FellServiceImplTests {
         fellService = new FellServiceImpl(
             fellRepository,
             apiClockService,
-            fellSimplifiedPagedCollectionMapper,
             apiProperties,
             meterToFeetConversionService,
             latLongToDmsConversionService);
