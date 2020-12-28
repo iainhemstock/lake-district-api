@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.services;
 
-import com.iainhemstock.lakedistrictapi.config.ApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
