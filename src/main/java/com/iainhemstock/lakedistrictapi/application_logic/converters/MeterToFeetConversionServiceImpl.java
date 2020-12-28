@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.services.converters;
+package com.iainhemstock.lakedistrictapi.application_logic.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.Feet;
 import com.iainhemstock.lakedistrictapi.domain.Meters;

@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.services;
+package com.iainhemstock.lakedistrictapi.application_logic;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import org.springframework.beans.factory.annotation.Autowired;

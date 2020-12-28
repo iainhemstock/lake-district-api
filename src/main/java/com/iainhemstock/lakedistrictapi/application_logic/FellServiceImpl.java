@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.services;
+package com.iainhemstock.lakedistrictapi.application_logic;
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;

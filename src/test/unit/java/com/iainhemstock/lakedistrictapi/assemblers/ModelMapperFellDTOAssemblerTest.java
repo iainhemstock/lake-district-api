@@ -11,8 +11,8 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellDTOAssembler;
-import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
-import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
+import com.iainhemstock.lakedistrictapi.application_logic.converters.LatLongToDmsConversionServiceImpl;
+import com.iainhemstock.lakedistrictapi.application_logic.converters.MeterToFeetConversionServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;
