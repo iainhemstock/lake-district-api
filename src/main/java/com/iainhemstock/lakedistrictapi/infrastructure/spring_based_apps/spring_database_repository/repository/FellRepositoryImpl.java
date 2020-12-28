@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
@@ -13,10 +14,12 @@ import java.util.Optional;
 
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
+    private DomainToEntityAssembler domainToEntityAssembler;
 
     @Autowired
-    public FellRepositoryImpl(final FellEntityRepository fellEntityRepository) {
+    public FellRepositoryImpl(final FellEntityRepository fellEntityRepository, final DomainToEntityAssembler domainToEntityAssembler) {
         this.fellEntityRepository = fellEntityRepository;
+        this.domainToEntityAssembler = domainToEntityAssembler;
     }
 
     @Override
@@ -26,7 +29,9 @@ public class FellRepositoryImpl implements FellRepository {
 
     @Override
     public Optional<Fell> findFellById(final OsMapRef osMapRef) {
-        throw new UnsupportedOperationException();
+        Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
+        Fell domain = this.domainToEntityAssembler.toDomain(entity.get());
+        return Optional.of(domain);
     }
 
     @Override

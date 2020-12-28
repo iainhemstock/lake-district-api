@@ -1,10 +1,14 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 public class Fell {
     private OsMapRef osMapRef;
     private FellName name;
