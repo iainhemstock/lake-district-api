@@ -1,6 +1,5 @@
 package com.iainhemstock.lakedistrictapi;
 
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_application_main.Application;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
