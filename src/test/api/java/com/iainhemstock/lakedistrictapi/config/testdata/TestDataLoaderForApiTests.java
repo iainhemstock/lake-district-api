@@ -16,7 +16,10 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMapEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.RegionEntity;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.ClassificationEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.OsMapEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.RegionEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.FellEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
