@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellsDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.SimpleFellsDTOAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,19 +21,19 @@ public class SimpleFellsDTOAssemblerImpl implements SimpleFellsDTOAssembler {
     }
 
     @Override
-    public SimpleFellsDTO toDTO(final Set<Fell> fells) {
-        if (fells == null)
+    public SimpleFellsDTO toDTO(final Set<FellEntity> fellEntities) {
+        if (fellEntities == null)
             throw new NullPointerException("Set of [Fell] cannot be null");
 
         SimpleFellsDTO simpleFellsDTO = new SimpleFellsDTO();
         simpleFellsDTO.setFells(new LinkedHashSet<>());
 
-        for (final Fell fell : fells) {
-            if (fell == null)
+        for (final FellEntity fellEntity : fellEntities) {
+            if (fellEntity == null)
                 throw new NullPointerException("Cannot map null Fell");
             LinksDTO linksDTO = new LinksDTO();
-            linksDTO.setLinks(Map.of("self", String.format("%s/fells/%s", apiProperties.getBaseUrl(), fell.getOsMapRef())));
-            simpleFellsDTO.getFells().add(new SimpleFellDTO(fell.getName().toString(), fell.getRegion().toString(), linksDTO));
+            linksDTO.setLinks(Map.of("self", String.format("%s/fells/%s", apiProperties.getBaseUrl(), fellEntity.getOsMapRef())));
+            simpleFellsDTO.getFells().add(new SimpleFellDTO(fellEntity.getName().toString(), fellEntity.getRegion().toString(), linksDTO));
         }
 
         return simpleFellsDTO;

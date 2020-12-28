@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Fell {
+public class FellEntity {
 
     @EmbeddedId
     @AttributeOverride(name = "value", column = @Column(name = "os_map_ref"))
@@ -59,16 +59,16 @@ public class Fell {
     @Transient
     private MeterToFeetConversionService meterToFeetConversionService;
 
-    public Fell(final OsMapRef osMapRef,
-                final FellName name,
-                final Meters heightMeters,
-                final Meters prominenceMeters,
-                final Latitude latitude,
-                final Longitude longitude,
-                @NotNull final Region region,
-                final OsMapRef parentOsMapRef,
-                final OsMaps osMaps,
-                final Classifications classifications) {
+    public FellEntity(final OsMapRef osMapRef,
+                      final FellName name,
+                      final Meters heightMeters,
+                      final Meters prominenceMeters,
+                      final Latitude latitude,
+                      final Longitude longitude,
+                      @NotNull final Region region,
+                      final OsMapRef parentOsMapRef,
+                      final OsMaps osMaps,
+                      final Classifications classifications) {
         this.osMapRef = osMapRef;
         this.name = name;
         this.heightMeters = heightMeters;

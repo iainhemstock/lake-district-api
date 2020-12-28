@@ -4,8 +4,8 @@ import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
 import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassificationEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
@@ -14,7 +14,7 @@ import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ClassificationEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMap;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Region;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.*;
@@ -49,7 +49,7 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addGreatGable() {
-        Fell greatGable = new Fell(
+        FellEntity greatGable = new FellEntity(
             new OsMapRef("NY211104"),
             new FellName("Great Gable"),
             new Meters(899),
@@ -57,7 +57,7 @@ public final class TestDataLoaderForApiTests {
             new Latitude(54.482),
             new Longitude(-3.219),
             new Region(3, new RegionName("Central Lake District")),
-            new ScafellPikeFell().getOsMapRef(),
+            new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new OsMap(1, new OsMapName("OS Landranger 89")),
                 new OsMap(2, new OsMapName("OS Landranger 90")),
@@ -70,11 +70,11 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addHelvellyn() {
-        fellRepository.save(new HelvellynFell());
+        fellRepository.save(new HelvellynFellEntity());
     }
 
     public void addScafellPike() {
-        fellRepository.save(new ScafellPikeFell());
+        fellRepository.save(new ScafellPikeFellEntity());
     }
 
     private void initializeRegionData() {

@@ -2,8 +2,8 @@ package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
@@ -38,7 +38,7 @@ public class FellServiceImplTests {
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
     private FellServiceImpl fellService;
-    private Fell helvellynFell;
+    private FellEntity helvellynFellEntity;
     private TestApiProperties apiProperties;
 
     @Mock private ApiClockService apiClockService;
@@ -49,7 +49,7 @@ public class FellServiceImplTests {
     @Before
     public void setUp() {
         apiProperties = new TestApiProperties();
-        helvellynFell = new HelvellynFell();
+        helvellynFellEntity = new HelvellynFellEntity();
 
         fellService = new FellServiceImpl(
             fellRepository,
@@ -62,10 +62,10 @@ public class FellServiceImplTests {
 
     @Test
     public void get_fell_by_id() {
-        Mockito.when(fellRepository.findById(helvellynFell.getOsMapRef()))
-            .thenReturn(Optional.of(helvellynFell));
-        Fell actualFell = fellService.getById(helvellynFell.getOsMapRef());
-        assertThat(actualFell, is(helvellynFell));
+        Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
+            .thenReturn(Optional.of(helvellynFellEntity));
+        FellEntity actualFellEntity = fellService.getById(helvellynFellEntity.getOsMapRef());
+        assertThat(actualFellEntity, is(helvellynFellEntity));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class FellServiceImplTests {
         Mockito.when(fellRepository.findAll(PageRequest.of(offset, limit)))
             .thenReturn(Page.empty(PageRequest.of(offset, limit)));
 
-        Page<Fell> actualFellsPage = fellService.getFells(offset, limit);
+        Page<FellEntity> actualFellsPage = fellService.getFells(offset, limit);
 
         assertThat(actualFellsPage.toList(), is(equalTo(Collections.EMPTY_LIST)));
         assertThat(actualFellsPage.getTotalElements(), is(0L));
@@ -149,11 +149,11 @@ public class FellServiceImplTests {
         long totalElements = 3L; // imagine the db contains three fells
         int totalPages = 3; // three fells at one page limit == three pages
         Mockito.when(fellRepository.findAll(PageRequest.of(offset, limit)))
-            .thenReturn(new PageImpl<>(List.of(new HelvellynFell()), PageRequest.of(offset, limit), totalElements));
+            .thenReturn(new PageImpl<>(List.of(new HelvellynFellEntity()), PageRequest.of(offset, limit), totalElements));
 
-        Page<Fell> actualFellsPage = fellService.getFells(offset, limit);
+        Page<FellEntity> actualFellsPage = fellService.getFells(offset, limit);
 
-        assertThat(actualFellsPage.toList(), is(List.of(new HelvellynFell())));
+        assertThat(actualFellsPage.toList(), is(List.of(new HelvellynFellEntity())));
         assertThat(actualFellsPage.getTotalElements(), is(totalElements));
         assertThat(actualFellsPage.getTotalPages(), is(totalPages));
         assertThat(actualFellsPage.getNumberOfElements(), is(limit));

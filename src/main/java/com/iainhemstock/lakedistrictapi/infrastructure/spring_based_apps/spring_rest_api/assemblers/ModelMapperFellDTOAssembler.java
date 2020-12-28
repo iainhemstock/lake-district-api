@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers;
 
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellDTOAssembler;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ModelMapperFellDTOAssembler implements FellDTOAssembler {
     }
 
     @Override
-    public FellDTO toDTO(final Fell fell) {
-        return mapper.map(fell, FellDTO.class);
+    public FellDTO toDTO(final FellEntity fellEntity) {
+        return mapper.map(fellEntity, FellDTO.class);
     }
 }

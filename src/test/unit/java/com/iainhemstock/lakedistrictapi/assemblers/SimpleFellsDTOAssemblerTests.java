@@ -1,12 +1,12 @@
 package com.iainhemstock.lakedistrictapi.assemblers;
 
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.SimpleFellsDTOAssemblerImpl;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellsDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.SimpleFellsDTOAssembler;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,8 +27,8 @@ public class SimpleFellsDTOAssemblerTests {
     public void setUp() {
         apiProperties = new TestApiProperties();
         mapper = new SimpleFellsDTOAssemblerImpl(apiProperties);
-        Set<Fell> fells = new LinkedHashSet<>(List.of(new GreatGableFell(), new HelvellynFell()));
-        dto = mapper.toDTO(fells);
+        Set<FellEntity> fellEntities = new LinkedHashSet<>(List.of(new GreatGableFellEntity(), new HelvellynFellEntity()));
+        dto = mapper.toDTO(fellEntities);
     }
 
     @Test

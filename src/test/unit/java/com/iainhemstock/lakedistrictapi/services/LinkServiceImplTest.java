@@ -1,14 +1,14 @@
 package com.iainhemstock.lakedistrictapi.services;
 
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
-import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFellEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -77,11 +77,11 @@ public class LinkServiceImplTest {
 
     @Test
     @Parameters(method = "parameters")
-    public void given_page_of_fells_when_building_nav_links_then_correct_links_are_built(final List<Fell> fellsList,
+    public void given_page_of_fells_when_building_nav_links_then_correct_links_are_built(final List<FellEntity> fellsList,
                                                                                                     final int offset,
                                                                                                     final int limit,
                                                                                                     final Links expectedLinks) {
-        Page<Fell> page = new PageImpl<>(
+        Page<FellEntity> page = new PageImpl<>(
             fellsList,
             PageRequest.of(offset, limit),
             fellsList.size());
@@ -92,7 +92,7 @@ public class LinkServiceImplTest {
     }
 
     private Object[] parameters() {
-        List<Fell> fellsList = List.of(new GreatGableFell(), new HelvellynFell(), new ScafellPikeFell());
+        List<FellEntity> fellsList = List.of(new GreatGableFellEntity(), new HelvellynFellEntity(), new ScafellPikeFellEntity());
         return new Object[] {
             new Object[] {fellsList, 0, 1, new Links(
                 getLink(LinkRel.SELF, 0, 1),

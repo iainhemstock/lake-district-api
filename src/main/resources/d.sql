@@ -37,7 +37,7 @@ INSERT INTO os_maps (id, name) VALUES (6, 'OS Explorer OL5');--6
 INSERT INTO os_maps (id, name) VALUES (7, 'OS Explorer OL6');--7
 INSERT INTO os_maps (id, name) VALUES (8, 'OS Explorer OL7');--8
 
-INSERT INTO fells (id, name, height_meters, region_id, prominence_meters, parent_peak_id, latitude, longitude, os_map_ref)
+INSERT INTO fellEntities (id, name, height_meters, region_id, prominence_meters, parent_peak_id, latitude, longitude, os_map_ref)
     VALUES
         (1, 'Ben Nevis', 1344, 8, 1344, 1, 0, 0, ''),
         (2, 'Snowdon', 1085, 9, 1039, 1, 0, 0, ''),

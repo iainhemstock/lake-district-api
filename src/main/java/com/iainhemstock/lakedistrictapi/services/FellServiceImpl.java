@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
@@ -37,20 +37,20 @@ public class FellServiceImpl implements FellService {
     }
 
     @Override
-    public Fell getById(final OsMapRef osMapRef) {
-        Optional<Fell> fell = fellRepository.findById(osMapRef);
+    public FellEntity getById(final OsMapRef osMapRef) {
+        Optional<FellEntity> fell = fellRepository.findById(osMapRef);
         if (fell.isEmpty()) {
             String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);
         }
-        Fell fellEntity = fell.get();
+        FellEntity fellEntity = fell.get();
         fellEntity.setMeterToFeetConversionService(meterToFeetConversionService);
         fellEntity.setLatLongToDmsConversionService(latLongToDmsConversionService);
         return fellEntity;
     }
 
     @Override
-    public Page<Fell> getFells(final int offset, final int limit) {
+    public Page<FellEntity> getFells(final int offset, final int limit) {
         if (offset < 0)
             throw new IllegalArgumentException("Offset cannot be negative");
 

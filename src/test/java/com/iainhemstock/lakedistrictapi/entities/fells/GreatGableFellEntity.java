@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.entities.fells;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
@@ -13,8 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public final class GreatGableFell extends Fell {
-    public GreatGableFell() {
+public final class GreatGableFellEntity extends FellEntity {
+    public GreatGableFellEntity() {
         super(
             new OsMapRef("NY211104"),
             new FellName("Great Gable"),
@@ -23,7 +23,7 @@ public final class GreatGableFell extends Fell {
             new Latitude(54.482),
             new Longitude(-3.219),
             new CentralRegion(),
-            new ScafellPikeFell().getOsMapRef(),
+            new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMap(),
                 new Landranger90OsMap(),

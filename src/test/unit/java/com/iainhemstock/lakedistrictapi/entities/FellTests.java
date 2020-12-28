@@ -1,10 +1,10 @@
 package com.iainhemstock.lakedistrictapi.entities;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
+import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,9 +27,9 @@ public class FellTests {
         Mockito.when(latLongToDmsConversionService.getSeconds()).thenReturn(new Seconds(30));
         Mockito.when(latLongToDmsConversionService.getHemisphere()).thenReturn(new Hemisphere("N"));
 
-        Fell helvellynFell = new HelvellynFell();
-        helvellynFell.setLatLongToDmsConversionService(latLongToDmsConversionService);
-        assertThat(helvellynFell.getConvertedLatitude(),
+        FellEntity helvellynFellEntity = new HelvellynFellEntity();
+        helvellynFellEntity.setLatLongToDmsConversionService(latLongToDmsConversionService);
+        assertThat(helvellynFellEntity.getConvertedLatitude(),
             is(new DMS(new Degrees(10), new Minutes(20), new Seconds(30), new Hemisphere("N"))));
     }
 
@@ -40,29 +40,29 @@ public class FellTests {
         Mockito.when(latLongToDmsConversionService.getSeconds()).thenReturn(new Seconds(60));
         Mockito.when(latLongToDmsConversionService.getHemisphere()).thenReturn(new Hemisphere("E"));
 
-        Fell helvellynFell = new HelvellynFell();
-        helvellynFell.setLatLongToDmsConversionService(latLongToDmsConversionService);
-        assertThat(helvellynFell.getConvertedLongitude(),
+        FellEntity helvellynFellEntity = new HelvellynFellEntity();
+        helvellynFellEntity.setLatLongToDmsConversionService(latLongToDmsConversionService);
+        assertThat(helvellynFellEntity.getConvertedLongitude(),
             is(new DMS(new Degrees(40), new Minutes(50), new Seconds(60), new Hemisphere("E"))));
     }
 
     @Test
     public void will_return_height_in_feet() {
-        Fell helvellynFell = new HelvellynFell();
-        helvellynFell.setMeterToFeetConversionService(meterToFeetConversionService);
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(helvellynFell.getHeightMeters()))
+        FellEntity helvellynFellEntity = new HelvellynFellEntity();
+        helvellynFellEntity.setMeterToFeetConversionService(meterToFeetConversionService);
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(helvellynFellEntity.getHeightMeters()))
             .thenReturn(new Feet(3117));
-        assertThat(helvellynFell.getHeightFeet(),
+        assertThat(helvellynFellEntity.getHeightFeet(),
             is(new Feet(3117)));
     }
 
     @Test
     public void will_return_prominence_in_feet() {
-        Fell helvellynFell = new HelvellynFell();
-        helvellynFell.setMeterToFeetConversionService(meterToFeetConversionService);
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(helvellynFell.getProminenceMeters()))
+        FellEntity helvellynFellEntity = new HelvellynFellEntity();
+        helvellynFellEntity.setMeterToFeetConversionService(meterToFeetConversionService);
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(helvellynFellEntity.getProminenceMeters()))
             .thenReturn(new Feet(2336));
-        assertThat(helvellynFell.getProminenceFeet(),
+        assertThat(helvellynFellEntity.getProminenceFeet(),
             is(new Feet(2336)));
     }
 }

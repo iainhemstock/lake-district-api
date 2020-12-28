@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +30,7 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public Links buildNavLinksForPageAndCollectionType(final Page<Fell> page, final String collection) {
+    public Links buildNavLinksForPageAndCollectionType(final Page<FellEntity> page, final String collection) {
         if (page.getPageable().isUnpaged())
             return Links.empty();
 
