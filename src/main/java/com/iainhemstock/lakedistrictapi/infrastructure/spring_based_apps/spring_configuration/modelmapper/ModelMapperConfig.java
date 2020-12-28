@@ -24,7 +24,7 @@ public class ModelMapperConfig {
         mm.createTypeMap(FellEntity.class, FellDTO.class)
             .addMappings(mapper -> {
                 mapper.map(source -> source.getName().toString(), (dest, v) -> dest.setName((String) v));
-                mapper.map(source -> source.getRegion().getRegionName().toString(), (dest, v) -> dest.setRegion((String) v));
+                mapper.map(source -> source.getRegionEntity().getRegionName().toString(), (dest, v) -> dest.setRegion((String) v));
                 mapper.map(source -> source.getHeightFeet().toString(), (dest, v) -> dest.setHeightFeet((String) v));
                 mapper.map(source -> source.getProminenceFeet().toString(), (dest, v) -> dest.setProminenceFeet((String) v));
                 mapper.using(new OsMapConverter()).map(FellEntity::getOsMaps, (dest, v) -> dest.setOsMapNames((Set) v));

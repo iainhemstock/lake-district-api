@@ -9,13 +9,13 @@ import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
-import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
-import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
-import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
+import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegionEntity;
+import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegionEntity;
+import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegionEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ClassificationEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMapEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Region;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.RegionEntity;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public final class TestDataLoaderForApiTests {
             new Meters(425),
             new Latitude(54.482),
             new Longitude(-3.219),
-            new Region(3, new RegionName("Central Lake District")),
+            new RegionEntity(3, new RegionName("Central Lake District")),
             new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new OsMapEntity(1, new OsMapName("OS Landranger 89")),
@@ -77,9 +77,9 @@ public final class TestDataLoaderForApiTests {
     }
 
     private void initializeRegionData() {
-        regionRepository.save(new EasternRegion());
-        regionRepository.save(new CentralRegion());
-        regionRepository.save(new SouthernRegion());
+        regionRepository.save(new EasternRegionEntity());
+        regionRepository.save(new CentralRegionEntity());
+        regionRepository.save(new SouthernRegionEntity());
     }
 
     private void initializeOsMapData() {

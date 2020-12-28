@@ -4,12 +4,12 @@ import com.iainhemstock.lakedistrictapi.config.modelmapper.ModelMapperConfig;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegionEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.ModelMapperFellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
-import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
@@ -44,7 +44,7 @@ public class ModelMapperFellDTOAssemblerTest {
             new Meters(712),
             new Latitude(54.527232),
             new Longitude(-3.016054),
-            new EasternRegion(),
+            new EasternRegionEntity(),
             new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger90OsMapEntity(),

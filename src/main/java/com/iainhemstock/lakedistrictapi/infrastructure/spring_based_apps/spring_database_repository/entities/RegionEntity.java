@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Region {
+public class RegionEntity {
 
     @Id
     @Column(name = "id")
@@ -23,7 +23,7 @@ public class Region {
     @NotNull
     private RegionName regionName;
 
-    public Region(final int id, final RegionName regionName) {
+    public RegionEntity(final int id, final RegionName regionName) {
         this.id = id;
         this.regionName = regionName;
     }

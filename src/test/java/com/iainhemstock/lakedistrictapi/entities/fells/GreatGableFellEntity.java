@@ -6,7 +6,7 @@ import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
-import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
+import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegionEntity;
 
 import javax.persistence.Entity;
 import java.util.HashSet;
@@ -22,7 +22,7 @@ public final class GreatGableFellEntity extends FellEntity {
             new Meters(425),
             new Latitude(54.482),
             new Longitude(-3.219),
-            new CentralRegion(),
+            new CentralRegionEntity(),
             new ScafellPikeFellEntity().getOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMapEntity(),

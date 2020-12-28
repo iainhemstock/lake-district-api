@@ -33,7 +33,7 @@ public class SimpleFellsDTOAssemblerImpl implements SimpleFellsDTOAssembler {
                 throw new NullPointerException("Cannot map null Fell");
             LinksDTO linksDTO = new LinksDTO();
             linksDTO.setLinks(Map.of("self", String.format("%s/fells/%s", apiProperties.getBaseUrl(), fellEntity.getOsMapRef())));
-            simpleFellsDTO.getFells().add(new SimpleFellDTO(fellEntity.getName().toString(), fellEntity.getRegion().toString(), linksDTO));
+            simpleFellsDTO.getFells().add(new SimpleFellDTO(fellEntity.getName().toString(), fellEntity.getRegionEntity().toString(), linksDTO));
         }
 
         return simpleFellsDTO;

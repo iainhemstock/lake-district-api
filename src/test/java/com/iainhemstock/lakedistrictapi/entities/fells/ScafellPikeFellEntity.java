@@ -6,7 +6,7 @@ import com.iainhemstock.lakedistrictapi.entities.classifications.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
-import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
+import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegionEntity;
 
 import javax.persistence.Entity;
 import java.util.HashSet;
@@ -22,7 +22,7 @@ public final class ScafellPikeFellEntity extends FellEntity {
             new Meters(912),
             new Latitude(54.454222),
             new Longitude(-3.211528),
-            new SouthernRegion(),
+            new SouthernRegionEntity(),
             new NullOsMapRef(),
             new OsMaps(new HashSet<>(Set.of(
                 new Landranger89OsMapEntity(),

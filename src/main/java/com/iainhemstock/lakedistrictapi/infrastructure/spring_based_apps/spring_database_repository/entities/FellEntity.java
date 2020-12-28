@@ -41,14 +41,14 @@ public class FellEntity {
     @ManyToOne
     @JoinColumn(name = "region_id")
     @NotNull
-    private Region region;
+    private RegionEntity regionEntity;
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "parent_os_map_ref"))
     private OsMapRef parentOsMapRef;
 
     @Embedded
-    private OsMaps osMapEntities;
+    private OsMaps osMaps;
 
     @Embedded
     private Classifications classifications;
@@ -65,9 +65,9 @@ public class FellEntity {
                       final Meters prominenceMeters,
                       final Latitude latitude,
                       final Longitude longitude,
-                      @NotNull final Region region,
+                      @NotNull final RegionEntity regionEntity,
                       final OsMapRef parentOsMapRef,
-                      final OsMaps osMapEntities,
+                      final OsMaps osMaps,
                       final Classifications classifications) {
         this.osMapRef = osMapRef;
         this.name = name;
@@ -75,9 +75,9 @@ public class FellEntity {
         this.prominenceMeters = prominenceMeters;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.region = region;
+        this.regionEntity = regionEntity;
         this.parentOsMapRef = parentOsMapRef;
-        this.osMapEntities = osMapEntities;
+        this.osMaps = osMaps;
         this.classifications = classifications;
     }
 
