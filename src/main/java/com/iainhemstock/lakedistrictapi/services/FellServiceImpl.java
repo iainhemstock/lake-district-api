@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 //import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +17,28 @@ import java.util.Optional;
 
 @Service
 public class FellServiceImpl implements FellService {
-    private final FellRepository fellRepository;
+    private final FellEntityRepository fellEntityRepository;
     private final ApiClockService apiClockService;
     private final MeterToFeetConversionService meterToFeetConversionService;
     private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final ApiProperties apiProperties;
 
     @Autowired
-    public FellServiceImpl(final FellRepository fellRepository,
+    public FellServiceImpl(final FellEntityRepository fellEntityRepository,
                            final ApiClockService apiClockService,
                            final ApiProperties apiProperties,
                            final MeterToFeetConversionService meterToFeetConversionService,
                            final LatLongToDmsConversionService latLongToDmsConversionService) {
         this.apiClockService = apiClockService;
         this.apiProperties = apiProperties;
-        this.fellRepository = fellRepository;
+        this.fellEntityRepository = fellEntityRepository;
         this.meterToFeetConversionService = meterToFeetConversionService;
         this.latLongToDmsConversionService = latLongToDmsConversionService;
     }
 
     @Override
     public FellEntity getById(final OsMapRef osMapRef) {
-        Optional<FellEntity> fell = fellRepository.findById(osMapRef);
+        Optional<FellEntity> fell = fellEntityRepository.findById(osMapRef);
         if (fell.isEmpty()) {
             String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);
@@ -57,7 +57,7 @@ public class FellServiceImpl implements FellService {
         if (limit <= 0)
             throw new IllegalArgumentException("Limit cannot be negative or zero");
 
-        return fellRepository.findAll(PageRequest.of(offset, limit));
+        return fellEntityRepository.findAll(PageRequest.of(offset, limit));
     }
 
 

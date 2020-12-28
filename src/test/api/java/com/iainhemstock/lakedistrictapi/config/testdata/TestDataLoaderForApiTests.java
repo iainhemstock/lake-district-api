@@ -29,10 +29,10 @@ import java.util.Set;
 @Component
 public final class TestDataLoaderForApiTests {
 
-    @Autowired private FellRepository fellRepository;
-    @Autowired private RegionRepository regionRepository;
-    @Autowired private OsMapRepository osMapRepository;
-    @Autowired private ClassificationsRepository classificationsRepository;
+    @Autowired private FellEntityRepository fellEntityRepository;
+    @Autowired private RegionEntityRepository regionEntityRepository;
+    @Autowired private OsMapEntityRepository osMapEntityRepository;
+    @Autowired private ClassificationEntityRepository classificationEntityRepository;
 
     private final Logger logger = LoggerFactory.getLogger(TestDataLoaderForApiTests.class);
 
@@ -65,33 +65,33 @@ public final class TestDataLoaderForApiTests {
                 new ClassificationEntity(3, new ClassificationName("Marilyn")),
                 new ClassificationEntity(15, new ClassificationName("Fellranger")),
                 new ClassificationEntity(11, new ClassificationName("Birkett"))))));
-        fellRepository.save(greatGable);
+        fellEntityRepository.save(greatGable);
     }
 
     public void addHelvellyn() {
-        fellRepository.save(new HelvellynFellEntity());
+        fellEntityRepository.save(new HelvellynFellEntity());
     }
 
     public void addScafellPike() {
-        fellRepository.save(new ScafellPikeFellEntity());
+        fellEntityRepository.save(new ScafellPikeFellEntity());
     }
 
     private void initializeRegionData() {
-        regionRepository.save(new EasternRegionEntity());
-        regionRepository.save(new CentralRegionEntity());
-        regionRepository.save(new SouthernRegionEntity());
+        regionEntityRepository.save(new EasternRegionEntity());
+        regionEntityRepository.save(new CentralRegionEntity());
+        regionEntityRepository.save(new SouthernRegionEntity());
     }
 
     private void initializeOsMapData() {
-        osMapRepository.save(new Landranger89OsMapEntity());
-        osMapRepository.save(new Landranger90OsMapEntity());
-        osMapRepository.save(new OL5ExplorerOsMapEntity());
-        osMapRepository.save(new OL6ExplorerOsMapEntity());
+        osMapEntityRepository.save(new Landranger89OsMapEntity());
+        osMapEntityRepository.save(new Landranger90OsMapEntity());
+        osMapEntityRepository.save(new OL5ExplorerOsMapEntity());
+        osMapEntityRepository.save(new OL6ExplorerOsMapEntity());
     }
 
     private void initializeClassificationData() {
-        classificationsRepository.save(new MarilynClassificationEntity());
-        classificationsRepository.save(new BirkettClassfication());
-        classificationsRepository.save(new FellrangerClassificationEntity());
+        classificationEntityRepository.save(new MarilynClassificationEntity());
+        classificationEntityRepository.save(new BirkettClassfication());
+        classificationEntityRepository.save(new FellrangerClassificationEntity());
     }
 }

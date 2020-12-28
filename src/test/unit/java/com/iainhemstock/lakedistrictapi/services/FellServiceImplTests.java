@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
@@ -42,7 +42,7 @@ public class FellServiceImplTests {
     private TestApiProperties apiProperties;
 
     @Mock private ApiClockService apiClockService;
-    @Mock private FellRepository fellRepository;
+    @Mock private FellEntityRepository fellEntityRepository;
     @Mock private MeterToFeetConversionService meterToFeetConversionService;
     @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
 
@@ -52,7 +52,7 @@ public class FellServiceImplTests {
         helvellynFellEntity = new HelvellynFellEntity();
 
         fellService = new FellServiceImpl(
-            fellRepository,
+            fellEntityRepository,
             apiClockService,
             apiProperties,
             meterToFeetConversionService,
@@ -62,7 +62,7 @@ public class FellServiceImplTests {
 
     @Test
     public void get_fell_by_id() {
-        Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
+        Mockito.when(fellEntityRepository.findById(helvellynFellEntity.getOsMapRef()))
             .thenReturn(Optional.of(helvellynFellEntity));
         FellEntity actualFellEntity = fellService.getById(helvellynFellEntity.getOsMapRef());
         assertThat(actualFellEntity, is(helvellynFellEntity));
@@ -131,7 +131,7 @@ public class FellServiceImplTests {
     public void given_no_fells_then_empty_page_is_returned() {
         final int offset = 0;
         final int limit = 1;
-        Mockito.when(fellRepository.findAll(PageRequest.of(offset, limit)))
+        Mockito.when(fellEntityRepository.findAll(PageRequest.of(offset, limit)))
             .thenReturn(Page.empty(PageRequest.of(offset, limit)));
 
         Page<FellEntity> actualFellsPage = fellService.getFells(offset, limit);
@@ -148,7 +148,7 @@ public class FellServiceImplTests {
         int limit = 1;
         long totalElements = 3L; // imagine the db contains three fells
         int totalPages = 3; // three fells at one page limit == three pages
-        Mockito.when(fellRepository.findAll(PageRequest.of(offset, limit)))
+        Mockito.when(fellEntityRepository.findAll(PageRequest.of(offset, limit)))
             .thenReturn(new PageImpl<>(List.of(new HelvellynFellEntity()), PageRequest.of(offset, limit), totalElements));
 
         Page<FellEntity> actualFellsPage = fellService.getFells(offset, limit);

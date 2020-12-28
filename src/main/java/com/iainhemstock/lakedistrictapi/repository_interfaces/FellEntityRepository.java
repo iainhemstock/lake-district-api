@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FellRepository extends JpaRepository<FellEntity, OsMapRef> {
+public interface FellEntityRepository extends JpaRepository<FellEntity, OsMapRef> {
 //    List<FellEntity> findByNameLikeIgnoreCase(String name);
 }
