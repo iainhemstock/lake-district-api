@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers;
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellDTOAssembler;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

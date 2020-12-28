@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.Classifica
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.DmsConverter;
 import com.iainhemstock.lakedistrictapi.config.modelmapper.converters.OsMapConverter;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;

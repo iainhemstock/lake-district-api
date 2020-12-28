@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.entities.osmaps;
 
 import com.iainhemstock.lakedistrictapi.domain.OsMapName;
-import com.iainhemstock.lakedistrictapi.entities.OsMap;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMap;
 
 import javax.persistence.Entity;
 

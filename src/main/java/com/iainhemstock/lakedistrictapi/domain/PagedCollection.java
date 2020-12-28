@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

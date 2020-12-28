@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.entities;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities;
 
 import com.iainhemstock.lakedistrictapi.domain.ClassificationName;
 import lombok.*;

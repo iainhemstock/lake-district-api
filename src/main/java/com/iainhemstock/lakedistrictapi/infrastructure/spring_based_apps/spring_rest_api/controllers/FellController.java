@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.*;
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;

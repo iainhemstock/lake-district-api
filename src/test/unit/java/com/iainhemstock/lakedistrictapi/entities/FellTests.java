@@ -4,6 +4,7 @@ import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

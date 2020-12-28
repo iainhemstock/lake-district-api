@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.iainhemstock.lakedistrictapi.entities.OsMap;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMap;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

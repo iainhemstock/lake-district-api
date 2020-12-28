@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;

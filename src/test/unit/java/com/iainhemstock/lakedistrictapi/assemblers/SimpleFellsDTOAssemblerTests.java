@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.SimpleFellsDTOAssemblerImpl;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellsDTO;
-import com.iainhemstock.lakedistrictapi.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.application_interfaces.SimpleFellsDTOAssembler;

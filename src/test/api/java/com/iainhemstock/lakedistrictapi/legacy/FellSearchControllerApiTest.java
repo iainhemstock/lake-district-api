@@ -3,7 +3,7 @@
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.iainhemstock.lakedistrictapi.controllers.FellSearchController;
 //import com.iainhemstock.lakedistrictapi.dtos.*;
-//import com.iainhemstock.lakedistrictapi.entities.Fell;
+//import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
 //import com.iainhemstock.lakedistrictapi.entities.fells.FleetwithPikeFell;
 //import com.iainhemstock.lakedistrictapi.entities.fells.ScafellFell;
 //import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;

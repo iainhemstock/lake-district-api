@@ -1,7 +1,6 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.entities.*;
 import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
 import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
@@ -14,6 +13,10 @@ import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
 import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Classification;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Fell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMap;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Region;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
