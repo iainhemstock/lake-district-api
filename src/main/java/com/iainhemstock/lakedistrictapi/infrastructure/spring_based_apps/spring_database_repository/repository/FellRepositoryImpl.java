@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
-    private DomainToEntityAssembler domainToEntityAssembler;
+    private final DomainToEntityAssembler domainToEntityAssembler;
 
     @Autowired
     public FellRepositoryImpl(final FellEntityRepository fellEntityRepository, final DomainToEntityAssembler domainToEntityAssembler) {
