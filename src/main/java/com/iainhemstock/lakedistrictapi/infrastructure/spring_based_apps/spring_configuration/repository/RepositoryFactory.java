@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.repository;
 
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellRepositoryImpl;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
