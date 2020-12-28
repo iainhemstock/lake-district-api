@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.repository;
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellEntityRepository;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellRepositoryImp;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellRepositoryImpl;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ public class RepositoryFactory {
 
     @Bean
     public FellRepository fellRepository() {
-        return new FellRepositoryImp(fellEntityRepository);
+        return new FellRepositoryImpl(fellEntityRepository);
     }
 
 }

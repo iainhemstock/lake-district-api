@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
-public class FellRepositoryImp implements FellRepository {
+public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
 
     @Autowired
-    public FellRepositoryImp(final FellEntityRepository fellEntityRepository) {
+    public FellRepositoryImpl(final FellEntityRepository fellEntityRepository) {
         this.fellEntityRepository = fellEntityRepository;
     }
 
