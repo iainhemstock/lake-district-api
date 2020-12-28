@@ -5,6 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,8 @@ public class FellRepositoryImpl implements FellRepository {
     @Override
     public Fell findFellById(final OsMapRef osMapRef) {
         Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
+        if (entity.isEmpty())
+            throw new FellNotFoundException(osMapRef.toString(), "", "", "");
         Fell domain = this.domainToEntityAssembler.toDomain(entity.get());
         return domain;
     }

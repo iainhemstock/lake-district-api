@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.controllers;
 
+import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
@@ -42,15 +43,12 @@ public class FellController {
 
     @GetMapping("/fells/{id}")
     public ResponseEntity<Object> getFell(@PathVariable final String id) {
-        FellEntity fellEntity = fellService.getById(new OsMapRef(id));
+        Fell fell = fellService.getById(new OsMapRef(id));
         Links links = new Links(
-            linkService.buildForResourceWithIdAndRel("fells", fellEntity.getOsMapRef().toString(), LinkRel.SELF),
-            linkService.buildForResourceWithIdAndRel("fells", fellEntity.getParentOsMapRef().toString(), LinkRel.PARENT));
-        FellDTO fellDTO = fellDTOAssembler.toDTO(fellEntity);
-        LinksDTO linksDTO = linksDTOAssembler.toDTO(links);
-        ItemDTO itemDTO = new ItemDTO(linksDTO, fellDTO);
+            linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
+            linkService.buildForResourceWithIdAndRel("fells", fell.getParentOsMapRef().toString(), LinkRel.PARENT));
 
-        return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        return new ResponseEntity<>(new ItemDTO(), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

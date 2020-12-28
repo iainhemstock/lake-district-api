@@ -51,6 +51,11 @@ public class DomainToEntityAssemblerTests {
     }
 
     @Test
+    public void will_map_parent_os_map_ref_from_entity_domain() {
+        assertThat(domain.getParentOsMapRef(), is(entity.getParentOsMapRef()));
+    }
+
+    @Test
     public void will_map_height_in_meters_from_entity_to_domain() {
         assertThat(domain.getHeightMeters(), is(entity.getHeightMeters()));
     }

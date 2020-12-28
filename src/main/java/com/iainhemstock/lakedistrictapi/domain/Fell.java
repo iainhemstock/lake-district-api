@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class Fell {
     private OsMapRef osMapRef;
+    private OsMapRef parentOsMapRef;
     private FellName name;
     private Meters heightMeters;
     private Feet heightFeet;

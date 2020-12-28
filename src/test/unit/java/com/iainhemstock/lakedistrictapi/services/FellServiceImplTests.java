@@ -2,6 +2,8 @@ package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.application_logic.FellServiceImpl;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.domain.Fell;
+import com.iainhemstock.lakedistrictapi.domain.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
@@ -40,6 +42,7 @@ public class FellServiceImplTests {
 
     private FellServiceImpl fellService;
     private FellEntity helvellynFellEntity;
+    private Fell helvellynFell;
     private TestApiProperties apiProperties;
 
     @Mock private ApiClockService apiClockService;
@@ -51,6 +54,7 @@ public class FellServiceImplTests {
     public void setUp() {
         apiProperties = new TestApiProperties();
         helvellynFellEntity = new HelvellynFellEntity();
+        helvellynFell = new HelvellynFell();
 
         fellService = new FellServiceImpl(
             fellRepository,
@@ -63,43 +67,9 @@ public class FellServiceImplTests {
 
     @Test
     public void get_fell_by_id() {
-        Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef()))
-            .thenReturn(Optional.of(helvellynFellEntity));
-        FellEntity actualFellEntity = fellService.getById(helvellynFellEntity.getOsMapRef());
-        assertThat(actualFellEntity, is(helvellynFellEntity));
-    }
-
-    @Test
-    public void will_throw_when_fell_not_found() {
-        try {
-            fellService.getById(new OsMapRef("NY000000"));
-            fail("Expected method under test to throw FellNotFoundException but it didn't");
-        }
-        catch (FellNotFoundException ex) {
-            assertThat(ex.getMessage(), is("Fell was not found for {id=NY000000}"));
-        }
-    }
-
-    @Test
-    public void will_throw_when_getting_fell_with_blank_id() {
-        try {
-            fellService.getById(new OsMapRef(""));
-            fail("Expected method under test to throw IllegalArgumentException but it didn't");
-        }
-        catch (IllegalArgumentException ex) {
-            assertThat(ex.getMessage(), is("OsMapRef cannot be blank"));
-        }
-    }
-
-    @Test
-    public void will_throw_when_getting_fell_with_null_id() {
-        try {
-            fellService.getById(new OsMapRef(null));
-            fail("Expected method under test to throw NullPointerException but it didn't");
-        }
-        catch (NullPointerException ex) {
-            assertThat(ex.getMessage(), is("OsMapRef cannot be null"));
-        }
+        Mockito.when(fellRepository.findFellById(helvellynFellEntity.getOsMapRef())).thenReturn(helvellynFell);
+        Fell actualFell = fellService.getById(helvellynFellEntity.getOsMapRef());
+        assertThat(actualFell, is(helvellynFell));
     }
 
     @Test

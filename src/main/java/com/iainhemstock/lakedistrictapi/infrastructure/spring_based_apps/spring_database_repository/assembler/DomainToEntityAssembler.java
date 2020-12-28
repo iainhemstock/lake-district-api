@@ -17,6 +17,7 @@ public class DomainToEntityAssembler {
     public Fell toDomain(final FellEntity entity) {
         Fell fell = new Fell();
         fell.setOsMapRef(entity.getOsMapRef());
+        fell.setParentOsMapRef(entity.getParentOsMapRef());
         fell.setName(entity.getName());
         fell.setHeightMeters(entity.getHeightMeters());
         fell.setProminenceMeters(entity.getProminenceMeters());

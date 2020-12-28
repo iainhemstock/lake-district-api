@@ -4,6 +4,7 @@ import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
+import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
@@ -37,16 +38,8 @@ public class FellServiceImpl implements FellService {
     }
 
     @Override
-    public FellEntity getById(final OsMapRef osMapRef) {
-        Optional<FellEntity> fell = fellRepository.findById(osMapRef);
-        if (fell.isEmpty()) {
-            String requestUri = String.format("%s/fells/%s", apiProperties.getBaseUrl(), osMapRef.toString());
-            throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), HttpMethod.GET.name(), requestUri);
-        }
-        FellEntity fellEntity = fell.get();
-        fellEntity.setMeterToFeetConversionService(meterToFeetConversionService);
-        fellEntity.setLatLongToDmsConversionService(latLongToDmsConversionService);
-        return fellEntity;
+    public Fell getById(final OsMapRef osMapRef) {
+        return fellRepository.findFellById(osMapRef);
     }
 
     @Override
