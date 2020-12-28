@@ -1,8 +1,7 @@
 package com.iainhemstock.lakedistrictapi.services.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
-import org.springframework.stereotype.Component;
+import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

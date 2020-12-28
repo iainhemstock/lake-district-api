@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.*;
+import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 //import com.iainhemstock.lakedistrictapi.services.mappers.FellSimplifiedPagedCollectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

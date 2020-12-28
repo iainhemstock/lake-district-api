@@ -9,7 +9,7 @@ import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
+import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;

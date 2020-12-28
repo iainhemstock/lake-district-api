@@ -1,8 +1,7 @@
 package com.iainhemstock.lakedistrictapi.services;
 
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.ApiClockService;
+import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;

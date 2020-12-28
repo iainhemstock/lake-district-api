@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.entities.Fell;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinkService;
+import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

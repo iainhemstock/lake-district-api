@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.serviceinterfaces;
+package com.iainhemstock.lakedistrictapi.application_interfaces;
 
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.Fell;

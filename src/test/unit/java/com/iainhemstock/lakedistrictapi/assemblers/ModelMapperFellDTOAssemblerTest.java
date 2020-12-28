@@ -10,7 +10,7 @@ import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.FellDTOAssembler;
+import com.iainhemstock.lakedistrictapi.application_interfaces.FellDTOAssembler;
 import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.services.converters.MeterToFeetConversionServiceImpl;
 import org.junit.Before;

@@ -7,7 +7,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.entities.Fell;
 import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.SimpleFellsDTOAssembler;
+import com.iainhemstock.lakedistrictapi.application_interfaces.SimpleFellsDTOAssembler;
 import org.junit.Before;
 import org.junit.Test;
 

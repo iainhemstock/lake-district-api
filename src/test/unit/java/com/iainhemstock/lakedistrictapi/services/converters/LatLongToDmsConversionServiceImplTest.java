@@ -15,7 +15,7 @@
 package com.iainhemstock.lakedistrictapi.services.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LatLongToDmsConversionService;
+import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import junitparams.JUnitParamsRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;

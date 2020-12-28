@@ -1,7 +1,6 @@
-package com.iainhemstock.lakedistrictapi.serviceinterfaces;
+package com.iainhemstock.lakedistrictapi.application_interfaces;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.services.converters.LatLongToDmsConversionServiceImpl;
 
 public interface LatLongToDmsConversionService {
     void convert(Latitude latitude);

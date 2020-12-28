@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.services.converters;
 
 import com.iainhemstock.lakedistrictapi.domain.Feet;
 import com.iainhemstock.lakedistrictapi.domain.Meters;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.MeterToFeetConversionService;
+import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
-import com.iainhemstock.lakedistrictapi.serviceinterfaces.LinksDTOAssembler;
+import com.iainhemstock.lakedistrictapi.application_interfaces.LinksDTOAssembler;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
