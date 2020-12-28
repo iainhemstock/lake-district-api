@@ -12,5 +12,5 @@ public interface FellRepository {
     Optional<FellEntity> findById(final OsMapRef osMapRef);
     Page<FellEntity> findAll(final Pageable pageable);
 
-    Optional<Fell> findFellById(OsMapRef osMapRef);
+    Fell findFellById(OsMapRef osMapRef);
 }

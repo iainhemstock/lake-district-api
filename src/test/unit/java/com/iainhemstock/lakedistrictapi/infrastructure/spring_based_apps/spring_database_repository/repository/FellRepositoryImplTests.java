@@ -54,7 +54,7 @@ public class FellRepositoryImplTests {
 
     @Test
     public void given_os_map_ref_when_finding_fell_by_its_id_then_correct_fell_is_returned() {
-        Optional<Fell> actualFell = fellRepository.findFellById(expectedFell.getOsMapRef());
-        assertThat(actualFell, is(equalTo(Optional.of(expectedFell))));
+        Fell actualFell = fellRepository.findFellById(expectedFell.getOsMapRef());
+        assertThat(actualFell, is(equalTo(expectedFell)));
     }
 }

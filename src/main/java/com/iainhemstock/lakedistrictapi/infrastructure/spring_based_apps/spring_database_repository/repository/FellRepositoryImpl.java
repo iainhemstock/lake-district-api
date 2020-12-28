@@ -28,10 +28,10 @@ public class FellRepositoryImpl implements FellRepository {
     }
 
     @Override
-    public Optional<Fell> findFellById(final OsMapRef osMapRef) {
+    public Fell findFellById(final OsMapRef osMapRef) {
         Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
         Fell domain = this.domainToEntityAssembler.toDomain(entity.get());
-        return Optional.of(domain);
+        return domain;
     }
 
     @Override
