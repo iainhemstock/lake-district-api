@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi;
 
-import com.iainhemstock.lakedistrictapi.repositories.FellRepository;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

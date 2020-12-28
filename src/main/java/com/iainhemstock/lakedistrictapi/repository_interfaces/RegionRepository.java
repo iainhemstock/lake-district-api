@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.repositories;
+package com.iainhemstock.lakedistrictapi.repository_interfaces;
 
 import com.iainhemstock.lakedistrictapi.entities.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
