@@ -25,10 +25,7 @@ public class FellNotFoundExceptionHandlerTest {
 
     @Before
     public void setUp() {
-        FellNotFoundException fellNotFoundException = new FellNotFoundException(
-            FELL_RESOURCE_ID,
-            NOW,
-            HttpMethod.GET.name());
+        FellNotFoundException fellNotFoundException = new FellNotFoundException(FELL_RESOURCE_ID, NOW);
 
         FellNotFoundExceptionHandler exceptionHandler = new FellNotFoundExceptionHandler();
         fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
