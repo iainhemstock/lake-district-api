@@ -11,9 +11,6 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-import java.util.Set;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
