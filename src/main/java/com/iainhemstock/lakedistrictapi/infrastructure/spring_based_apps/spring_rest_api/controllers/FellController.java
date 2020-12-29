@@ -2,15 +2,11 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.RepoResult;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.PagedCollectionDTOAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.PagedCollectionDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.SimpleFellsDTO;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +27,9 @@ public class FellController {
     getFells(@RequestParam(value = "offset", required = false, defaultValue = "${api.pageable.default-page-offset}") Integer offset,
              @RequestParam(value = "limit", required = false, defaultValue = "${spring.data.web.pageable.default-page-size}") Integer limit) {
 
-        RepoResult<SimpleFell> fellResults = fellService.getSimpleFells(offset, limit);
+        RepoPage<SimpleFell> fellResults = fellService.getSimpleFells(offset, limit);
         Links links = linkService.buildNavLinksForPageAndCollectionType(fellResults, "fells");
-        PagedCollectionDTO<SimpleFell> pagedCollectionDTO = pagedCollectionDTOAssembler.toDTO(links, fellResults);
+        PagedCollectionDTO<SimpleFell> pagedCollectionDTO = new PagedCollectionDTO<>(links, fellResults);
 
         return new ResponseEntity<>(pagedCollectionDTO, HttpStatus.OK);
     }

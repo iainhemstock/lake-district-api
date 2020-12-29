@@ -1,33 +1,27 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "http://192.168.0.16:8080/schemas",
-	"type": "object",
-	"required": [ "fells" ],
-	"properties": {
-		"fells": {
-			"type": "array",
-			"items": {
+	"type": "array",
+	"items": {
+		"type": "object",
+		"required": ["name", "region", "links"],
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"region": {
+				"type": "string"
+			},
+			"links": {
 				"type": "object",
-				"required": ["name", "region", "links"],
+				"required": ["self"],
 				"properties": {
-					"name": {
-						"type": "string"
-					},
-					"region": {
-						"type": "string"
-					},
-					"links": {
+					"self": {
 						"type": "object",
-						"required": ["self"],
+						"required": ["href"],
 						"properties": {
-							"self": {
-								"type": "object",
-								"required": ["href"],
-								"properties": {
-									"href": {
-										"type": "string"
-									}
-								}
+							"href": {
+								"type": "string"
 							}
 						}
 					}

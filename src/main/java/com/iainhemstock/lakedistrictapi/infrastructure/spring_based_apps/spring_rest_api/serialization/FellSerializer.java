@@ -15,7 +15,6 @@ public class FellSerializer extends JsonSerializer<Fell> {
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
             jgen.writeStringField("name", fell.getName().toString());
-//            jgen.writeObjectField("classifications", fell.getClassificationNames());
             jgen.writeArrayFieldStart("classifications");
                 fell.getClassificationNames().forEach(classificationName -> {
                     try {
@@ -35,7 +34,6 @@ public class FellSerializer extends JsonSerializer<Fell> {
             jgen.writeEndObject();
             jgen.writeObjectFieldStart("location");
                 jgen.writeStringField("os_map_ref", fell.getOsMapRef().toString());
-//                jgen.writeObjectField("os_maps", fell.getOsMapNames());
                 jgen.writeArrayFieldStart("os_maps");
                 fell.getOsMapNames().forEach(osMapName -> {
                     try {

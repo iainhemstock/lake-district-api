@@ -1,16 +1,18 @@
 package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.application_logic.LinkServiceImpl;
+import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.SpringPageRepoPage;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -19,9 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -70,39 +70,44 @@ public class LinkServiceImplTest {
 
     @Test
     public void given_no_source_links_then_no_links_will_be_built() {
-        Page page = new PageImpl(Collections.EMPTY_LIST, Pageable.unpaged(), 0);
+        RepoPage<SimpleFell> repoPage = SpringPageRepoPage.empty();
         Links expectedLinks = Links.empty();
-        Links actualLinks = linkService.buildNavLinksForPageAndCollectionType(page, "fells");
+        Links actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
         assertThat(actualLinks, is(equalTo(expectedLinks)));
     }
 
     @Test
     @Parameters(method = "parameters")
-    public void given_page_of_fells_when_building_nav_links_then_correct_links_are_built(final List<FellEntity> fellsList,
+    public void given_repo_result_when_building_nav_links_then_correct_links_are_built(final List<SimpleFell> items,
                                                                                                     final int offset,
                                                                                                     final int limit,
                                                                                                     final Links expectedLinks) {
-        Page<FellEntity> page = new PageImpl<>(
-            fellsList,
+        Page<SimpleFell> fellPage = new PageImpl<>(
+            items,
             PageRequest.of(offset, limit),
-            fellsList.size());
+            items.size());
 
-        Links actualLinks = linkService.buildNavLinksForPageAndCollectionType(page, "fells");
+        RepoPage<SimpleFell> repoPage = SpringPageRepoPage.from(fellPage);
+
+        Links actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
 
         assertThat(actualLinks, is(equalTo(expectedLinks)));
     }
 
     private Object[] parameters() {
-        List<FellEntity> fellsList = List.of(new GreatGableFellEntity(), new HelvellynFellEntity(), new ScafellPikeFellEntity());
+        List<SimpleFell> items = List.of(
+            new SimpleFell(new GreatGableFellEntity().getName(), new GreatGableFellEntity().getRegionEntity().getRegionName(), new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new GreatGableFellEntity().getOsMapRef().toString()))),
+            new SimpleFell(new HelvellynFellEntity().getName(), new HelvellynFellEntity().getRegionEntity().getRegionName(), new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new HelvellynFellEntity().getOsMapRef().toString()))),
+            new SimpleFell(new ScafellPikeFellEntity().getName(), new ScafellPikeFellEntity().getRegionEntity().getRegionName(), new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new ScafellPikeFellEntity().getOsMapRef().toString()))));
         return new Object[] {
-            new Object[] {fellsList, 0, 1, new Links(
+            new Object[] {items, 0, 1, new Links(
                 getLink(LinkRel.SELF, 0, 1),
                 getLink(LinkRel.NEXT, 1, 1)) },
-            new Object[] {fellsList, 1, 1, new Links(
+            new Object[] {items, 1, 1, new Links(
                 getLink(LinkRel.PREV, 0, 1),
                 getLink(LinkRel.SELF, 1, 1),
                 getLink(LinkRel.NEXT, 2, 1)) },
-            new Object[] {fellsList, 2, 1, new Links(
+            new Object[] {items, 2, 1, new Links(
                 getLink(LinkRel.PREV, 1, 1),
                 getLink(LinkRel.SELF, 2, 1)) }
         };

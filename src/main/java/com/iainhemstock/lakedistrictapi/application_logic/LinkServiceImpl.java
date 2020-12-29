@@ -1,15 +1,10 @@
 package com.iainhemstock.lakedistrictapi.application_logic;
 
-import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
-import com.iainhemstock.lakedistrictapi.domain.Link;
-import com.iainhemstock.lakedistrictapi.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.RepoResult;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.nonNull;
@@ -32,26 +27,21 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public Links buildNavLinksForPageAndCollectionType(final Page<FellEntity> page, final String collection) {
-        if (page.getPageable().isUnpaged())
+    public Links buildNavLinksForPageAndCollectionType(final RepoPage<SimpleFell> repoPage, final String collection) {
+        if (repoPage.isEmpty())
             return Links.empty();
 
         Links links = new Links();
 
-        if (page.hasPrevious())
-            links.add(buildLink(collection, LinkRel.PREV, page.previousPageable().getOffset(), page.previousPageable().getPageSize()));
+        if (repoPage.hasPrevious())
+            links.add(buildLink(collection, LinkRel.PREV, repoPage.getPrevOffset(), repoPage.getLimit()));
 
-        links.add(buildLink(collection, LinkRel.SELF, page.getPageable().getOffset(), page.getPageable().getPageSize()));
+        links.add(buildLink(collection, LinkRel.SELF, repoPage.getOffset(), repoPage.getLimit()));
 
-        if (page.hasNext())
-            links.add(buildLink(collection, LinkRel.NEXT, page.nextPageable().getOffset(), page.nextPageable().getPageSize()));
+        if (repoPage.hasNext())
+            links.add(buildLink(collection, LinkRel.NEXT, repoPage.getNextOffset(), repoPage.getLimit()));
 
         return links;
-    }
-
-    @Override
-    public Links buildNavLinksForPageAndCollectionType(final RepoResult<SimpleFell> repoResult, final String collection) {
-        throw new UnsupportedOperationException();
     }
 
     private Link buildLink(final String collection, final LinkRel rel, final long offset, final int limit) {

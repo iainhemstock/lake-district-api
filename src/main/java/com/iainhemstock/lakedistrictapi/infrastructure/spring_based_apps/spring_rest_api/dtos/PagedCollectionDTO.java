@@ -1,29 +1,25 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos;
 
+import com.iainhemstock.lakedistrictapi.domain.Links;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class PagedCollectionDTO<T> {
-    private LinksDTO links = new LinksDTO();
-    private String offset;
-    private String limit;
-    private String total_items;
-    private T items;
 
-    public PagedCollectionDTO() {
-    }
+    private final Links links;
+    private final RepoPage<T> items;
+    private final String offset;
+    private final String limit;
+    private final String total_items;
 
-    public PagedCollectionDTO(final LinksDTO linksDTO,
-                              final T items,
-                              final String offset,
-                              final String limit,
-                              final String totalItems) {
-        this.links = linksDTO;
+    public PagedCollectionDTO(final Links links, final RepoPage<T> items) {
+        this.links = links;
         this.items = items;
-        this.offset = offset;
-        this.limit = limit;
-        this.total_items = totalItems;
+        this.offset = String.valueOf(items.getOffset());
+        this.limit = String.valueOf(items.getLimit());
+        this.total_items = String.valueOf(items.getTotalItemsAvailable());
     }
 }

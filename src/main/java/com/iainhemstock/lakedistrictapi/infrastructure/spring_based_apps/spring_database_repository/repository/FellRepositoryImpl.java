@@ -1,18 +1,21 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
-import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
@@ -38,7 +41,21 @@ public class FellRepositoryImpl implements FellRepository {
     }
 
     @Override
-    public Page<FellEntity> findAll(final Pageable pageable) {
-        return fellEntityRepository.findAll(pageable);
+    public RepoPage<SimpleFell> findAll(final int offset, final int limit) {
+        Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(PageRequest.of(offset, limit));
+        if (fellEntityPage.isEmpty())
+            return SpringPageRepoPage.empty();
+
+        List<SimpleFell> simpleFells = fellEntityPage.toList().stream()
+            .map(fellEntity -> {
+                return new SimpleFell(
+                    fellEntity.getName(),
+                    fellEntity.getRegionEntity().getRegionName(),
+                    new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fellEntity.getOsMapRef().toString())));
+            }).collect(Collectors.toList());
+
+        Page<SimpleFell> simpleFellPage = new PageImpl<>(simpleFells, PageRequest.of(offset, limit), fellEntityPage.getTotalElements());
+
+        return SpringPageRepoPage.from(simpleFellPage);
     }
 }
