@@ -43,25 +43,14 @@ public class FellServiceImplTests {
     private FellServiceImpl fellService;
     private FellEntity helvellynFellEntity;
     private Fell helvellynFell;
-    private TestApiProperties apiProperties;
 
-    @Mock private ApiClockService apiClockService;
     @Mock private FellRepository fellRepository;
-    @Mock private MeterToFeetConversionService meterToFeetConversionService;
-    @Mock private LatLongToDmsConversionService latLongToDmsConversionService;
 
     @Before
     public void setUp() {
-        apiProperties = new TestApiProperties();
         helvellynFellEntity = new HelvellynFellEntity();
         helvellynFell = new HelvellynFell();
-
-        fellService = new FellServiceImpl(
-            fellRepository,
-            apiClockService,
-            apiProperties,
-            meterToFeetConversionService,
-            latLongToDmsConversionService);
+        fellService = new FellServiceImpl(fellRepository);
 
     }
 

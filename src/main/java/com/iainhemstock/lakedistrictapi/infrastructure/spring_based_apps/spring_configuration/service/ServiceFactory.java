@@ -15,18 +15,10 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceFactory {
 
     @Autowired private FellRepository fellRepository;
-    @Autowired private ApiClockService apiClockService;
-    @Autowired private ApiProperties apiProperties;
-    @Autowired private MeterToFeetConversionService meterToFeetConversionService;
-    @Autowired private LatLongToDmsConversionService latLongToDmsConversionService;
 
     @Bean
     public FellService fellService() {
-        return new FellServiceImpl(fellRepository,
-                                   apiClockService,
-                                   apiProperties,
-                                   meterToFeetConversionService,
-                                   latLongToDmsConversionService);
+        return new FellServiceImpl(fellRepository);
     }
 
 }
