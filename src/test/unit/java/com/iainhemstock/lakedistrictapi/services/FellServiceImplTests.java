@@ -2,16 +2,10 @@ package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.application_logic.FellServiceImpl;
-import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.FellNotFoundException;
-import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
-import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
-import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -29,7 +23,6 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -57,7 +50,7 @@ public class FellServiceImplTests {
 
     @Test
     public void get_fell_by_id() {
-        Mockito.when(fellRepository.findFellById(helvellynFellEntity.getOsMapRef())).thenReturn(helvellynFell);
+        Mockito.when(fellRepository.findById(helvellynFellEntity.getOsMapRef())).thenReturn(helvellynFell);
         Fell actualFell = fellService.getById(helvellynFellEntity.getOsMapRef());
         assertThat(actualFell, is(helvellynFell));
     }

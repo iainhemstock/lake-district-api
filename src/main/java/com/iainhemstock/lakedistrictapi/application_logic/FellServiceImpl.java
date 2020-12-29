@@ -17,7 +17,7 @@ public class FellServiceImpl implements FellService {
 
     @Override
     public Fell getById(final OsMapRef osMapRef) {
-        return fellRepository.findFellById(osMapRef);
+        return fellRepository.findById(osMapRef);
     }
 
     @Override

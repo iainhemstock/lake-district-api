@@ -29,7 +29,7 @@ public class FellRepositoryImpl implements FellRepository {
     }
 
     @Override
-    public Fell findFellById(final OsMapRef osMapRef) {
+    public Fell findById(final OsMapRef osMapRef) {
         Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
         if (entity.isEmpty())
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), "");

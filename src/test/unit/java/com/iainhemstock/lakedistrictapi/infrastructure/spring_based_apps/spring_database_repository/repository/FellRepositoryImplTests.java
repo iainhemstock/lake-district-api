@@ -16,7 +16,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
-import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -47,14 +46,14 @@ public class FellRepositoryImplTests {
 
     @Test
     public void given_os_map_ref_when_finding_fell_by_its_id_then_correct_fell_is_returned() {
-        Fell actualFell = fellRepository.findFellById(expectedFell.getOsMapRef());
+        Fell actualFell = fellRepository.findById(expectedFell.getOsMapRef());
         assertThat(actualFell, is(equalTo(expectedFell)));
     }
 
     @Test
     public void will_throw_when_fell_not_found() {
         try {
-            fellRepository.findFellById(new OsMapRef("NY000000"));
+            fellRepository.findById(new OsMapRef("NY000000"));
             fail("Expected method under test to throw FellNotFoundException but it didn't");
         }
         catch (FellNotFoundException ex) {
@@ -66,7 +65,7 @@ public class FellRepositoryImplTests {
     @Test
     public void will_throw_when_getting_fell_with_blank_id() {
         try {
-            fellRepository.findFellById(new OsMapRef(""));
+            fellRepository.findById(new OsMapRef(""));
             fail("Expected method under test to throw IllegalArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -77,7 +76,7 @@ public class FellRepositoryImplTests {
     @Test
     public void will_throw_when_getting_fell_with_null_id() {
         try {
-            fellRepository.findFellById(new OsMapRef(null));
+            fellRepository.findById(new OsMapRef(null));
             fail("Expected method under test to throw NullPointerException but it didn't");
         }
         catch (NullPointerException ex) {

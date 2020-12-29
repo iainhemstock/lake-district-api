@@ -9,6 +9,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface FellRepository {
-    Fell findFellById(OsMapRef osMapRef);
+    Fell findById(OsMapRef osMapRef);
     Page<FellEntity> findAll(final Pageable pageable);
 }
