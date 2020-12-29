@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.objectmapper.ObjectMapperConfig;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.LinksSerializer;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +27,7 @@ public class LinksSerializerTest {
 
     @Before
     public void setUp() throws JsonProcessingException {
-        objectMapper = new ObjectMapper();
-        LinksSerializer serializer = new LinksSerializer();
-        objectMapper.registerModule(new SimpleModule().addSerializer(Links.class, serializer));
+        objectMapper = new ObjectMapperConfig().objectMapper();
 
         Links links = new Links();
         links.add(new Link(LinkRel.FIRST, FIRST_HREF));

@@ -3,12 +3,12 @@ package com.iainhemstock.lakedistrictapi.serializers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iainhemstock.lakedistrictapi.domain.Link;
-import com.iainhemstock.lakedistrictapi.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.domain.Links;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.FellSerializer;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.LinksSerializer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +31,10 @@ public class ItemDTOSerializerTests {
         expectedSelfHref = "http://localhost:8080/api/v1/fells/NY123456";
         expectedParentHref = "http://localhost:8080/api/v1/fells/NY987654";
         mapper = new ObjectMapper();
+        LinksSerializer linksSerializer = new LinksSerializer();
+        mapper.registerModule(new SimpleModule().addSerializer(Links.class, linksSerializer));
+        FellSerializer fellSerializer = new FellSerializer();
+        mapper.registerModule(new SimpleModule().addSerializer(Fell.class, fellSerializer));
     }
 
     @Test
@@ -47,7 +51,7 @@ public class ItemDTOSerializerTests {
         Links links = new Links();
         links.add(new Link(LinkRel.SELF, expectedSelfHref));
         links.add(new Link(LinkRel.PARENT, expectedParentHref));
-        String json = mapper.writeValueAsString(new ItemDTO(null, links));
+        String json = mapper.writeValueAsString(new ItemDTO(links, null));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("links").get("self").has("href"));
@@ -56,7 +60,7 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_item_exists_when_serializing_then_item_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(getDetailedFellDTO(), null));
+        String json = mapper.writeValueAsString(new ItemDTO(null, new HelvellynFell()));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("item").has("name"));
@@ -81,7 +85,7 @@ public class ItemDTOSerializerTests {
         assertTrue(jsonNode.get("item").get("location").get("longitude_as_dms").has("hemisphere"));
     }
 
-    private FellDTO getDetailedFellDTO() {
+    private FellDTO getFell() {
         FellDTO fellDTO = new FellDTO();
         fellDTO.setHeightMeters("899");
         fellDTO.setHeightFeet("2999");

@@ -15,7 +15,7 @@ public class ItemDTOSerializer extends JsonSerializer<ItemDTO> {
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
         jgen.writeObjectField("links", itemDTO.getLinks());
-        jgen.writeObjectField("item", itemDTO.getFellDTO());
+        jgen.writeObjectField("item", itemDTO.getFell());
         jgen.writeEndObject();
     }
 }

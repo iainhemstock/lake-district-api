@@ -53,38 +53,7 @@ public class FellController {
             linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fell.getParentOsMapRef().toString(), LinkRel.PARENT));
 
-        FellDTO fellDTO = new FellDTO();
-        fellDTO.setHeightMeters(fell.getHeightMeters().toString());
-        fellDTO.setHeightFeet(fell.getHeightFeet().toString());
-        fellDTO.setProminenceMeters(fell.getProminenceMeters().toString());
-        fellDTO.setProminenceFeet(fell.getProminenceFeet().toString());
-        fellDTO.setOsMapRef(fell.getOsMapRef().toString());
-        fellDTO.setLatitude(fell.getLatitude().toString());
-        fellDTO.setLongitude(fell.getLongitude().toString());
-        fellDTO.setLatitudeAsDms(Map.of(
-            "degrees", fell.getConvertedLatitude().getDegrees().toString(),
-            "minutes", fell.getConvertedLatitude().getMinutes().toString(),
-            "seconds", fell.getConvertedLatitude().getSeconds().toString(),
-            "hemisphere", fell.getConvertedLatitude().getHemisphere().toString()));
-        fellDTO.setLongitudeAsDms(Map.of(
-            "degrees", fell.getConvertedLongitude().getDegrees().toString(),
-            "minutes", fell.getConvertedLongitude().getMinutes().toString(),
-            "seconds", fell.getConvertedLongitude().getSeconds().toString(),
-            "hemisphere", fell.getConvertedLongitude().getHemisphere().toString()));
-        fellDTO.setRegion(fell.getRegionName().toString());
-
-        Set<String> osMapNames = new LinkedHashSet<>();
-        fell.getOsMapNames().forEach(osMapName -> osMapNames.add(osMapName.toString()));
-        fellDTO.setOsMapNames(osMapNames);
-
-        Set<String> classificationNames = new LinkedHashSet<>();
-        fell.getClassificationNames().forEach(classificationName -> classificationNames.add(classificationName.toString()));
-        fellDTO.setClassificationNames(classificationNames);
-
-        fellDTO.setName(fell.getName().toString());
-
-
-        return new ResponseEntity<>(new ItemDTO(fellDTO, links), HttpStatus.OK);
+        return new ResponseEntity<>(new ItemDTO(links, fell), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

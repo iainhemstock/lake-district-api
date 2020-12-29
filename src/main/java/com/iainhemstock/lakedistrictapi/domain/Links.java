@@ -1,7 +1,5 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.LinksSerializer;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -12,7 +10,6 @@ import java.util.function.Consumer;
 
 @ToString
 @EqualsAndHashCode
-@JsonSerialize(using = LinksSerializer.class)
 public class Links {
     private final List<Link> links;
 
