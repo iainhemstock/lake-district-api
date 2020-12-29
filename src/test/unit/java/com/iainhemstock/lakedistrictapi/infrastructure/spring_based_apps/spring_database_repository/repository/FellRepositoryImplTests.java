@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository;
 
+import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
@@ -24,20 +25,24 @@ import static org.junit.Assert.fail;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FellRepositoryImplTests {
+    private static final String NOW = "2018-12-10T13:45:00.000Z";
+
     @Mock private FellEntityRepository fellEntityRepository;
     @Mock private DomainToEntityAssembler domainToEntityAssembler;
+    @Mock private ApiClockService apiClockService;
 
     private FellRepository fellRepository;
     private Fell expectedFell;
 
     @Before
     public void setUp() {
-        fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler);
+        fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService);
         expectedFell = new HelvellynFell();
 
         FellEntity helvellynFellEntity = new HelvellynFellEntity();
         Mockito.when(fellEntityRepository.findById(helvellynFellEntity.getOsMapRef())).thenReturn(Optional.of(helvellynFellEntity));
         Mockito.when(domainToEntityAssembler.toDomain(helvellynFellEntity)).thenReturn(expectedFell);
+        Mockito.when(apiClockService.now()).thenReturn(NOW);
     }
 
     @Test
@@ -54,6 +59,7 @@ public class FellRepositoryImplTests {
         }
         catch (FellNotFoundException ex) {
             assertThat(ex.getMessage(), is("Fell was not found for {id=NY000000}"));
+            assertThat(ex.getTimestamp(), is(NOW));
         }
     }
 

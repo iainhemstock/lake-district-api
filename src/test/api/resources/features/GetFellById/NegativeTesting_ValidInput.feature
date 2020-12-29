@@ -17,7 +17,6 @@ Feature: GET /fells/{id} - NEGATIVE TESTS WITH VALID INPUT
 		When making a GET request to http://localhost:8080/api/v1/fells/NY000000
 		Then the body will contain the status code 404
 		And the body will contain the message Fell was not found for {id=NY000000}
-		And the body will contain the path http://localhost:8080/api/v1/fells/NY000000
 		And the body will contain the timestamp 2018-12-10 13:45:00
 
 	#VerifyResponseHeaders
@@ -38,7 +37,6 @@ Feature: GET /fells/{id} - NEGATIVE TESTS WITH VALID INPUT
 		And the body will conform to the schema in schemas/error_schema.json
 		And the body will contain the status code 405
 		And the body will contain the message <message>
-		And the body will contain the path http://localhost:8080/api/v1/fells/NY000000
 		And the body will contain the timestamp 2018-12-10 13:45:00
 		Examples:
 			| unsupported http method | message                          |

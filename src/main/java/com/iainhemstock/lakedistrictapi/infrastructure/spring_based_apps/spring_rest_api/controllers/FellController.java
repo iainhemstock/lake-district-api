@@ -13,6 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/v1")
 public class FellController {
@@ -48,7 +53,43 @@ public class FellController {
             linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fell.getParentOsMapRef().toString(), LinkRel.PARENT));
 
-        return new ResponseEntity<>(new ItemDTO(), HttpStatus.OK);
+        Map<String, String> linksMap = new HashMap<>();
+        links.forEach(link -> linksMap.put(link.getRel().toString(), link.getHref()));
+        LinksDTO linksDTO = new LinksDTO();
+        linksDTO.setLinks(linksMap);
+
+        FellDTO fellDTO = new FellDTO();
+        fellDTO.setHeightMeters(fell.getHeightMeters().toString());
+        fellDTO.setHeightFeet(fell.getHeightFeet().toString());
+        fellDTO.setProminenceMeters(fell.getProminenceMeters().toString());
+        fellDTO.setProminenceFeet(fell.getProminenceFeet().toString());
+        fellDTO.setOsMapRef(fell.getOsMapRef().toString());
+        fellDTO.setLatitude(fell.getLatitude().toString());
+        fellDTO.setLongitude(fell.getLongitude().toString());
+        fellDTO.setLatitudeAsDms(Map.of(
+            "degrees", fell.getConvertedLatitude().getDegrees().toString(),
+            "minutes", fell.getConvertedLatitude().getMinutes().toString(),
+            "seconds", fell.getConvertedLatitude().getSeconds().toString(),
+            "hemisphere", fell.getConvertedLatitude().getHemisphere().toString()));
+        fellDTO.setLongitudeAsDms(Map.of(
+            "degrees", fell.getConvertedLongitude().getDegrees().toString(),
+            "minutes", fell.getConvertedLongitude().getMinutes().toString(),
+            "seconds", fell.getConvertedLongitude().getSeconds().toString(),
+            "hemisphere", fell.getConvertedLongitude().getHemisphere().toString()));
+        fellDTO.setRegion(fell.getRegionName().toString());
+
+        Set<String> osMapNames = new LinkedHashSet<>();
+        fell.getOsMapNames().forEach(osMapName -> osMapNames.add(osMapName.toString()));
+        fellDTO.setOsMapNames(osMapNames);
+
+        Set<String> classificationNames = new LinkedHashSet<>();
+        fell.getClassificationNames().forEach(classificationName -> classificationNames.add(classificationName.toString()));
+        fellDTO.setClassificationNames(classificationNames);
+
+        fellDTO.setName(fell.getName().toString());
+
+
+        return new ResponseEntity<>(new ItemDTO(linksDTO, fellDTO), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

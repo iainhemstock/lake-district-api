@@ -155,12 +155,6 @@ public class GetFellByIdStepDefs {
             is(expectedMessage)));
     }
 
-    @And("^the body will contain the path (.*)$")
-    public void theResponseBodyWillContainThePath(final String expectedPath) throws Exception {
-        commonState.getResult().andExpect(jsonPath(ErrorAttributes.PATH.value(),
-            is(expectedPath)));
-    }
-
     @And("^the body will contain the timestamp (.*)$")
     public void theResponseBodyWillContainTheTimestamp(final String expectedTimestamp) throws Exception {
         commonState.getResult().andExpect(jsonPath(ErrorAttributes.TIMESTAMP.value(),

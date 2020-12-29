@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.repository;
 
+import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.FellRepositoryImpl;
@@ -13,10 +14,11 @@ public class RepositoryFactory {
 
     @Autowired private FellEntityRepository fellEntityRepository;
     @Autowired private DomainToEntityAssembler domainToEntityAssembler;
+    @Autowired private ApiClockService apiClockService;
 
     @Bean
     public FellRepository fellRepository() {
-        return new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler);
+        return new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService);
     }
 
 }

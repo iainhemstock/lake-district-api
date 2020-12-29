@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository;
 
+import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
@@ -16,11 +17,15 @@ import java.util.Optional;
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
     private final DomainToEntityAssembler domainToEntityAssembler;
+    private ApiClockService apiClockService;
 
     @Autowired
-    public FellRepositoryImpl(final FellEntityRepository fellEntityRepository, final DomainToEntityAssembler domainToEntityAssembler) {
+    public FellRepositoryImpl(final FellEntityRepository fellEntityRepository,
+                              final DomainToEntityAssembler domainToEntityAssembler,
+                              final ApiClockService apiClockService) {
         this.fellEntityRepository = fellEntityRepository;
         this.domainToEntityAssembler = domainToEntityAssembler;
+        this.apiClockService = apiClockService;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class FellRepositoryImpl implements FellRepository {
     public Fell findFellById(final OsMapRef osMapRef) {
         Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
         if (entity.isEmpty())
-            throw new FellNotFoundException(osMapRef.toString(), "", "", "");
+            throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), "", "");
         Fell domain = this.domainToEntityAssembler.toDomain(entity.get());
         return domain;
     }
