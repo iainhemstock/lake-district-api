@@ -7,15 +7,15 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 
 import java.io.IOException;
 
-public class ItemDTOSerializer extends JsonSerializer<ItemDTO> {
+public class ItemDTOSerializer<T> extends JsonSerializer<ItemDTO<T>> {
 
     @Override
-    public void serialize(final ItemDTO itemDTO,
+    public void serialize(final ItemDTO<T> itemDTO,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
         jgen.writeObjectField("links", itemDTO.getLinks());
-        jgen.writeObjectField("item", itemDTO.getFell());
+        jgen.writeObjectField("item", itemDTO.getItem());
         jgen.writeEndObject();
     }
 }

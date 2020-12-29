@@ -53,7 +53,7 @@ public class FellController {
             linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fell.getParentOsMapRef().toString(), LinkRel.PARENT));
 
-        return new ResponseEntity<>(new ItemDTO(links, fell), HttpStatus.OK);
+        return new ResponseEntity<>(new ItemDTO<>(links, fell), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
