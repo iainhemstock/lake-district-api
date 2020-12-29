@@ -1,7 +1,5 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.FellDTOSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +8,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@JsonSerialize(using = FellDTOSerializer.class)
 public class FellDTO {
     private String heightMeters;
     private String heightFeet;
