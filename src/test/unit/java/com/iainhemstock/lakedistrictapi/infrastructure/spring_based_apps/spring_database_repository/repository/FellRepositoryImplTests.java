@@ -57,7 +57,7 @@ public class FellRepositoryImplTests {
             fail("Expected method under test to throw FellNotFoundException but it didn't");
         }
         catch (FellNotFoundException ex) {
-            assertThat(ex.getMessage(), is("Fell was not found for {id=NY000000}"));
+            assertThat(ex.getMessage(), is("Fell was not found for {os map ref=NY000000}"));
             assertThat(ex.getTimestamp(), is(NOW));
         }
     }

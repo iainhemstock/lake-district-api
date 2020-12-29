@@ -40,7 +40,7 @@ public class FellNotFoundExceptionHandlerTest {
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
         assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getMessage(),
-            is(equalTo("Fell was not found for {id=" + FELL_RESOURCE_ID + "}")));
+            is(equalTo("Fell was not found for {os map ref=" + FELL_RESOURCE_ID + "}")));
     }
 
     @Test

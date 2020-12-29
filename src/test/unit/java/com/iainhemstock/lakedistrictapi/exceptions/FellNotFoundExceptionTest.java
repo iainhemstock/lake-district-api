@@ -13,6 +13,6 @@ public class FellNotFoundExceptionTest {
     public void will_supply_message_containing_the_unfound_fell_id() {
         FellNotFoundException ex = new FellNotFoundException("missing-fell", "");
         assertThat(ex.getMessage(),
-            is(equalTo("Fell was not found for {id=missing-fell}")));
+            is(equalTo("Fell was not found for {os map ref=missing-fell}")));
     }
 }

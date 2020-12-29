@@ -11,11 +11,11 @@ public class FellNotFoundException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return String.format("Fell was not found for {id=%s}", resourceId);
+        return String.format("Fell was not found for {os map ref=%s}", resourceId);
     }
 
     public String getTimestamp() {
         return timestamp;
     }
-    
+
 }
