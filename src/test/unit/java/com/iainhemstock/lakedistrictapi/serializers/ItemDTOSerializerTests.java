@@ -33,7 +33,7 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_no_links_when_serializing_then_empty_object_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(null, null));
+        String json = mapper.writeValueAsString(new ItemDTO(null, null, null));
         jsonNode = mapper.readTree(json);
 
         assertThat(jsonNode.has("links"), is(true));
@@ -46,7 +46,7 @@ public class ItemDTOSerializerTests {
         linksDTO.setLinks(Map.of(
             LinkRel.SELF.toString(), expectedSelfHref,
             LinkRel.PARENT.toString(), expectedParentHref));
-        String json = mapper.writeValueAsString(new ItemDTO(linksDTO, null));
+        String json = mapper.writeValueAsString(new ItemDTO(linksDTO, null, null));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("links").get("self").has("href"));
@@ -55,7 +55,7 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_item_exists_when_serializing_then_item_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(null, getDetailedFellDTO()));
+        String json = mapper.writeValueAsString(new ItemDTO(null, getDetailedFellDTO(), null));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("item").has("name"));

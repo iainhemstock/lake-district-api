@@ -89,7 +89,7 @@ public class FellController {
         fellDTO.setName(fell.getName().toString());
 
 
-        return new ResponseEntity<>(new ItemDTO(linksDTO, fellDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new ItemDTO(linksDTO, fellDTO, links), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
