@@ -53,11 +53,6 @@ public class FellController {
             linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
             linkService.buildForResourceWithIdAndRel("fells", fell.getParentOsMapRef().toString(), LinkRel.PARENT));
 
-        Map<String, String> linksMap = new HashMap<>();
-        links.forEach(link -> linksMap.put(link.getRel().toString(), link.getHref()));
-        LinksDTO linksDTO = new LinksDTO();
-        linksDTO.setLinks(linksMap);
-
         FellDTO fellDTO = new FellDTO();
         fellDTO.setHeightMeters(fell.getHeightMeters().toString());
         fellDTO.setHeightFeet(fell.getHeightFeet().toString());
@@ -89,7 +84,7 @@ public class FellController {
         fellDTO.setName(fell.getName().toString());
 
 
-        return new ResponseEntity<>(new ItemDTO(linksDTO, fellDTO, links), HttpStatus.OK);
+        return new ResponseEntity<>(new ItemDTO(fellDTO, links), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

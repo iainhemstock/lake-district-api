@@ -3,7 +3,9 @@ package com.iainhemstock.lakedistrictapi.serializers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.FellDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.LinksDTO;
@@ -33,7 +35,7 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_no_links_when_serializing_then_empty_object_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(null, null, null));
+        String json = mapper.writeValueAsString(new ItemDTO(null, null));
         jsonNode = mapper.readTree(json);
 
         assertThat(jsonNode.has("links"), is(true));
@@ -42,11 +44,10 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_links_exist_when_serializing_then_links_will_be_written() throws JsonProcessingException {
-        LinksDTO linksDTO = new LinksDTO();
-        linksDTO.setLinks(Map.of(
-            LinkRel.SELF.toString(), expectedSelfHref,
-            LinkRel.PARENT.toString(), expectedParentHref));
-        String json = mapper.writeValueAsString(new ItemDTO(linksDTO, null, null));
+        Links links = new Links();
+        links.add(new Link(LinkRel.SELF, expectedSelfHref));
+        links.add(new Link(LinkRel.PARENT, expectedParentHref));
+        String json = mapper.writeValueAsString(new ItemDTO(null, links));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("links").get("self").has("href"));
@@ -55,7 +56,7 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_item_exists_when_serializing_then_item_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(null, getDetailedFellDTO(), null));
+        String json = mapper.writeValueAsString(new ItemDTO(getDetailedFellDTO(), null));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("item").has("name"));
