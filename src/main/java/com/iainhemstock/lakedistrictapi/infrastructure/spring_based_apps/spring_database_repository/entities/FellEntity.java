@@ -1,8 +1,6 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities;
 
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
-import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "fells")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -53,65 +52,4 @@ public class FellEntity {
     @Embedded
     private Classifications classifications;
 
-    @Transient
-    private LatLongToDmsConversionService latLongToDmsConversionService;
-
-    @Transient
-    private MeterToFeetConversionService meterToFeetConversionService;
-
-    public FellEntity(final OsMapRef osMapRef,
-                      final FellName name,
-                      final Meters heightMeters,
-                      final Meters prominenceMeters,
-                      final Latitude latitude,
-                      final Longitude longitude,
-                      @NotNull final RegionEntity regionEntity,
-                      final OsMapRef parentOsMapRef,
-                      final OsMaps osMaps,
-                      final Classifications classifications) {
-        this.osMapRef = osMapRef;
-        this.name = name;
-        this.heightMeters = heightMeters;
-        this.prominenceMeters = prominenceMeters;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.regionEntity = regionEntity;
-        this.parentOsMapRef = parentOsMapRef;
-        this.osMaps = osMaps;
-        this.classifications = classifications;
-    }
-
-    public void setLatLongToDmsConversionService(final LatLongToDmsConversionService latLongToDmsConversionService) {
-        this.latLongToDmsConversionService = latLongToDmsConversionService;
-    }
-
-    public DMS getConvertedLatitude() {
-        this.latLongToDmsConversionService.convert(this.latitude);
-        return new DMS(
-            this.latLongToDmsConversionService.getDegrees(),
-            this.latLongToDmsConversionService.getMinutes(),
-            this.latLongToDmsConversionService.getSeconds(),
-            this.latLongToDmsConversionService.getHemisphere());
-    }
-
-    public DMS getConvertedLongitude() {
-        this.latLongToDmsConversionService.convert(this.longitude);
-        return new DMS(
-            this.latLongToDmsConversionService.getDegrees(),
-            this.latLongToDmsConversionService.getMinutes(),
-            this.latLongToDmsConversionService.getSeconds(),
-            this.latLongToDmsConversionService.getHemisphere());
-    }
-
-    public void setMeterToFeetConversionService(final MeterToFeetConversionService meterToFeetConversionService) {
-        this.meterToFeetConversionService = meterToFeetConversionService;
-    }
-
-    public Feet getHeightFeet() {
-        return this.meterToFeetConversionService.convertRoundedToNearestInteger(this.heightMeters);
-    }
-
-    public Feet getProminenceFeet() {
-        return this.meterToFeetConversionService.convertRoundedToNearestInteger(this.prominenceMeters);
-    }
 }
