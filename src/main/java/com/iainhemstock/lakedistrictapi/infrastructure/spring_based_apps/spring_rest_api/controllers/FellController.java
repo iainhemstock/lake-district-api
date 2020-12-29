@@ -2,7 +2,6 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.assemblers.PagedCollectionDTOAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.PagedCollectionDTO;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
@@ -17,7 +16,6 @@ public class FellController {
 
     @Autowired private FellService fellService;
     @Autowired private LinkService linkService;
-    @Autowired private PagedCollectionDTOAssembler<SimpleFell> pagedCollectionDTOAssembler;
 
     @GetMapping(value = "/fells")
     public ResponseEntity<Object>
