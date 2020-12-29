@@ -53,7 +53,7 @@ public class FellServiceImplTests {
         try {
             int invalidOffset = -1;
             int anyLimit = 0;
-            fellService.getSimpleFells(invalidOffset, anyLimit);
+            fellService.getFells(invalidOffset, anyLimit);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -66,7 +66,7 @@ public class FellServiceImplTests {
     public void given_invalid_limit_when_requesting_fells_then_exception_is_thrown(final int invalidLimit) {
         try {
             int anyOffset = 0;
-            fellService.getSimpleFells(anyOffset, invalidLimit);
+            fellService.getFells(anyOffset, invalidLimit);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {

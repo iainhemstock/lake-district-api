@@ -27,7 +27,7 @@ public class FellController {
     getFells(@RequestParam(value = "offset", required = false, defaultValue = "${api.pageable.default-page-offset}") Integer offset,
              @RequestParam(value = "limit", required = false, defaultValue = "${spring.data.web.pageable.default-page-size}") Integer limit) {
 
-        RepoPage<SimpleFell> fellResults = fellService.getSimpleFells(offset, limit);
+        RepoPage<SimpleFell> fellResults = fellService.getFells(offset, limit);
         Links links = linkService.buildNavLinksForPageAndCollectionType(fellResults, "fells");
         PagedCollectionDTO<SimpleFell> pagedCollectionDTO = new PagedCollectionDTO<>(links, fellResults);
 

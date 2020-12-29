@@ -18,7 +18,7 @@ public class FellServiceImpl implements FellService {
     }
 
     @Override
-    public RepoPage<SimpleFell> getSimpleFells(final int offset, final int limit) {
+    public RepoPage<SimpleFell> getFells(final int offset, final int limit) {
         if (offset < 0)
             throw new IllegalArgumentException("Offset cannot be negative");
 
