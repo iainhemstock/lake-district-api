@@ -28,8 +28,7 @@ public class FellNotFoundExceptionHandlerTest {
         FellNotFoundException fellNotFoundException = new FellNotFoundException(
             FELL_RESOURCE_ID,
             NOW,
-            HttpMethod.GET.name(),
-            String.format("http://localhost:8080/api/fells/%s", FELL_RESOURCE_ID));
+            HttpMethod.GET.name());
 
         FellNotFoundExceptionHandler exceptionHandler = new FellNotFoundExceptionHandler();
         fellNotFoundResponseEntity = exceptionHandler.handleException(fellNotFoundException);
@@ -45,12 +44,6 @@ public class FellNotFoundExceptionHandlerTest {
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainMessage() {
         assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getMessage(),
             is(equalTo("Fell was not found for {id=" + FELL_RESOURCE_ID + "}")));
-    }
-
-    @Test
-    public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
-        assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getPath(),
-            is(equalTo("http://localhost:8080/api/fells/" + FELL_RESOURCE_ID)));
     }
 
     @Test

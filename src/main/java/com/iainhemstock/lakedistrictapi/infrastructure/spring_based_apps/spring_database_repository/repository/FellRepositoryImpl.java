@@ -37,7 +37,7 @@ public class FellRepositoryImpl implements FellRepository {
     public Fell findFellById(final OsMapRef osMapRef) {
         Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
         if (entity.isEmpty())
-            throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), "", "");
+            throw new FellNotFoundException(osMapRef.toString(), apiClockService.now(), "");
         Fell domain = this.domainToEntityAssembler.toDomain(entity.get());
         return domain;
     }

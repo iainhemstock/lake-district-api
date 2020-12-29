@@ -9,13 +9,10 @@
 		"message": {
 			"type": "string"
 		},
-		"path": {
-			"type": "string"
-		},
 		"timestamp": {
 			"type": "string"
 		}
 	},
-	"required": ["status", "message", "path", "timestamp"],
+	"required": ["status", "message", "timestamp"],
 	"additionalProperties": false
 }

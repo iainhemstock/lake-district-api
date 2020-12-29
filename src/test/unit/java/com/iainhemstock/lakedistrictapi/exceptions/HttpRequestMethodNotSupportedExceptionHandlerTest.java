@@ -69,13 +69,6 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     }
 
     @Test
-    public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainPath() {
-        assertThat(
-            ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getPath(),
-            is(equalTo(apiProperties.getBaseUrl() + "/fells/" + FELL_ID)));
-    }
-
-    @Test
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainTimestamp() {
         assertThat(
             ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getTimestamp(),

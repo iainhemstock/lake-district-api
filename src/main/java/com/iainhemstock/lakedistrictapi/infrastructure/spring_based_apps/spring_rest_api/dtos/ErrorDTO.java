@@ -9,6 +9,5 @@ import lombok.*;
 public class ErrorDTO {
     private String status;
     private String message;
-    private String path;
     private String timestamp;
 }

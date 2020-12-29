@@ -26,7 +26,6 @@ public class HttpRequestMethodNotSupportedExceptionHandler {
         ErrorDTO errorDto = new ErrorDTO(
             String.valueOf(status.value()),
             String.format("Method %s is not supported", ex.getMethod()),
-            requestUrl,
             apiClockService.now()
         );
 
