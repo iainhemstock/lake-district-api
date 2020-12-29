@@ -9,7 +9,8 @@ public class DomainToEntityAssembler {
     private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final MeterToFeetConversionService meterToFeetConversionService;
 
-    public DomainToEntityAssembler(final LatLongToDmsConversionService latLongToDmsConversionService, final MeterToFeetConversionService meterToFeetConversionService) {
+    public DomainToEntityAssembler(final LatLongToDmsConversionService latLongToDmsConversionService,
+                                   final MeterToFeetConversionService meterToFeetConversionService) {
         this.latLongToDmsConversionService = latLongToDmsConversionService;
         this.meterToFeetConversionService = meterToFeetConversionService;
     }
