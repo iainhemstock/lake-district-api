@@ -1,11 +1,13 @@
 package com.iainhemstock.lakedistrictapi.application_logic;
 
+import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.RepoResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,11 @@ public class LinkServiceImpl implements LinkService {
             links.add(buildLink(collection, LinkRel.NEXT, page.nextPageable().getOffset(), page.nextPageable().getPageSize()));
 
         return links;
+    }
+
+    @Override
+    public Links buildNavLinksForPageAndCollectionType(final RepoResult<SimpleFell> repoResult, final String collection) {
+        throw new UnsupportedOperationException();
     }
 
     private Link buildLink(final String collection, final LinkRel rel, final long offset, final int limit) {

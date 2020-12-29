@@ -3,7 +3,9 @@ package com.iainhemstock.lakedistrictapi.application_logic;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
+import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.RepoResult;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,11 @@ public class FellServiceImpl implements FellService {
             throw new IllegalArgumentException("Limit cannot be negative or zero");
 
         return fellRepository.findAll(PageRequest.of(offset, limit));
+    }
+
+    @Override
+    public RepoResult<SimpleFell> getSimpleFells(final int offset, final int limit) {
+        throw new UnsupportedOperationException();
     }
 
 
