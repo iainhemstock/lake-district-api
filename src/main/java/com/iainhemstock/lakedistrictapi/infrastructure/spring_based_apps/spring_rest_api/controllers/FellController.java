@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class FellController {
 
     @Autowired private FellService fellService;
-    @Autowired private FellDTOAssembler fellDTOAssembler;
     @Autowired private LinkService linkService;
     @Autowired private LinksDTOAssembler linksDTOAssembler;
     @Autowired private SimpleFellsDTOAssembler simpleFellsDTOAssembler;
