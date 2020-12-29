@@ -85,21 +85,4 @@ public class ItemDTOSerializerTests {
         assertTrue(jsonNode.get("item").get("location").get("longitude_as_dms").has("hemisphere"));
     }
 
-    private FellDTO getFell() {
-        FellDTO fellDTO = new FellDTO();
-        fellDTO.setHeightMeters("899");
-        fellDTO.setHeightFeet("2999");
-        fellDTO.setProminenceMeters("150");
-        fellDTO.setProminenceFeet("476");
-        fellDTO.setOsMapRef("NY123456");
-        fellDTO.setRegion("Central Lake District");
-        fellDTO.setName("Green Fell");
-        fellDTO.setLatitude("54.123");
-        fellDTO.setLongitude("-3.345");
-        fellDTO.setLatitudeAsDms(Map.of("degrees", "54", "minutes", "23", "seconds", "12", "hemisphere", "N"));
-        fellDTO.setLongitudeAsDms(Map.of("degrees", "3", "minutes", "42", "seconds", "56", "hemisphere", "W"));
-        fellDTO.setClassificationNames(Set.of("Marilyn", "Birkett"));
-        fellDTO.setOsMapNames(Set.of("OS Landranger 90", "OS Explorer OL5"));
-        return fellDTO;
-    }
 }
