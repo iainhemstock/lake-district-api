@@ -1,5 +1,6 @@
 package com.iainhemstock.lakedistrictapi.services;
 
+import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.application_logic.FellServiceImpl;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
@@ -40,7 +41,7 @@ public class FellServiceImplTests {
 
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
-    private FellServiceImpl fellService;
+    private FellService fellService;
     private FellEntity helvellynFellEntity;
     private Fell helvellynFell;
 

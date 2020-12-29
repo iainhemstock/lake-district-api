@@ -29,11 +29,6 @@ public class FellRepositoryImpl implements FellRepository {
     }
 
     @Override
-    public Optional<FellEntity> findById(final OsMapRef osMapRef) {
-        return fellEntityRepository.findById(osMapRef);
-    }
-
-    @Override
     public Fell findFellById(final OsMapRef osMapRef) {
         Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
         if (entity.isEmpty())
