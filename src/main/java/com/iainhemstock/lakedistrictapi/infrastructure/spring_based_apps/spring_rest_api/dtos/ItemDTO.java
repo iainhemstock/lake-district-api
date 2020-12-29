@@ -10,9 +10,6 @@ public class ItemDTO {
     private LinksDTO linksDTO;
     private FellDTO fellDTO;
 
-    public ItemDTO() {
-    }
-
     public ItemDTO(final LinksDTO linksDTO, final FellDTO fellDTO) {
         this.linksDTO = linksDTO;
         this.fellDTO = fellDTO;
