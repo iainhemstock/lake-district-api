@@ -17,7 +17,6 @@ public class FellController {
 
     @Autowired private FellService fellService;
     @Autowired private LinkService linkService;
-    @Autowired private SimpleFellsDTOAssembler simpleFellsDTOAssembler;
     @Autowired private PagedCollectionDTOAssembler<SimpleFell> pagedCollectionDTOAssembler;
 
     @GetMapping(value = "/fells")
