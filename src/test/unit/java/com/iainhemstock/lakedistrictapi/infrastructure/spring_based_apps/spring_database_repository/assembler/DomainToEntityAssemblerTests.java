@@ -36,7 +36,6 @@ public class DomainToEntityAssemblerTests {
     public void setUp() {
         domainToEntityAssembler = new DomainToEntityAssembler(latLongToDmsConversionService, meterToFeetConversionService);
         entity = new HelvellynFellEntity();
-        entity.setLatLongToDmsConversionService(latLongToDmsConversionService);
         domain = domainToEntityAssembler.toDomain(entity);
     }
 
@@ -115,7 +114,8 @@ public class DomainToEntityAssemblerTests {
 
         domain = domainToEntityAssembler.toDomain(entity);
 
-        assertThat(domain.getConvertedLatitude(), is(entity.getConvertedLatitude()));
+        assertThat(domain.getConvertedLatitude(), is(new DMS(
+            new Degrees(10), new Minutes(20), new Seconds(30), new Hemisphere("N"))));
     }
 
     @Test
@@ -127,6 +127,7 @@ public class DomainToEntityAssemblerTests {
 
         domain = domainToEntityAssembler.toDomain(entity);
 
-        assertThat(domain.getConvertedLongitude(), is(entity.getConvertedLongitude()));
+        assertThat(domain.getConvertedLongitude(), is(new DMS(
+            new Degrees(40), new Minutes(50), new Seconds(60), new Hemisphere("E"))));
     }
 }
