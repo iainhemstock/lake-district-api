@@ -1,12 +1,11 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
 public class Meters {
     private int value;
 
@@ -20,18 +19,5 @@ public class Meters {
 
     public String toString() {
         return String.valueOf(value);
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Meters meters = (Meters) o;
-        return value == meters.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value;
     }
 }

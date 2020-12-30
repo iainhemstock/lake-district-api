@@ -24,22 +24,22 @@ CREATE TABLE os_maps (
     PRIMARY KEY (id)
 )^;
 
-CREATE TABLE classifications (
+CREATE TABLE classificationEntities (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL,
     PRIMARY KEY (id)
 )^;
 
-CREATE TABLE fells (
+CREATE TABLE fellEntities (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL,
     height_meters INT NOT NULL,
     prominence_meters INT NOT NULL,
     region_id INT NOT NULL,
-    parent_peak_id INT, -- is modified to be NOT NULL after all the fells are inserted
+    parent_peak_id INT, -- is modified to be NOT NULL after all the fellEntities are inserted
     PRIMARY KEY (id),
     FOREIGN KEY (region_id) REFERENCES regions(id),
-    FOREIGN KEY (parent_peak_id) REFERENCES fells(id)
+    FOREIGN KEY (parent_peak_id) REFERENCES fellEntities(id)
 )^;
 
 CREATE TABLE locations (
@@ -47,22 +47,22 @@ CREATE TABLE locations (
     latitude double NOT NULL,
     longitude double NOT NULL,
     os_map_ref VARCHAR(8) NOT NULL UNIQUE,
-    FOREIGN KEY (fell_id) REFERENCES fells(id),
+    FOREIGN KEY (fell_id) REFERENCES fellEntities(id),
     UNIQUE (latitude, longitude)
 )^;
 
 CREATE TABLE fells_classifications (
     fell_id INT NOT NULL,
     classification_id INT NOT NULL,
-    FOREIGN KEY (fell_id) REFERENCES fells(id),
-    FOREIGN KEY (classification_id) REFERENCES classifications(id),
+    FOREIGN KEY (fell_id) REFERENCES fellEntities(id),
+    FOREIGN KEY (classification_id) REFERENCES classificationEntities(id),
     UNIQUE (fell_id, classification_id)
 )^;
 
 CREATE TABLE fells_osmaps (
     fell_id INT NOT NULL,
     os_map_id INT NOT NULL,
-    FOREIGN KEY (fell_id) REFERENCES fells(id),
+    FOREIGN KEY (fell_id) REFERENCES fellEntities(id),
     FOREIGN KEY (os_map_id) REFERENCES os_maps(id),
     UNIQUE (fell_id, os_map_id)
 )^;

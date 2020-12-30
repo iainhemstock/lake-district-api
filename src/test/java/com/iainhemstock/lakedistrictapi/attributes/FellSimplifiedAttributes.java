@@ -2,9 +2,9 @@ package com.iainhemstock.lakedistrictapi.attributes;
 
 public enum FellSimplifiedAttributes {
 
-    FELL_NAME("$.items.fells[%d].name"),
-    FELL_REGION("$.items.fells[%d].region"),
-    FELL_SELF_HREF("$.items.fells[%d].links.self.href");
+    FELL_NAME("$.items[%d].name"),
+    FELL_REGION("$.items[%d].region"),
+    FELL_SELF_HREF("$.items[%d].links.self.href");
 
     private final String value;
 

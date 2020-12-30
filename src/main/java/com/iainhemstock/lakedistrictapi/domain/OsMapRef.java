@@ -10,13 +10,10 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @EqualsAndHashCode
-public class OsMapRef implements Serializable {
-
-    @NotNull
+public class OsMapRef {
     private String value;
 
     public OsMapRef(final String value) {

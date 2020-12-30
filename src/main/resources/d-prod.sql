@@ -94,7 +94,7 @@ CREATE FUNCTION fell_insert(
 RETURNS INT
 DETERMINISTIC
 BEGIN
-    INSERT INTO fells (name, height_meters, region_id, prominence_meters, parent_peak_id)
+    INSERT INTO fellEntities (name, height_meters, region_id, prominence_meters, parent_peak_id)
         VALUES (in_name, in_height_meters, in_region_id, in_prominence_meters, in_parent_peak_id);
 
     RETURN last_insert_id();
@@ -137,7 +137,7 @@ SET @glenridding_dodd = 'Glenridding Dodd'^;
 SET @arnison_crag = 'Arnison Crag'^;
 
 SET @ben_nevis_id = (SELECT fell_insert('Ben Nevis', 1344, @sh, 1344, 0))^;
-UPDATE fells SET parent_peak_id = @ben_nevis_id WHERE id = @ben_nevis_id^;
+UPDATE fellEntities SET parent_peak_id = @ben_nevis_id WHERE id = @ben_nevis_id^;
 
 SET @snowdon_id = (SELECT fell_insert('Snowdon', 1085, @sd, 1039, @ben_nevis_id))^;
 
@@ -148,7 +148,7 @@ SET @scafell_id = (SELECT fell_insert('Scafell', 964, @s, 133, @scafell_pike_id)
 SET @helvellyn_id = (SELECT fell_insert(@helvellyn, 950, @e, 712, @scafell_pike_id))^;
 
 SET @skiddaw_id = (SELECT fell_insert('Skiddaw', 931, @n, 709, 0))^;
-UPDATE fells set parent_peak_id = @skiddaw_id WHERE id = @skiddaw_id^;
+UPDATE fellEntities set parent_peak_id = @skiddaw_id WHERE id = @skiddaw_id^;
 
 SET @great_end_id = (SELECT fell_insert('Great End', 910, @s, 56, @scafell_pike_id))^;
 
@@ -203,7 +203,7 @@ SET @lingmell_id = (SELECT fell_insert('Lingmell', 807, @s, 72, @scafell_pike_id
 SET @high_stile_id = (SELECT fell_insert('High Stile', 807, @w, 362, @great_gable_id))^;
 
 SET @coniston_old_man_id = (SELECT fell_insert('Coniston Old Man', 803, @s, 416, 0))^;
-UPDATE fells set parent_peak_id = @coniston_old_man_id WHERE id = @coniston_old_man_id^;
+UPDATE fellEntities set parent_peak_id = @coniston_old_man_id WHERE id = @coniston_old_man_id^;
 
 SET @swirl_how_id = (SELECT fell_insert('Swirl How', 802, @s, 112, @coniston_old_man_id))^;
 
@@ -321,7 +321,7 @@ SET @cold_pike_id = (SELECT fell_insert('Cold Pike', 701, @s, 46, @crinkle_crags
 
 SET @pavey_ark_id = (SELECT fell_insert('Pavey Ark', 700, @c, 15, @thunacar_knott_id))^;
 
-SET @gray_crag_id = (SELECT fell_insert('Gray Crag', 699, @fe, 15, @thornthwaite_crag_id))^; -- this is GR(A)Y Crag, there is a different GR(E)Y Crag fell
+SET @gray_crag_id = (SELECT fell_insert('Gray Crag', 699, @fe, 15, @thornthwaite_crag_id))^; -- this is GR(A)Y Crag, there is a different GR(E)Y Crag fellEntity
 
 SET @grey_knotts_id = (SELECT fell_insert('Grey Knotts', 697, @w, 15, @brandreth_id))^;
 
@@ -377,7 +377,7 @@ SET @fleetwith_pike_id = (SELECT fell_insert('Fleetwith Pike', 648, @w, 117, @gr
 
 SET @base_brown_id = (SELECT fell_insert('Base Brown', 646, @w, 38, @green_gable_id))^;
 
-SET @grey_crag_id = (SELECT fell_insert('Grey Crag', 638, @fe, 45, @tarn_crag_longsleddale_id))^; -- this is GR(E)Y Crag, there is a different GR(A)Y Crag fell
+SET @grey_crag_id = (SELECT fell_insert('Grey Crag', 638, @fe, 45, @tarn_crag_longsleddale_id))^; -- this is GR(E)Y Crag, there is a different GR(A)Y Crag fellEntity
 
 SET @causey_pike_id = (SELECT fell_insert('Causey Pike', 637, @nw, 40, @scar_crags_id))^;
 
@@ -573,14 +573,14 @@ SET @holme_fell_id = (SELECT fell_insert('Holme Fell', 317, @s, 165, @coniston_o
 
 SET @castle_crag_id = (SELECT fell_insert('Castle Crag', 298, @nw, 75, @high_spy_id))^;
 
-ALTER TABLE fells MODIFY parent_peak_id INT NOT NULL^;
+ALTER TABLE fellEntities MODIFY parent_peak_id INT NOT NULL^;
 
 /***************************************************************************************************
 * LOCATIONS
 ***************************************************************************************************/
 INSERT INTO locations (fell_id, latitude, longitude, os_map_ref)
 VALUES
-    -- eastern fells -----------------------------------------
+    -- eastern fellEntities -----------------------------------------
     (@helvellyn_id, 54.527232, -3.016054, 'NY342151'),
     (@nethermost_pike_id, 54.51882, -3.01646, 'NY343142'),
     (@catstye_cam_id, 54.53326, -3.00909, 'NY348158'),
@@ -616,7 +616,7 @@ VALUES
     (@nab_scar_id, 54.457, -2.996, 'NY356073'),
     (@glenridding_dodd_id, 54.54895, -2.95846, 'NY381175'),
     (@arnison_crag_id, 54.52663, -2.93939, 'NY393150'),
-    -- far eastern fells -----------------------------------------
+    -- far eastern fellEntities -----------------------------------------
     (@high_street_id, 54.492, -2.865, 'NY440110'),
     (@high_raise_haweswater_id, 54.513, -2.851, 'NY448135'),
     (@rampsgill_head_id, 54.50744, -2.86173, 'NY443128'),
@@ -653,7 +653,7 @@ VALUES
     (@steel_knotts_id, 54.55503, -2.86737, 'NY440181'),
     (@hallin_fell_id, 54.57057, -2.876354, 'NY433198'),
     (@troutbeck_tongue_id, 54.44969, -2.8929, 'NY422064'),
-    -- central fells -----------------------------------------
+    -- central fellEntities -----------------------------------------
     (@high_raise_langdale_id, 54.476, -3.113, 'NY280095'),
     (@sergeant_man_id, 54.47042, -3.10321, 'NY286089'),
     (@harrison_stickle_id, 54.45687, -3.11056, 'NY281074'),
@@ -681,7 +681,7 @@ VALUES
     (@walla_crag_id, 54.5808, -3.12166, 'NY276212'),
     (@high_rigg_id, 54.58843, -3.07235, 'NY308220'),
     (@loughrigg_fell_id, 54.4371, -3.00826, 'NY347051'),
-    -- southern fells -----------------------------------------
+    -- southern fellEntities -----------------------------------------
     (@scafell_pike_id, 54.454222, -3.211528, 'NY215072'),
     (@scafell_id, 54.448, -3.225, 'NY206064'),
     (@great_end_id, 54.464, -3.194, 'NY226084'),
@@ -712,7 +712,7 @@ VALUES
     (@lingmoor_fell_id, 54.43208, -3.07626, 'NY302046'),
     (@black_fell_id, 54.40557, -3.01673, 'NY341016'),
     (@holme_fell_id, 54.396, -3.056, 'NY315006'),
-    -- northern fells -----------------------------------------
+    -- northern fellEntities -----------------------------------------
     (@skiddaw_id, 54.647, -3.146, 'NY260290'),
     (@blencathra_id, 54.63985, -3.05046, 'NY323277'),
     (@skiddaw_little_man_id, 54.63906, -3.13876, 'NY266277'),
@@ -737,7 +737,7 @@ VALUES
     (@longlands_fell_id, 54.70747, -3.12671, 'NY275353'),
     (@binsey_id, 54.70852, -3.20434, 'NY225355'),
     (@latrigg_id, 54.61229, -3.11788, 'NY279247'),
-    -- north western fells -----------------------------------------
+    -- north western fellEntities -----------------------------------------
     (@grasmoor_id, 54.57115, -3.27918, 'NY174203'),
     (@eel_crag_crag_hill_id, 54.572, -3.25, 'NY192203'),
     (@grisedale_pike_id, 54.592, -3.241, 'NY198225'),
@@ -767,7 +767,7 @@ VALUES
     (@sale_fell_id, 54.656, -3.248, 'NY194297'),
     (@rannerdale_knotts_id, 54.55216, -3.28941, 'NY167182'),
     (@castle_crag_id, 54.53278, -3.16207, 'NY249159'),
-    -- western fells -----------------------------------------
+    -- western fellEntities -----------------------------------------
     (@great_gable_id, 54.482, -3.219, 'NY211104'),
     (@pillar_id, 54.497, -3.282, 'NY171121'),
     (@scoat_fell_id, 54.49004, -3.2998, 'NY159113'),
@@ -805,58 +805,58 @@ VALUES
 /***************************************************************************************************
 * Classifications
 ***************************************************************************************************/
-INSERT INTO classifications (name) VALUES ('Wainwright')^;
+INSERT INTO classificationEntities (name) VALUES ('Wainwright')^;
 SET @wainwright_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Hewitt')^;
+INSERT INTO classificationEntities (name) VALUES ('Hewitt')^;
 SET @hewitt_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Marilyn')^;
+INSERT INTO classificationEntities (name) VALUES ('Marilyn')^;
 SET @marilyn_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Nuttall')^;
+INSERT INTO classificationEntities (name) VALUES ('Nuttall')^;
 SET @nuttall_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Country high point')^;
+INSERT INTO classificationEntities (name) VALUES ('Country high point')^;
 SET @country_high_point_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Hardy')^;
+INSERT INTO classificationEntities (name) VALUES ('Hardy')^;
 SET @hardy_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Current county top')^;
+INSERT INTO classificationEntities (name) VALUES ('Current county top')^;
 SET @current_county_top_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Furth')^;
+INSERT INTO classificationEntities (name) VALUES ('Furth')^;
 SET @furth_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Historic county top')^;
+INSERT INTO classificationEntities (name) VALUES ('Historic county top')^;
 SET @historic_county_top_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Administrative county top')^;
+INSERT INTO classificationEntities (name) VALUES ('Administrative county top')^;
 SET @administrative_county_top_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Birkett')^;
+INSERT INTO classificationEntities (name) VALUES ('Birkett')^;
 SET @birkett_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('HuMP')^;
+INSERT INTO classificationEntities (name) VALUES ('HuMP')^;
 SET @hump_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Nuttal')^;
+INSERT INTO classificationEntities (name) VALUES ('Nuttal')^;
 SET @nuttal_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Simm')^;
+INSERT INTO classificationEntities (name) VALUES ('Simm')^;
 SET @simm_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Synge')^;
+INSERT INTO classificationEntities (name) VALUES ('Synge')^;
 SET @synge_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Fellranger')^;
+INSERT INTO classificationEntities (name) VALUES ('Fellranger')^;
 SET @fellranger_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Tump')^;
+INSERT INTO classificationEntities (name) VALUES ('Tump')^;
 SET @tump_id = (SELECT last_insert_id())^;
 
-INSERT INTO classifications (name) VALUES ('Dewey')^;
+INSERT INTO classificationEntities (name) VALUES ('Dewey')^;
 SET @dewey_id = (SELECT last_insert_id())^;
 
 /***************************************************************************************************

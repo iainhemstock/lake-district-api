@@ -1,37 +1,36 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
-import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.entities.*;
-import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
-import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassification;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassification;
-import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFell;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMap;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMap;
-import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegion;
-import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegion;
-import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegion;
-import com.iainhemstock.lakedistrictapi.repositories.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.BirkettClassficationEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellrangerClassificationEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.MarilynClassificationEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.GreatGableFellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ScafellPikeFellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Landranger89OsMapEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Landranger90OsMapEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OL5ExplorerOsMapEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OL6ExplorerOsMapEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.CentralRegionEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.EasternRegionEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.SouthernRegionEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.ClassificationEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.OsMapEntityRepository;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.RegionEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public final class TestDataLoaderForApiTests {
 
-    @Autowired private FellRepository fellRepository;
-    @Autowired private RegionRepository regionRepository;
-    @Autowired private OsMapRepository osMapRepository;
-    @Autowired private ClassificationsRepository classificationsRepository;
+    @Autowired private FellEntityRepository fellEntityRepository;
+    @Autowired private RegionEntityRepository regionEntityRepository;
+    @Autowired private OsMapEntityRepository osMapEntityRepository;
+    @Autowired private ClassificationEntityRepository classificationEntityRepository;
 
     private final Logger logger = LoggerFactory.getLogger(TestDataLoaderForApiTests.class);
 
@@ -47,50 +46,33 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addGreatGable() {
-        Fell greatGable = new Fell(
-            new OsMapRef("NY211104"),
-            new FellName("Great Gable"),
-            new Meters(899),
-            new Meters(425),
-            new Latitude(54.482),
-            new Longitude(-3.219),
-            new Region(3, new RegionName("Central Lake District")),
-            new ScafellPikeFell().getOsMapRef(),
-            new OsMaps(new HashSet<>(Set.of(
-                new OsMap(1, new OsMapName("OS Landranger 89")),
-                new OsMap(2, new OsMapName("OS Landranger 90")),
-                new OsMap(7, new OsMapName("OS Explorer OL6"))))),
-            new Classifications(new HashSet<>(Set.of(
-                new Classification(3, new ClassificationName("Marilyn")),
-                new Classification(15, new ClassificationName("Fellranger")),
-                new Classification(11, new ClassificationName("Birkett"))))));
-        fellRepository.save(greatGable);
+        fellEntityRepository.save(new GreatGableFellEntity());
     }
 
     public void addHelvellyn() {
-        fellRepository.save(new HelvellynFell());
+        fellEntityRepository.save(new HelvellynFellEntity());
     }
 
     public void addScafellPike() {
-        fellRepository.save(new ScafellPikeFell());
+        fellEntityRepository.save(new ScafellPikeFellEntity());
     }
 
     private void initializeRegionData() {
-        regionRepository.save(new EasternRegion());
-        regionRepository.save(new CentralRegion());
-        regionRepository.save(new SouthernRegion());
+        regionEntityRepository.save(new EasternRegionEntity());
+        regionEntityRepository.save(new CentralRegionEntity());
+        regionEntityRepository.save(new SouthernRegionEntity());
     }
 
     private void initializeOsMapData() {
-        osMapRepository.save(new Landranger89OsMap());
-        osMapRepository.save(new Landranger90OsMap());
-        osMapRepository.save(new OL5ExplorerOsMap());
-        osMapRepository.save(new OL6ExplorerOsMap());
+        osMapEntityRepository.save(new Landranger89OsMapEntity());
+        osMapEntityRepository.save(new Landranger90OsMapEntity());
+        osMapEntityRepository.save(new OL5ExplorerOsMapEntity());
+        osMapEntityRepository.save(new OL6ExplorerOsMapEntity());
     }
 
     private void initializeClassificationData() {
-        classificationsRepository.save(new MarilynClassification());
-        classificationsRepository.save(new BirkettClassfication());
-        classificationsRepository.save(new FellrangerClassification());
+        classificationEntityRepository.save(new MarilynClassificationEntity());
+        classificationEntityRepository.save(new BirkettClassficationEntity());
+        classificationEntityRepository.save(new FellrangerClassificationEntity());
     }
 }

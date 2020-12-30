@@ -72,7 +72,7 @@
 			"type": "string"
 		},
 		"items": {
-			"type": "object"
+			"type": "array"
 		}
 	}
 }
