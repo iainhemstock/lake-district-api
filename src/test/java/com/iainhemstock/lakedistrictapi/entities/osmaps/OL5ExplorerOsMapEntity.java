@@ -1,6 +1,5 @@
 package com.iainhemstock.lakedistrictapi.entities.osmaps;
 
-import com.iainhemstock.lakedistrictapi.domain.OsMapName;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMapEntity;
 
 import javax.persistence.Entity;
@@ -9,7 +8,7 @@ import javax.persistence.Entity;
 public final class OL5ExplorerOsMapEntity extends OsMapEntity {
 
     public OL5ExplorerOsMapEntity() {
-        super(6, new OsMapName("OS Explorer OL5"));
+        super(6, "OS Explorer OL5");
     }
 
 }

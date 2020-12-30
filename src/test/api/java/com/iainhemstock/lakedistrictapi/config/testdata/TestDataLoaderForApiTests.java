@@ -1,21 +1,18 @@
 package com.iainhemstock.lakedistrictapi.config.testdata;
 
-import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassfication;
+import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassficationEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.FellrangerClassificationEntity;
 import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
+import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.*;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
+import com.iainhemstock.lakedistrictapi.entities.osmaps.OL6ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.entities.regions.CentralRegionEntity;
 import com.iainhemstock.lakedistrictapi.entities.regions.EasternRegionEntity;
 import com.iainhemstock.lakedistrictapi.entities.regions.SouthernRegionEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ClassificationEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OsMapEntity;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.RegionEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.ClassificationEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.OsMapEntityRepository;
@@ -26,8 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public final class TestDataLoaderForApiTests {
@@ -51,24 +46,7 @@ public final class TestDataLoaderForApiTests {
     }
 
     public void addGreatGable() {
-        FellEntity greatGable = new FellEntity(
-            new OsMapRef("NY211104"),
-            new FellName("Great Gable"),
-            new Meters(899),
-            new Meters(425),
-            new Latitude(54.482),
-            new Longitude(-3.219),
-            new RegionEntity(3, new RegionName("Central Lake District")),
-            new ScafellPikeFellEntity().getOsMapRef(),
-            new OsMaps(new HashSet<>(Set.of(
-                new OsMapEntity(1, new OsMapName("OS Landranger 89")),
-                new OsMapEntity(2, new OsMapName("OS Landranger 90")),
-                new OsMapEntity(7, new OsMapName("OS Explorer OL6"))))),
-            new Classifications(new HashSet<>(Set.of(
-                new ClassificationEntity(3, new ClassificationName("Marilyn")),
-                new ClassificationEntity(15, new ClassificationName("Fellranger")),
-                new ClassificationEntity(11, new ClassificationName("Birkett"))))));
-        fellEntityRepository.save(greatGable);
+        fellEntityRepository.save(new GreatGableFellEntity());
     }
 
     public void addHelvellyn() {
@@ -94,7 +72,7 @@ public final class TestDataLoaderForApiTests {
 
     private void initializeClassificationData() {
         classificationEntityRepository.save(new MarilynClassificationEntity());
-        classificationEntityRepository.save(new BirkettClassfication());
+        classificationEntityRepository.save(new BirkettClassficationEntity());
         classificationEntityRepository.save(new FellrangerClassificationEntity());
     }
 }

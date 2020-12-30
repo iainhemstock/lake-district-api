@@ -9,17 +9,10 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 public class Classifications {
 
-    @ManyToMany
-    @JoinTable(
-        name = "fells_classifications",
-        joinColumns = @JoinColumn(name = "os_map_ref"),
-        inverseJoinColumns = @JoinColumn(name = "classification_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
     private Set<ClassificationEntity> classificationEntities;
 
     public Classifications(final Set<ClassificationEntity> classificationEntities) {

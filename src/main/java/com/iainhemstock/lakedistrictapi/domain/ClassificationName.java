@@ -3,9 +3,6 @@ package com.iainhemstock.lakedistrictapi.domain;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 @NoArgsConstructor
 @EqualsAndHashCode
 public class ClassificationName {

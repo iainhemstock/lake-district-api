@@ -2,12 +2,8 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
-import com.iainhemstock.lakedistrictapi.application_logic.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger90OsMapEntity;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +15,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,39 +36,39 @@ public class DomainToEntityAssemblerTests {
 
     @Test
     public void will_map_fell_name_from_entity_to_domain() {
-        assertThat(domain.getName(), is(entity.getName()));
+        assertThat(domain.getName(), is(new FellName(entity.getName())));
     }
 
     @Test
     public void will_map_os_map_ref_from_entity_to_domain() {
-        assertThat(domain.getOsMapRef(), is(entity.getOsMapRef()));
+        assertThat(domain.getOsMapRef(), is(new OsMapRef(entity.getOsMapRef())));
     }
 
     @Test
     public void will_map_parent_os_map_ref_from_entity_domain() {
-        assertThat(domain.getParentOsMapRef(), is(entity.getParentOsMapRef()));
+        assertThat(domain.getParentOsMapRef(), is(new OsMapRef(entity.getParentOsMapRef())));
     }
 
     @Test
     public void will_map_height_in_meters_from_entity_to_domain() {
-        assertThat(domain.getHeightMeters(), is(entity.getHeightMeters()));
+        assertThat(domain.getHeightMeters(), is(new Meters(entity.getHeightMeters())));
     }
 
     @Test
     public void will_map_height_in_feet_from_entity_to_domain() {
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(entity.getHeightMeters())).thenReturn(new Feet(123));
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(entity.getHeightMeters()))).thenReturn(new Feet(123));
         domain = domainToEntityAssembler.toDomain(entity);
         assertThat(domain.getHeightFeet(), is(new Feet(123)));
     }
 
     @Test
     public void will_map_prominence_in_meters_from_entity_to_domain() {
-        assertThat(domain.getProminenceMeters(), is(entity.getProminenceMeters()));
+        assertThat(domain.getProminenceMeters(), is(new Meters(entity.getProminenceMeters())));
     }
 
     @Test
     public void will_map_prominence_in_feet_from_entity_to_domain() {
-        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(entity.getProminenceMeters())).thenReturn(new Feet(456));
+        Mockito.when(meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(entity.getProminenceMeters()))).thenReturn(new Feet(456));
         domain = domainToEntityAssembler.toDomain(entity);
         assertThat(domain.getProminenceFeet(), is(new Feet(456)));
     }
@@ -92,17 +87,17 @@ public class DomainToEntityAssemblerTests {
 
     @Test
     public void will_map_latitude_from_entity_to_domain() {
-        assertThat(domain.getLatitude(), is(entity.getLatitude()));
+        assertThat(domain.getLatitude(), is(new Latitude(entity.getLatitude())));
     }
 
     @Test
     public void will_map_longitude_from_entity_to_domain() {
-        assertThat(domain.getLongitude(), is(entity.getLongitude()));
+        assertThat(domain.getLongitude(), is(new Longitude(entity.getLongitude())));
     }
 
     @Test
     public void will_map_region_from_entity_to_domain() {
-        assertThat(domain.getRegionName(), is(entity.getRegionEntity().getRegionName()));
+        assertThat(domain.getRegionName(), is(new RegionName(entity.getRegionEntity().getName())));
     }
 
     @Test

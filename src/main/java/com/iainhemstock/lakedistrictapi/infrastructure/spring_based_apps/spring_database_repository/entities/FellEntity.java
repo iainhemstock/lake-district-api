@@ -1,10 +1,10 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities;
 
-import com.iainhemstock.lakedistrictapi.domain.*;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "fells")
@@ -15,41 +15,53 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FellEntity {
 
-    @EmbeddedId
-    @AttributeOverride(name = "value", column = @Column(name = "os_map_ref"))
+    @Id
+    @Column(name = "os_map_ref")
+    @NotNull
     @EqualsAndHashCode.Include
-    private OsMapRef osMapRef;
+    private String osMapRef;
 
-    @Embedded
-    private FellName name;
+    @Column(name = "name")
+    @NotNull
+    private String name;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "height_meters"))
-    private Meters heightMeters;
+    @Column(name = "height_meters")
+    private int heightMeters;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "prominence_meters"))
-    private Meters prominenceMeters;
+    @Column(name = "prominence_meters")
+    private int prominenceMeters;
 
-    @Embedded
-    private Latitude latitude;
+    @Column(name = "latitude")
+    @NotNull
+    private double latitude;
 
-    @Embedded
-    private Longitude longitude;
+    @Column(name = "longitude")
+    @NotNull
+    private double longitude;
 
     @ManyToOne
     @JoinColumn(name = "region_id")
     @NotNull
     private RegionEntity regionEntity;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "parent_os_map_ref"))
-    private OsMapRef parentOsMapRef;
+    @Column(name = "parent_os_map_ref")
+    @NotNull
+    private String parentOsMapRef;
 
-    @Embedded
-    private OsMaps osMaps;
+    @ManyToMany
+    @JoinTable(
+        name = "fells_osmaps",
+        joinColumns = @JoinColumn(name = "os_map_ref"),
+        inverseJoinColumns = @JoinColumn(name = "os_map_id"),
+        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "os_map_id" }))
+    private Set<OsMapEntity> osMaps;
 
-    @Embedded
-    private Classifications classifications;
+    @ManyToMany
+    @JoinTable(
+        name = "fells_classifications",
+        joinColumns = @JoinColumn(name = "os_map_ref"),
+        inverseJoinColumns = @JoinColumn(name = "classification_id"),
+        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "classification_id" }))
+    private Set<ClassificationEntity> classifications;
 
 }

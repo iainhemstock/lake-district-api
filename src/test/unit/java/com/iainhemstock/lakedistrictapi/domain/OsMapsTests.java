@@ -19,7 +19,7 @@ public class OsMapsTests {
 
         Set<String> expectedNames = Set.of("OS Landranger 89", "OS Explorer OL5");
         Set<String> actualNames = new HashSet<>();
-        osMapEntities.forEach(osMap -> actualNames.add(osMap.getOsMapName().toString()));
+        osMapEntities.forEach(osMap -> actualNames.add(osMap.getName().toString()));
         assertTrue(actualNames.containsAll(expectedNames) && expectedNames.containsAll(actualNames));
     }
 

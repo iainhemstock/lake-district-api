@@ -10,27 +10,27 @@ import java.util.Set;
 public class HelvellynFell extends Fell {
     public HelvellynFell() {
         FellEntity helvellynFellEntity = new HelvellynFellEntity();
-        setOsMapRef(helvellynFellEntity.getOsMapRef());
-        setName(helvellynFellEntity.getName());
-        setHeightMeters(helvellynFellEntity.getHeightMeters());
+        setOsMapRef(new OsMapRef(helvellynFellEntity.getOsMapRef()));
+        setName(new FellName(helvellynFellEntity.getName()));
+        setHeightMeters(new Meters(helvellynFellEntity.getHeightMeters()));
         setHeightFeet(new Feet(3117));
-        setProminenceMeters(helvellynFellEntity.getProminenceMeters());
+        setProminenceMeters(new Meters(helvellynFellEntity.getProminenceMeters()));
         setProminenceFeet(new Feet(2336));
         setClassificationNames(new ClassificationNames(Set.of(new ClassificationName("Marilyn"))));
         setOsMapNames(new OsMapNames(Set.of(new OsMapName("OS Landranger 90"), new OsMapName("OS Explorer OL5"))));
-        setLatitude(helvellynFellEntity.getLatitude());
-        setLongitude(helvellynFellEntity.getLongitude());
-        setRegionName(helvellynFellEntity.getRegionEntity().getRegionName());
+        setLatitude(new Latitude(helvellynFellEntity.getLatitude()));
+        setLongitude(new Longitude(helvellynFellEntity.getLongitude()));
+        setRegionName(new RegionName(helvellynFellEntity.getRegionEntity().getName()));
 
         LatLongToDmsConversionService latLongToDmsConversionService = new LatLongToDmsConversionServiceImpl();
-        latLongToDmsConversionService.convert(helvellynFellEntity.getLatitude());
+        latLongToDmsConversionService.convert(new Latitude(helvellynFellEntity.getLatitude()));
         setConvertedLatitude(new DMS(
             latLongToDmsConversionService.getDegrees(),
             latLongToDmsConversionService.getMinutes(),
             latLongToDmsConversionService.getSeconds(),
             latLongToDmsConversionService.getHemisphere()));
 
-        latLongToDmsConversionService.convert(helvellynFellEntity.getLongitude());
+        latLongToDmsConversionService.convert(new Longitude(helvellynFellEntity.getLongitude()));
         setConvertedLongitude(new DMS(
             latLongToDmsConversionService.getDegrees(),
             latLongToDmsConversionService.getMinutes(),

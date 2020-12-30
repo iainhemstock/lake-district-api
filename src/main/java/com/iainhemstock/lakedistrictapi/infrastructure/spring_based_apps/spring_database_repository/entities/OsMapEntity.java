@@ -1,9 +1,11 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities;
 
-import com.iainhemstock.lakedistrictapi.domain.OsMapName;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,9 +21,8 @@ public class OsMapEntity {
     @EqualsAndHashCode.Include
     private int id;
 
-    @Embedded
     @Column(name = "name")
     @NotNull
-    private OsMapName osMapName;
+    private String name;
 
 }

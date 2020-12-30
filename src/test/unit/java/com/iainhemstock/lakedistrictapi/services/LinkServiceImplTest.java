@@ -1,13 +1,10 @@
 package com.iainhemstock.lakedistrictapi.services;
 
 import com.iainhemstock.lakedistrictapi.application_logic.LinkServiceImpl;
-import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
-import com.iainhemstock.lakedistrictapi.domain.Link;
-import com.iainhemstock.lakedistrictapi.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.entities.fells.GreatGableFellEntity;
 import com.iainhemstock.lakedistrictapi.entities.fells.ScafellPikeFellEntity;
 import com.iainhemstock.lakedistrictapi.application_interfaces.LinkService;
@@ -95,10 +92,27 @@ public class LinkServiceImplTest {
     }
 
     private Object[] parameters() {
+        GreatGableFellEntity greatGableFellEntity = new GreatGableFellEntity();
+        HelvellynFellEntity helvellynFellEntity = new HelvellynFellEntity();
+        ScafellPikeFellEntity scafellPikeFellEntity = new ScafellPikeFellEntity();
+
         List<SimpleFell> items = List.of(
-            new SimpleFell(new GreatGableFellEntity().getName(), new GreatGableFellEntity().getRegionEntity().getRegionName(), new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new GreatGableFellEntity().getOsMapRef().toString()))),
-            new SimpleFell(new HelvellynFellEntity().getName(), new HelvellynFellEntity().getRegionEntity().getRegionName(), new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new HelvellynFellEntity().getOsMapRef().toString()))),
-            new SimpleFell(new ScafellPikeFellEntity().getName(), new ScafellPikeFellEntity().getRegionEntity().getRegionName(), new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new ScafellPikeFellEntity().getOsMapRef().toString()))));
+            new SimpleFell(
+                new FellName(greatGableFellEntity.getName()),
+                new RegionName(greatGableFellEntity.getRegionEntity().getName()),
+                new Links(
+                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + greatGableFellEntity.getOsMapRef().toString()))),
+            new SimpleFell(
+                new FellName(helvellynFellEntity.getName()),
+                new RegionName(helvellynFellEntity.getRegionEntity().getName()),
+                new Links(
+                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + helvellynFellEntity.getOsMapRef().toString()))),
+            new SimpleFell(
+                new FellName(scafellPikeFellEntity.getName()),
+                new RegionName(scafellPikeFellEntity.getRegionEntity().getName()),
+                new Links(
+                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + scafellPikeFellEntity.getOsMapRef().toString()))));
+
         return new Object[] {
             new Object[] {items, 0, 1, new Links(
                 getLink(LinkRel.SELF, 0, 1),

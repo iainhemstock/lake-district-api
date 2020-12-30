@@ -8,8 +8,8 @@ public class ScafellPikeSimpleFell extends SimpleFell {
 
     public ScafellPikeSimpleFell() {
         super(
-            new ScafellPikeFellEntity().getName(),
-            new ScafellPikeFellEntity().getRegionEntity().getRegionName(),
+            new FellName(new ScafellPikeFellEntity().getName()),
+            new RegionName(new ScafellPikeFellEntity().getRegionEntity().getName()),
             new Links(
                 new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new ScafellPikeFellEntity().getOsMapRef().toString())));
     }

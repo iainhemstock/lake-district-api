@@ -9,17 +9,11 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 public class OsMaps {
 
-    @ManyToMany
-    @JoinTable(
-        name = "fells_osmaps",
-        joinColumns = @JoinColumn(name = "os_map_ref"),
-        inverseJoinColumns = @JoinColumn(name = "os_map_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = { "os_map_ref", "os_map_id" }))
+
     private Set<OsMapEntity> osMapEntities;
 
     public OsMaps(final Set<OsMapEntity> osMapEntities) {

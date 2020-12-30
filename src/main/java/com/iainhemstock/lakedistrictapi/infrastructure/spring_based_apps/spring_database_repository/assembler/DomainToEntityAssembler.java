@@ -17,38 +17,38 @@ public class DomainToEntityAssembler {
 
     public Fell toDomain(final FellEntity entity) {
         Fell fell = new Fell();
-        fell.setOsMapRef(entity.getOsMapRef());
-        fell.setParentOsMapRef(entity.getParentOsMapRef());
-        fell.setName(entity.getName());
-        fell.setHeightMeters(entity.getHeightMeters());
-        fell.setProminenceMeters(entity.getProminenceMeters());
-        fell.setLatitude(entity.getLatitude());
-        fell.setLongitude(entity.getLongitude());
-        fell.setRegionName(entity.getRegionEntity().getRegionName());
+        fell.setOsMapRef(new OsMapRef(entity.getOsMapRef()));
+        fell.setParentOsMapRef(new OsMapRef(entity.getParentOsMapRef()));
+        fell.setName(new FellName(entity.getName()));
+        fell.setHeightMeters(new Meters(entity.getHeightMeters()));
+        fell.setProminenceMeters(new Meters(entity.getProminenceMeters()));
+        fell.setLatitude(new Latitude(entity.getLatitude()));
+        fell.setLongitude(new Longitude(entity.getLongitude()));
+        fell.setRegionName(new RegionName(entity.getRegionEntity().getName()));
 
-        this.latLongToDmsConversionService.convert(entity.getLatitude());
+        this.latLongToDmsConversionService.convert(new Latitude(entity.getLatitude()));
         fell.setConvertedLatitude(new DMS(
             this.latLongToDmsConversionService.getDegrees(),
             this.latLongToDmsConversionService.getMinutes(),
             this.latLongToDmsConversionService.getSeconds(),
             this.latLongToDmsConversionService.getHemisphere()));
 
-        this.latLongToDmsConversionService.convert(entity.getLongitude());
+        this.latLongToDmsConversionService.convert(new Longitude(entity.getLongitude()));
         fell.setConvertedLongitude(new DMS(
             this.latLongToDmsConversionService.getDegrees(),
             this.latLongToDmsConversionService.getMinutes(),
             this.latLongToDmsConversionService.getSeconds(),
             this.latLongToDmsConversionService.getHemisphere()));
 
-        fell.setHeightFeet(this.meterToFeetConversionService.convertRoundedToNearestInteger(entity.getHeightMeters()));
-        fell.setProminenceFeet(this.meterToFeetConversionService.convertRoundedToNearestInteger(entity.getProminenceMeters()));
+        fell.setHeightFeet(this.meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(entity.getHeightMeters())));
+        fell.setProminenceFeet(this.meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(entity.getProminenceMeters())));
 
         ClassificationNames classificationNames = new ClassificationNames();
-        entity.getClassifications().forEach(classificationEntity -> classificationNames.add(classificationEntity.getClassificationName()));
+        entity.getClassifications().forEach(classificationEntity -> classificationNames.add(new ClassificationName(classificationEntity.getName())));
         fell.setClassificationNames(classificationNames);
 
         OsMapNames osMapNames = new OsMapNames();
-        entity.getOsMaps().forEach(osMapEntity -> osMapNames.add(osMapEntity.getOsMapName()));
+        entity.getOsMaps().forEach(osMapEntity -> osMapNames.add(new OsMapName(osMapEntity.getName())));
         fell.setOsMapNames(osMapNames);
 
         return fell;

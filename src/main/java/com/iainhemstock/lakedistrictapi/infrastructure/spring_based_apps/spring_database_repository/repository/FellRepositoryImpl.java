@@ -33,7 +33,7 @@ public class FellRepositoryImpl implements FellRepository {
 
     @Override
     public Fell findById(final OsMapRef osMapRef) {
-        Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef);
+        Optional<FellEntity> entity = fellEntityRepository.findById(osMapRef.toString());
         if (entity.isEmpty())
             throw new FellNotFoundException(osMapRef.toString(), apiClockService.now());
         Fell domain = this.domainToEntityAssembler.toDomain(entity.get());
@@ -49,8 +49,8 @@ public class FellRepositoryImpl implements FellRepository {
         List<SimpleFell> simpleFells = fellEntityPage.toList().stream()
             .map(fellEntity -> {
                 return new SimpleFell(
-                    fellEntity.getName(),
-                    fellEntity.getRegionEntity().getRegionName(),
+                    new FellName(fellEntity.getName()),
+                    new RegionName(fellEntity.getRegionEntity().getName()),
                     new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fellEntity.getOsMapRef().toString())));
             }).collect(Collectors.toList());
 
