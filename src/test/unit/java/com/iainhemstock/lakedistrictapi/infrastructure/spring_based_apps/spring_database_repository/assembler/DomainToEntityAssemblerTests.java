@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConversionService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.entities.fells.HelvellynFellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import org.junit.Before;
 import org.junit.Test;

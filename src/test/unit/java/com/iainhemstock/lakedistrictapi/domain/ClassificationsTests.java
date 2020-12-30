@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.iainhemstock.lakedistrictapi.entities.classifications.BirkettClassficationEntity;
-import com.iainhemstock.lakedistrictapi.entities.classifications.MarilynClassificationEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.BirkettClassficationEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.MarilynClassificationEntity;
 import org.junit.Test;
 
 import java.util.HashSet;

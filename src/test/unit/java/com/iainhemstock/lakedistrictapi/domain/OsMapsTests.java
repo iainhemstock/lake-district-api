@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
-import com.iainhemstock.lakedistrictapi.entities.osmaps.Landranger89OsMapEntity;
-import com.iainhemstock.lakedistrictapi.entities.osmaps.OL5ExplorerOsMapEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.Landranger89OsMapEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.OL5ExplorerOsMapEntity;
 import org.junit.Test;
 
 import java.util.HashSet;
