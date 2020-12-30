@@ -5,6 +5,7 @@ import com.iainhemstock.lakedistrictapi.common.CommonTestState;
 import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
 import com.iainhemstock.lakedistrictapi.attributes.ErrorAttributes;
 import com.iainhemstock.lakedistrictapi.attributes.FellAttributes;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_application_main.Application;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
