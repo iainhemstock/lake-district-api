@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.FellSerializer;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.LinksSerializer;
@@ -21,11 +23,13 @@ public class ItemDTOSerializerTests {
     private String expectedSelfHref;
     private String expectedParentHref;
     private ObjectMapper mapper;
+    private ApiProperties apiProperties;
 
     @Before
     public void setUp() throws JsonProcessingException {
-        expectedSelfHref = "http://localhost:8080/api/v1/fells/NY123456";
-        expectedParentHref = "http://localhost:8080/api/v1/fells/NY987654";
+        apiProperties = new TestApiProperties();
+        expectedSelfHref = String.format("%s/fells/NY123456", apiProperties.getBaseUrl());
+        expectedParentHref = String.format("%s/fells/NY987654", apiProperties.getBaseUrl());
         mapper = new ObjectMapper();
         LinksSerializer linksSerializer = new LinksSerializer();
         mapper.registerModule(new SimpleModule().addSerializer(Links.class, linksSerializer));

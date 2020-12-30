@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
@@ -20,15 +21,18 @@ import java.util.stream.Collectors;
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
     private final DomainToEntityAssembler domainToEntityAssembler;
-    private ApiClockService apiClockService;
+    private final ApiClockService apiClockService;
+    private ApiProperties apiProperties;
 
     @Autowired
     public FellRepositoryImpl(final FellEntityRepository fellEntityRepository,
                               final DomainToEntityAssembler domainToEntityAssembler,
-                              final ApiClockService apiClockService) {
+                              final ApiClockService apiClockService,
+                              final ApiProperties apiProperties) {
         this.fellEntityRepository = fellEntityRepository;
         this.domainToEntityAssembler = domainToEntityAssembler;
         this.apiClockService = apiClockService;
+        this.apiProperties = apiProperties;
     }
 
     @Override
@@ -51,7 +55,8 @@ public class FellRepositoryImpl implements FellRepository {
                 return new SimpleFell(
                     new FellName(fellEntity.getName()),
                     new RegionName(fellEntity.getRegionEntity().getName()),
-                    new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fellEntity.getOsMapRef().toString())));
+                    new Links(
+                        new Link(LinkRel.SELF, String.format("%s/fells/%s", apiProperties.getBaseUrl(), fellEntity.getOsMapRef()))));
             }).collect(Collectors.toList());
 
         Page<SimpleFell> simpleFellPage = new PageImpl<>(simpleFells, PageRequest.of(offset, limit), fellEntityPage.getTotalElements());

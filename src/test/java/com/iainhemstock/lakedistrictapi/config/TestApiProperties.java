@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 
 public class TestApiProperties extends ApiProperties {
 
-    private static final String API_BASE_URL = "http://localhost:8080/api/v1";
+    public static final String API_BASE_URL = "http://localhost:8080/api/v1";
 
     @Override
     public String getBaseUrl() {

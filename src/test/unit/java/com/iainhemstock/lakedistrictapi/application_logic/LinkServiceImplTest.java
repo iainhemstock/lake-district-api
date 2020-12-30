@@ -100,17 +100,17 @@ public class LinkServiceImplTest {
                 new FellName(greatGableFellEntity.getName()),
                 new RegionName(greatGableFellEntity.getRegionEntity().getName()),
                 new Links(
-                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + greatGableFellEntity.getOsMapRef().toString()))),
+                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, greatGableFellEntity.getOsMapRef())))),
             new SimpleFell(
                 new FellName(helvellynFellEntity.getName()),
                 new RegionName(helvellynFellEntity.getRegionEntity().getName()),
                 new Links(
-                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + helvellynFellEntity.getOsMapRef().toString()))),
+                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, helvellynFellEntity.getOsMapRef())))),
             new SimpleFell(
                 new FellName(scafellPikeFellEntity.getName()),
                 new RegionName(scafellPikeFellEntity.getRegionEntity().getName()),
                 new Links(
-                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + scafellPikeFellEntity.getOsMapRef().toString()))));
+                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, scafellPikeFellEntity.getOsMapRef())))));
 
         return new Object[] {
             new Object[] {items, 0, 1, new Links(

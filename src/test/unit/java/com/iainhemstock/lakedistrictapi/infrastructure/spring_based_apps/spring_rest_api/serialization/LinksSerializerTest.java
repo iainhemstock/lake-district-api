@@ -3,6 +3,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
@@ -14,11 +15,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class LinksSerializerTest {
-    private static final String FIRST_HREF = "http://localhost:8080/api/v1/fells?offset=0&limit=1";
-    private static final String PREV_HREF = "http://localhost:8080/api/v1/fells?offset=24&limit=1";
-    private static final String SELF_HREF = "http://localhost:8080/api/v1/fells?offset=25&limit=1";
-    private static final String NEXT_HREF = "http://localhost:8080/api/v1/fells?offset=26&limit=1";
-    private static final String LAST_HREF = "http://localhost:8080/api/v1/fells?offset=213&limit=1";
+    private static final String FIRST_HREF = String.format("%s/fells?offset=0&limit=1", TestApiProperties.API_BASE_URL);
+    private static final String PREV_HREF = String.format("%s/fells?offset=24&limit=1", TestApiProperties.API_BASE_URL);
+    private static final String SELF_HREF = String.format("%s/fells?offset=25&limit=1", TestApiProperties.API_BASE_URL);
+    private static final String NEXT_HREF = String.format("%s/fells?offset=26&limit=1", TestApiProperties.API_BASE_URL);
+    private static final String LAST_HREF = String.format("%s/fells?offset=213&limit=1", TestApiProperties.API_BASE_URL);
 
     private JsonNode jsonNode;
     private ObjectMapper objectMapper;

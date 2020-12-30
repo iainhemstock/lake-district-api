@@ -1,7 +1,9 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
+import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.GreatGableFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
@@ -41,10 +43,12 @@ public class FellRepositoryImplTests {
 
     private FellRepository fellRepository;
     private Fell expectedFell;
+    private ApiProperties apiProperties;
 
     @Before
     public void setUp() {
-        fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService);
+        apiProperties = new TestApiProperties();
+        fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService, apiProperties);
         expectedFell = new HelvellynFell();
 
         FellEntity helvellynFellEntity = new HelvellynFellEntity();
@@ -119,7 +123,7 @@ public class FellRepositoryImplTests {
         Set<SimpleFell> expectedSimpleFells = Set.of(new SimpleFell(
             new FellName("Great Gable"),
             new RegionName("Central Lake District"),
-            new Links(new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new GreatGableFellEntity().getOsMapRef().toString()))));
+            new Links(new Link(LinkRel.SELF, String.format("%s/fells/%s", apiProperties.getBaseUrl(), new GreatGableFellEntity().getOsMapRef())))));
 
         RepoPage<SimpleFell> repoPage = fellRepository.findAll(offset, limit);
 

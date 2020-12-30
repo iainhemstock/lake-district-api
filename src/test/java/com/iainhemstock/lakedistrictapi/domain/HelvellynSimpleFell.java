@@ -1,5 +1,8 @@
 package com.iainhemstock.lakedistrictapi.domain;
 
+import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.GreatGableFellEntity;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
@@ -10,7 +13,7 @@ public class HelvellynSimpleFell extends SimpleFell {
             new HelvellynFell().getName(),
             new HelvellynFell().getRegionName(),
             new Links(
-                new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + new HelvellynFell().getOsMapRef().toString())));
+                new Link(LinkRel.SELF, String.format("%s/fells%s/", TestApiProperties.API_BASE_URL, new HelvellynFellEntity().getOsMapRef()))));
     }
 
 }

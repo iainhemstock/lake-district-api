@@ -15,10 +15,11 @@ public class RepositoryFactory {
     @Autowired private FellEntityRepository fellEntityRepository;
     @Autowired private DomainToEntityAssembler domainToEntityAssembler;
     @Autowired private ApiClockService apiClockService;
+    @Autowired private ApiProperties apiProperties;
 
     @Bean
     public FellRepository fellRepository() {
-        return new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService);
+        return new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService, apiProperties);
     }
 
 }
