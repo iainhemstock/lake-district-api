@@ -5,6 +5,9 @@ import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConver
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class DomainToEntityAssembler {
     private final LatLongToDmsConversionService latLongToDmsConversionService;
     private final MeterToFeetConversionService meterToFeetConversionService;
@@ -43,7 +46,7 @@ public class DomainToEntityAssembler {
         fell.setHeightFeet(this.meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(entity.getHeightMeters())));
         fell.setProminenceFeet(this.meterToFeetConversionService.convertRoundedToNearestInteger(new Meters(entity.getProminenceMeters())));
 
-        ClassificationNames classificationNames = new ClassificationNames();
+        Set<ClassificationName> classificationNames = new LinkedHashSet<>();
         entity.getClassifications().forEach(classificationEntity -> classificationNames.add(new ClassificationName(classificationEntity.getName())));
         fell.setClassificationNames(classificationNames);
 

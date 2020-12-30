@@ -76,7 +76,7 @@ public class DomainToEntityAssemblerTests {
     @Test
     public void will_map_classifications_from_entity_to_domain() {
         assertThat(domain.getClassificationNames(),
-            is(new ClassificationNames(Set.of(new ClassificationName("Marilyn")))));
+            is(Set.of(new ClassificationName("Marilyn"))));
     }
 
     @Test

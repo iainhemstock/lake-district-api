@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -17,7 +19,7 @@ public class Fell {
     private Feet heightFeet;
     private Meters prominenceMeters;
     private Feet prominenceFeet;
-    private ClassificationNames classificationNames;
+    private Set<ClassificationName> classificationNames;
     private OsMapNames osMapNames;
     private Latitude latitude;
     private Longitude longitude;
