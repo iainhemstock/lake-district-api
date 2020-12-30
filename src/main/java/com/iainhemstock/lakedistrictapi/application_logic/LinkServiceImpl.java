@@ -7,6 +7,10 @@ import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static java.util.Objects.nonNull;
 
 @Service
@@ -27,11 +31,11 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public Links buildNavLinksForPageAndCollectionType(final RepoPage<SimpleFell> repoPage, final String collection) {
+    public Set<Link> buildNavLinksForPageAndCollectionType(final RepoPage<SimpleFell> repoPage, final String collection) {
         if (repoPage.isEmpty())
-            return Links.empty();
+            return Collections.EMPTY_SET;
 
-        Links links = new Links();
+        Set<Link> links = new LinkedHashSet<>();
 
         if (repoPage.hasPrevious())
             links.add(buildLink(collection, LinkRel.PREV, repoPage.getPrevOffset(), repoPage.getLimit()));

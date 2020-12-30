@@ -15,9 +15,4 @@ public class Link {
         this.rel = rel;
         this.href = href;
     }
-
-    @Override
-    public boolean equals(final Object other) {
-        return href.equals(((Link) other).href);
-    }
 }

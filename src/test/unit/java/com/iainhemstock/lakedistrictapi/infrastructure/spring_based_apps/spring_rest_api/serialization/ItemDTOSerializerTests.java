@@ -7,11 +7,12 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ObjectMapperConfig;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.FellSerializer;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.LinksSerializer;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -30,16 +31,12 @@ public class ItemDTOSerializerTests {
         apiProperties = new TestApiProperties();
         expectedSelfHref = String.format("%s/fells/NY123456", apiProperties.getBaseUrl());
         expectedParentHref = String.format("%s/fells/NY987654", apiProperties.getBaseUrl());
-        mapper = new ObjectMapper();
-        LinksSerializer linksSerializer = new LinksSerializer();
-        mapper.registerModule(new SimpleModule().addSerializer(Links.class, linksSerializer));
-        FellSerializer fellSerializer = new FellSerializer();
-        mapper.registerModule(new SimpleModule().addSerializer(Fell.class, fellSerializer));
+        mapper = new ObjectMapperConfig().objectMapper();
     }
 
     @Test
     public void given_no_links_when_serializing_then_empty_object_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(null, null));
+        String json = mapper.writeValueAsString(new ItemDTO<>(null, null));
         jsonNode = mapper.readTree(json);
 
         assertThat(jsonNode.has("links"), is(true));
@@ -48,10 +45,10 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_links_exist_when_serializing_then_links_will_be_written() throws JsonProcessingException {
-        Links links = new Links();
-        links.add(new Link(LinkRel.SELF, expectedSelfHref));
-        links.add(new Link(LinkRel.PARENT, expectedParentHref));
-        String json = mapper.writeValueAsString(new ItemDTO(links, null));
+        Set<Link> links = Set.of(
+            new Link(LinkRel.SELF, expectedSelfHref),
+            new Link(LinkRel.PARENT, expectedParentHref));
+        String json = mapper.writeValueAsString(new ItemDTO<>(links, null));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("links").get("self").has("href"));
@@ -60,7 +57,7 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_item_exists_when_serializing_then_item_will_be_written() throws JsonProcessingException {
-        String json = mapper.writeValueAsString(new ItemDTO(null, new HelvellynFell()));
+        String json = mapper.writeValueAsString(new ItemDTO<>(null, new HelvellynFell()));
         jsonNode = mapper.readTree(json);
 
         assertTrue(jsonNode.get("item").has("name"));

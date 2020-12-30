@@ -1,14 +1,16 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos;
 
-import com.iainhemstock.lakedistrictapi.domain.Links;
+import com.iainhemstock.lakedistrictapi.domain.Link;
 import lombok.Getter;
+
+import java.util.Set;
 
 @Getter
 public class ItemDTO<T> {
-    private final Links links;
+    private final Set<Link> links;
     private final T item;
 
-    public ItemDTO(final Links links, final T Item) {
+    public ItemDTO(final Set<Link> links, final T Item) {
         this.links = links;
         item = Item;
     }

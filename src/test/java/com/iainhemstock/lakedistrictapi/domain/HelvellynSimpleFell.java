@@ -5,6 +5,8 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import lombok.EqualsAndHashCode;
 
+import java.util.Set;
+
 @EqualsAndHashCode
 public class HelvellynSimpleFell extends SimpleFell {
 
@@ -12,7 +14,7 @@ public class HelvellynSimpleFell extends SimpleFell {
         super(
             new HelvellynFell().getName(),
             new HelvellynFell().getRegionName(),
-            new Links(
+            Set.of(
                 new Link(LinkRel.SELF, String.format("%s/fells%s/", TestApiProperties.API_BASE_URL, new HelvellynFellEntity().getOsMapRef()))));
     }
 

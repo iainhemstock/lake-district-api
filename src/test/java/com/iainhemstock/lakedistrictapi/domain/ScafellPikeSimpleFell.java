@@ -5,6 +5,8 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.ScafellPikeFellEntity;
 import lombok.EqualsAndHashCode;
 
+import java.util.Set;
+
 @EqualsAndHashCode
 public class ScafellPikeSimpleFell extends SimpleFell {
 
@@ -12,7 +14,7 @@ public class ScafellPikeSimpleFell extends SimpleFell {
         super(
             new FellName(new ScafellPikeFellEntity().getName()),
             new RegionName(new ScafellPikeFellEntity().getRegionEntity().getName()),
-            new Links(
+            Set.of(
                 new Link(LinkRel.SELF, String.format("%s/fells%s/", TestApiProperties.API_BASE_URL, new ScafellPikeFellEntity().getOsMapRef()))));
     }
 

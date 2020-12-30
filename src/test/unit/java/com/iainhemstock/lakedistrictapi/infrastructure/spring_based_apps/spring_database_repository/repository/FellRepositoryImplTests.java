@@ -123,7 +123,7 @@ public class FellRepositoryImplTests {
         Set<SimpleFell> expectedSimpleFells = Set.of(new SimpleFell(
             new FellName("Great Gable"),
             new RegionName("Central Lake District"),
-            new Links(new Link(LinkRel.SELF, String.format("%s/fells/%s", apiProperties.getBaseUrl(), new GreatGableFellEntity().getOsMapRef())))));
+            Set.of(new Link(LinkRel.SELF, String.format("%s/fells/%s", apiProperties.getBaseUrl(), new GreatGableFellEntity().getOsMapRef())))));
 
         RepoPage<SimpleFell> repoPage = fellRepository.findAll(offset, limit);
 

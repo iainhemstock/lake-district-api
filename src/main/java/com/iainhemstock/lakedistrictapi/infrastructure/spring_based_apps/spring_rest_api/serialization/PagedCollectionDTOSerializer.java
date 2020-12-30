@@ -3,22 +3,19 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.PagedCollectionDTO;
 
 import java.io.IOException;
 
-public class SimpleFellSerializer extends JsonSerializer<SimpleFell> {
+public class PagedCollectionDTOSerializer<T> extends JsonSerializer<PagedCollectionDTO<T>> {
     @Override
-    public void serialize(final SimpleFell simpleFell,
+    public void serialize(final PagedCollectionDTO<T> pagedCollectionDTO,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
-            jgen.writeStringField("name", simpleFell.getName().toString());
-            jgen.writeStringField("region", simpleFell.getRegionName().toString());
         jgen.writeObjectFieldStart("links");
-        if (simpleFell.getLinks() != null) {
-            simpleFell.getLinks().forEach(link -> {
+        if (pagedCollectionDTO.getLinks() != null) {
+            pagedCollectionDTO.getLinks().forEach(link -> {
                 try {
                     if (link != null) {
                         jgen.writeObjectFieldStart(link.getRel().toString());
@@ -31,6 +28,10 @@ public class SimpleFellSerializer extends JsonSerializer<SimpleFell> {
             });
         }
         jgen.writeEndObject();
+        jgen.writeStringField("offset", pagedCollectionDTO.getOffset());
+        jgen.writeStringField("limit", pagedCollectionDTO.getLimit());
+        jgen.writeStringField("total_items", pagedCollectionDTO.getTotal_items());
+        jgen.writeObjectField("items", pagedCollectionDTO.getItems());
         jgen.writeEndObject();
     }
 }

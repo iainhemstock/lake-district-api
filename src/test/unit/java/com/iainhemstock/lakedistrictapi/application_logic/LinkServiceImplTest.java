@@ -18,7 +18,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -67,17 +69,35 @@ public class LinkServiceImplTest {
     @Test
     public void given_no_source_links_then_no_links_will_be_built() {
         RepoPage<SimpleFell> repoPage = SpringPageRepoPage.empty();
-        Links expectedLinks = Links.empty();
-        Links actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
+        Set<Link> expectedLinks = Collections.EMPTY_SET;
+        Set<Link> actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
         assertThat(actualLinks, is(equalTo(expectedLinks)));
     }
 
     @Test
-    @Parameters(method = "parameters")
-    public void given_repo_result_when_building_nav_links_then_correct_links_are_built(final List<SimpleFell> items,
-                                                                                                    final int offset,
-                                                                                                    final int limit,
-                                                                                                    final Links expectedLinks) {
+    public void given_repo_result_when_building_nav_links_then_correct_links_are_built() {
+        List<SimpleFell> items = List.of(
+            new SimpleFell(
+                new FellName(new GreatGableFellEntity().getName()),
+                new RegionName(new GreatGableFellEntity().getRegionEntity().getName()),
+                Set.of(
+                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, new GreatGableFellEntity().getOsMapRef())))),
+            new SimpleFell(
+                new FellName(new HelvellynFellEntity().getName()),
+                new RegionName(new HelvellynFellEntity().getRegionEntity().getName()),
+                Set.of(
+                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, new HelvellynFellEntity().getOsMapRef())))),
+            new SimpleFell(
+                new FellName(new ScafellPikeFellEntity().getName()),
+                new RegionName(new ScafellPikeFellEntity().getRegionEntity().getName()),
+                Set.of(
+                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, new ScafellPikeFellEntity().getOsMapRef())))));
+        Set<Link> expectedLinks = Set.of(
+            getLink(LinkRel.SELF, 0, 1),
+            getLink(LinkRel.NEXT, 1, 1));
+        int offset = 0;
+        int limit = 1;
+
         Page<SimpleFell> fellPage = new PageImpl<>(
             items,
             PageRequest.of(offset, limit),
@@ -85,46 +105,46 @@ public class LinkServiceImplTest {
 
         RepoPage<SimpleFell> repoPage = SpringPageRepoPage.from(fellPage);
 
-        Links actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
+        Set<Link> actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
 
-        assertThat(actualLinks, is(equalTo(expectedLinks)));
+        assertTrue(actualLinks.containsAll(expectedLinks) && expectedLinks.containsAll(actualLinks));
     }
 
-    private Object[] parameters() {
-        GreatGableFellEntity greatGableFellEntity = new GreatGableFellEntity();
-        HelvellynFellEntity helvellynFellEntity = new HelvellynFellEntity();
-        ScafellPikeFellEntity scafellPikeFellEntity = new ScafellPikeFellEntity();
-
-        List<SimpleFell> items = List.of(
-            new SimpleFell(
-                new FellName(greatGableFellEntity.getName()),
-                new RegionName(greatGableFellEntity.getRegionEntity().getName()),
-                new Links(
-                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, greatGableFellEntity.getOsMapRef())))),
-            new SimpleFell(
-                new FellName(helvellynFellEntity.getName()),
-                new RegionName(helvellynFellEntity.getRegionEntity().getName()),
-                new Links(
-                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, helvellynFellEntity.getOsMapRef())))),
-            new SimpleFell(
-                new FellName(scafellPikeFellEntity.getName()),
-                new RegionName(scafellPikeFellEntity.getRegionEntity().getName()),
-                new Links(
-                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, scafellPikeFellEntity.getOsMapRef())))));
-
-        return new Object[] {
-            new Object[] {items, 0, 1, new Links(
-                getLink(LinkRel.SELF, 0, 1),
-                getLink(LinkRel.NEXT, 1, 1)) },
-            new Object[] {items, 1, 1, new Links(
-                getLink(LinkRel.PREV, 0, 1),
-                getLink(LinkRel.SELF, 1, 1),
-                getLink(LinkRel.NEXT, 2, 1)) },
-            new Object[] {items, 2, 1, new Links(
-                getLink(LinkRel.PREV, 1, 1),
-                getLink(LinkRel.SELF, 2, 1)) }
-        };
-    }
+//    private Object[] parameters() {
+//        GreatGableFellEntity greatGableFellEntity = new GreatGableFellEntity();
+//        HelvellynFellEntity helvellynFellEntity = new HelvellynFellEntity();
+//        ScafellPikeFellEntity scafellPikeFellEntity = new ScafellPikeFellEntity();
+//
+//        List<SimpleFell> items = List.of(
+//            new SimpleFell(
+//                new FellName(greatGableFellEntity.getName()),
+//                new RegionName(greatGableFellEntity.getRegionEntity().getName()),
+//                Set.of(
+//                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, greatGableFellEntity.getOsMapRef())))),
+//            new SimpleFell(
+//                new FellName(helvellynFellEntity.getName()),
+//                new RegionName(helvellynFellEntity.getRegionEntity().getName()),
+//                Set.of(
+//                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, helvellynFellEntity.getOsMapRef())))),
+//            new SimpleFell(
+//                new FellName(scafellPikeFellEntity.getName()),
+//                new RegionName(scafellPikeFellEntity.getRegionEntity().getName()),
+//                Set.of(
+//                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, scafellPikeFellEntity.getOsMapRef())))));
+//
+//        return new Object[] {
+//            new Object[] {items, 0, 1, Set.of(
+//                getLink(LinkRel.SELF, 0, 1),
+//                getLink(LinkRel.NEXT, 1, 1)) },
+//            new Object[] {items, 1, 1, Set.of(
+//                getLink(LinkRel.PREV, 0, 1),
+//                getLink(LinkRel.SELF, 1, 1),
+//                getLink(LinkRel.NEXT, 2, 1)) },
+//            new Object[] {items, 2, 1, Set.of(
+//                getLink(LinkRel.PREV, 1, 1),
+//                getLink(LinkRel.SELF, 2, 1)) }
+//        };
+//    }
 
     private Link getLink(final LinkRel rel, final int offset, final int limit) {
         return new Link(rel, getHref(offset, limit));

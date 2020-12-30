@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FellRepositoryImpl implements FellRepository {
@@ -55,7 +56,7 @@ public class FellRepositoryImpl implements FellRepository {
                 return new SimpleFell(
                     new FellName(fellEntity.getName()),
                     new RegionName(fellEntity.getRegionEntity().getName()),
-                    new Links(
+                    Set.of(
                         new Link(LinkRel.SELF, String.format("%s/fells/%s", apiProperties.getBaseUrl(), fellEntity.getOsMapRef()))));
             }).collect(Collectors.toList());
 

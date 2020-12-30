@@ -14,8 +14,22 @@ public class ItemDTOSerializer<T> extends JsonSerializer<ItemDTO<T>> {
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
-        jgen.writeObjectField("links", itemDTO.getLinks());
-        jgen.writeObjectField("item", itemDTO.getItem());
+            jgen.writeObjectFieldStart("links");
+            if (itemDTO.getLinks() != null) {
+                itemDTO.getLinks().forEach(link -> {
+                    try {
+                        if (link != null) {
+                            jgen.writeObjectFieldStart(link.getRel().toString());
+                            jgen.writeStringField("href", link.getHref());
+                            jgen.writeEndObject();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+            jgen.writeEndObject();
+            if (itemDTO.getItem() != null) jgen.writeObjectField("item", itemDTO.getItem());
         jgen.writeEndObject();
     }
 }

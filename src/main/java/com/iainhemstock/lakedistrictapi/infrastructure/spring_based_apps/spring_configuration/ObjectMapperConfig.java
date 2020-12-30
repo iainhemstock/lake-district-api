@@ -3,9 +3,9 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.domain.Links;
 import com.iainhemstock.lakedistrictapi.domain.SimpleFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.PagedCollectionDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.*;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.modelmapper.TypeToken;
@@ -19,11 +19,10 @@ public class ObjectMapperConfig {
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new SimpleModule().addSerializer(new TypeToken<ItemDTO<Fell>>() {}.getRawType(), new ItemDTOSerializer<>()));
-        mapper.registerModule(new SimpleModule().addSerializer(Links.class, new LinksSerializer()));
         mapper.registerModule(new SimpleModule().addSerializer(Fell.class, new FellSerializer()));
         mapper.registerModule(new SimpleModule().addSerializer(SimpleFell.class, new SimpleFellSerializer()));
         mapper.registerModule(new SimpleModule().addSerializer(new TypeToken<RepoPage<SimpleFell>>() {}.getRawType(), new RepoResultSerializer<>()));
-
+        mapper.registerModule(new SimpleModule().addSerializer(new TypeToken<PagedCollectionDTO<SimpleFell>>() {}.getRawType(), new PagedCollectionDTOSerializer<>()));
         return mapper;
     }
 
