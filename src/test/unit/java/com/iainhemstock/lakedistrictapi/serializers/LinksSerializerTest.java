@@ -3,12 +3,10 @@ package com.iainhemstock.lakedistrictapi.serializers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.iainhemstock.lakedistrictapi.domain.Link;
 import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.domain.Links;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.objectmapper.ObjectMapperConfig;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.LinksSerializer;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ObjectMapperConfig;
 import org.junit.Before;
 import org.junit.Test;
 

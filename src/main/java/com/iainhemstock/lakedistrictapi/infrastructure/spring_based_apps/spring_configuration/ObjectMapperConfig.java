@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.objectmapper;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;

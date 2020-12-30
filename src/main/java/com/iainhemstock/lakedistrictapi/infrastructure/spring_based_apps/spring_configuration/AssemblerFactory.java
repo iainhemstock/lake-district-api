@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.assemblers;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration;
 
 import com.iainhemstock.lakedistrictapi.application_logic.LatLongToDmsConversionServiceImpl;
 import com.iainhemstock.lakedistrictapi.application_logic.MeterToFeetConversionServiceImpl;

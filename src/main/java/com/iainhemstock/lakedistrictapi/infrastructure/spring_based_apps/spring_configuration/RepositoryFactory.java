@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.repository;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
