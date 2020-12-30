@@ -17,7 +17,7 @@ public class HelvellynFell extends Fell {
         setProminenceMeters(new Meters(helvellynFellEntity.getProminenceMeters()));
         setProminenceFeet(new Feet(2336));
         setClassificationNames(Set.of(new ClassificationName("Marilyn")));
-        setOsMapNames(new OsMapNames(Set.of(new OsMapName("OS Landranger 90"), new OsMapName("OS Explorer OL5"))));
+        setOsMapNames(Set.of(new OsMapName("OS Landranger 90"), new OsMapName("OS Explorer OL5")));
         setLatitude(new Latitude(helvellynFellEntity.getLatitude()));
         setLongitude(new Longitude(helvellynFellEntity.getLongitude()));
         setRegionName(new RegionName(helvellynFellEntity.getRegionEntity().getName()));

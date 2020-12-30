@@ -82,7 +82,7 @@ public class DomainToEntityAssemblerTests {
     @Test
     public void will_map_os_maps_from_entity_to_domain() {
         assertThat(domain.getOsMapNames(),
-            is(new OsMapNames(Set.of(new OsMapName("OS Landranger 90"), new OsMapName("OS Explorer OL5")))));
+            is(Set.of(new OsMapName("OS Landranger 90"), new OsMapName("OS Explorer OL5"))));
     }
 
     @Test

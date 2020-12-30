@@ -50,7 +50,7 @@ public class DomainToEntityAssembler {
         entity.getClassifications().forEach(classificationEntity -> classificationNames.add(new ClassificationName(classificationEntity.getName())));
         fell.setClassificationNames(classificationNames);
 
-        OsMapNames osMapNames = new OsMapNames();
+        Set<OsMapName> osMapNames = new LinkedHashSet<>();
         entity.getOsMaps().forEach(osMapEntity -> osMapNames.add(new OsMapName(osMapEntity.getName())));
         fell.setOsMapNames(osMapNames);
 
