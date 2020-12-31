@@ -1,12 +1,9 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain;
 
 import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.domain.Link;
-import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import lombok.Getter;
 
 import java.util.Map;
-import java.util.Set;
 
 @Getter
 public class SimpleLinkableFell {

@@ -1,12 +1,10 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.iainhemstock.lakedistrictapi.domain.Link;
-import com.iainhemstock.lakedistrictapi.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

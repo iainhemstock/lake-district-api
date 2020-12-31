@@ -1,11 +1,9 @@
-package com.iainhemstock.lakedistrictapi.domain;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain;
 
 public enum LinkRel {
-    FIRST("first"),
     PREV("prev"),
     SELF("self"),
     NEXT("next"),
-    LAST("last"),
     PARENT("parent");
 
     private String value;
