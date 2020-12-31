@@ -1,27 +1,34 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.iainhemstock.lakedistrictapi.domain.Link;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
+import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Getter
-@Setter
+@JsonPropertyOrder({"links", "offset", "limit", "total_items", "items"})
 public class PagedCollectionDTO<T> {
 
-    private final Set<Link> links;
-    private final RepoPage<T> items;
+    private final Map<LinkRel, Link> links;
+    private final Set<T> items;
     private final String offset;
     private final String limit;
     private final String total_items;
 
-    public PagedCollectionDTO(final Set<Link> links, final RepoPage<T> items) {
+    public PagedCollectionDTO(final Map<LinkRel, Link> links,
+                              final Set<T> items,
+                              final int offset,
+                              final int limit,
+                              final int totalItems) {
         this.links = links;
         this.items = items;
-        this.offset = String.valueOf(items.getOffset());
-        this.limit = String.valueOf(items.getLimit());
-        this.total_items = String.valueOf(items.getTotalItemsAvailable());
+        this.offset = String.valueOf(offset);
+        this.limit = String.valueOf(limit);
+        this.total_items = String.valueOf(totalItems);
     }
 }

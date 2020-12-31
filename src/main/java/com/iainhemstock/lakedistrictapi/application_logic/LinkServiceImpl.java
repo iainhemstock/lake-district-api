@@ -7,9 +7,7 @@ import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Objects.nonNull;
 
@@ -31,21 +29,21 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public Set<Link> buildNavLinksForPageAndCollectionType(final RepoPage<SimpleFell> repoPage, final String collection) {
+    public Map<LinkRel, Link> buildNavLinksForPageAndCollectionType(final RepoPage<Fell> repoPage, final String collection) {
         if (repoPage.isEmpty())
-            return Collections.EMPTY_SET;
+            return Collections.EMPTY_MAP;
 
-        Set<Link> links = new LinkedHashSet<>();
+        Map<LinkRel, Link> linksMap = new LinkedHashMap<>();
 
         if (repoPage.hasPrevious())
-            links.add(buildLink(collection, LinkRel.PREV, repoPage.getPrevOffset(), repoPage.getLimit()));
+            linksMap.put(LinkRel.PREV, buildLink(collection, LinkRel.PREV, repoPage.getPrevOffset(), repoPage.getLimit()));
 
-        links.add(buildLink(collection, LinkRel.SELF, repoPage.getOffset(), repoPage.getLimit()));
+        linksMap.put(LinkRel.SELF, buildLink(collection, LinkRel.SELF, repoPage.getOffset(), repoPage.getLimit()));
 
         if (repoPage.hasNext())
-            links.add(buildLink(collection, LinkRel.NEXT, repoPage.getNextOffset(), repoPage.getLimit()));
+            linksMap.put(LinkRel.NEXT, buildLink(collection, LinkRel.NEXT, repoPage.getNextOffset(), repoPage.getLimit()));
 
-        return links;
+        return linksMap;
     }
 
     private Link buildLink(final String collection, final LinkRel rel, final long offset, final int limit) {

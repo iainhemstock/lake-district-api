@@ -1,32 +1,18 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "http://192.168.0.16:8080/schemas",
-	"type": "array",
-	"items": {
-		"type": "object",
-		"required": ["name", "region", "links"],
-		"properties": {
-			"name": {
-				"type": "string"
-			},
-			"region": {
-				"type": "string"
-			},
-			"links": {
-				"type": "object",
-				"required": ["self"],
-				"properties": {
-					"self": {
-						"type": "object",
-						"required": ["href"],
-						"properties": {
-							"href": {
-								"type": "string"
-							}
-						}
-					}
-				}
-			}
+	"type": "object",
+	"required": ["name", "region", "links"],
+	"additionalProperties": false,
+	"properties": {
+		"name": {
+			"type": "string"
+		},
+		"region": {
+			"type": "string"
+		},
+		"links": {
+			"type": "object"
 		}
 	}
 }

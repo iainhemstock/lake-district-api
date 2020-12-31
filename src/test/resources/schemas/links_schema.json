@@ -15,16 +15,6 @@
 				}
 			}
 		},
-		"first": {
-			"type": "object",
-			"required": ["href"],
-			"additionalProperties": false,
-			"properties": {
-				"href": {
-					"type": "string"
-				}
-			}
-		},
 		"prev": {
 			"type": "object",
 			"required": ["href"],
@@ -36,16 +26,6 @@
 			}
 		},
 		"next": {
-			"type": "object",
-			"required": ["href"],
-			"additionalProperties": false,
-			"properties": {
-				"href": {
-					"type": "string"
-				}
-			}
-		},
-		"last": {
 			"type": "object",
 			"required": ["href"],
 			"additionalProperties": false,

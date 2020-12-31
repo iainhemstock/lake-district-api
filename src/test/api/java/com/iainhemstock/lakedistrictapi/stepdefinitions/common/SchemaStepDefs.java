@@ -46,16 +46,23 @@ public class SchemaStepDefs {
         validate(schema, jsonNode.get("item"));
     }
 
+    @Then("^the response will conform to the schema in (.*)$")
+    public void theResponseWillConformToTheSchemaIn(final String schemaFilename) throws IOException {
+        this.theResponseWillConformToTheJsonSchema(schemaFilename);
+    }
+
     @Then("^the pagination attributes will conform to the schema in (.*)$")
     public void thePaginationAttributesWillConformToTheJsonSchema(final String schemaFilename) throws IOException {
-        this.theResponseWillConformToTheJsonSchema(schemaFilename);
+        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonSchema jsonSchema = loadJsonSchemaFromClasspath(schemaFilename);
+        validate(jsonSchema, jsonNode.findValue("links"));
     }
 
     @And("^the items attribute will conform to the schema in (.*)$")
     public void theItemsAttributeWillConformToTheSchemaIn(final String schemaFilename) throws Exception {
         JsonNode responseBodyJsonNode = getResponseBodyAsJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
-        validate(schema, responseBodyJsonNode.findValue("items"));
+        validate(schema, responseBodyJsonNode.findValue("items").get(0));
     }
 
     private JsonNode getResponseBodyAsJsonNode() throws IOException {
@@ -81,5 +88,6 @@ public class SchemaStepDefs {
     private JsonNode getJsonNodeFromStringContent(String json) throws IOException {
         return objectMapper.readTree(json);
     }
+
 
 }

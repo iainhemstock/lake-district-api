@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -68,46 +69,30 @@ public class LinkServiceImplTest {
 
     @Test
     public void given_no_source_links_then_no_links_will_be_built() {
-        RepoPage<SimpleFell> repoPage = SpringPageRepoPage.empty();
-        Set<Link> expectedLinks = Collections.EMPTY_SET;
-        Set<Link> actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
+        RepoPage<Fell> repoPage = SpringPageRepoPage.empty();
+        Map<LinkRel, Link> expectedLinks = Collections.EMPTY_MAP;
+        Map<LinkRel, Link> actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
         assertThat(actualLinks, is(equalTo(expectedLinks)));
     }
 
     @Test
     public void given_repo_result_when_building_nav_links_then_correct_links_are_built() {
-        List<SimpleFell> items = List.of(
-            new SimpleFell(
-                new FellName(new GreatGableFellEntity().getName()),
-                new RegionName(new GreatGableFellEntity().getRegionEntity().getName()),
-                Set.of(
-                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, new GreatGableFellEntity().getOsMapRef())))),
-            new SimpleFell(
-                new FellName(new HelvellynFellEntity().getName()),
-                new RegionName(new HelvellynFellEntity().getRegionEntity().getName()),
-                Set.of(
-                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, new HelvellynFellEntity().getOsMapRef())))),
-            new SimpleFell(
-                new FellName(new ScafellPikeFellEntity().getName()),
-                new RegionName(new ScafellPikeFellEntity().getRegionEntity().getName()),
-                Set.of(
-                    new Link(LinkRel.SELF, String.format("%s/fells/%s", TestApiProperties.API_BASE_URL, new ScafellPikeFellEntity().getOsMapRef())))));
-        Set<Link> expectedLinks = Set.of(
-            getLink(LinkRel.SELF, 0, 1),
-            getLink(LinkRel.NEXT, 1, 1));
+        List<Fell> items = List.of(new HelvellynFell(), new HelvellynFell());
         int offset = 0;
         int limit = 1;
 
-        Page<SimpleFell> fellPage = new PageImpl<>(
+        RepoPage<Fell> repoPage = SpringPageRepoPage.from(new PageImpl<>(
             items,
             PageRequest.of(offset, limit),
-            items.size());
+            items.size()));
 
-        RepoPage<SimpleFell> repoPage = SpringPageRepoPage.from(fellPage);
+        Map<LinkRel, Link> expectedLinks = Map.of(
+            LinkRel.SELF, getLink(LinkRel.SELF, 0, 1),
+            LinkRel.NEXT, getLink(LinkRel.NEXT, 1, 1));
 
-        Set<Link> actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
+        Map<LinkRel, Link> actualLinks = linkService.buildNavLinksForPageAndCollectionType(repoPage, "fells");
 
-        assertTrue(actualLinks.containsAll(expectedLinks) && expectedLinks.containsAll(actualLinks));
+        assertEquals(expectedLinks, actualLinks);
     }
 
 //    private Object[] parameters() {

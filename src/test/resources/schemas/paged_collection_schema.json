@@ -12,55 +12,7 @@
 	"additionalProperties": false,
 	"properties": {
 		"links": {
-			"type": "object",
-			"required": ["self"],
-			"properties": {
-				"first": {
-					"type": "object",
-					"required": ["href"],
-					"properties": {
-						"href": {
-							"type": "string"
-						}
-					}
-				},
-				"prev": {
-					"type": "object",
-					"required": ["href"],
-					"properties": {
-						"href": {
-							"type": "string"
-						}
-					}
-				},
-				"self": {
-					"type": "object",
-					"required": ["href"],
-					"properties": {
-						"href": {
-							"type": "string"
-						}
-					}
-				},
-				"next": {
-					"type": "object",
-					"required": ["href"],
-					"properties": {
-						"href": {
-							"type": "string"
-						}
-					}
-				},
-				"last": {
-					"type": "object",
-					"required": ["href"],
-					"properties": {
-						"href": {
-							"type": "string"
-						}
-					}
-				}
-			}
+			"type": "object"
 		},
 		"offset": {
 			"type": "string"

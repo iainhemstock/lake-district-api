@@ -12,6 +12,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Map;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -45,9 +46,9 @@ public class ItemDTOSerializerTests {
 
     @Test
     public void given_links_exist_when_serializing_then_links_will_be_written() throws JsonProcessingException {
-        Set<Link> links = Set.of(
-            new Link(LinkRel.SELF, expectedSelfHref),
-            new Link(LinkRel.PARENT, expectedParentHref));
+        Map<LinkRel, Link> links = Map.of(
+            LinkRel.SELF, new Link(LinkRel.SELF, expectedSelfHref),
+            LinkRel.PARENT, new Link(LinkRel.PARENT, expectedParentHref));
         String json = mapper.writeValueAsString(new ItemDTO<>(links, null));
         jsonNode = mapper.readTree(json);
 

@@ -1,11 +1,13 @@
 package com.iainhemstock.lakedistrictapi.application_interfaces;
 
-import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.domain.Fell;
+import com.iainhemstock.lakedistrictapi.domain.Link;
+import com.iainhemstock.lakedistrictapi.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 
-import java.util.Set;
+import java.util.Map;
 
 public interface LinkService {
     Link buildForResourceWithIdAndRel(final String resource, final String resourceId, final LinkRel rel);
-    Set<Link> buildNavLinksForPageAndCollectionType(RepoPage<SimpleFell> repoPage, String collection);
+    Map<LinkRel, Link> buildNavLinksForPageAndCollectionType(RepoPage<Fell> repoPage, String collection);
 }
