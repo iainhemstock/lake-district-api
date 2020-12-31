@@ -1,6 +1,6 @@
 package com.iainhemstock.lakedistrictapi.config;
 
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 
 public class TestApiProperties extends ApiProperties {
 

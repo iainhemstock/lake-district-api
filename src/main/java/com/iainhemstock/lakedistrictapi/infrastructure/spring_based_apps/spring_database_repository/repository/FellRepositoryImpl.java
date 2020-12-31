@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
@@ -16,24 +16,20 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
     private final DomainToEntityAssembler domainToEntityAssembler;
     private final ApiClockService apiClockService;
-    private ApiProperties apiProperties;
 
     @Autowired
     public FellRepositoryImpl(final FellEntityRepository fellEntityRepository,
                               final DomainToEntityAssembler domainToEntityAssembler,
-                              final ApiClockService apiClockService,
-                              final ApiProperties apiProperties) {
+                              final ApiClockService apiClockService) {
         this.fellEntityRepository = fellEntityRepository;
         this.domainToEntityAssembler = domainToEntityAssembler;
         this.apiClockService = apiClockService;
-        this.apiProperties = apiProperties;
     }
 
     @Override

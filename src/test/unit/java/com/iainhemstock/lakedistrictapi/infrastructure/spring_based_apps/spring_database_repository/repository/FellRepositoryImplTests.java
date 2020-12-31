@@ -3,7 +3,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
@@ -44,7 +44,7 @@ public class FellRepositoryImplTests {
     @Before
     public void setUp() {
         apiProperties = new TestApiProperties();
-        fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService, apiProperties);
+        fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService);
         expectedFell = new HelvellynFell();
 
         FellEntity helvellynFellEntity = new HelvellynFellEntity();

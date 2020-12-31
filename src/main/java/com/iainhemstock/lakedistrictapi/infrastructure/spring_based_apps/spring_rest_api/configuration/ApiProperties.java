@@ -1,4 +1,4 @@
-package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration;
+package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

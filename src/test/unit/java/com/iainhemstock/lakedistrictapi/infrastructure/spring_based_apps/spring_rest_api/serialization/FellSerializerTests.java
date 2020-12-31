@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.HelvellynFell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_configuration.ObjectMapperConfig;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ObjectMapperConfig;
 import org.junit.Before;
 import org.junit.Test;
 
