@@ -11,12 +11,10 @@ import java.util.Set;
 @Getter
 public class SimpleLinkableFell {
     private final String name;
-    private final String region;
     private final Map<LinkRel, Link> links;
 
     public SimpleLinkableFell(final Fell fell, final Map<LinkRel, Link> links) {
         this.name = fell.getName().toString();
-        this.region = fell.getRegionName().toString();
         this.links = links;
     }
 }

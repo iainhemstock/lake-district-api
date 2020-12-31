@@ -18,12 +18,6 @@ public class ItemsStepDefs {
             FellSimplifiedAttributes.FELL_NAME.valueAt(0), is(fellName)));
     }
 
-    @And("^region (.*)$")
-    public void andRegion(final String region) throws Exception {
-        commonState.getResult().andExpect(jsonPath(
-            FellSimplifiedAttributes.FELL_REGION.valueAt(0), is(region)));
-    }
-
     @And("^self href (.*)$")
     public void andSelfHref(final String url) throws Exception {
         commonState.getResult().andExpect(jsonPath(

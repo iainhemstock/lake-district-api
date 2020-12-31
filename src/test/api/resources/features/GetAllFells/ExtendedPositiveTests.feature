@@ -49,13 +49,12 @@ Feature: GET /fells?page={}&size={} - EXTENDED POSITIVE TESTS WITH OPTIONAL PARA
 	Scenario Outline: API provides a simplified view of fell results
 		When making a GET request to http://localhost:8080/api/v1/fells?offset=<offset>&limit=<limit>
 		Then the body will contain a simplified fell with name <fell name>
-		And region <fell region>
 		And self href <url>
 		Examples:
-			| offset | limit | fell name    | fell region            | url 										   |
-			| 0      | 1     | Great Gable  | Central Lake District  | http://localhost:8080/api/v1/fells/NY211104 |
-			| 1      | 1     | Helvellyn    | Eastern Lake District  | http://localhost:8080/api/v1/fells/NY342151 |
-			| 2      | 1     | Scafell Pike | Southern Lake District | http://localhost:8080/api/v1/fells/NY215072 |
+			| offset | limit | fell name    | url 										  |
+			| 0      | 1     | Great Gable  | http://localhost:8080/api/v1/fells/NY211104 |
+			| 1      | 1     | Helvellyn    | http://localhost:8080/api/v1/fells/NY342151 |
+			| 2      | 1     | Scafell Pike | http://localhost:8080/api/v1/fells/NY215072 |
 
 	#VerifyResponseHeaders
 	Scenario Outline: API provides content type header for specific page and size requests

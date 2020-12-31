@@ -2,13 +2,10 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "http://192.168.0.16:8080/schemas",
 	"type": "object",
-	"required": ["name", "region", "links"],
+	"required": ["name", "links"],
 	"additionalProperties": false,
 	"properties": {
 		"name": {
-			"type": "string"
-		},
-		"region": {
 			"type": "string"
 		},
 		"links": {

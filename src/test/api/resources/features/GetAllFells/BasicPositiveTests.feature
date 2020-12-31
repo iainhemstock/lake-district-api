@@ -34,7 +34,6 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 	Scenario: API provides a simplified view of a fell
 		When making a GET request to http://localhost:8080/api/v1/fells
 		Then the body will contain a simplified fell with name Great Gable
-		And region Central Lake District
 		And self href http://localhost:8080/api/v1/fells/NY211104
 
 	Scenario: API provides content type header
