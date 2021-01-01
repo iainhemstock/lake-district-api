@@ -10,8 +10,10 @@ public class SimpleLinkedFell {
     private final String name;
     private final Map<LinkRel, Link> links;
 
-    public SimpleLinkedFell(final Fell fell, final Map<LinkRel, Link> links) {
+    public SimpleLinkedFell(final Fell fell) {
         this.name = fell.getName().toString();
-        this.links = links;
+        this.links = Map.of(LinkRel.SELF,
+            new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fell.getOsMapRef().toString()));
     }
+
 }

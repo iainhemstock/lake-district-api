@@ -33,13 +33,7 @@ public class FellController {
              @RequestParam(value = "limit", required = false, defaultValue = "${spring.data.web.pageable.default-page-size}") Integer limit) {
 
         RepoPage<Fell> fellResults = fellService.getFells(offset, limit);
-
-        Set<SimpleLinkedFell> simpleLinkedFells = fellResults.getItems().stream()
-            .map(fell -> new SimpleLinkedFell(
-                fell,
-                Map.of(LinkRel.SELF,
-                    new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fell.getOsMapRef().toString()))))
-            .collect(Collectors.toSet());
+        Set<SimpleLinkedFell> simpleLinkedFells = mapFellsToSimpleLinkedFells(fellResults);
 
         LinkedRepoPage<SimpleLinkedFell> linkedRepoPage = new LinkedRepoPage<>(
             simpleLinkedFells,
@@ -48,6 +42,12 @@ public class FellController {
             apiProperties.getBaseUrl() + "/fells");
 
         return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
+    }
+
+    private Set<SimpleLinkedFell> mapFellsToSimpleLinkedFells(final RepoPage<Fell> fellResults) {
+        return fellResults.getItems().stream()
+            .map(SimpleLinkedFell::new)
+            .collect(Collectors.toSet());
     }
 
     @GetMapping("/fells/{id}")
