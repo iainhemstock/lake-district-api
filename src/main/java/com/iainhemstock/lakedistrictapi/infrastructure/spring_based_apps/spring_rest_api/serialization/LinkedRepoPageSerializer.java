@@ -14,8 +14,8 @@ public class LinkedRepoPageSerializer<T> extends JsonSerializer<LinkedRepoPage<T
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
         jgen.writeObjectField("links", linkedRepoPage.getLinks());
-        jgen.writeStringField("offset", String.valueOf(linkedRepoPage.getMetaData().getOffset()));
-        jgen.writeStringField("limit", String.valueOf(linkedRepoPage.getMetaData().getLimit()));
+        jgen.writeStringField("offset", String.valueOf(linkedRepoPage.getOffset()));
+        jgen.writeStringField("limit", String.valueOf(linkedRepoPage.getLimit()));
         jgen.writeStringField("total_items", String.valueOf(linkedRepoPage.getTotalItems()));
         jgen.writeObjectField("items", linkedRepoPage.getItems());
         jgen.writeEndObject();

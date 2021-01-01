@@ -37,4 +37,12 @@ public class LinkedRepoPage<T> {
                 new Link(LinkRel.NEXT, String.format("%s?offset=%d&limit=%d",
                     baseUrl, metaData.getOffset() + 1, metaData.getLimit())));
     }
+
+    public int getOffset() {
+        return this.metaData.getOffset();
+    }
+
+    public int getLimit() {
+        return this.metaData.getLimit();
+    }
 }
