@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ToString
-public class SpringPageRepoPage<T> implements RepoPage<T> {
+public class SpringPageRepoPage<T> extends RepoPage<T> {
     private Page<T> itemPage;
 
     public static <T> RepoPage<T> empty() {

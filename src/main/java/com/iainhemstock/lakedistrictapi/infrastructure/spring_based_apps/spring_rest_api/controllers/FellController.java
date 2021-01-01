@@ -6,9 +6,10 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.SimpleLinkableFell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.PagedCollectionDTO;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.SimpleLinkedFell;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedRepoPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPageMetaData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,23 +34,20 @@ public class FellController {
 
         RepoPage<Fell> fellResults = fellService.getFells(offset, limit);
 
-        Set<SimpleLinkableFell> simpleLinkableFells = fellResults.getItems().stream()
-            .map(fell -> new SimpleLinkableFell(
+        Set<SimpleLinkedFell> simpleLinkedFells = fellResults.getItems().stream()
+            .map(fell -> new SimpleLinkedFell(
                 fell,
                 Map.of(LinkRel.SELF,
                     new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + fell.getOsMapRef().toString()))))
             .collect(Collectors.toSet());
 
-        Map<LinkRel, Link> navLinks = linkService.buildNavLinksForPageAndCollectionType(fellResults, "fells");
+        LinkedRepoPage<SimpleLinkedFell> linkedRepoPage = new LinkedRepoPage<>(
+            simpleLinkedFells,
+            RepoPageMetaData.of(offset, limit),
+            fellResults.getTotalItemsAvailable(),
+            apiProperties.getBaseUrl() + "/fells");
 
-        PagedCollectionDTO<SimpleLinkableFell> pagedCollectionDTO = new PagedCollectionDTO<>(
-            navLinks,
-            simpleLinkableFells,
-            offset,
-            limit,
-            fellResults.getTotalItemsAvailable());
-
-        return new ResponseEntity<>(pagedCollectionDTO, HttpStatus.OK);
+        return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
     }
 
     @GetMapping("/fells/{id}")

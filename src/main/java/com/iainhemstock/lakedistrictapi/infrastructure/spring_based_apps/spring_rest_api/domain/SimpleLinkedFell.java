@@ -6,11 +6,11 @@ import lombok.Getter;
 import java.util.Map;
 
 @Getter
-public class SimpleLinkableFell {
+public class SimpleLinkedFell {
     private final String name;
     private final Map<LinkRel, Link> links;
 
-    public SimpleLinkableFell(final Fell fell, final Map<LinkRel, Link> links) {
+    public SimpleLinkedFell(final Fell fell, final Map<LinkRel, Link> links) {
         this.name = fell.getName().toString();
         this.links = links;
     }
