@@ -2,10 +2,11 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.SimpleLinkableFell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ItemDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.PagedCollectionDTO;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class FellController {
 
     @Autowired private FellService fellService;
     @Autowired private LinkService linkService;
+    @Autowired private ApiProperties apiProperties;
 
     @GetMapping(value = "/fells")
     public ResponseEntity<Object>
@@ -53,11 +55,8 @@ public class FellController {
     @GetMapping("/fells/{id}")
     public ResponseEntity<Object> getFell(@PathVariable final String id) {
         Fell fell = fellService.getById(new OsMapRef(id));
-        Map<LinkRel, Link> links = Map.of(
-            LinkRel.SELF, linkService.buildForResourceWithIdAndRel("fells", fell.getOsMapRef().toString(), LinkRel.SELF),
-            LinkRel.PARENT, linkService.buildForResourceWithIdAndRel("fells", fell.getParentOsMapRef().toString(), LinkRel.PARENT));
-
-        return new ResponseEntity<>(new ItemDTO<>(links, fell), HttpStatus.OK);
+        LinkedFell linkedFell = new LinkedFell(fell, apiProperties.getBaseUrl());
+        return new ResponseEntity<>(linkedFell, HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

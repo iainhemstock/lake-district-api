@@ -15,11 +15,13 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class OsMapRef {
     private String value;
+    private boolean isNull;
 
     public OsMapRef(final String value) {
         if (value == null) throw new NullPointerException("OsMapRef cannot be null");
         if (value.equals("")) throw new IllegalArgumentException("OsMapRef cannot be blank");
         this.value = value;
+        this.isNull = false;
     }
 
     @Override
