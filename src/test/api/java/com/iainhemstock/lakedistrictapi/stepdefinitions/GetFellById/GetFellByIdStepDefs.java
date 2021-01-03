@@ -76,7 +76,7 @@ public class GetFellByIdStepDefs {
 
     @Then("^the body will not contain the parent peak href$")
     public void theResponseBodyWillNotContainTheParentPeakHref() throws Exception {
-        commonState.getResult().andExpect(jsonPath("$.links.parent").doesNotExist());
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.PARENT_HREF.value()).doesNotExist());
     }
 
     @And("^the body will contain the height in feet (.*)$")
