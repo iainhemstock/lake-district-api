@@ -35,41 +35,6 @@ public class SpringPageRepoPage<T> extends RepoPage<T> {
     }
 
     @Override
-    public int getTotalPages() {
-        return this.itemPage.getTotalPages();
-    }
-
-    @Override
-    public int getItemsCount() {
-        return this.itemPage.getNumberOfElements();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.itemPage.isEmpty();
-    }
-
-    @Override
-    public boolean hasPrevious() {
-        return this.itemPage.hasPrevious();
-    }
-
-    @Override
-    public boolean hasNext() {
-        return this.itemPage.hasNext();
-    }
-
-    @Override
-    public int getPrevOffset() {
-        return (int) this.itemPage.previousPageable().getOffset();
-    }
-
-    @Override
-    public int getNextOffset() {
-        return (int) this.itemPage.nextPageable().getOffset();
-    }
-
-    @Override
     public int getOffset() {
         return (int) this.itemPage.getPageable().getOffset();
     }
