@@ -1,7 +1,8 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.controllers;
 
-import com.iainhemstock.lakedistrictapi.application_interfaces.*;
-import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
+import com.iainhemstock.lakedistrictapi.domain.Fell;
+import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellSummaryProjection;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
@@ -22,7 +23,6 @@ import java.util.stream.Collectors;
 public class FellController {
 
     @Autowired private FellService fellService;
-    @Autowired private LinkService linkService;
     @Autowired private ApiProperties apiProperties;
 
     @GetMapping(value = "/fells")

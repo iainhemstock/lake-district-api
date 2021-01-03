@@ -2,7 +2,6 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPageMetaData;
 import lombok.Getter;
 
