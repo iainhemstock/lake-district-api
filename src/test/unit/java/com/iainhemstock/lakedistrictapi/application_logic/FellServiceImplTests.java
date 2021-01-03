@@ -2,6 +2,7 @@ package com.iainhemstock.lakedistrictapi.application_logic;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellSummaryProjection;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
@@ -52,7 +53,7 @@ public class FellServiceImplTests {
         try {
             int invalidOffset = -1;
             int anyLimit = 0;
-            fellService.getFells(invalidOffset, anyLimit);
+            fellService.getFells(invalidOffset, anyLimit, FellSummaryProjection.class);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -65,7 +66,7 @@ public class FellServiceImplTests {
     public void given_invalid_limit_when_requesting_fells_then_exception_is_thrown(final int invalidLimit) {
         try {
             int anyOffset = 0;
-            fellService.getFells(anyOffset, invalidLimit);
+            fellService.getFells(anyOffset, invalidLimit, FellSummaryProjection.class);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {

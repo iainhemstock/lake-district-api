@@ -18,15 +18,13 @@ public class FellServiceImpl implements FellService {
     }
 
     @Override
-    public RepoPage<Fell> getFells(final int offset, final int limit) {
+    public <T> RepoPage<T> getFells(final int offset, final int limit, final Class<T> projection) {
         if (offset < 0)
             throw new IllegalArgumentException("Offset cannot be negative");
 
         if (limit <= 0)
             throw new IllegalArgumentException("Limit cannot be negative or zero");
 
-        return fellRepository.findAll(offset, limit);
+        return fellRepository.findAll(offset, limit, projection);
     }
-
-
 }

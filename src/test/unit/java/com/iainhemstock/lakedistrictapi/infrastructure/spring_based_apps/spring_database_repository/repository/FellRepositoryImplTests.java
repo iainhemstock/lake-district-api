@@ -93,20 +93,20 @@ public class FellRepositoryImplTests {
         }
     }
 
-    @Test
-    public void given_no_fells_then_empty_repo_result_is_returned() {
-        final int offset = 0;
-        final int limit = 1;
-        Mockito.when(fellEntityRepository.findAll(PageRequest.of(offset, limit)))
-            .thenReturn(Page.empty(PageRequest.of(offset, limit)));
-
-        RepoPage<Fell> repoPage = fellRepository.findAll(offset, limit);
-
-        assertThat(repoPage.getItems(), is(Collections.EMPTY_SET));
-        assertThat(repoPage.getTotalItemsAvailable(), is(0));
-        assertThat(repoPage.getTotalPages(), is(1));
-        assertThat(repoPage.getItemsCount(), is(0));
-    }
+//    @Test
+//    public void given_no_fells_then_empty_repo_result_is_returned() {
+//        final int offset = 0;
+//        final int limit = 1;
+//        Mockito.when(fellEntityRepository.findAll(PageRequest.of(offset, limit)))
+//            .thenReturn(Page.empty(PageRequest.of(offset, limit)));
+//
+//        RepoPage<Fell> repoPage = fellRepository.findAll(offset, limit);
+//
+//        assertThat(repoPage.getItems(), is(Collections.EMPTY_SET));
+//        assertThat(repoPage.getTotalItemsAvailable(), is(0));
+//        assertThat(repoPage.getTotalPages(), is(1));
+//        assertThat(repoPage.getItemsCount(), is(0));
+//    }
 
 //    @Test
 //    public void given_fell_exists_then_fell_repo_result_is_returned() {

@@ -2,9 +2,8 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.*;
 import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellSummaryProjection;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.SimpleLinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedRepoPage;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,19 +30,19 @@ public class FellController {
     getFells(@RequestParam(value = "offset", required = false, defaultValue = "${api.pageable.default-page-offset}") Integer offset,
              @RequestParam(value = "limit", required = false, defaultValue = "${spring.data.web.pageable.default-page-size}") Integer limit) {
 
-        RepoPage<Fell> fellResults = fellService.getFells(offset, limit);
-        Set<SimpleLinkedFell> simpleLinkedFells = mapFellsToSimpleLinkedFells(fellResults);
+        RepoPage<FellSummaryProjection> fellPage = fellService.getFells(offset, limit, FellSummaryProjection.class);
+        Set<SimpleLinkedFell> simpleLinkedFells = mapFellsToSimpleLinkedFells(fellPage);
 
         LinkedRepoPage<SimpleLinkedFell> linkedRepoPage = new LinkedRepoPage<>(
             simpleLinkedFells,
             RepoPageMetaData.of(offset, limit),
-            fellResults.getTotalItemsAvailable(),
+            fellPage.getTotalItemsAvailable(),
             apiProperties.getBaseUrl() + "/fells");
 
         return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
     }
 
-    private Set<SimpleLinkedFell> mapFellsToSimpleLinkedFells(final RepoPage<Fell> fellResults) {
+    private Set<SimpleLinkedFell> mapFellsToSimpleLinkedFells(final RepoPage<FellSummaryProjection> fellResults) {
         return fellResults.getItems().stream()
             .map(SimpleLinkedFell::new)
             .collect(Collectors.toSet());

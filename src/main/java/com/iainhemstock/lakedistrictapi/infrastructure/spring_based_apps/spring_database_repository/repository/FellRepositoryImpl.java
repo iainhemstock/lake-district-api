@@ -41,17 +41,7 @@ public class FellRepositoryImpl implements FellRepository {
         return domain;
     }
 
-    @Override
-    public RepoPage<Fell> findAll(final int offset, final int limit) {
-        Page<FellEntity> fellEntities = fellEntityRepository.findAll(PageRequest.of(offset, limit));
-        if (fellEntities.isEmpty())
-            return SpringPageRepoPage.empty();
-
-        List<Fell> fells = fellEntities.stream().map(domainToEntityAssembler::toDomain).collect(Collectors.toList());
-
-        return SpringPageRepoPage.from(new PageImpl<>(
-            fells,
-            PageRequest.of(offset, limit),
-            fellEntities.getTotalElements()));
+    public <T> RepoPage<T> findAll(final int offset, final int limit, final Class<T> projection) {
+        return SpringPageRepoPage.from(fellEntityRepository.findBy(PageRequest.of(offset, limit), projection));
     }
 }
