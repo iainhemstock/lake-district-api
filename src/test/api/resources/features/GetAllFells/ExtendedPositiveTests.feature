@@ -16,7 +16,7 @@ Feature: GET /fells?page={}&size={} - EXTENDED POSITIVE TESTS WITH OPTIONAL PARA
 	#VerifyResponsePayload
 	Scenario Outline: API provides json body validated against schema
 		When making a GET request to http://localhost:8080/api/v1/fells?offset=<offset>&limit=<limit>
-		Then the body will conform to the schema in schemas/paged_collection_schema.json
+		Then the body will conform to the schema in schemas/linked_repo_page_schema.json
 		Examples:
 			| offset | limit |
 			| 0 	 | 1     |

@@ -11,7 +11,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Scenario: API provides json body validated against schema
 		When making a GET request to http://localhost:8080/api/v1/fells
-		Then the response will conform to the schema in schemas/paged_collection_schema.json
+		Then the response will conform to the schema in schemas/linked_repo_page_schema.json
 		Then the pagination attributes will conform to the schema in schemas/links_schema.json
 		And the items attribute will conform to the schema in schemas/simple_fell_schema.json
 
