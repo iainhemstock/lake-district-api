@@ -15,7 +15,7 @@ public class LinkedFell {
         this.fell = fell;
         this.links = new LinkedHashMap<>();
         this.links.put(LinkRel.SELF, new Link(LinkRel.SELF, baseUrl + "/fells/" + this.fell.getOsMapRef()));
-        if (!fell.getParentOsMapRef().isNull())
+        if (fell.getParentOsMapRef() != null)
             this.links.put(LinkRel.PARENT, new Link(LinkRel.PARENT, baseUrl + "/fells/" + this.fell.getParentOsMapRef()));
     }
 }

@@ -44,8 +44,7 @@ public class FellEntity {
     @NotNull
     private RegionEntity regionEntity;
 
-    @Column(name = "parent_os_map_ref")
-    @NotNull
+    @Column(name = "parent_os_map_ref", nullable = true)
     private String parentOsMapRef;
 
     @ManyToMany

@@ -1,7 +1,5 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities;
 
-import com.iainhemstock.lakedistrictapi.domain.NullOsMapRef;
-
 import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +15,7 @@ public final class ScafellPikeFellEntity extends FellEntity {
             54.454222,
             -3.211528,
             new SouthernRegionEntity(),
-            new NullOsMapRef().toString(),
+            null,
             new HashSet<>(Set.of(
                 new Landranger89OsMapEntity(),
                 new Landranger90OsMapEntity(),

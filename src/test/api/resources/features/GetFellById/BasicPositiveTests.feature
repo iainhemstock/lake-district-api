@@ -47,6 +47,12 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 			| OS Landranger 90 |
 			| OS Explorer OL6  |
 
+	#VerifyResponsePayload
+	Scenario: API does not specify a parent href when a fell has no parent
+		Given Scafell Pike exists
+		When making a GET request to http://localhost:8080/api/v1/fells/NY215072
+		Then the body will not contain the parent peak href
+
 	#VerifyResponseHeaders
 	Scenario: API provides content type header
 		When making a GET request to http://localhost:8080/api/v1/fells/NY211104

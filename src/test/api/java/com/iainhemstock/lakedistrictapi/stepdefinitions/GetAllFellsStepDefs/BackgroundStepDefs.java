@@ -25,6 +25,11 @@ public class BackgroundStepDefs {
         testDataLoader.addGreatGable();
     }
 
+    @Given("^Scafell Pike exists$")
+    public void scafellPikeExists() {
+        testDataLoader.addScafellPike();
+    }
+
     @Given("^Great Gable, Helvellyn and Scafell Pike exist$")
     public void fellsExist() {
         testDataLoader.addGreatGable();

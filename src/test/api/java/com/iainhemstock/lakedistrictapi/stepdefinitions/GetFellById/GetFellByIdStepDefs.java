@@ -6,6 +6,7 @@ import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
 import com.iainhemstock.lakedistrictapi.attributes.ErrorAttributes;
 import com.iainhemstock.lakedistrictapi.attributes.FellAttributes;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,11 @@ public class GetFellByIdStepDefs {
     public void theResponseBodyWillContainTheParentPeakHref(final String expectedParentPeakUrl) throws Exception {
         commonState.getResult().andExpect(jsonPath(LinksAttributes.PARENT_HREF.value(),
             is(expectedParentPeakUrl)));
+    }
+
+    @Then("^the body will not contain the parent peak href$")
+    public void theResponseBodyWillNotContainTheParentPeakHref() throws Exception {
+        commonState.getResult().andExpect(jsonPath("$.links.parent").doesNotExist());
     }
 
     @And("^the body will contain the height in feet (.*)$")
