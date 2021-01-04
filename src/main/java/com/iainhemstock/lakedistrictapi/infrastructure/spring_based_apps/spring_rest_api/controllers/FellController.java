@@ -39,7 +39,7 @@ public class FellController {
         LinkedRepoPage<SimpleLinkedFell> linkedRepoPage = new LinkedRepoPage<>(
             simpleLinkedFells,
             RepoPageMetaData.of(offset, limit),
-            fellPage.getTotalItemsAvailable(),
+            fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells");
 
         return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
