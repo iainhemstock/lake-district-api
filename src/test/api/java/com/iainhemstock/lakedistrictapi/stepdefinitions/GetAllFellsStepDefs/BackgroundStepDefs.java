@@ -42,7 +42,7 @@ public class BackgroundStepDefs {
         assertThat(DEFAULT_PAGE_OFFSET, is(defaultOffset));
     }
 
-    @And("^the limit of the number of items returned in the response is ([0-9]+) by default$")
+    @And("^the default limit of items returned is ([0-9]+)$")
     public void theLimitOfTheNumberOfItemsReturnedInTheResponseIsByDefault(final int defaultLimit) {
         assertThat(DEFAULT_PAGE_SIZE, is(defaultLimit));
     }

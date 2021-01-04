@@ -13,7 +13,7 @@ public class FellNotFoundExceptionHandler {
 
     public ResponseEntity<Object> handleException(final FellNotFoundException ex) {
         ErrorDTO errorDTO = new ErrorDTO(
-            String.valueOf(HttpURLConnection.HTTP_NOT_FOUND),
+            String.format("%d %s", HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.name()),
             ex.getMessage(),
             ex.getTimestamp());
 

@@ -69,7 +69,7 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 		Then the status code will be 405
 		And the content type will be application/json
 		And the body will conform to the schema in schemas/error_schema.json
-		And the body will contain the status code 405
+		And the body will contain the status code 405 METHOD_NOT_ALLOWED
 		And the body will contain the message <message>
 		And the body will contain the timestamp 2018-12-10 13:45:00
 		Examples:

@@ -1,11 +1,12 @@
 package com.iainhemstock.lakedistrictapi.stepdefinitions.GetAllFellsStepDefs;
 
+import com.iainhemstock.lakedistrictapi.attributes.LinksAttributes;
 import com.iainhemstock.lakedistrictapi.attributes.PagedCollectionAttributes;
 import com.iainhemstock.lakedistrictapi.common.CommonTestState;
 import io.cucumber.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 public class LinksStepDefs {
@@ -37,5 +38,26 @@ public class LinksStepDefs {
             .andExpect(jsonPath(pageObjectLink.value()).exists());
         commonState.getResult()
             .andExpect(jsonPath(pageObjectLink.value(), is(expectedLink)));
+    }
+
+    @Then("^the (prev|self|next) href will contain an offset (.*)$")
+    public void theHrefWillContainAnOffset(final String rel, final String expectedOffset) throws Exception {
+        switch (rel) {
+            case "prev":
+                commonState.getResult().andExpect(jsonPath("$.links.prev.href", containsString(expectedOffset)));
+                break;
+            case "self":
+                commonState.getResult().andExpect(jsonPath("$.links.self.href", containsString(expectedOffset)));
+                break;
+            case "next":
+                commonState.getResult().andExpect(jsonPath("$.links.next.href", containsString(expectedOffset)));
+                break;
+        }
+
+    }
+
+    @Then("a pref href will not exist")
+    public void aPrefHrefWillNotExist() throws Exception {
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.PREV_HREF.value()).doesNotExist());
     }
 }

@@ -1,8 +1,10 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.controllers;
 
+import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellSummaryProjection;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
@@ -24,6 +26,7 @@ public class FellController {
 
     @Autowired private FellService fellService;
     @Autowired private ApiProperties apiProperties;
+    @Autowired private ApiClockService apiClockService;
 
     @GetMapping(value = "/fells")
     public ResponseEntity<Object>
@@ -57,7 +60,11 @@ public class FellController {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException ex) {
-        return ResponseEntity.badRequest().build();
+        ErrorDTO errorDTO = new ErrorDTO(
+            HttpStatus.BAD_REQUEST.toString(),
+            ex.getMessage(),
+            apiClockService.now());
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -58,7 +58,7 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     public void given_httpMethodNotAllowedExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatus() {
         assertThat(
             ((ErrorDTO) methodNotAllowedResponseEntity.getBody()).getStatus(),
-            is(equalTo(String.valueOf(HttpStatus.METHOD_NOT_ALLOWED.value()))));
+            is(equalTo(HttpStatus.METHOD_NOT_ALLOWED.toString())));
     }
 
     @Test

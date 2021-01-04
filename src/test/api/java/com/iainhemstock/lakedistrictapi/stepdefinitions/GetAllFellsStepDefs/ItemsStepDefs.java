@@ -12,13 +12,13 @@ public class ItemsStepDefs {
 
     @Autowired private CommonTestState commonState;
 
-    @And("^the body will contain a simplified fell with name (.*)$")
+    @And("^the body will contain a fell name (.*)$")
     public void theBodyWillContainASimplifiedFell(final String fellName) throws Exception {
         commonState.getResult().andExpect(jsonPath(
             FellSimplifiedAttributes.FELL_NAME.valueAt(0), is(fellName)));
     }
 
-    @And("^self href (.*)$")
+    @And("^fell self href (.*)$")
     public void andSelfHref(final String url) throws Exception {
         commonState.getResult().andExpect(jsonPath(
             FellSimplifiedAttributes.FELL_SELF_HREF.valueAt(0), is(url)));

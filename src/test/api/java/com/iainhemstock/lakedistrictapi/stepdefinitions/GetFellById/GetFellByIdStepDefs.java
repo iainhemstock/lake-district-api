@@ -149,10 +149,10 @@ public class GetFellByIdStepDefs {
         }
     }
 
-    @And("^the body will contain the status code ([0-9]{3})$")
-    public void theResponseBodyWillContainStatusCode(final int expectedStatusCode) throws Exception {
+    @And("^the body will contain the status code (.*)$")
+    public void theResponseBodyWillContainStatusCode(final String expectedStatusCode) throws Exception {
         commonState.getResult().andExpect(jsonPath(ErrorAttributes.STATUS.value(),
-            is(String.valueOf(expectedStatusCode))));
+            is(expectedStatusCode)));
     }
 
     @And("^the body will contain the message (.*)$")

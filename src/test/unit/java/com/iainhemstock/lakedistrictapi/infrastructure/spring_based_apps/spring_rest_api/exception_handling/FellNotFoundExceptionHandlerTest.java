@@ -33,7 +33,7 @@ public class FellNotFoundExceptionHandlerTest {
     @Test
     public void given_fellNotFoundExceptionHasBeenThrown_when_handled_then_errorResponseWillContainStatusCode() {
         assertThat(((ErrorDTO) fellNotFoundResponseEntity.getBody()).getStatus(),
-            is(equalTo(String.valueOf(HttpStatus.NOT_FOUND.value()))));
+            is(equalTo(HttpStatus.NOT_FOUND.toString())));
     }
 
     @Test

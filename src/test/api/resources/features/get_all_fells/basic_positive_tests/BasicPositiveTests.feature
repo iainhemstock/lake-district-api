@@ -3,7 +3,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist
 		And the offset of items returned in the response is 0 by default
-		And the limit of the number of items returned in the response is 1 by default
+		And the default limit of items returned is 1
 
 	Scenario: API provides OK status code on successful request
 		When making a GET request to http://localhost:8080/api/v1/fells
@@ -22,19 +22,16 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 			| prev | current                                             | next                                                 |
 			|      | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1  |
 
-	Scenario Outline: API provides pagination metadata for this collection of resources
+	Scenario: API provides pagination metadata for this collection of resources
 		When making a GET request to http://localhost:8080/api/v1/fells
-		Then the body will contain the offset <offset>
-		And the limit <limit>
-		And the total items <total items>
-		Examples:
-			| offset | limit  | total items |
-			| 0      | 1      | 3           |
+		Then the body will contain the offset 0
+		And the limit 1
+		And the total items 3
 
 	Scenario: API provides a simplified view of a fell
 		When making a GET request to http://localhost:8080/api/v1/fells
-		Then the body will contain a simplified fell with name Great Gable
-		And self href http://localhost:8080/api/v1/fells/NY211104
+		Then the body will contain a fell name Great Gable
+		And fell self href http://localhost:8080/api/v1/fells/NY211104
 
 	Scenario: API provides content type header
 		When making a GET request to http://localhost:8080/api/v1/fells

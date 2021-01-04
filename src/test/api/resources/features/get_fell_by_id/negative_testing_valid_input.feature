@@ -15,7 +15,7 @@ Feature: GET /fells/{id} - NEGATIVE TESTS WITH VALID INPUT
 	#VerifyResponsePayload
 	Scenario: API provides error response body when fell not found
 		When making a GET request to http://localhost:8080/api/v1/fells/NY000000
-		Then the body will contain the status code 404
+		Then the body will contain the status code 404 NOT_FOUND
 		And the body will contain the message Fell was not found for {os map ref=NY000000}
 		And the body will contain the timestamp 2018-12-10 13:45:00
 
@@ -35,7 +35,7 @@ Feature: GET /fells/{id} - NEGATIVE TESTS WITH VALID INPUT
 		Then the status code will be 405
 		And the content type will be application/json
 		And the body will conform to the schema in schemas/error_schema.json
-		And the body will contain the status code 405
+		And the body will contain the status code 405 METHOD_NOT_ALLOWED
 		And the body will contain the message <message>
 		And the body will contain the timestamp 2018-12-10 13:45:00
 		Examples:
