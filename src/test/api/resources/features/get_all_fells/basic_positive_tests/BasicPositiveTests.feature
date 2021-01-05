@@ -2,7 +2,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist
-		And the offset of items returned in the response is 0 by default
+		And the default offset of items returned is 0
 		And the default limit of items returned is 1
 
 	Scenario: API provides OK status code on successful request
@@ -39,4 +39,4 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Scenario: API confirms that this endpoint only accepts idempotent requests
 		When making an OPTIONS request to http://localhost:8080/api/v1/fells
-		Then the headers will confirm only GET, HEAD AND OPTIONS methods are allowed
+		Then the headers will confirm only GET, HEAD and OPTIONS methods are allowed

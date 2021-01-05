@@ -27,7 +27,7 @@ Feature: GET /fells/{id} - NEGATIVE TESTS WITH VALID INPUT
 	#VerifyApplicationState
 	Scenario: API confirms that this endpoint only accepts idempotent requests
 		When making an OPTIONS request to http://localhost:8080/api/v1/fells/NY211104
-		Then the headers will confirm only GET, HEAD AND OPTIONS methods are allowed
+		Then the headers will confirm only GET, HEAD and OPTIONS methods are allowed
 
 	#VerifyApplicationState
 	Scenario Outline: API provides an error response when making an unsupported http method request

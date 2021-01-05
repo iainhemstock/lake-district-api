@@ -25,7 +25,7 @@ public class HeaderStepDefs {
             content().contentType(MediaType.APPLICATION_JSON));
     }
 
-    @Then("the headers will confirm only GET, HEAD AND OPTIONS methods are allowed")
+    @Then("the headers will confirm only GET, HEAD and OPTIONS methods are allowed")
     public void theResponseWillConfirmOnlyGETRequestsAreAllowed() throws Exception {
         commonState.getResult().andExpect(
             header().string("Allow", "GET,HEAD,OPTIONS"));

@@ -37,7 +37,7 @@ public class BackgroundStepDefs {
         testDataLoader.addScafellPike();
     }
 
-    @And("^the offset of items returned in the response is ([0-9]+) by default$")
+    @And("^the default offset of items returned is ([0-9]+)$")
     public void theOffsetOfItemsReturnedInTheResponseIsByDefault(final int defaultOffset) {
         assertThat(DEFAULT_PAGE_OFFSET, is(defaultOffset));
     }

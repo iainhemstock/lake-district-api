@@ -51,4 +51,4 @@ Feature: GET /fells?offset=2 - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 	#===================================================================================================================
 	Scenario: API confirms that this endpoint only accepts idempotent requests
 		When making an OPTIONS request to http://localhost:8080/api/v1/fells?offset=2
-		Then the headers will confirm only GET, HEAD AND OPTIONS methods are allowed
+		Then the headers will confirm only GET, HEAD and OPTIONS methods are allowed
