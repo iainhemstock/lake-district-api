@@ -4,19 +4,19 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 
 	#VerifyStatusCode
 	Scenario: API provides OK status code on successful request
-		When making a GET request to http://localhost:8080/api/v1/fells/NY211104
+		When making a GET request to /fells/NY211104
 		Then the status code will be 200
 
 	#VerifyResponsePayload
 	Scenario: API provides json body validated against schema
-		When making a GET request to http://localhost:8080/api/v1/fells/NY211104
+		When making a GET request to /fells/NY211104
 		Then the body will conform to the schema in schemas/item_schema.json
 		And the links attribute will conform to the schema in schemas/links_schema.json
 		And the item attribute will conform to the schema in schemas/fell_schema.json
 
 	#VerifyResponsePayload
 	Scenario: API provides a detailed view of a fell
-		When making a GET request to http://localhost:8080/api/v1/fells/NY211104
+		When making a GET request to /fells/NY211104
 		Then the body will contain the fell name Great Gable
 		And the body will contain the region Central Lake District
 		And the body will contain the latitude 54.482
@@ -50,22 +50,22 @@ Feature: GET /fells/{id} - BASIC POSITIVE TESTS
 	#VerifyResponsePayload
 	Scenario: API does not specify a parent href when a fell has no parent
 		Given Scafell Pike exists
-		When making a GET request to http://localhost:8080/api/v1/fells/NY215072
+		When making a GET request to /fells/NY215072
 		Then the body will not contain the parent peak href
 
 	#VerifyResponseHeaders
 	Scenario: API provides content type header
-		When making a GET request to http://localhost:8080/api/v1/fells/NY211104
+		When making a GET request to /fells/NY211104
 		Then the content type will be application/json
 
 	#VerifyApplicationState
 	Scenario: API confirms that this endpoint only accepts idempotent requests
-		When making an OPTIONS request to http://localhost:8080/api/v1/fells/NY211104
+		When making an OPTIONS request to /fells/NY211104
 		Then the headers will confirm only GET, HEAD and OPTIONS methods are allowed
 
 	#VerifyApplicationState
 	Scenario Outline: API provides an error response when making an unsupported http method request
-		When making an <unsupported http method> request to http://localhost:8080/api/v1/fells/NY211104
+		When making an <unsupported http method> request to /fells/NY211104
 		Then the status code will be 405
 		And the content type will be application/json
 		And the body will conform to the schema in schemas/error_schema.json
