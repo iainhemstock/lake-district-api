@@ -28,7 +28,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 		And the limit 1
 		And the total items 3
 
-	Scenario: API provides a simplified view of a fell
+	Scenario: API provides a collection of fells
 		When making a GET request to http://localhost:8080/api/v1/fells
 		Then the body will contain a fell name Great Gable
 		And fell self href http://localhost:8080/api/v1/fells/NY211104

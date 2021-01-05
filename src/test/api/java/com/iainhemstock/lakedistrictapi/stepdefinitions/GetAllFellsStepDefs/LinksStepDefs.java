@@ -60,4 +60,9 @@ public class LinksStepDefs {
     public void aPrefHrefWillNotExist() throws Exception {
         commonState.getResult().andExpect(jsonPath(LinksAttributes.PREV_HREF.value()).doesNotExist());
     }
+
+    @Then("a next href will not exist")
+    public void aNextHrefWillNotExist() throws Exception {
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.NEXT_HREF.value()).doesNotExist());
+    }
 }
