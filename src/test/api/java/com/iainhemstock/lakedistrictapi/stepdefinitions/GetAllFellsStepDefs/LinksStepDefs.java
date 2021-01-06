@@ -3,6 +3,7 @@ package com.iainhemstock.lakedistrictapi.stepdefinitions.GetAllFellsStepDefs;
 import com.iainhemstock.lakedistrictapi.attributes.LinksAttributes;
 import com.iainhemstock.lakedistrictapi.attributes.PagedCollectionAttributes;
 import com.iainhemstock.lakedistrictapi.common.CommonTestState;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -64,5 +65,15 @@ public class LinksStepDefs {
     @Then("a next href will not exist")
     public void aNextHrefWillNotExist() throws Exception {
         commonState.getResult().andExpect(jsonPath(LinksAttributes.NEXT_HREF.value()).doesNotExist());
+    }
+
+    @And("^the self href will contain a limit (limit=([0-9]*))$")
+    public void theSelfHrefWillContainAnLimitLimit(final String expectedLimit) throws Exception {
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.SELF_HREF.value(), containsString(expectedLimit)));
+    }
+
+    @And("^the next href will contain a limit (limit=([0-9]*))$")
+    public void theNextHrefWillContainAnLimitLimit(final String expectedLimit) throws Exception {
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.NEXT_HREF.value(), containsString(expectedLimit)));
     }
 }
