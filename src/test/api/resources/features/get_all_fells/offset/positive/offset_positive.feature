@@ -24,10 +24,13 @@ Feature: GET /fells?offset=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 
 	Scenario Outline: ?offset=# - API provides a collection of fells offset by specified amount
 		When making a GET request to /fells?offset=<offset>
-		Then the body will contain a fell name <fell name>
-		And fell self href <self href>
+		Then the body will contain the following fells
+			| name         | href            |
+			| <fell name>  | <self href> |
+			| <fell name>  | <self href> |
+			| <fell name>  | <self href> |
 		Examples:
-			| offset | fell name    | self href        							 |
+			| offset | fell name    | self href       |
 			| 0      | Great Gable  | /fells/NY211104 |
 			| 1      | Helvellyn    | /fells/NY342151 |
 			| 2      | Scafell Pike | /fells/NY215072 |
