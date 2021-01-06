@@ -31,7 +31,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 	Scenario: API provides a collection of fells
 		When making a GET request to /fells
 		Then the body will contain a fell name Great Gable
-		And fell self href http://localhost:8080/api/v1/fells/NY211104
+		And fell self href /fells/NY211104
 
 	Scenario: API provides content type header
 		When making a GET request to /fells

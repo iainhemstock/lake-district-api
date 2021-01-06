@@ -28,9 +28,9 @@ Feature: GET /fells?offset=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 		And fell self href <self href>
 		Examples:
 			| offset | fell name    | self href        							 |
-			| 0      | Great Gable  | http://localhost:8080/api/v1/fells/NY211104 |
-			| 1      | Helvellyn    | http://localhost:8080/api/v1/fells/NY342151 |
-			| 2      | Scafell Pike | http://localhost:8080/api/v1/fells/NY215072 |
+			| 0      | Great Gable  | /fells/NY211104 |
+			| 1      | Helvellyn    | /fells/NY342151 |
+			| 2      | Scafell Pike | /fells/NY215072 |
 
 	Scenario Outline: ?offset=# - API provides pagination metadata for this collection of resources
 		When making a GET request to /fells?offset=<offset>

@@ -32,3 +32,9 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 			| 1     | 0      | 3           |
 			| 2     | 0      | 3           |
 			| 3     | 0      | 3           |
+
+	Scenario: ?fells?limit=1 - API returns a page containing a single fell
+		When making a GET request to /fells?limit=1
+		Then the body will contain a fell name Great Gable
+		And fell self href /fells/NY211104
+		And the number of fells contained in the page is 1
