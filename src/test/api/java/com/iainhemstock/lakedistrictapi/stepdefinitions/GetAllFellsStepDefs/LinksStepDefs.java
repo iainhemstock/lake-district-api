@@ -79,7 +79,7 @@ public class LinksStepDefs {
 
     @Then("^the prev href will contain a limit (limit=([0-9]*)$)")
     public void thePrevHrefWillContainAnLimitLimit(final String expectedLimit) throws Exception {
-        commonState.getResult().andExpect(jsonPath(LinksAttributes.NEXT_HREF.value(), containsString(expectedLimit)));
+        commonState.getResult().andExpect(jsonPath(LinksAttributes.PREV_HREF.value(), containsString(expectedLimit)));
     }
 
 }
