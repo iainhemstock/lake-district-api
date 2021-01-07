@@ -10,13 +10,13 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 		And the self href will contain a limit limit=1
 		And the next href will contain a limit limit=1
 
-	Scenario: /fells?limit=2 - API returns navigational links to prev, current and next pages when page limit is 2
+	Scenario: /fells?limit=2 - API returns navigational links to current and next pages when page limit is 2
 		When making a GET request to /fells?limit=2
 		Then a pref href will not exist
 		And the self href will contain a limit limit=2
 		And the next href will contain a limit limit=2
 
-	Scenario: /fells?limit=3 - API returns navigational links to prev and current pages when page limit is 3
+	Scenario: /fells?limit=3 - API returns navigational links to current page when page limit is 3
 		When making a GET request to /fells?limit=3
 		Then a pref href will not exist
 		And the self href will contain a limit limit=3
@@ -40,7 +40,7 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 			| Helvellyn | /fells/NY342151 |
 		And the number of fells contained in the page is 1
 
-	Scenario: ?fells?limit=1 - API returns a page containing two fells when limit=2
+	Scenario: ?fells?limit=2 - API returns a page containing two fells when limit=2
 		When making a GET request to /fells?limit=2
 		Then the body will contain the following fells
 			| name        | href            |
