@@ -63,3 +63,12 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 			| Helvellyn    | /fells/NY342151 |
 			| Scafell Pike | /fells/NY215072 |
 		And the number of fells contained in the page is 3
+
+	Scenario: ?fells?limit=99999 - API returns a page containing three fells when limit=99999
+		When making a GET request to /fells?limit=99999
+		Then the body will contain the following fells
+			| name         | href            |
+			| Great Gable  | /fells/NY211104 |
+			| Helvellyn    | /fells/NY342151 |
+			| Scafell Pike | /fells/NY215072 |
+		And the number of fells contained in the page is 3
