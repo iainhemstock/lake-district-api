@@ -22,18 +22,23 @@ Feature: GET /fells?offset=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 		And the self href will contain an offset offset=2
 		And a next href will not exist
 
-	Scenario Outline: ?offset=# - API provides a collection of fells offset by specified amount
-		When making a GET request to /fells?offset=<offset>
+	Scenario: ?offset=0 - API provides a collection of fells offset by specified amount of 0
+		When making a GET request to /fells?offset=0
 		Then the body will contain the following fells
 			| name         | href            |
-			| <fell name>  | <self href> |
-			| <fell name>  | <self href> |
-			| <fell name>  | <self href> |
-		Examples:
-			| offset | fell name    | self href       |
-			| 0      | Great Gable  | /fells/NY211104 |
-			| 1      | Helvellyn    | /fells/NY342151 |
-			| 2      | Scafell Pike | /fells/NY215072 |
+			| Great Gable  | /fells/NY211104 |
+
+	Scenario: ?offset=1 - API provides a collection of fells offset by specified amount of 1
+		When making a GET request to /fells?offset=1
+		Then the body will contain the following fells
+			| name         | href            |
+			| Helvellyn    | /fells/NY342151 |
+
+	Scenario: ?offset=2 - API provides a collection of fells offset by specified amount of 2
+		When making a GET request to /fells?offset=2
+		Then the body will contain the following fells
+			| name         | href            |
+			| Scafell Pike | /fells/NY215072 |
 
 	Scenario Outline: ?offset=# - API provides pagination metadata for this collection of resources
 		When making a GET request to /fells?offset=<offset>
