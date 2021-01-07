@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,9 +30,12 @@ public class FellController {
     @Autowired private ApiClockService apiClockService;
 
     @GetMapping(value = "/fells")
-    public ResponseEntity<Object>
-    getFells(@RequestParam(value = "offset", required = false, defaultValue = "${api.pageable.default-page-offset}") Integer offset,
-             @RequestParam(value = "limit", required = false, defaultValue = "${spring.data.web.pageable.default-page-size}") Integer limit) {
+    public ResponseEntity<Object> getFells(
+        @RequestParam(value = "offset", required = false) Integer offset,
+        @RequestParam(value = "limit", required = false) Integer limit) {
+
+        if (offset == null) offset = apiProperties.getPageOffset();
+        if (limit == null) limit = apiProperties.getPageSize();
 
         RepoPage<FellSummaryProjection> fellPage = fellService.getFells(offset, limit, FellSummaryProjection.class);
         Set<SimpleLinkedFell> simpleLinkedFells = mapFellsToSimpleLinkedFells(fellPage);

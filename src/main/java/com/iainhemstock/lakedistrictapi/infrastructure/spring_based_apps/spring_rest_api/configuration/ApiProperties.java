@@ -11,4 +11,6 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 public class ApiProperties {
     private String baseUrl;
+    private int pageOffset;
+    private int pageSize;
 }

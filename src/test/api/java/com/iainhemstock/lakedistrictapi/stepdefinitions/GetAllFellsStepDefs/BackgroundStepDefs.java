@@ -1,6 +1,7 @@
 package com.iainhemstock.lakedistrictapi.stepdefinitions.GetAllFellsStepDefs;
 
 import com.iainhemstock.lakedistrictapi.config.testdata.TestDataLoaderForApiTests;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,8 @@ import static org.junit.Assert.assertThat;
 
 public class BackgroundStepDefs {
 
-    @Value("${api.pageable.default-page-offset}")
-    private int DEFAULT_PAGE_OFFSET;
-
-    @Value("${spring.data.web.pageable.default-page-size}")
-    private int DEFAULT_PAGE_SIZE;
-
-    @Autowired
-    private TestDataLoaderForApiTests testDataLoader;
+    @Autowired private TestDataLoaderForApiTests testDataLoader;
+    @Autowired private ApiProperties apiProperties;
 
     @Given("^Great Gable exists$")
     public void fellExists() {
@@ -38,12 +33,14 @@ public class BackgroundStepDefs {
     }
 
     @And("^the default offset of items returned is ([0-9]+)$")
-    public void theOffsetOfItemsReturnedInTheResponseIsByDefault(final int defaultOffset) {
-        assertThat(DEFAULT_PAGE_OFFSET, is(defaultOffset));
+    public void theOffsetOfItemsReturnedInTheResponseIsByDefault(final int expectedPageOffset) {
+        apiProperties.setPageOffset(expectedPageOffset);
+        assertThat(apiProperties.getPageOffset(), is(expectedPageOffset));
     }
 
     @And("^the default limit of items returned is ([0-9]+)$")
-    public void theLimitOfTheNumberOfItemsReturnedInTheResponseIsByDefault(final int defaultLimit) {
-        assertThat(DEFAULT_PAGE_SIZE, is(defaultLimit));
+    public void theLimitOfTheNumberOfItemsReturnedInTheResponseIsByDefault(final int expectedPageSize) {
+        apiProperties.setPageSize(expectedPageSize);
+        assertThat(apiProperties.getPageSize(), is(expectedPageSize));
     }
 }
