@@ -22,6 +22,12 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 		And the self href will contain a limit limit=3
 		And a next href will not exist
 
+	Scenario: /fells?limit=99999 - API returns navigation links to the current page when page limit is greater than the total number of items
+		When making a GET request to /fells?limit=99999
+		Then a pref href will not exist
+		And the self href will contain a limit limit=99999
+		And a next href will not exist
+
 	Scenario Outline: /fells?limit=# - API provides pagination metadata for this collection of resources
 		When making a GET request to /fells?limit=<limit>
 		Then the body will contain the offset <offset>
