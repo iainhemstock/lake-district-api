@@ -2,7 +2,7 @@ Feature: /fells?limit=[invalid] - NEGATIVE TESTS WITH INVALID INPUT
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist
-		And the default offset of items returned is 0
+		And the default page offset is 0
 
 	Scenario Outline: /fells?limit=[invalid] - API returns BAD_REQUEST status code when page size is invalid
 		When making a GET request to /fells?limit=<invalid_limit>

@@ -2,7 +2,7 @@ Feature: GET /fells?offset={invalid} - NEGATIVE TESTING WITH INVALID PARAMETERS
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist
-		And the default limit of items returned is 1
+		And the default page size is 1
 
 	#===================================================================================================================
 	# [1] verify correct HTTP status code

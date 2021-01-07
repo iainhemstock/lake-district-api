@@ -2,8 +2,8 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist
-		And the default offset of items returned is 0
-		And the default limit of items returned is 1
+		And the default page offset is 0
+		And the default page size is 1
 
 	Scenario: API provides OK status code on successful request
 		When making a GET request to /fells

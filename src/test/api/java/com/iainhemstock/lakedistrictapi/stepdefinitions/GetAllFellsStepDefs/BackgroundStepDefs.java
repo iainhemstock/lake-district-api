@@ -32,13 +32,13 @@ public class BackgroundStepDefs {
         testDataLoader.addScafellPike();
     }
 
-    @And("^the default offset of items returned is ([0-9]+)$")
+    @And("^the default page offset is ([0-9]+)$")
     public void theOffsetOfItemsReturnedInTheResponseIsByDefault(final int expectedPageOffset) {
         apiProperties.setPageOffset(expectedPageOffset);
         assertThat(apiProperties.getPageOffset(), is(expectedPageOffset));
     }
 
-    @And("^the default limit of items returned is ([0-9]+)$")
+    @And("^the default page size is ([0-9]+)$")
     public void theLimitOfTheNumberOfItemsReturnedInTheResponseIsByDefault(final int expectedPageSize) {
         apiProperties.setPageSize(expectedPageSize);
         assertThat(apiProperties.getPageSize(), is(expectedPageSize));

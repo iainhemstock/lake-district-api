@@ -2,7 +2,7 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist
-		And the default offset of items returned is 0
+		And the default page offset is 0
 
 	Scenario: /fells?limit=1 - API provides navigational links to current and next pages when page limit is 1
 		When making a GET request to /fells?limit=1
