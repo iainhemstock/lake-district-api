@@ -38,6 +38,7 @@ Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 			| 1     | 0      | 3           |
 			| 2     | 0      | 3           |
 			| 3     | 0      | 3           |
+			| 99999 | 0      | 3           |
 
 	Scenario: ?fells?limit=1 - API returns a page containing a single fell when limit=1
 		When making a GET request to /fells?limit=1
