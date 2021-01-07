@@ -1,4 +1,4 @@
-Feature: /fells?limit=[invalid] - NEGATIVE TESTS WITH INVALID INPUT
+Feature: GET /fells?limit=[invalid] - NEGATIVE TESTS WITH INVALID INPUT
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist

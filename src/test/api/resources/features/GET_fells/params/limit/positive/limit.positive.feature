@@ -1,4 +1,4 @@
-Feature: GET /fells?limit=# - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
+Feature: GET /fells?limit=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMETERS
 
 	Background:
 		Given Great Gable, Helvellyn and Scafell Pike exist

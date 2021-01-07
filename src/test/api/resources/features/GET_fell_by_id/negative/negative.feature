@@ -1,6 +1,6 @@
 # todo: create some negative tests with invalid input such as null fell id
 
-Feature: GET /fells/{id} - NEGATIVE TESTS WITH VALID INPUT
+Feature: GET /fells/[id] - NEGATIVE TESTS WITH VALID INPUT
 
 	#VerifyStatusCode
 	Scenario: API provides 404 status code when ID does not exist

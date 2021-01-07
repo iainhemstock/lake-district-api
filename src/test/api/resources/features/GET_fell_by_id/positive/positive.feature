@@ -1,4 +1,4 @@
-Feature: GET /fells/{id} - BASIC POSITIVE TESTS
+Feature: GET /fells/[id] - BASIC POSITIVE TESTS
 	Background:
 		Given Great Gable exists
 
