@@ -131,24 +131,6 @@ public class GetFellByIdStepDefs {
             .andExpect(jsonPath(FellAttributes.LONGITUDE_AS_DMS_HEMISPHERE.valueAt(1), is(expectedDms.get("hemisphere"))));
     }
 
-    @When("^sending unsupported (.*) request to (.*)")
-    public void usingHttpMethodWithEndpoint(final String unsupportedHttpMethod,
-                                            final String endpoint) throws Exception {
-        commonState.setEndpointUnderTest(endpoint);
-
-        if ("POST".equals(unsupportedHttpMethod))
-            commonState.setResult(commonState.getMockMvc().perform(post(commonState.getEndpointUnderTest())));
-        else if ("PUT".equals(unsupportedHttpMethod))
-            commonState.setResult(commonState.getMockMvc().perform(put(commonState.getEndpointUnderTest())));
-        else if ("PATCH".equals(unsupportedHttpMethod))
-            commonState.setResult(commonState.getMockMvc().perform(patch(commonState.getEndpointUnderTest())));
-        else if ("DELETE".equals(unsupportedHttpMethod))
-            commonState.setResult(commonState.getMockMvc().perform(delete(commonState.getEndpointUnderTest())));
-        else {
-            fail(String.format("Unrecognised http method submitted to test [%s]", unsupportedHttpMethod));
-        }
-    }
-
     @And("^the body will contain the status code (.*)$")
     public void theResponseBodyWillContainStatusCode(final String expectedStatusCode) throws Exception {
         commonState.getResult().andExpect(jsonPath(ErrorAttributes.STATUS.value(),
