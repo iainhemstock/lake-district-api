@@ -1,8 +1,8 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling;
 
-import com.iainhemstock.lakedistrictapi.config.TestApiProperties;
+import com.iainhemstock.lakedistrictapi.config.TestApiConfiguration;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling.HttpRequestMethodNotSupportedExceptionHandler;
 import com.iainhemstock.lakedistrictapi.application_logic.ApiClockServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +30,11 @@ public class HttpRequestMethodNotSupportedExceptionHandlerTest {
     @Mock private ApiClockServiceImpl apiClockService;
 
     private ResponseEntity<Object> methodNotAllowedResponseEntity;
-    private TestApiProperties apiProperties;
+    private ApiProperties apiProperties;
 
     @Before
     public void setUp() {
-        apiProperties = new TestApiProperties();
+        apiProperties = new TestApiConfiguration().apiProperties();
 
         Mockito.when(apiClockService.now())
             .thenReturn(NOW);
