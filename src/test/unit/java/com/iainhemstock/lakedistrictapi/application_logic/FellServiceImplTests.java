@@ -3,9 +3,10 @@ package com.iainhemstock.lakedistrictapi.application_logic;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellSummaryProjection;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
+import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellEntityFactory;
+import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellFactory;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -35,8 +36,8 @@ public class FellServiceImplTests {
 
     @Before
     public void setUp() {
-        helvellynFellEntity = new HelvellynFellEntity();
-        helvellynFell = new HelvellynFell();
+        helvellynFellEntity = TestDataFellEntityFactory.helvellynFellEntity();
+        helvellynFell = TestDataFellFactory.helvellynFell();
         fellService = new FellServiceImpl(fellRepository);
 
     }

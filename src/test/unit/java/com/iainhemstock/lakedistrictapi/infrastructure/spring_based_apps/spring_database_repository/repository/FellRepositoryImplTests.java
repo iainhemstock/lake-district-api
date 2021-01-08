@@ -2,12 +2,13 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.HelvellynFellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.assembler.DomainToEntityAssembler;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
+import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellEntityFactory;
+import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,9 +38,9 @@ public class FellRepositoryImplTests {
     @Before
     public void setUp() {
         fellRepository = new FellRepositoryImpl(fellEntityRepository, domainToEntityAssembler, apiClockService);
-        expectedFell = new HelvellynFell();
+        expectedFell = TestDataFellFactory.helvellynFell();
 
-        FellEntity helvellynFellEntity = new HelvellynFellEntity();
+        FellEntity helvellynFellEntity = TestDataFellEntityFactory.helvellynFellEntity();
         Mockito.when(fellEntityRepository.findById(helvellynFellEntity.getOsMapRef())).thenReturn(Optional.of(helvellynFellEntity));
         Mockito.when(domainToEntityAssembler.toDomain(helvellynFellEntity)).thenReturn(expectedFell);
         Mockito.when(apiClockService.now()).thenReturn(NOW);

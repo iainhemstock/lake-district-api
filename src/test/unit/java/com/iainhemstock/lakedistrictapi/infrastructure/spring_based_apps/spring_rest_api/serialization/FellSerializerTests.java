@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.domain.HelvellynFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ObjectMapperConfig;
+import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class FellSerializerTests {
     public void setUp() throws JsonProcessingException {
         mapper = new ObjectMapperConfig().objectMapper();
 
-        helvellynFell = new HelvellynFell();
+        helvellynFell = TestDataFellFactory.helvellynFell();
         json = mapper.writeValueAsString(helvellynFell);
         jsonNode = mapper.readTree(json);
     }
