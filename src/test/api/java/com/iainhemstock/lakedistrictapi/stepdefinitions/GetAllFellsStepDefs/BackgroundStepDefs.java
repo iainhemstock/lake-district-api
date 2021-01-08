@@ -1,35 +1,35 @@
 package com.iainhemstock.lakedistrictapi.stepdefinitions.GetAllFellsStepDefs;
 
-import com.iainhemstock.lakedistrictapi.config.testdata.TestDataLoaderForApiTests;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class BackgroundStepDefs {
 
-    @Autowired private TestDataLoaderForApiTests testDataLoader;
     @Autowired private ApiProperties apiProperties;
+    @Autowired private FellEntityRepository fellEntityRepository;
 
     @Given("^Great Gable exists$")
-    public void fellExists() {
-        testDataLoader.addGreatGable();
+    public void greatGableExists() {
+        assertTrue(fellEntityRepository.existsById("NY211104"));
     }
 
     @Given("^Scafell Pike exists$")
     public void scafellPikeExists() {
-        testDataLoader.addScafellPike();
+        assertTrue(fellEntityRepository.existsById("NY215072"));
     }
 
     @Given("^Great Gable, Helvellyn and Scafell Pike exist$")
     public void fellsExist() {
-        testDataLoader.addGreatGable();
-        testDataLoader.addHelvellyn();
-        testDataLoader.addScafellPike();
+        assertTrue(fellEntityRepository.existsById("NY211104"));
+        assertTrue(fellEntityRepository.existsById("NY342151"));
+        assertTrue(fellEntityRepository.existsById("NY215072"));
     }
 
     @And("^the default page offset is ([0-9]+)$")

@@ -1,10 +1,8 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities;
 
-import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
 public final class ScafellPikeFellEntity extends FellEntity {
     public ScafellPikeFellEntity() {
         super(

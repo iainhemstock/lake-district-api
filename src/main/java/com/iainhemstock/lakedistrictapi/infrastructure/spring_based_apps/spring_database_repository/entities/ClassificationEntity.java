@@ -2,10 +2,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,6 +14,7 @@ import javax.validation.constraints.NotNull;
 public class ClassificationEntity {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     @EqualsAndHashCode.Include
     private int id;

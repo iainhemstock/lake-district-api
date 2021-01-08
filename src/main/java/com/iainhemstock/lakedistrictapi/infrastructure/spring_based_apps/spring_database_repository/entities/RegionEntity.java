@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "regions")
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 public class RegionEntity {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     @EqualsAndHashCode.Include
     private int id;
