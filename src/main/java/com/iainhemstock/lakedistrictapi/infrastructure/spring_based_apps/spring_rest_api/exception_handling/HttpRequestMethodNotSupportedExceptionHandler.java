@@ -1,7 +1,7 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.exception_handling;
 
+import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
-import com.iainhemstock.lakedistrictapi.application_logic.ApiClockServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,10 +13,10 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 @Component
 public class HttpRequestMethodNotSupportedExceptionHandler {
 
-    private final ApiClockServiceImpl apiClockService;
+    private final ApiClockService apiClockService;
 
     @Autowired
-    public HttpRequestMethodNotSupportedExceptionHandler(final ApiClockServiceImpl apiClockService) {
+    public HttpRequestMethodNotSupportedExceptionHandler(final ApiClockService apiClockService) {
         this.apiClockService = apiClockService;
     }
 
