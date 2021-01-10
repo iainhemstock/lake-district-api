@@ -8,11 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class Longitude {
 
-    private double value;
+    private final double value;
 
     public double toDouble() {
         return value;

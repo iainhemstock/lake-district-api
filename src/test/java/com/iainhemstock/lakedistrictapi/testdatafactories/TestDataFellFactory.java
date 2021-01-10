@@ -12,39 +12,41 @@ public class TestDataFellFactory {
 
     public static Fell helvellynFell() {
         FellEntity entity = TestDataFellEntityFactory.helvellynFellEntity();
-        Fell fell = new Fell();
-        fell.setOsMapRef(new OsMapRef(entity.getOsMapRef()));
-        fell.setName(new FellName(entity.getName()));
-        fell.setHeightMeters(new Meters(entity.getHeightMeters()));
-        fell.setHeightFeet(new Feet(3117));
-        fell.setProminenceMeters(new Meters(entity.getProminenceMeters()));
-        fell.setProminenceFeet(new Feet(2336));
-        fell.setLatitude(new Latitude(entity.getLatitude()));
-        fell.setLongitude(new Longitude(entity.getLongitude()));
-        fell.setRegionName(new RegionName(entity.getRegionEntity().getName()));
-        fell.setClassificationNames(entity.getClassifications().stream()
-            .map(classificationEntity -> new ClassificationName(classificationEntity.getName()))
-            .collect(Collectors.toSet()));
-        fell.setOsMapNames(entity.getOsMaps().stream()
-            .map(osMap -> new OsMapName(osMap.getName()))
-            .collect(Collectors.toSet()));
 
         LatLongToDmsConversionService latLongToDmsConversionService = new LatLongToDmsConversionServiceImpl();
         latLongToDmsConversionService.convert(new Latitude(entity.getLatitude()));
-        fell.setConvertedLatitude(new DMS(
+        DMS convertedLatitude = new DMS(
             latLongToDmsConversionService.getDegrees(),
             latLongToDmsConversionService.getMinutes(),
             latLongToDmsConversionService.getSeconds(),
-            latLongToDmsConversionService.getHemisphere()));
+            latLongToDmsConversionService.getHemisphere());
 
         latLongToDmsConversionService.convert(new Longitude(entity.getLongitude()));
-        fell.setConvertedLongitude(new DMS(
+        DMS convertedLongitude = new DMS(
             latLongToDmsConversionService.getDegrees(),
             latLongToDmsConversionService.getMinutes(),
             latLongToDmsConversionService.getSeconds(),
-            latLongToDmsConversionService.getHemisphere()));
+            latLongToDmsConversionService.getHemisphere());
 
-        return fell;
+        return new Fell(
+            new OsMapRef(entity.getOsMapRef()),
+            new OsMapRef(entity.getParentOsMapRef()),
+            new FellName(entity.getName()),
+            new Meters(entity.getHeightMeters()),
+            new Feet(3117),
+            new Meters(entity.getProminenceMeters()),
+            new Feet(2336),
+            entity.getClassifications().stream()
+                .map(classificationEntity -> new ClassificationName(classificationEntity.getName()))
+                .collect(Collectors.toSet()),
+            entity.getOsMaps().stream()
+                .map(osMap -> new OsMapName(osMap.getName()))
+                .collect(Collectors.toSet()),
+            new Latitude(entity.getLatitude()),
+            new Longitude(entity.getLongitude()),
+            new RegionName(entity.getRegionEntity().getName()),
+            convertedLatitude,
+            convertedLongitude);
     }
 
 }

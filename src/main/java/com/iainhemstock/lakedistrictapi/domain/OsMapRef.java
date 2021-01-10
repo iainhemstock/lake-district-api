@@ -10,12 +10,11 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @EqualsAndHashCode
 public class OsMapRef {
-    private String value;
-    private boolean isNull;
+    private final String value;
+    private final boolean isNull;
 
     public OsMapRef(final String value) {
         if (value == null) {

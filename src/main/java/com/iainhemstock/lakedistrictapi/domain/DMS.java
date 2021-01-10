@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class DMS  {
-    private Degrees degrees;
-    private Minutes minutes;
-    private Seconds seconds;
-    private Hemisphere hemisphere;
+    private final Degrees degrees;
+    private final Minutes minutes;
+    private final Seconds seconds;
+    private final Hemisphere hemisphere;
 
     public DMS(final Degrees degrees, final Minutes minutes, final Seconds seconds, final Hemisphere hemisphere) {
         this.degrees = degrees;
