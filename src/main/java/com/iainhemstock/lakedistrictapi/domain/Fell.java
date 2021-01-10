@@ -16,8 +16,8 @@ public class Fell {
     private final Feet heightFeet;
     private final Meters prominenceMeters;
     private final Feet prominenceFeet;
-    private final Set<ClassificationName> classificationNames;
-    private final Set<OsMapName> osMapNames;
+    private final Set<ClassificationName> immutableClassificationNames;
+    private final Set<OsMapName> immutableOsMapNames;
     private final Latitude latitude;
     private final Longitude longitude;
     private final RegionName regionName;
@@ -32,8 +32,8 @@ public class Fell {
         this.heightFeet = fell.getHeightFeet();
         this.prominenceMeters = fell.getProminenceMeters();
         this.prominenceFeet = fell.getProminenceFeet();
-        this.classificationNames = Set.copyOf(fell.getClassificationNames());
-        this.osMapNames = Set.copyOf(fell.getOsMapNames());
+        this.immutableClassificationNames = Set.copyOf(fell.getImmutableClassificationNames());
+        this.immutableOsMapNames = Set.copyOf(fell.getImmutableOsMapNames());
         this.latitude = fell.getLatitude();
         this.longitude = fell.getLongitude();
         this.regionName = fell.getRegionName();

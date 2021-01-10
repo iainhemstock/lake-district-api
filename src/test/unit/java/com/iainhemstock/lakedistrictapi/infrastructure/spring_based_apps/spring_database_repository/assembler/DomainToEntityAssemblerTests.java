@@ -82,13 +82,13 @@ public class DomainToEntityAssemblerTests {
 
     @Test
     public void will_map_classifications_from_entity_to_domain() {
-        assertThat(domain.getClassificationNames(),
+        assertThat(domain.getImmutableClassificationNames(),
             is(Set.of(new ClassificationName("Marilyn"))));
     }
 
     @Test
     public void will_map_os_maps_from_entity_to_domain() {
-        assertThat(domain.getOsMapNames(),
+        assertThat(domain.getImmutableOsMapNames(),
             is(Set.of(new OsMapName("OS Landranger 90"), new OsMapName("OS Explorer OL5"))));
     }
 

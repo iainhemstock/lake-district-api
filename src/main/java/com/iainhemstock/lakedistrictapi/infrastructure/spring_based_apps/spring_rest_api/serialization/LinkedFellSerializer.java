@@ -3,6 +3,7 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class LinkedFellSerializer extends JsonSerializer<LinkedFell> {
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
         jgen.writeObjectField("links", linkedFell.getLinks());
-        jgen.writeObjectField("item", linkedFell.getFell());
+        jgen.writeObjectField("item", new Fell(linkedFell));
         jgen.writeEndObject();
     }
 }

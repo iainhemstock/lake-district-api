@@ -123,7 +123,7 @@ public class FellSerializerTests {
     public void will_serialize_classification_names() {
         Set<String> actualNames = mapper.convertValue(jsonNode.get("classifications"), HashSet.class);
         Set<String> expectedNames = new LinkedHashSet<>();
-        helvellynFell.getClassificationNames().forEach(classificationName -> expectedNames.add(classificationName.toString()));
+        helvellynFell.getImmutableClassificationNames().forEach(classificationName -> expectedNames.add(classificationName.toString()));
         assertTrue(actualNames.containsAll(expectedNames)
             && expectedNames.containsAll(actualNames));
     }
@@ -132,7 +132,7 @@ public class FellSerializerTests {
     public void will_serialize_os_map_names() {
         Set<String> actualNames = mapper.convertValue(jsonNode.get("location").get("os_maps"), HashSet.class);
         Set<String> expectedNames = new LinkedHashSet<>();
-        helvellynFell.getOsMapNames().forEach(osMapName -> expectedNames.add(osMapName.toString()));
+        helvellynFell.getImmutableOsMapNames().forEach(osMapName -> expectedNames.add(osMapName.toString()));
         assertTrue(actualNames.containsAll(expectedNames)
             && expectedNames.containsAll(actualNames));
     }

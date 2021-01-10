@@ -44,7 +44,7 @@ public class DomainToEntityAssembler {
         entity.getOsMaps().forEach(osMapEntity ->
             osMapNames.add(new OsMapName(osMapEntity.getName())));
 
-        Fell fell = new Fell(
+        return new Fell(
             new OsMapRef(entity.getOsMapRef()),
             (entity.getParentOsMapRef() != null)
                 ? new OsMapRef(entity.getParentOsMapRef())
@@ -61,7 +61,5 @@ public class DomainToEntityAssembler {
             new RegionName(entity.getRegionEntity().getName()),
             convertedLatitude,
             convertedLongitude);
-
-        return fell;
     }
 }

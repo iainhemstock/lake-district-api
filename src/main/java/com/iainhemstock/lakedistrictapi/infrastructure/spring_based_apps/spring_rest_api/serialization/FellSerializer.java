@@ -17,10 +17,10 @@ public class FellSerializer extends JsonSerializer<Fell> {
         jgen.writeStartObject();
             jgen.writeStringField("name", fell.getName().toString());
             jgen.writeArrayFieldStart("classifications");
-        for (ClassificationName classificationName : fell.getClassificationNames()) {
-            jgen.writeString(classificationName.toString());
-        }
-        jgen.writeEndArray();
+            for (ClassificationName classificationName : fell.getImmutableClassificationNames()) {
+                jgen.writeString(classificationName.toString());
+            }
+            jgen.writeEndArray();
             jgen.writeObjectFieldStart("height");
                 jgen.writeStringField("meters", fell.getHeightMeters().toString());
                 jgen.writeStringField("feet", fell.getHeightFeet().toString());
@@ -32,10 +32,10 @@ public class FellSerializer extends JsonSerializer<Fell> {
             jgen.writeObjectFieldStart("location");
                 jgen.writeStringField("os_map_ref", fell.getOsMapRef().toString());
                 jgen.writeArrayFieldStart("os_maps");
-            for (OsMapName osMapName : fell.getOsMapNames()) {
-                jgen.writeString(osMapName.toString());
-            }
-        jgen.writeEndArray();
+                for (OsMapName osMapName : fell.getImmutableOsMapNames()) {
+                    jgen.writeString(osMapName.toString());
+                }
+            jgen.writeEndArray();
                 jgen.writeStringField("region", fell.getRegionName().toString());
                 jgen.writeStringField("latitude", fell.getLatitude().toString());
                 jgen.writeStringField("longitude", fell.getLongitude().toString());
