@@ -2,7 +2,7 @@ package com.iainhemstock.lakedistrictapi.application_logic;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellSummaryProjection;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellNameAndOsMapRefOnly;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellEntityFactory;
@@ -54,7 +54,7 @@ public class FellServiceImplTests {
         try {
             int invalidOffset = -1;
             int anyLimit = 0;
-            fellService.getFells(invalidOffset, anyLimit, FellSummaryProjection.class);
+            fellService.getFells(invalidOffset, anyLimit, FellNameAndOsMapRefOnly.class);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -67,7 +67,7 @@ public class FellServiceImplTests {
     public void given_invalid_limit_when_requesting_fells_then_exception_is_thrown(final int invalidLimit) {
         try {
             int anyOffset = 0;
-            fellService.getFells(anyOffset, invalidLimit, FellSummaryProjection.class);
+            fellService.getFells(anyOffset, invalidLimit, FellNameAndOsMapRefOnly.class);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {

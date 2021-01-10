@@ -8,7 +8,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.SimpleLinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellSummaryProjection;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellNameAndOsMapRefOnly;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedRepoPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPageMetaData;
@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,7 +36,7 @@ public class FellController {
         if (offset == null) offset = apiProperties.getPageOffset();
         if (limit == null) limit = apiProperties.getPageSize();
 
-        RepoPage<FellSummaryProjection> fellPage = fellService.getFells(offset, limit, FellSummaryProjection.class);
+        RepoPage<FellNameAndOsMapRefOnly> fellPage = fellService.getFells(offset, limit, FellNameAndOsMapRefOnly.class);
         Set<SimpleLinkedFell> simpleLinkedFells = mapFellsToSimpleLinkedFells(fellPage);
 
         LinkedRepoPage<SimpleLinkedFell> linkedRepoPage = new LinkedRepoPage<>(
@@ -49,9 +48,9 @@ public class FellController {
         return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
     }
 
-    private Set<SimpleLinkedFell> mapFellsToSimpleLinkedFells(final RepoPage<FellSummaryProjection> fellResults) {
+    private Set<SimpleLinkedFell> mapFellsToSimpleLinkedFells(final RepoPage<FellNameAndOsMapRefOnly> fellResults) {
         return fellResults.getItems().stream()
-            .map(fellSummaryProjection -> new SimpleLinkedFell(fellSummaryProjection, apiProperties.getBaseUrl()))
+            .map(fellNameAndOsMapRefOnly -> new SimpleLinkedFell(fellNameAndOsMapRefOnly, apiProperties.getBaseUrl()))
             .collect(Collectors.toSet());
     }
 
