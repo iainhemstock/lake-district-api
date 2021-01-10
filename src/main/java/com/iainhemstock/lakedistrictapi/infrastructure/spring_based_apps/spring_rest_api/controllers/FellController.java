@@ -51,7 +51,7 @@ public class FellController {
 
     private Set<SimpleLinkedFell> mapFellsToSimpleLinkedFells(final RepoPage<FellSummaryProjection> fellResults) {
         return fellResults.getItems().stream()
-            .map(SimpleLinkedFell::new)
+            .map(fellSummaryProjection -> new SimpleLinkedFell(fellSummaryProjection, apiProperties.getBaseUrl()))
             .collect(Collectors.toSet());
     }
 

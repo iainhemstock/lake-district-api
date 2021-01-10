@@ -10,10 +10,10 @@ public class SimpleLinkedFell {
     private final String name;
     private final Map<LinkRel, Link> links;
 
-    public SimpleLinkedFell(final FellSummaryProjection projection) {
+    public SimpleLinkedFell(final FellSummaryProjection projection, final String baseUrl) {
         this.name = projection.getName();
         this.links = Map.of(LinkRel.SELF,
-            new Link(LinkRel.SELF, "http://localhost:8080/api/v1/fells/" + projection.getOsMapRef()));
+            new Link(LinkRel.SELF, String.format("%s/fells/%s", baseUrl, projection.getOsMapRef())));
     }
 
 }
