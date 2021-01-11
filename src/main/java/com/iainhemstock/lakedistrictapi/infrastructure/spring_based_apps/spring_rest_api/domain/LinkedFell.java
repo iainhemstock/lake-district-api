@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Getter
-public class LinkedFell extends Fell {
+public class LinkedFell extends Fell implements LinkedBasicFell {
     private final Map<LinkRel, Link> links = new LinkedHashMap<>();
 
     public LinkedFell(final Fell fell, final String baseUrl) {

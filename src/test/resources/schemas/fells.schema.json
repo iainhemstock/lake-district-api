@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"allOf": [ { "$ref": "classpath:schemas/ref/pagination.schema.json" } ],
+	"properties": {
+		"items": {
+			"type": "array",
+			"items": { "$ref": "#/definitions/linked_simple_fell" }
+		}
+	},
+	"definitions": {
+		"linked_simple_fell": {
+			"type": "object",
+			"required": ["name", "links"],
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"links": {
+					"$ref": "classpath:schemas/ref/links.schema.json#/definitions/links"
+				}
+			}
+		}
+	}
+}

@@ -14,7 +14,7 @@ Feature: GET /fells?limit=[invalid] - NEGATIVE TESTS WITH INVALID INPUT
 
 	Scenario Outline: /fells?limit=[invalid] - API provides json body validated against schema when page size is invalid
 		When making a GET request to /fells?limit=<invalid_limit>
-		Then the body will conform to the schema in schemas/error_schema.json
+		Then the body will conform to the schema in schemas/error.schema.json
 		Examples:
 			| invalid_limit |
 			| 0             |

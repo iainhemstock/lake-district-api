@@ -3,12 +3,8 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.SimpleLinkedFell;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedRepoPage;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.*;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedResultPage;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.serialization.*;
 import org.modelmapper.TypeToken;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +20,18 @@ public class ObjectMapperConfig {
         ObjectMapper mapper = new ObjectMapper();
 
         mapper
-            .registerModule(new SimpleModule().addSerializer(Fell.class, new FellSerializer()))
-            .registerModule(new SimpleModule().addSerializer(LinkedFell.class, new LinkedFellSerializer()))
-            .registerModule(new SimpleModule().addSerializer(new TypeToken<LinkedRepoPage<SimpleLinkedFell>>() {}.getRawType(), new LinkedRepoPageSerializer<>()))
-            .registerModule(new SimpleModule().addSerializer(new TypeToken<Map<LinkRel, Link>>() {}.getRawType(), new LinksMapSerializer()));
+            .registerModule(new SimpleModule().addSerializer(
+                LinkedBasicFell.class,
+                new LinkedBasicFellSerializer()))
+            .registerModule(new SimpleModule().addSerializer(
+                LinkedFell.class,
+                new LinkedFellSerializer()))
+            .registerModule(new SimpleModule().addSerializer(
+                new TypeToken<LinkedResultPage<LinkedBasicFell>>() {}.getRawType(),
+                new LinkedResultPageSerializer<>()))
+            .registerModule(new SimpleModule().addSerializer(
+                new TypeToken<Map<LinkRel, Link>>() {}.getRawType(),
+                new LinksMapSerializer()));
 
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 

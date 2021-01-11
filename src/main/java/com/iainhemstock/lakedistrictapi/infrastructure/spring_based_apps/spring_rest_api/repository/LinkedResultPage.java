@@ -2,8 +2,8 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPageMetaData;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData;
 import lombok.Getter;
 
 import java.util.LinkedHashMap;
@@ -11,10 +11,10 @@ import java.util.Map;
 import java.util.Set;
 
 @Getter
-public class LinkedRepoPage<T> extends RepoPage<T> {
+public class LinkedResultPage<T> extends ResultPage<T> {
     private final Map<LinkRel, Link> links;
 
-    public LinkedRepoPage(final Set<T> items, final RepoPageMetaData metaData, final int totalItems, final String baseUrl) {
+    public LinkedResultPage(final Set<T> items, final ResultPageMetaData metaData, final int totalItems, final String baseUrl) {
         super(metaData, totalItems, items);
         this.links = new LinkedHashMap<>();
 

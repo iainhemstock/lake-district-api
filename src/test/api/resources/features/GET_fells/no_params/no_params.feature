@@ -11,9 +11,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Scenario: API provides json body validated against schema
 		When making a GET request to /fells
-		Then the response will conform to the schema in schemas/linked_repo_page_schema.json
-		Then the pagination attributes will conform to the schema in schemas/links_schema.json
-		And the items attribute will conform to the schema in schemas/simple_fell_schema.json
+		Then the response will conform to the schema in schemas/fells.schema.json
 
 	Scenario Outline: API provides contextual navigational links depending on the current page
 		When making a GET request to /fells

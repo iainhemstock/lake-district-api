@@ -3,13 +3,13 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedRepoPage;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedResultPage;
 
 import java.io.IOException;
 
-public class LinkedRepoPageSerializer<T> extends JsonSerializer<LinkedRepoPage<T>> {
+public class LinkedResultPageSerializer<T> extends JsonSerializer<LinkedResultPage<T>> {
     @Override
-    public void serialize(final LinkedRepoPage<T> linkedRepoPage,
+    public void serialize(final LinkedResultPage<T> linkedRepoPage,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();

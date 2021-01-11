@@ -2,12 +2,12 @@ package com.iainhemstock.lakedistrictapi.repository_interfaces;
 
 import java.util.Set;
 
-public abstract class RepoPage<T> {
-    private final RepoPageMetaData metaData;
+public abstract class ResultPage<T> {
+    private final ResultPageMetaData metaData;
     private final int totalItems;
     private final Set<T> items;
 
-    public RepoPage(final RepoPageMetaData metaData, final int totalItems, final Set<T> items) {
+    public ResultPage(final ResultPageMetaData metaData, final int totalItems, final Set<T> items) {
         this.metaData = metaData;
         this.totalItems = totalItems;
         this.items = items;

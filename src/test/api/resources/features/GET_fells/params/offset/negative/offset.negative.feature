@@ -10,7 +10,7 @@ Feature: GET /fells?offset={invalid} - NEGATIVE TESTING WITH INVALID PARAMETERS
 
 	Scenario: /fells?offset=-1 - API provides json body validated against schema when invalid offset is specified
 		When making a GET request to /fells?offset=-1
-		Then the body will conform to the schema in schemas/error_schema.json
+		Then the body will conform to the schema in schemas/error.schema.json
 
 	Scenario: /fells?offset=-1 - API returns error response when invalid offset is specified
 		When making a GET request to /fells?offset=-1

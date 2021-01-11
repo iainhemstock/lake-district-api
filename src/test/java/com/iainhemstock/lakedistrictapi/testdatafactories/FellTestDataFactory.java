@@ -5,13 +5,12 @@ import com.iainhemstock.lakedistrictapi.application_logic.LatLongToDmsConversion
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TestDataFellFactory {
+public class FellTestDataFactory {
 
     public static Fell helvellynFell() {
-        FellEntity entity = TestDataFellEntityFactory.helvellynFellEntity();
+        FellEntity entity = FellEntityTestDataFactory.helvellynFellEntity();
 
         LatLongToDmsConversionService latLongToDmsConversionService = new LatLongToDmsConversionServiceImpl();
         latLongToDmsConversionService.convert(new Latitude(entity.getLatitude()));

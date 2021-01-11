@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FellEntityRepository extends JpaRepository<FellEntity, String> {
-    <T> Page<T> findBy(final Pageable pageable, final Class<T> projection);
 }

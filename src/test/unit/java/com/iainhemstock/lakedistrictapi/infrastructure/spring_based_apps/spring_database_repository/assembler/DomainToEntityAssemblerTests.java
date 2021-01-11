@@ -4,7 +4,7 @@ import com.iainhemstock.lakedistrictapi.application_interfaces.LatLongToDmsConve
 import com.iainhemstock.lakedistrictapi.application_interfaces.MeterToFeetConversionService;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
-import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellEntityFactory;
+import com.iainhemstock.lakedistrictapi.testdatafactories.FellEntityTestDataFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +31,7 @@ public class DomainToEntityAssemblerTests {
     @Before
     public void setUp() {
         domainToEntityAssembler = new DomainToEntityAssembler(latLongToDmsConversionService, meterToFeetConversionService);
-        entity = TestDataFellEntityFactory.helvellynFellEntity();
+        entity = FellEntityTestDataFactory.helvellynFellEntity();
         domain = domainToEntityAssembler.toDomain(entity);
     }
 
@@ -52,7 +52,7 @@ public class DomainToEntityAssemblerTests {
 
     @Test
     public void will_not_map_parent_os_map_ref_from_entity_to_domain_when_entity_has_no_parent() {
-        Fell scafellPikeFell = domainToEntityAssembler.toDomain(TestDataFellEntityFactory.scafellPike());
+        Fell scafellPikeFell = domainToEntityAssembler.toDomain(FellEntityTestDataFactory.scafellPike());
         assertThat(scafellPikeFell.getParentOsMapRef(), is(nullValue()));
     }
 

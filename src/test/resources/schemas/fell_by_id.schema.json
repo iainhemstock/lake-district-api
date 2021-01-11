@@ -1,10 +1,13 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "http://192.168.0.16:8080/schemas",
+	"id": "http://192.168.0.16:8080/jsonschemas/linked_fell_schema.json",
 	"type": "object",
-	"required": ["classifications", "height", "location", "name", "prominence"],
+	"required": ["links", "classifications", "height", "location", "name", "prominence"],
 	"additionalProperties": false,
 	"properties": {
+		"links": {
+			"$ref": "classpath:schemas/ref/links.schema.json#/definitions/links"
+		},
 		"classifications": {
 			"type": "array",
 			"items": {

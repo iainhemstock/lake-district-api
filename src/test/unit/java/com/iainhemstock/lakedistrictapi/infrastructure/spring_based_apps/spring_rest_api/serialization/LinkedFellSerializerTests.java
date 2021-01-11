@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ObjectMapperConfig;
-import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellFactory;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
+import com.iainhemstock.lakedistrictapi.testdatafactories.FellTestDataFactory;
+import com.iainhemstock.lakedistrictapi.testdatafactories.LinkedFellTestDataFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,9 +19,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
 
-public class FellSerializerTests {
+public class LinkedFellSerializerTests {
 
-    private Fell helvellynFell;
+    private LinkedFell helvellynFell;
     private ObjectMapper mapper;
     private JsonNode jsonNode;
     private String json;
@@ -28,7 +30,7 @@ public class FellSerializerTests {
     public void setUp() throws JsonProcessingException {
         mapper = new ObjectMapperConfig().objectMapper();
 
-        helvellynFell = TestDataFellFactory.helvellynFell();
+        helvellynFell = LinkedFellTestDataFactory.helvellynLinkedFell();
         json = mapper.writeValueAsString(helvellynFell);
         jsonNode = mapper.readTree(json);
     }

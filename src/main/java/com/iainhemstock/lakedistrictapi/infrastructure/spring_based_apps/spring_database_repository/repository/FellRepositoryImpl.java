@@ -8,9 +8,14 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.exceptions.FellNotFoundException;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.RepoPage;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FellRepositoryImpl implements FellRepository {
     private final FellEntityRepository fellEntityRepository;
@@ -33,7 +38,11 @@ public class FellRepositoryImpl implements FellRepository {
         return this.domainToEntityAssembler.toDomain(entity);
     }
 
-    public <T> RepoPage<T> findAll(final int offset, final int limit, final Class<T> projection) {
-        return SpringPageRepoPage.from(fellEntityRepository.findBy(PageRequest.of(offset, limit), projection));
+    public ResultPage<Fell> findAll(final int offset, final int limit) {
+        Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(PageRequest.of(offset, limit));
+        List<Fell> fellList = fellEntityPage.stream()
+            .map(this.domainToEntityAssembler::toDomain)
+            .collect(Collectors.toList());
+        return SpringPageResultPage.from(new PageImpl<>(fellList, PageRequest.of(offset, limit), fellEntityPage.getTotalElements()));
     }
 }

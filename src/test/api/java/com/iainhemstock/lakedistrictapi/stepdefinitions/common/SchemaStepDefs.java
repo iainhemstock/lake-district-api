@@ -27,21 +27,40 @@ public class SchemaStepDefs {
 
     @And("^the body will conform to the schema in (.*)$")
     public void theResponseWillConformToTheJsonSchema(final String schemaFilename) throws IOException {
-        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonNode jsonNode = mapResponseToJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
         validate(schema, jsonNode);
     }
 
+    private JsonNode mapResponseToJsonNode() throws IOException {
+        String responseBodyString = commonState.getResult().andReturn().getResponse().getContentAsString();
+        return objectMapper.readTree(responseBodyString);
+    }
+
+    private void validate(final JsonSchema schema, final JsonNode jsonNode) {
+        Set<ValidationMessage> errors = schema.validate(jsonNode);
+        if (errors.size() > 0)
+            fail("Does not conform to json schema: " + errors.toString());
+    }
+
+    private JsonSchema loadJsonSchemaFromClasspath(String name) {
+        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(name);
+        if (is == null)
+            fail(String.format("Schema file load failed: could not load specified file [filename = %s]", name));
+        return factory.getSchema(is);
+    }
+
     @Then("^the links attribute will conform to the schema in (.*)$")
     public void theLinksAttributeWillConformToTheSchemaIn(final String schemaFilename) throws IOException {
-        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonNode jsonNode = mapResponseToJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
         validate(schema, jsonNode.get("links"));
     }
 
     @Then("^the item attribute will conform to the schema in (.*)$")
     public void theItemAttributeWillConformToTheSchemaIn(final String schemaFilename) throws IOException {
-        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonNode jsonNode = mapResponseToJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
         validate(schema, jsonNode.get("item"));
     }
@@ -53,41 +72,16 @@ public class SchemaStepDefs {
 
     @Then("^the pagination attributes will conform to the schema in (.*)$")
     public void thePaginationAttributesWillConformToTheJsonSchema(final String schemaFilename) throws IOException {
-        JsonNode jsonNode = getResponseBodyAsJsonNode();
+        JsonNode jsonNode = mapResponseToJsonNode();
         JsonSchema jsonSchema = loadJsonSchemaFromClasspath(schemaFilename);
         validate(jsonSchema, jsonNode.findValue("links"));
     }
 
     @And("^the items attribute will conform to the schema in (.*)$")
     public void theItemsAttributeWillConformToTheSchemaIn(final String schemaFilename) throws Exception {
-        JsonNode responseBodyJsonNode = getResponseBodyAsJsonNode();
+        JsonNode responseBodyJsonNode = mapResponseToJsonNode();
         JsonSchema schema = loadJsonSchemaFromClasspath(schemaFilename);
         validate(schema, responseBodyJsonNode.findValue("items").get(0));
     }
-
-    private JsonNode getResponseBodyAsJsonNode() throws IOException {
-        String responseBodyString = commonState.getResult().andReturn().getResponse().getContentAsString();
-        return getJsonNodeFromStringContent(responseBodyString);
-    }
-
-    private void validate(final JsonSchema schema, final JsonNode jsonNode) {
-        Set<ValidationMessage> errors = schema.validate(jsonNode);
-        if (errors.size() > 0)
-            fail("Does not conform to json schema: " + errors.toString());
-    }
-
-    private JsonSchema loadJsonSchemaFromClasspath(String name) {
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
-        InputStream is = Thread.currentThread().getContextClassLoader()
-            .getResourceAsStream(name);
-        if (is == null)
-            fail(String.format("Schema file load failed: could not load specified file [filename = %s]", name));
-        return factory.getSchema(is);
-    }
-
-    private JsonNode getJsonNodeFromStringContent(String json) throws IOException {
-        return objectMapper.readTree(json);
-    }
-
 
 }

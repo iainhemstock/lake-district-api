@@ -1,18 +1,9 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "http://192.168.0.16:8080/schemas",
 	"type": "object",
-	"required": [
-		"links",
-		"offset",
-		"limit",
-		"total_items",
-		"items"
-	],
-	"additionalProperties": false,
 	"properties": {
 		"links": {
-			"type": "object"
+			"$ref": "classpath:schemas/ref/links.schema.json#/definitions/links"
 		},
 		"offset": {
 			"type": "string"
@@ -22,9 +13,6 @@
 		},
 		"total_items": {
 			"type": "string"
-		},
-		"items": {
-			"type": "array"
 		}
 	}
 }

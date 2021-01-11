@@ -5,7 +5,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import java.util.HashSet;
 import java.util.Set;
 
-public class TestDataFellEntityFactory {
+public class FellEntityTestDataFactory {
 
     public static FellEntity helvellynFellEntity() {
         return new FellEntity(

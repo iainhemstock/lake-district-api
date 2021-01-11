@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class RepoPageMetaData {
+public class ResultPageMetaData {
     private int offset;
     private int limit;
 
-    public static RepoPageMetaData of(final int offset, final int limit) {
-        return new RepoPageMetaData(offset, limit);
+    public static ResultPageMetaData of(final int offset, final int limit) {
+        return new ResultPageMetaData(offset, limit);
     }
 }

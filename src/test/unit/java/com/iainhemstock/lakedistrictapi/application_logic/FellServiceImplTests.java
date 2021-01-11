@@ -2,11 +2,10 @@ package com.iainhemstock.lakedistrictapi.application_logic;
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.*;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.FellNameAndOsMapRefOnly;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
-import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellEntityFactory;
-import com.iainhemstock.lakedistrictapi.testdatafactories.TestDataFellFactory;
+import com.iainhemstock.lakedistrictapi.testdatafactories.FellEntityTestDataFactory;
+import com.iainhemstock.lakedistrictapi.testdatafactories.FellTestDataFactory;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -36,8 +35,8 @@ public class FellServiceImplTests {
 
     @Before
     public void setUp() {
-        helvellynFellEntity = TestDataFellEntityFactory.helvellynFellEntity();
-        helvellynFell = TestDataFellFactory.helvellynFell();
+        helvellynFellEntity = FellEntityTestDataFactory.helvellynFellEntity();
+        helvellynFell = FellTestDataFactory.helvellynFell();
         fellService = new FellServiceImpl(fellRepository);
 
     }
@@ -54,7 +53,7 @@ public class FellServiceImplTests {
         try {
             int invalidOffset = -1;
             int anyLimit = 0;
-            fellService.getFells(invalidOffset, anyLimit, FellNameAndOsMapRefOnly.class);
+            fellService.getFells(invalidOffset, anyLimit);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -67,7 +66,7 @@ public class FellServiceImplTests {
     public void given_invalid_limit_when_requesting_fells_then_exception_is_thrown(final int invalidLimit) {
         try {
             int anyOffset = 0;
-            fellService.getFells(anyOffset, invalidLimit, FellNameAndOsMapRefOnly.class);
+            fellService.getFells(anyOffset, invalidLimit);
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {

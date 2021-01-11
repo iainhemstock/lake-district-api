@@ -10,7 +10,7 @@ Feature: GET /fells/[id] - NEGATIVE TESTS WITH VALID INPUT
 	#VerifyResponsePayload
 	Scenario: API provides json body validated against schema
 		When making a GET request to /fells/NY000000
-		Then the body will conform to the schema in schemas/error_schema.json
+		Then the body will conform to the schema in schemas/error.schema.json
 
 	#VerifyResponsePayload
 	Scenario: API provides error response body when fell not found
@@ -34,7 +34,7 @@ Feature: GET /fells/[id] - NEGATIVE TESTS WITH VALID INPUT
 		When making an <unsupported http method> request to /fells/NY000000
 		Then the status code will be 405
 		And the content type will be application/json
-		And the body will conform to the schema in schemas/error_schema.json
+		And the body will conform to the schema in schemas/error.schema.json
 		And the body will contain the status code 405 METHOD_NOT_ALLOWED
 		And the body will contain the message <message>
 		And the body will contain the timestamp 2018-12-10 13:45:00
