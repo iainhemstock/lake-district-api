@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
 @ToString
 public class SpringPageResultPage<T> extends ResultPage<T> {
 
-    public static <T> ResultPage<T> empty() {
-        return new SpringPageResultPage<>(Page.empty());
-    }
-
     public static <T> ResultPage<T> from(final Page<T> page) {
         return new SpringPageResultPage<>(page);
     }
