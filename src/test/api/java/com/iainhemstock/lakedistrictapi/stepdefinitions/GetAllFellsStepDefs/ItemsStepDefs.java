@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 public class ItemsStepDefs {
@@ -17,13 +18,14 @@ public class ItemsStepDefs {
     @Autowired private CommonTestState commonState;
     @Autowired private ApiProperties apiProperties;
 
-    @Then("the body will contain the following fells")
+    @Then("the body will contain the following fells in order")
     public void theBodyWillContainTheFollowingFells(final List<Map<String, String>> expectedFells) throws Exception {
+        System.out.println(expectedFells);
         for (int i=0; i < expectedFells.size(); ++i) {
-            commonState.getResult().andExpect(
-                jsonPath(
-                    String.format("$.items[?(@.name=='%s' && @.links.self.href=='%s')]",
-                        expectedFells.get(i).get("name"), apiProperties.getBaseUrl() + expectedFells.get(i).get("href"))).exists());
+            String expectedName = expectedFells.get(i).get("name");
+            String expectedHref = String.format("%s%s", apiProperties.getBaseUrl(), expectedFells.get(i).get("href"));
+            commonState.getResult().andExpect(jsonPath(String.format("$.items[%d].name", i), is(expectedName)));
+            commonState.getResult().andExpect(jsonPath(String.format("$.items[%d].links.self.href", i), is(expectedHref)));
         }
     }
 

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,7 +42,7 @@ public class FellController {
         LinkedResultPage<LinkedBasicFell> linkedRepoPage = new LinkedResultPage<>(
             fellPage.getItems().stream()
                 .map(fell -> new LinkedFell(fell, apiProperties.getBaseUrl()))
-                .collect(Collectors.toSet()),
+                .collect(Collectors.toCollection(LinkedHashSet::new)),
             ResultPageMetaData.of(offset, limit),
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells");

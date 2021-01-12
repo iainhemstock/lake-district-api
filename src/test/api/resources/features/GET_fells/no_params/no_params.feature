@@ -29,9 +29,10 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Scenario: API provides a collection of fells
 		When making a GET request to /fells
-		Then the body will contain the following fells
+		Then the body will contain the following fells in order
 			| name         | href            |
 			| Scafell Pike | /fells/NY215072 |
+		And the number of fells contained in the page is 1
 
 	Scenario: API provides content type header
 		When making a GET request to /fells
