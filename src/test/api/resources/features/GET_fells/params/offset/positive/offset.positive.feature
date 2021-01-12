@@ -26,7 +26,7 @@ Feature: GET /fells?offset=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAM
 		When making a GET request to /fells?offset=0
 		Then the body will contain the following fells
 			| name         | href            |
-			| Great Gable  | /fells/NY211104 |
+			| Scafell Pike | /fells/NY215072 |
 
 	Scenario: ?offset=1 - API provides a collection of fells offset by specified amount of 1
 		When making a GET request to /fells?offset=1
@@ -38,7 +38,7 @@ Feature: GET /fells?offset=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAM
 		When making a GET request to /fells?offset=2
 		Then the body will contain the following fells
 			| name         | href            |
-			| Scafell Pike | /fells/NY215072 |
+			| Great Gable  | /fells/NY211104 |
 
 	Scenario Outline: ?offset=# - API provides pagination metadata for this collection of resources
 		When making a GET request to /fells?offset=<offset>

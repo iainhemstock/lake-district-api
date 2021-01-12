@@ -29,8 +29,8 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 	Scenario: API provides a collection of fells
 		When making a GET request to /fells
 		Then the body will contain the following fells
-			| name        | href            |
-			| Great Gable | /fells/NY211104 |
+			| name         | href            |
+			| Scafell Pike | /fells/NY215072 |
 
 	Scenario: API provides content type header
 		When making a GET request to /fells

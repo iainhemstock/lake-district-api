@@ -43,25 +43,25 @@ Feature: GET /fells?limit=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAME
 	Scenario: ?fells?limit=1 - API returns a page containing a single fell when limit=1
 		When making a GET request to /fells?limit=1
 		Then the body will contain the following fells
-			| name      | href            |
-			| Helvellyn | /fells/NY342151 |
+			| name         | href            |
+			| Scafell Pike | /fells/NY215072 |
 		And the number of fells contained in the page is 1
 
 	Scenario: ?fells?limit=2 - API returns a page containing two fells when limit=2
 		When making a GET request to /fells?limit=2
 		Then the body will contain the following fells
-			| name        | href            |
-			| Great Gable | /fells/NY211104 |
-			| Helvellyn   | /fells/NY342151 |
+			| name         | href            |
+			| Scafell Pike | /fells/NY215072 |
+			| Helvellyn    | /fells/NY342151 |
 		And the number of fells contained in the page is 2
 
 	Scenario: ?fells?limit=3 - API returns a page containing three fells when limit=3
 		When making a GET request to /fells?limit=3
 		Then the body will contain the following fells
 			| name         | href            |
-			| Great Gable  | /fells/NY211104 |
-			| Helvellyn    | /fells/NY342151 |
 			| Scafell Pike | /fells/NY215072 |
+			| Helvellyn    | /fells/NY342151 |
+			| Great Gable  | /fells/NY211104 |
 		And the number of fells contained in the page is 3
 
 	Scenario: ?fells?limit=99999 - API returns a page containing three fells when limit=99999

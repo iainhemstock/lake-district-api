@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +40,8 @@ public class FellRepositoryImpl implements FellRepository {
     }
 
     public ResultPage<Fell> findAll(final int offset, final int limit) {
-        Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(PageRequest.of(offset, limit));
+        Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(
+            PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "heightMeters")));
         List<Fell> fellList = fellEntityPage.stream()
             .map(this.domainToEntityAssembler::toDomain)
             .collect(Collectors.toList());

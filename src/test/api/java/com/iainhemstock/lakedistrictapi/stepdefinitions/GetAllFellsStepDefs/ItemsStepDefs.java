@@ -19,7 +19,7 @@ public class ItemsStepDefs {
 
     @Then("the body will contain the following fells")
     public void theBodyWillContainTheFollowingFells(final List<Map<String, String>> expectedFells) throws Exception {
-        for (int i=0; i< expectedFells.size()-1; ++i) {
+        for (int i=0; i < expectedFells.size(); ++i) {
             commonState.getResult().andExpect(
                 jsonPath(
                     String.format("$.items[?(@.name=='%s' && @.links.self.href=='%s')]",
