@@ -16,3 +16,11 @@ Feature: GET /fells?sort=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMET
 		Then the body will contain the following fells
 			| name        | href            |
 			| Great Gable | /fells/NY211104 |
+
+	Scenario: ?sort=name.asc - API provides a collection of fells sorted by name.asc
+		When making a GET request to /fells?sort=name.asc
+		Then the body will contain the following fells
+			| name         | href            |
+			| Great Gable  | /fells/NY211104 |
+
+	
