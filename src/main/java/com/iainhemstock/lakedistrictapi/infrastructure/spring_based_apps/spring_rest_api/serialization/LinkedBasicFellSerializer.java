@@ -14,6 +14,10 @@ public class LinkedBasicFellSerializer extends JsonSerializer<LinkedBasicFell> {
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
         jgen.writeStringField("name", linkedBasicFell.getName().toString());
+        jgen.writeObjectFieldStart("height");
+        jgen.writeStringField("meters", linkedBasicFell.getHeightMeters().toString());
+        jgen.writeStringField("feet", linkedBasicFell.getHeightFeet().toString());
+        jgen.writeEndObject();
         jgen.writeObjectField("links", linkedBasicFell.getLinks());
         jgen.writeEndObject();
     }

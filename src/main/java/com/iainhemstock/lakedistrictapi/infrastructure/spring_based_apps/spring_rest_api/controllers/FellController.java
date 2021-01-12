@@ -2,9 +2,10 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
-import com.iainhemstock.lakedistrictapi.domain.Fell;
-import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
+import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedBasicFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
@@ -16,7 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.EnumMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,13 +44,40 @@ public class FellController {
 
         LinkedResultPage<LinkedBasicFell> linkedResultPage = new LinkedResultPage<>(
             fellPage.getItems().stream()
-                .map(fell -> new LinkedFell(fell, apiProperties.getBaseUrl()))
+                .map(this::mapToLinkedBasicFell)
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
             ResultPageMetaData.of(offset, limit),
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells");
 
         return new ResponseEntity<>(linkedResultPage, HttpStatus.OK);
+    }
+
+    private LinkedBasicFell mapToLinkedBasicFell(final Fell fell) {
+        return new LinkedBasicFell() {
+            @Override
+            public FellName getName() {
+                return fell.getName();
+            }
+
+            @Override
+            public Meters getHeightMeters() {
+                return fell.getHeightMeters();
+            }
+
+            @Override
+            public Feet getHeightFeet() {
+                return fell.getHeightFeet();
+            }
+
+            @Override
+            public EnumMap<LinkRel, Link> getLinks() {
+                return new EnumMap<>(Map.of(
+                    LinkRel.SELF,
+                    new Link(LinkRel.SELF, apiProperties.getBaseUrl() + "/fells/" + fell.getOsMapRef().toString())
+                ));
+            }
+        };
     }
 
     @GetMapping("/fells/{id}")
