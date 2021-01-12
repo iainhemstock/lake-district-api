@@ -39,7 +39,7 @@ public class FellController {
 
         ResultPage<Fell> fellPage = fellService.getFells(offset, limit, sort);
 
-        LinkedResultPage<LinkedBasicFell> linkedRepoPage = new LinkedResultPage<>(
+        LinkedResultPage<LinkedBasicFell> linkedResultPage = new LinkedResultPage<>(
             fellPage.getItems().stream()
                 .map(fell -> new LinkedFell(fell, apiProperties.getBaseUrl()))
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
@@ -47,7 +47,7 @@ public class FellController {
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells");
 
-        return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
+        return new ResponseEntity<>(linkedResultPage, HttpStatus.OK);
     }
 
     @GetMapping("/fells/{id}")
