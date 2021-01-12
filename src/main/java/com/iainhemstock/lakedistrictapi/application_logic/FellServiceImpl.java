@@ -19,13 +19,13 @@ public class FellServiceImpl implements FellService {
     }
 
     @Override
-    public ResultPage<Fell> getFells(final int offset, final int limit) {
+    public ResultPage<Fell> getFells(final int offset, final int limit, final String sort) {
         if (offset < 0)
             throw new IllegalArgumentException("Offset cannot be negative");
 
         if (limit <= 0)
             throw new IllegalArgumentException("Limit cannot be negative or zero");
 
-        return fellRepository.findAll(offset, limit);
+        return fellRepository.findAll(offset, limit, sort);
     }
 }

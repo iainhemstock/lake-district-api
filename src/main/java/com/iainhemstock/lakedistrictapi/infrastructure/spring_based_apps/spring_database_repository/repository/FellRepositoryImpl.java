@@ -39,7 +39,7 @@ public class FellRepositoryImpl implements FellRepository {
         return this.domainToEntityAssembler.toDomain(entity);
     }
 
-    public ResultPage<Fell> findAll(final int offset, final int limit) {
+    public ResultPage<Fell> findAll(final int offset, final int limit, final String sort) {
         Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(
             PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "heightMeters")));
         List<Fell> fellList = fellEntityPage.stream()

@@ -34,9 +34,9 @@ public class FellController {
 
         if (offset == null) offset = apiProperties.getPageOffset();
         if (limit == null) limit = apiProperties.getPageSize();
-        if (sort.isEmpty()) sort = apiProperties.getPageSort();
+        if (sort == null) sort = apiProperties.getPageSort();
 
-        ResultPage<Fell> fellPage = fellService.getFells(offset, limit);
+        ResultPage<Fell> fellPage = fellService.getFells(offset, limit, sort);
 
         LinkedResultPage<LinkedBasicFell> linkedRepoPage = new LinkedResultPage<>(
             fellPage.getItems().stream()
