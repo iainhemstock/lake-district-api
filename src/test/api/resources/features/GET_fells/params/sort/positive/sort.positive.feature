@@ -10,3 +10,9 @@ Feature: GET /fells?sort=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMET
 		Then the body will contain the following fells
 			| name         | href            |
 			| Scafell Pike | /fells/NY215072 |
+
+	Scenario: ?sort=height.asc - API provides a collection of fells sorted by height.asc
+		When making a GET request to /fells?sort=height.asc
+		Then the body will contain the following fells
+			| name        | href            |
+			| Great Gable | /fells/NY211104 |

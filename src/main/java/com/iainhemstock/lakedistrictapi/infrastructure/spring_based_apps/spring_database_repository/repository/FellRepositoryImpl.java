@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FellRepositoryImpl implements FellRepository {
+    private static final String FELL_ENTITY_HEIGHT_METERS_FIELD = "heightMeters";
+
     private final FellEntityRepository fellEntityRepository;
     private final DomainToEntityAssembler domainToEntityAssembler;
     private final ApiClockService apiClockService;
@@ -40,8 +42,12 @@ public class FellRepositoryImpl implements FellRepository {
     }
 
     public ResultPage<Fell> findAll(final int offset, final int limit, final String sort) {
+        Sort springSort = null;
+        if (sort.equals("height.desc")) springSort = Sort.by(Sort.Direction.DESC, FELL_ENTITY_HEIGHT_METERS_FIELD);
+        else springSort = Sort.by(Sort.Direction.ASC, FELL_ENTITY_HEIGHT_METERS_FIELD);
+
         Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(
-            PageRequest.of(offset, limit, Sort.by(Sort.Direction.DESC, "heightMeters")));
+            PageRequest.of(offset, limit, springSort));
         List<Fell> fellList = fellEntityPage.stream()
             .map(this.domainToEntityAssembler::toDomain)
             .collect(Collectors.toList());
