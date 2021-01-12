@@ -7,11 +7,12 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.Map;
 
-public class LinksMapSerializer extends JsonSerializer<Map<LinkRel, Link>> {
+public class LinksMapSerializer extends JsonSerializer<EnumMap<LinkRel, Link>> {
     @Override
-    public void serialize(final Map<LinkRel, Link> linkMap,
+    public void serialize(final EnumMap<LinkRel, Link> linkMap,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();

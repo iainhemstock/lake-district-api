@@ -3,12 +3,11 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 import com.iainhemstock.lakedistrictapi.domain.Fell;
 import lombok.Getter;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 @Getter
 public class LinkedFell extends Fell implements LinkedBasicFell {
-    private final Map<LinkRel, Link> links = new LinkedHashMap<>();
+    private final EnumMap<LinkRel, Link> links = new EnumMap<>(LinkRel.class);
 
     public LinkedFell(final Fell fell, final String baseUrl) {
         super(fell);

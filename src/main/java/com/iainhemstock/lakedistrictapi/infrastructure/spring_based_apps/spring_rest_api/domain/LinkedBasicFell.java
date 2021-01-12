@@ -2,9 +2,9 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.domain.FellName;
 
-import java.util.Map;
+import java.util.EnumMap;
 
 public interface LinkedBasicFell {
     FellName getName();
-    Map<LinkRel, Link> getLinks();
+    EnumMap<LinkRel, Link> getLinks();
 }
