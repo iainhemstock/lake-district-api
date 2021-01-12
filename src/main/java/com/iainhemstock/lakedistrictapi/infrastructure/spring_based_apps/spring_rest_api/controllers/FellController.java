@@ -30,6 +30,13 @@ public class FellController {
     @Autowired private ApiProperties apiProperties;
     @Autowired private ApiClockService apiClockService;
 
+    @GetMapping("/fells/{id}")
+    public ResponseEntity<LinkedFell> getFell(@PathVariable final String id) {
+        Fell fell = fellService.getById(new OsMapRef(id));
+        LinkedFell linkedFell = new LinkedFell(fell, apiProperties.getBaseUrl());
+        return new ResponseEntity<>(linkedFell, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/fells")
     public ResponseEntity<LinkedResultPage<LinkedBasicFell>> getFells(
         @RequestParam(value = "offset", required = false) Integer offset,
@@ -41,16 +48,17 @@ public class FellController {
         if (sort == null) sort = apiProperties.getPageSort();
 
         ResultPage<Fell> fellPage = fellService.getFells(offset, limit, sort);
+        return new ResponseEntity<>(mapToLinkedResultPage(fellPage), HttpStatus.OK);
+    }
 
-        LinkedResultPage<LinkedBasicFell> linkedResultPage = new LinkedResultPage<>(
+    private LinkedResultPage<LinkedBasicFell> mapToLinkedResultPage(final ResultPage<Fell> fellPage) {
+        return new LinkedResultPage<>(
             fellPage.getItems().stream()
                 .map(this::mapToLinkedBasicFell)
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
-            ResultPageMetaData.of(offset, limit),
+            ResultPageMetaData.of(fellPage.getOffset(), fellPage.getLimit()),
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells");
-
-        return new ResponseEntity<>(linkedResultPage, HttpStatus.OK);
     }
 
     private LinkedBasicFell mapToLinkedBasicFell(final Fell fell) {
@@ -78,13 +86,6 @@ public class FellController {
                 ));
             }
         };
-    }
-
-    @GetMapping("/fells/{id}")
-    public ResponseEntity<LinkedFell> getFell(@PathVariable final String id) {
-        Fell fell = fellService.getById(new OsMapRef(id));
-        LinkedFell linkedFell = new LinkedFell(fell, apiProperties.getBaseUrl());
-        return new ResponseEntity<>(linkedFell, HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
