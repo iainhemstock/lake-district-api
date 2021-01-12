@@ -6,5 +6,5 @@ import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
 
 public interface FellService {
     Fell getById(final OsMapRef osMapRef);
-    ResultPage<Fell> getFells(final int offset, final int limit);
+    ResultPage<Fell> getFells(final int offset, final int limit, final String sort);
 }

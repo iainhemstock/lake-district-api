@@ -6,17 +6,18 @@ import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData;
 import lombok.Getter;
 
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 @Getter
 public class LinkedResultPage<T> extends ResultPage<T> {
-    private final Map<LinkRel, Link> links;
+    private final EnumMap<LinkRel, Link> links;
 
     public LinkedResultPage(final Set<T> items, final ResultPageMetaData metaData, final int totalItems, final String baseUrl) {
         super(metaData, totalItems, items);
-        this.links = new LinkedHashMap<>();
+        this.links = new EnumMap<>(LinkRel.class);
 
         if (metaData.getOffset() > 0)
             this.links.put(LinkRel.PREV,

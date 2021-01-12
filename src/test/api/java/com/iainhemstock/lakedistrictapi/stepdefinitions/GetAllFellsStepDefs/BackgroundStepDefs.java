@@ -43,4 +43,10 @@ public class BackgroundStepDefs {
         apiProperties.setPageSize(expectedPageSize);
         assertThat(apiProperties.getPageSize(), is(expectedPageSize));
     }
+
+    @And("^the default page sort is (.*)$")
+    public void theDefaultPageSortIsHeightDesc(final String expectedPageSort) {
+        apiProperties.setPageSort(expectedPageSort);
+        assertThat(apiProperties.getPageSort(), is(expectedPageSort));
+    }
 }

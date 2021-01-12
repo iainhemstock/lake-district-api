@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,22 +30,24 @@ public class FellController {
     @GetMapping(value = "/fells")
     public ResponseEntity<LinkedResultPage<LinkedBasicFell>> getFells(
         @RequestParam(value = "offset", required = false) Integer offset,
-        @RequestParam(value = "limit", required = false) Integer limit) {
+        @RequestParam(value = "limit", required = false) Integer limit,
+        @RequestParam(value = "sort", required = false) String sort) {
 
         if (offset == null) offset = apiProperties.getPageOffset();
         if (limit == null) limit = apiProperties.getPageSize();
+        if (sort == null) sort = apiProperties.getPageSort();
 
-        ResultPage<Fell> fellPage = fellService.getFells(offset, limit);
+        ResultPage<Fell> fellPage = fellService.getFells(offset, limit, sort);
 
-        LinkedResultPage<LinkedBasicFell> linkedRepoPage = new LinkedResultPage<>(
+        LinkedResultPage<LinkedBasicFell> linkedResultPage = new LinkedResultPage<>(
             fellPage.getItems().stream()
                 .map(fell -> new LinkedFell(fell, apiProperties.getBaseUrl()))
-                .collect(Collectors.toSet()),
+                .collect(Collectors.toCollection(LinkedHashSet::new)),
             ResultPageMetaData.of(offset, limit),
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells");
 
-        return new ResponseEntity<>(linkedRepoPage, HttpStatus.OK);
+        return new ResponseEntity<>(linkedResultPage, HttpStatus.OK);
     }
 
     @GetMapping("/fells/{id}")

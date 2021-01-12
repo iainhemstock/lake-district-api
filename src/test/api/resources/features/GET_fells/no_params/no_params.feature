@@ -4,6 +4,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 		Given Great Gable, Helvellyn and Scafell Pike exist
 		And the default page offset is 0
 		And the default page size is 1
+		And the default page sort is height.desc
 
 	Scenario: API provides OK status code on successful request
 		When making a GET request to /fells
@@ -28,9 +29,10 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 
 	Scenario: API provides a collection of fells
 		When making a GET request to /fells
-		Then the body will contain the following fells
-			| name        | href            |
-			| Great Gable | /fells/NY211104 |
+		Then the body will contain the following fells in order
+			| name         | href            |
+			| Scafell Pike | /fells/NY215072 |
+		And the number of fells contained in the page is 1
 
 	Scenario: API provides content type header
 		When making a GET request to /fells

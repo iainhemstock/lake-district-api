@@ -10,6 +10,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 @Configuration
@@ -30,7 +31,7 @@ public class ObjectMapperConfig {
                 new TypeToken<LinkedResultPage<LinkedBasicFell>>() {}.getRawType(),
                 new LinkedResultPageSerializer<>()))
             .registerModule(new SimpleModule().addSerializer(
-                new TypeToken<Map<LinkRel, Link>>() {}.getRawType(),
+                new TypeToken<EnumMap<LinkRel, Link>>() {}.getRawType(),
                 new LinksMapSerializer()));
 
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
