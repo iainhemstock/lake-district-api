@@ -13,4 +13,5 @@ public class ApiProperties {
     private String baseUrl;
     private int pageOffset;
     private int pageSize;
+    private String pageSort;
 }

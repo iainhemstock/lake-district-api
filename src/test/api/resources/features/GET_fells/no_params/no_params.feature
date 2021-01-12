@@ -4,6 +4,7 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 		Given Great Gable, Helvellyn and Scafell Pike exist
 		And the default page offset is 0
 		And the default page size is 1
+		And the default page sort is height.desc
 
 	Scenario: API provides OK status code on successful request
 		When making a GET request to /fells
