@@ -53,7 +53,7 @@ public class FellRepositoryImpl implements FellRepository {
         if (sort.equals("height.desc")) return Sort.by(Sort.Direction.DESC, FELL_ENTITY_HEIGHT_METERS_FIELD);
         else if (sort.equals("height.asc")) return Sort.by(Sort.Direction.ASC, FELL_ENTITY_HEIGHT_METERS_FIELD);
         else if (sort.equals("name.asc")) return Sort.by(Sort.Direction.ASC, "name");
-        else if(sort.equals("name.desc"))  return Sort.by(Sort.Direction.DESC, "name");
-        return null;
+        else if (sort.equals("name.desc")) return Sort.by(Sort.Direction.DESC, "name");
+        throw new IllegalArgumentException(String.format("Unrecognized sort request {sort=%s}", sort));
     }
 }
