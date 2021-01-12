@@ -23,4 +23,8 @@ Feature: GET /fells?sort=[valid] - EXTENDED POSITIVE TESTS WITH OPTIONAL PARAMET
 			| name         | href            |
 			| Great Gable  | /fells/NY211104 |
 
-	
+	Scenario: ?sort=name.desc - API provides a collection of fells sorted by name.desc
+		When making a GET request to /fells?sort=name.desc
+		Then the body will contain the following fells
+			| name         | href            |
+			| Scafell Pike | /fells/NY215072 |
