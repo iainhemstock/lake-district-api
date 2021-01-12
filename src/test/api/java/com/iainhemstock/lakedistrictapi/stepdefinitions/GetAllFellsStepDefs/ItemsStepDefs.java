@@ -23,8 +23,12 @@ public class ItemsStepDefs {
         System.out.println(expectedFells);
         for (int i=0; i < expectedFells.size(); ++i) {
             String expectedName = expectedFells.get(i).get("name");
+            String expectedHeightMeters = expectedFells.get(i).get("height meters");
+            String expectedHeightFeet = expectedFells.get(i).get("height feet");
             String expectedHref = String.format("%s%s", apiProperties.getBaseUrl(), expectedFells.get(i).get("href"));
             commonState.getResult().andExpect(jsonPath(String.format("$.items[%d].name", i), is(expectedName)));
+            commonState.getResult().andExpect(jsonPath(String.format("$.items[%d].height.meters", i), is(expectedHeightMeters)));
+            commonState.getResult().andExpect(jsonPath(String.format("$.items[%d].height.feet", i), is(expectedHeightFeet)));
             commonState.getResult().andExpect(jsonPath(String.format("$.items[%d].links.self.href", i), is(expectedHref)));
         }
     }
