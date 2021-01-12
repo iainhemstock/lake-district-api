@@ -29,10 +29,12 @@ public class FellController {
     @GetMapping(value = "/fells")
     public ResponseEntity<LinkedResultPage<LinkedBasicFell>> getFells(
         @RequestParam(value = "offset", required = false) Integer offset,
-        @RequestParam(value = "limit", required = false) Integer limit) {
+        @RequestParam(value = "limit", required = false) Integer limit,
+        @RequestParam(value = "sort", required = false) String sort) {
 
         if (offset == null) offset = apiProperties.getPageOffset();
         if (limit == null) limit = apiProperties.getPageSize();
+        if (sort.isEmpty()) sort = apiProperties.getPageSort();
 
         ResultPage<Fell> fellPage = fellService.getFells(offset, limit);
 
