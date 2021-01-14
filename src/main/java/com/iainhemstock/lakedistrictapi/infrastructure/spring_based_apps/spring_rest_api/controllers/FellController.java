@@ -62,6 +62,7 @@ public class FellController {
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells",
             fellPage.getHasPreviousPage(),
+            fellPage.getPrevPageMetaData(),
             fellPage.getHasNextPage());
     }
 
