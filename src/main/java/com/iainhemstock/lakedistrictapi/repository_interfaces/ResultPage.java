@@ -12,19 +12,22 @@ public abstract class ResultPage<T> {
     @Getter final private Boolean hasPreviousPage;
     private final ResultPageMetaData prevPageMetaData;
     @Getter final private Boolean hasNextPage;
+    private final ResultPageMetaData nextPageMetaData;
 
     public ResultPage(final ResultPageMetaData metaData,
                       final int totalItems,
                       final Set<T> items,
                       final boolean hasPreviousPage,
                       final ResultPageMetaData prevPageMetaData,
-                      final boolean hasNextPage) {
+                      final boolean hasNextPage,
+                      final ResultPageMetaData nextPageMetaData) {
         this.metaData = metaData;
         this.totalItems = totalItems;
         this.items = items;
         this.hasPreviousPage = hasPreviousPage;
         this.prevPageMetaData = prevPageMetaData;
         this.hasNextPage = hasNextPage;
+        this.nextPageMetaData = nextPageMetaData;
     }
 
     public int getOffset() {

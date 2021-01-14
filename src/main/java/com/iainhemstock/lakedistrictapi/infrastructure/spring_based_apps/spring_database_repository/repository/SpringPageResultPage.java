@@ -25,6 +25,11 @@ public class SpringPageResultPage<T> extends ResultPage<T> {
                     (int) itemPage.getPageable().previousOrFirst().getOffset(),
                     itemPage.getPageable().previousOrFirst().getPageSize())
                 : null,
-            itemPage.hasNext());
+            itemPage.hasNext(),
+            (itemPage.hasNext())
+                ? ResultPageMetaData.of(
+                    (int) itemPage.getPageable().next().getOffset(),
+                    itemPage.getPageable().next().getPageSize())
+                : null);
     }
 }
