@@ -13,8 +13,10 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.EnumMap;
@@ -30,9 +32,9 @@ public class FellController {
     @Autowired private ApiProperties apiProperties;
     @Autowired private ApiClockService apiClockService;
 
-    @GetMapping("/fells/{id}")
-    public ResponseEntity<LinkedFell> getFell(@PathVariable final String id) {
-        Fell fell = fellService.getById(new OsMapRef(id));
+    @GetMapping("/fells/{osMapRef}")
+    public ResponseEntity<LinkedFell> getFell(@PathVariable final OsMapRef osMapRef) {
+        Fell fell = fellService.getById(osMapRef);
         LinkedFell linkedFell = new LinkedFell(fell, apiProperties.getBaseUrl());
         return new ResponseEntity<>(linkedFell, HttpStatus.OK);
     }
