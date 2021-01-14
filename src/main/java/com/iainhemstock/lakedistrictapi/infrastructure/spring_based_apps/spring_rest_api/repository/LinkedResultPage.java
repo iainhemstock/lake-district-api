@@ -18,8 +18,9 @@ public class LinkedResultPage<T> extends ResultPage<T> {
                             final ResultPageMetaData metaData,
                             final int totalItems,
                             final String baseUrl,
-                            final boolean hasPreviousPage) {
-        super(metaData, totalItems, items, hasPreviousPage);
+                            final boolean hasPreviousPage,
+                            final boolean hasNextPage) {
+        super(metaData, totalItems, items, hasPreviousPage, hasNextPage);
 
         if (hasPreviousPage)
             this.links.put(LinkRel.PREV,
@@ -30,7 +31,7 @@ public class LinkedResultPage<T> extends ResultPage<T> {
             new Link(LinkRel.SELF,
                 String.format("%s?offset=%d&limit=%d", baseUrl, this.getMetaData().getOffset(), this.getMetaData().getLimit())));
 
-        if (this.getMetaData().getOffset() + this.getItems().size() < this.getTotalItems())
+        if (hasNextPage)
             this.links.put(LinkRel.NEXT,
                 new Link(LinkRel.NEXT, String.format("%s?offset=%d&limit=%d",
                     baseUrl, this.getMetaData().getOffset() + 1, this.getMetaData().getLimit())));

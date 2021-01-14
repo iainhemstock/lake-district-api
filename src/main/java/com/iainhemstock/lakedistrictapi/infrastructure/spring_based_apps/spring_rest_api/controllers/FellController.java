@@ -61,7 +61,8 @@ public class FellController {
             ResultPageMetaData.of(fellPage.getOffset(), fellPage.getLimit()),
             fellPage.getTotalItems(),
             apiProperties.getBaseUrl() + "/fells",
-            fellPage.getHasPreviousPage());
+            fellPage.getHasPreviousPage(),
+            fellPage.getHasNextPage());
     }
 
     private LinkedBasicFell mapToLinkedBasicFell(final Fell fell) {
