@@ -19,17 +19,15 @@ public class SpringPageResultPage<T> extends ResultPage<T> {
         super(new ResultPageMetaData((int) itemPage.getPageable().getOffset(), itemPage.getPageable().getPageSize()),
             (int) itemPage.getTotalElements(),
             itemPage.stream().collect(Collectors.toCollection(LinkedHashSet::new)),
-            itemPage.hasPrevious(),
             (itemPage.hasPrevious())
                 ? ResultPageMetaData.of(
                     (int) itemPage.getPageable().previousOrFirst().getOffset(),
                     itemPage.getPageable().previousOrFirst().getPageSize())
-                : null,
-            itemPage.hasNext(),
+                : ResultPageMetaData.empty(),
             (itemPage.hasNext())
                 ? ResultPageMetaData.of(
                     (int) itemPage.getPageable().next().getOffset(),
                     itemPage.getPageable().next().getPageSize())
-                : null);
+                : ResultPageMetaData.empty());
     }
 }

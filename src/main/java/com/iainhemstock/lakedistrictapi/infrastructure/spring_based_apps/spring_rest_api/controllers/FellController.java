@@ -4,25 +4,16 @@ import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.Link;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedBasicFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedResultPage;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedBasicFellsResultPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.EnumMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -50,48 +41,7 @@ public class FellController {
         if (sort == null) sort = apiProperties.getPageSort();
 
         ResultPage<Fell> fellPage = fellService.getFells(offset, limit, sort);
-        return new ResponseEntity<>(mapToLinkedResultPage(fellPage), HttpStatus.OK);
-    }
-
-    private LinkedResultPage<LinkedBasicFell> mapToLinkedResultPage(final ResultPage<Fell> fellPage) {
-        return new LinkedResultPage<>(
-            fellPage.getItems().stream()
-                .map(this::mapToLinkedBasicFell)
-                .collect(Collectors.toCollection(LinkedHashSet::new)),
-            ResultPageMetaData.of(fellPage.getOffset(), fellPage.getLimit()),
-            fellPage.getTotalItems(),
-            apiProperties.getBaseUrl() + "/fells",
-            fellPage.getHasPreviousPage(),
-            fellPage.getPrevPageMetaData(),
-            fellPage.getHasNextPage(),
-            fellPage.getNextPageMetaData());
-    }
-
-    private LinkedBasicFell mapToLinkedBasicFell(final Fell fell) {
-        return new LinkedBasicFell() {
-            @Override
-            public FellName getName() {
-                return fell.getName();
-            }
-
-            @Override
-            public Meters getHeightMeters() {
-                return fell.getHeightMeters();
-            }
-
-            @Override
-            public Feet getHeightFeet() {
-                return fell.getHeightFeet();
-            }
-
-            @Override
-            public EnumMap<LinkRel, Link> getLinks() {
-                return new EnumMap<>(Map.of(
-                    LinkRel.SELF,
-                    new Link(LinkRel.SELF, apiProperties.getBaseUrl() + "/fells/" + fell.getOsMapRef().toString())
-                ));
-            }
-        };
+        return new ResponseEntity<>(new LinkedBasicFellsResultPage(fellPage, apiProperties.getBaseUrl()), HttpStatus.OK);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

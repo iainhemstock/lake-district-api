@@ -7,7 +7,6 @@ import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData
 import lombok.Getter;
 
 import java.util.EnumMap;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -18,24 +17,24 @@ public class LinkedResultPage<T> extends ResultPage<T> {
                             final ResultPageMetaData metaData,
                             final int totalItems,
                             final String baseUrl,
-                            final boolean hasPreviousPage,
                             final ResultPageMetaData prevPageMetaData,
-                            final boolean hasNextPage,
                             final ResultPageMetaData nextPageMetaData) {
-        super(metaData, totalItems, items, hasPreviousPage, prevPageMetaData, hasNextPage, nextPageMetaData);
+        super(metaData, totalItems, items, prevPageMetaData, nextPageMetaData);
 
-        if (hasPreviousPage)
+        if (this.hasPrevPage()) {
             this.links.put(LinkRel.PREV,
                 new Link(LinkRel.PREV, String.format("%s?offset=%d&limit=%d",
                     baseUrl, prevPageMetaData.getOffset(), prevPageMetaData.getLimit())));
+        }
 
         this.links.put(LinkRel.SELF,
             new Link(LinkRel.SELF,
                 String.format("%s?offset=%d&limit=%d", baseUrl, this.getMetaData().getOffset(), this.getMetaData().getLimit())));
 
-        if (hasNextPage)
+        if (this.hasNextPage()) {
             this.links.put(LinkRel.NEXT,
                 new Link(LinkRel.NEXT, String.format("%s?offset=%d&limit=%d",
                     baseUrl, nextPageMetaData.getOffset(), nextPageMetaData.getLimit())));
+        }
     }
 }

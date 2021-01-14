@@ -9,24 +9,18 @@ public abstract class ResultPage<T> {
     private final ResultPageMetaData metaData;
     private final int totalItems;
     private final Set<T> items;
-    @Getter final private Boolean hasPreviousPage;
     private final ResultPageMetaData prevPageMetaData;
-    @Getter final private Boolean hasNextPage;
     private final ResultPageMetaData nextPageMetaData;
 
     public ResultPage(final ResultPageMetaData metaData,
                       final int totalItems,
                       final Set<T> items,
-                      final boolean hasPreviousPage,
                       final ResultPageMetaData prevPageMetaData,
-                      final boolean hasNextPage,
                       final ResultPageMetaData nextPageMetaData) {
         this.metaData = metaData;
         this.totalItems = totalItems;
         this.items = items;
-        this.hasPreviousPage = hasPreviousPage;
         this.prevPageMetaData = prevPageMetaData;
-        this.hasNextPage = hasNextPage;
         this.nextPageMetaData = nextPageMetaData;
     }
 
@@ -36,5 +30,13 @@ public abstract class ResultPage<T> {
 
     public int getLimit() {
         return this.metaData.getLimit();
+    }
+
+    public boolean hasPrevPage() {
+        return !this.prevPageMetaData.isEmpty();
+    }
+
+    public boolean hasNextPage() {
+        return !this.nextPageMetaData.isEmpty();
     }
 }
