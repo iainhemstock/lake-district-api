@@ -1,24 +1,21 @@
 package com.iainhemstock.lakedistrictapi.repository_interfaces;
 
+import lombok.Getter;
+
 import java.util.Set;
 
+@Getter
 public abstract class ResultPage<T> {
     private final ResultPageMetaData metaData;
     private final int totalItems;
     private final Set<T> items;
+    @Getter private Boolean hasPreviousPage;
 
-    public ResultPage(final ResultPageMetaData metaData, final int totalItems, final Set<T> items) {
+    public ResultPage(final ResultPageMetaData metaData, final int totalItems, final Set<T> items, final boolean hasPreviousPage) {
         this.metaData = metaData;
         this.totalItems = totalItems;
         this.items = items;
-    }
-
-    public Set<T> getItems() {
-        return this.items;
-    }
-
-    public int getTotalItems() {
-        return this.totalItems;
+        this.hasPreviousPage = hasPreviousPage;
     }
 
     public int getOffset() {

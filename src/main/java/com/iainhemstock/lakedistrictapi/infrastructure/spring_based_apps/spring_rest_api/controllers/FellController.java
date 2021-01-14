@@ -60,7 +60,8 @@ public class FellController {
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
             ResultPageMetaData.of(fellPage.getOffset(), fellPage.getLimit()),
             fellPage.getTotalItems(),
-            apiProperties.getBaseUrl() + "/fells");
+            apiProperties.getBaseUrl() + "/fells",
+            fellPage.getHasPreviousPage());
     }
 
     private LinkedBasicFell mapToLinkedBasicFell(final Fell fell) {

@@ -18,6 +18,7 @@ public class SpringPageResultPage<T> extends ResultPage<T> {
     private SpringPageResultPage(final Page<T> itemPage) {
         super(new ResultPageMetaData((int) itemPage.getPageable().getOffset(), itemPage.getPageable().getPageSize()),
             (int) itemPage.getTotalElements(),
-            itemPage.stream().collect(Collectors.toCollection(LinkedHashSet::new)));
+            itemPage.stream().collect(Collectors.toCollection(LinkedHashSet::new)),
+            itemPage.hasPrevious());
     }
 }
