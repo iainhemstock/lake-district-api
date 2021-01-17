@@ -5,6 +5,5 @@ import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 
 public interface FellRepository {
     Fell findById(OsMapRef osMapRef);
-    ResultPage<Fell> findAll(final int offset, final int limit, final String sort);
     ResultPage<Fell> findAll(final ResultPageRequest pageRequest);
 }

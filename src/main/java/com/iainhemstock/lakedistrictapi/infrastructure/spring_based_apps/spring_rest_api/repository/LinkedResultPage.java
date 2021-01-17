@@ -11,6 +11,8 @@ import java.util.Set;
 
 @Getter
 public class LinkedResultPage<T> extends ResultPage<T> {
+    private static final String URL_PATTERN = "%s?offset=%d&limit=%d&sort=%s";
+
     private final EnumMap<LinkRel, Link> links = new EnumMap<>(LinkRel.class);
 
     public LinkedResultPage(final Set<T> items,
@@ -23,18 +25,18 @@ public class LinkedResultPage<T> extends ResultPage<T> {
 
         if (this.hasPrevPage()) {
             this.links.put(LinkRel.PREV,
-                new Link(LinkRel.PREV, String.format("%s?offset=%d&limit=%d",
-                    baseUrl, prevResultPageRequest.getOffset(), prevResultPageRequest.getLimit())));
+                new Link(LinkRel.PREV, String.format(URL_PATTERN,
+                    baseUrl, prevResultPageRequest.getOffset(), prevResultPageRequest.getLimit(), prevResultPageRequest.getSort())));
         }
 
         this.links.put(LinkRel.SELF,
-            new Link(LinkRel.SELF,
-                String.format("%s?offset=%d&limit=%d", baseUrl, this.getPageRequest().getOffset(), this.getPageRequest().getLimit())));
+            new Link(LinkRel.SELF, String.format(URL_PATTERN,
+                baseUrl, this.getPageRequest().getOffset(), this.getPageRequest().getLimit(), this.getPageRequest().getSort())));
 
         if (this.hasNextPage()) {
             this.links.put(LinkRel.NEXT,
-                new Link(LinkRel.NEXT, String.format("%s?offset=%d&limit=%d",
-                    baseUrl, nextResultPageRequest.getOffset(), nextResultPageRequest.getLimit())));
+                new Link(LinkRel.NEXT, String.format(URL_PATTERN,
+                    baseUrl, nextResultPageRequest.getOffset(), nextResultPageRequest.getLimit(), nextResultPageRequest.getSort())));
         }
     }
 }

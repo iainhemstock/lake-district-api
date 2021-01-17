@@ -42,14 +42,6 @@ public class FellRepositoryImpl implements FellRepository {
         return this.domainToEntityAssembler.toDomain(entity);
     }
 
-    public ResultPage<Fell> findAll(final int offset, final int limit, final String sort) {
-        Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(PageRequest.of(offset, limit, sortCriteria(sort)));
-        List<Fell> fellList = fellEntityPage.stream()
-            .map(this.domainToEntityAssembler::toDomain)
-            .collect(Collectors.toList());
-        return SpringPageResultPage.from(new PageImpl<>(fellList, PageRequest.of(offset, limit), fellEntityPage.getTotalElements()));
-    }
-
     public ResultPage<Fell> findAll(final ResultPageRequest pageRequest) {
         PageRequest pageable = PageRequest.of(
             pageRequest.getOffset(),
@@ -62,7 +54,7 @@ public class FellRepositoryImpl implements FellRepository {
             .map(this.domainToEntityAssembler::toDomain)
             .collect(Collectors.toList());
 
-        return SpringPageResultPage.from(new PageImpl<>(fellList, pageable, fellEntityPage.getTotalElements()));
+        return SpringPageResultPage.from(new PageImpl<>(fellList, pageable, fellEntityPage.getTotalElements()), pageRequest);
     }
 
     private Sort sortCriteria(final String sort) {

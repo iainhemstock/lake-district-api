@@ -18,8 +18,8 @@ Feature: GET /fells - BASIC POSITIVE TESTS
 		When making a GET request to /fells
 		Then the body will contain the following <prev>, <current> and <next> links
 		Examples:
-			| prev | current                                             | next                                                 |
-			|      | http://localhost:8080/api/v1/fells?offset=0&limit=1 | http://localhost:8080/api/v1/fells?offset=1&limit=1  |
+			| prev | current                                                              | next                                                                 |
+			|      | http://localhost:8080/api/v1/fells?offset=0&limit=1&sort=height.desc | http://localhost:8080/api/v1/fells?offset=1&limit=1&sort=height.desc |
 
 	Scenario: API provides pagination metadata for this collection of resources
 		When making a GET request to /fells

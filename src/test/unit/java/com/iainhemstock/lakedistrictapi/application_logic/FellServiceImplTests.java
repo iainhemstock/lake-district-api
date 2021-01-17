@@ -4,6 +4,7 @@ import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
 import com.iainhemstock.lakedistrictapi.domain.*;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.entities.FellEntity;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageRequest;
 import com.iainhemstock.lakedistrictapi.testdatafactories.FellEntityTestDataFactory;
 import com.iainhemstock.lakedistrictapi.testdatafactories.FellTestDataFactory;
 import junitparams.JUnitParamsRunner;
@@ -54,7 +55,7 @@ public class FellServiceImplTests {
             int invalidOffset = -1;
             int anyLimit = 0;
             String anySort = "";
-            fellService.getFells(invalidOffset, anyLimit, anySort);
+            fellService.getFells(ResultPageRequest.of(invalidOffset, anyLimit, anySort));
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
@@ -68,7 +69,7 @@ public class FellServiceImplTests {
         try {
             int anyOffset = 0;
             String anySort = "";
-            fellService.getFells(anyOffset, invalidLimit, anySort);
+            fellService.getFells(ResultPageRequest.of(anyOffset, invalidLimit, anySort));
             fail("Expected method under test to throw InvalidArgumentException but it didn't");
         }
         catch (IllegalArgumentException ex) {
