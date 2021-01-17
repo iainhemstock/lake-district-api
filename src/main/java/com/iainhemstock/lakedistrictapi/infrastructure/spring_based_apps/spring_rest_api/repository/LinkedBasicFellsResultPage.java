@@ -8,7 +8,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkRel;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedBasicFell;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageRequest;
 
 import java.util.EnumMap;
 import java.util.LinkedHashSet;
@@ -22,11 +22,11 @@ public class LinkedBasicFellsResultPage extends LinkedResultPage<LinkedBasicFell
             fellPage.getItems().stream()
                 .map(fell -> mapToLinkedBasicFell(fell, baseUrl))
                 .collect(Collectors.toCollection(LinkedHashSet::new)),
-            ResultPageMetaData.of(fellPage.getOffset(), fellPage.getLimit()),
+            ResultPageRequest.of(fellPage.getOffset(), fellPage.getLimit(), fellPage.getSort()),
             fellPage.getTotalItems(),
             baseUrl + "/fells",
-            fellPage.getPrevPageMetaData(),
-            fellPage.getNextPageMetaData());
+            fellPage.getPrevResultPageRequest(),
+            fellPage.getNextResultPageRequest());
     }
 
     private static LinkedBasicFell mapToLinkedBasicFell(final Fell fell, final String baseUrl) {

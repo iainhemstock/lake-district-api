@@ -2,14 +2,16 @@ package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring
 
 import com.iainhemstock.lakedistrictapi.application_interfaces.ApiClockService;
 import com.iainhemstock.lakedistrictapi.application_interfaces.FellService;
-import com.iainhemstock.lakedistrictapi.domain.*;
+import com.iainhemstock.lakedistrictapi.domain.Fell;
+import com.iainhemstock.lakedistrictapi.domain.OsMapRef;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.configuration.ApiProperties;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedBasicFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.domain.LinkedFell;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.dtos.ErrorDTO;
-import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedResultPage;
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedBasicFellsResultPage;
+import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_rest_api.repository.LinkedResultPage;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +32,9 @@ public class FellController {
         return new ResponseEntity<>(linkedFell, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/fells")
-    public ResponseEntity<LinkedResultPage<LinkedBasicFell>> getFells(
-        @RequestParam(value = "offset", required = false) Integer offset,
-        @RequestParam(value = "limit", required = false) Integer limit,
-        @RequestParam(value = "sort", required = false) String sort) {
-
-        if (offset == null) offset = apiProperties.getPageOffset();
-        if (limit == null) limit = apiProperties.getPageSize();
-        if (sort == null) sort = apiProperties.getPageSort();
-
-        ResultPage<Fell> fellPage = fellService.getFells(offset, limit, sort);
+    @GetMapping("/fells")
+    public ResponseEntity<LinkedResultPage<LinkedBasicFell>> getFells(final ResultPageRequest pageRequest) {
+        ResultPage<Fell> fellPage = fellService.getFells(pageRequest);
         return new ResponseEntity<>(new LinkedBasicFellsResultPage(fellPage, apiProperties.getBaseUrl()), HttpStatus.OK);
     }
 

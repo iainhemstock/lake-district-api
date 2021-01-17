@@ -9,6 +9,7 @@ import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_
 import com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository.jpa_repository.FellEntityRepository;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.FellRepository;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -47,6 +48,21 @@ public class FellRepositoryImpl implements FellRepository {
             .map(this.domainToEntityAssembler::toDomain)
             .collect(Collectors.toList());
         return SpringPageResultPage.from(new PageImpl<>(fellList, PageRequest.of(offset, limit), fellEntityPage.getTotalElements()));
+    }
+
+    public ResultPage<Fell> findAll(final ResultPageRequest pageRequest) {
+        PageRequest pageable = PageRequest.of(
+            pageRequest.getOffset(),
+            pageRequest.getLimit(),
+            sortCriteria(pageRequest.getSort()));
+
+        Page<FellEntity> fellEntityPage = fellEntityRepository.findAll(pageable);
+
+        List<Fell> fellList = fellEntityPage.stream()
+            .map(this.domainToEntityAssembler::toDomain)
+            .collect(Collectors.toList());
+
+        return SpringPageResultPage.from(new PageImpl<>(fellList, pageable, fellEntityPage.getTotalElements()));
     }
 
     private Sort sortCriteria(final String sort) {

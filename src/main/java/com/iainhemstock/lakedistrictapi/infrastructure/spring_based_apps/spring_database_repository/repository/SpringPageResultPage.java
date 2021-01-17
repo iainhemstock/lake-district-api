@@ -1,7 +1,8 @@
 package com.iainhemstock.lakedistrictapi.infrastructure.spring_based_apps.spring_database_repository.repository;
 
+import com.iainhemstock.lakedistrictapi.repository_interfaces.NullResultPageRequest;
 import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPage;
-import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageMetaData;
+import com.iainhemstock.lakedistrictapi.repository_interfaces.ResultPageRequest;
 import lombok.ToString;
 import org.springframework.data.domain.Page;
 
@@ -16,18 +17,23 @@ public class SpringPageResultPage<T> extends ResultPage<T> {
     }
 
     private SpringPageResultPage(final Page<T> itemPage) {
-        super(new ResultPageMetaData((int) itemPage.getPageable().getOffset(), itemPage.getPageable().getPageSize()),
+        super(ResultPageRequest.of(
+                (int) itemPage.getPageable().getOffset(),
+                itemPage.getPageable().getPageSize(),
+                itemPage.getSort().toString()),
             (int) itemPage.getTotalElements(),
             itemPage.stream().collect(Collectors.toCollection(LinkedHashSet::new)),
             (itemPage.hasPrevious())
-                ? ResultPageMetaData.of(
+                ? ResultPageRequest.of(
                     (int) itemPage.getPageable().previousOrFirst().getOffset(),
-                    itemPage.getPageable().previousOrFirst().getPageSize())
-                : ResultPageMetaData.empty(),
+                    itemPage.getPageable().previousOrFirst().getPageSize(),
+                    itemPage.getSort().toString())
+                : new NullResultPageRequest(),
             (itemPage.hasNext())
-                ? ResultPageMetaData.of(
+                ? ResultPageRequest.of(
                     (int) itemPage.getPageable().next().getOffset(),
-                    itemPage.getPageable().next().getPageSize())
-                : ResultPageMetaData.empty());
+                    itemPage.getPageable().next().getPageSize(),
+                    itemPage.getSort().toString())
+                : new NullResultPageRequest());
     }
 }

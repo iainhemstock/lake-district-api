@@ -6,37 +6,41 @@ import java.util.Set;
 
 @Getter
 public abstract class ResultPage<T> {
-    private final ResultPageMetaData metaData;
+    private final ResultPageRequest pageRequest;
     private final int totalItems;
     private final Set<T> items;
-    private final ResultPageMetaData prevPageMetaData;
-    private final ResultPageMetaData nextPageMetaData;
+    private final ResultPageRequest prevResultPageRequest;
+    private final ResultPageRequest nextResultPageRequest;
 
-    public ResultPage(final ResultPageMetaData metaData,
+    public ResultPage(final ResultPageRequest pageRequest,
                       final int totalItems,
                       final Set<T> items,
-                      final ResultPageMetaData prevPageMetaData,
-                      final ResultPageMetaData nextPageMetaData) {
-        this.metaData = metaData;
+                      final ResultPageRequest prevResultPageRequest,
+                      final ResultPageRequest nextResultPageRequest) {
+        this.pageRequest = pageRequest;
         this.totalItems = totalItems;
         this.items = items;
-        this.prevPageMetaData = prevPageMetaData;
-        this.nextPageMetaData = nextPageMetaData;
+        this.prevResultPageRequest = prevResultPageRequest;
+        this.nextResultPageRequest = nextResultPageRequest;
     }
 
     public int getOffset() {
-        return this.metaData.getOffset();
+        return this.pageRequest.getOffset();
     }
 
     public int getLimit() {
-        return this.metaData.getLimit();
+        return this.pageRequest.getLimit();
+    }
+
+    public String getSort() {
+        return this.pageRequest.getSort();
     }
 
     public boolean hasPrevPage() {
-        return !this.prevPageMetaData.isEmpty();
+        return !this.prevResultPageRequest.isNull();
     }
 
     public boolean hasNextPage() {
-        return !this.nextPageMetaData.isEmpty();
+        return !this.nextResultPageRequest.isNull();
     }
 }
